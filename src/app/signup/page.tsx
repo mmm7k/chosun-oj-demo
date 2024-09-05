@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <div className="w-[100vw]  h-[100vh] flex ">
         {/* left */}
-        <section className="w-1/2  flex items-center justify-center bg-[#0032A0]">
+        <section className="w-1/2  flex items-center justify-center bg-primary">
           <div className="w-1/3 h-2/5 relative">
             <Image
               src="/commons/logo.png"
@@ -38,7 +38,7 @@ export default function Home() {
               placeholder="다시 한번 비밀번호를 입력해주세요"
             />
             {/* 교직원 로그인 체크박스 */}
-            <div className="w-3/4 h-11 rounded-md  bg-[#0032A0] text-white flex items-center justify-center mt-4">
+            <div className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center mt-4">
               회원가입
             </div>
             <Link

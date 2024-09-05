@@ -6,11 +6,11 @@ export default function Home() {
     <>
       <div className="w-[100vw]  h-[100vh] flex ">
         {/* left */}
-        <section className="w-1/2  flex items-center justify-center bg-[#0032A0]">
+        <section className="w-1/2  flex items-center justify-center bg-primary">
           <div className="w-1/3 h-2/5 relative">
             <Image
               src="/commons/logo.png"
-              alt="Chosun Online Judge"
+              alt="logo"
               layout="fill"
               objectFit="contain"
             />
@@ -37,7 +37,7 @@ export default function Home() {
               <Checkbox />
               <span className="ml-2">교직원 로그인</span>
             </div>
-            <div className="w-3/4 h-11 rounded-md  bg-[#0032A0] text-white flex items-center justify-center mt-4 cursor-pointer">
+            <div className="w-3/4 h-11 rounded-md  bg-primary text-white flex items-center justify-center mt-4 cursor-pointer">
               로그인
             </div>
             <Link
