@@ -9,7 +9,7 @@ export default function AdminLayout({
     <div className="bg-[#EBEBEB] flex h-screen">
       <SideNav />
 
-      <main className="ml-52">{children}</main>
+      <main className="w-full pl-52">{children}</main>
     </div>
   );
 }

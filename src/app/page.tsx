@@ -23,6 +23,7 @@ export default function Home() {
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required('학번을 입력해주세요'),
+
     password: Yup.string().required('비밀번호를 입력해주세요'),
   });
 
