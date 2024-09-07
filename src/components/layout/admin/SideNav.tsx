@@ -47,11 +47,11 @@ export default function SideNav() {
             <div
               className={`flex justify-between  items-center  ${
                 pathname === '/admin/dashboard'
-                  ? 'text-primary'
-                  : 'text-primaryFont'
+                  ? 'text-primary hover:text-[#5679c4]'
+                  : 'text-primaryFont hover:text-gray-500'
               }`}
             >
-              <div className="flex items-center ">
+              <div className="flex items-center  transition">
                 <LuLayoutDashboard className="text-lg mr-2" />
                 <span> 대시보드</span>
               </div>
@@ -62,12 +62,12 @@ export default function SideNav() {
             <div
               className={`flex justify-between cursor-pointer items-center ${
                 pathname === '/admin/student'
-                  ? 'text-primary'
-                  : 'text-primaryFont'
+                  ? 'text-primary hover:text-[#5679c4]'
+                  : 'text-primaryFont hover:text-gray-500'
               }`}
               onClick={toggleStudentDropdown}
             >
-              <div className="flex items-center">
+              <div className="flex items-center  transition">
                 <PiStudent className="text-xl mr-2" />
                 <span>학생</span>
               </div>
@@ -78,17 +78,17 @@ export default function SideNav() {
               )}
             </div>
             <ul
-              className={`list-disc overflow-hidden transition-all duration-500 ease-in-out pl-8 space-y-6 ${
+              className={`list-disc overflow-hidden transition-all duration-500 ease-in-out pl-8 space-y-6  ${
                 isStudentDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5">
+              <li className="mt-5  hover:text-gray-500 transition">
                 <Link href="/admin/student/overview">학생 개요</Link>
               </li>
-              <li>
+              <li className=" hover:text-gray-500 transition">
                 <Link href="/admin/student/attendance">출석 관리</Link>
               </li>
-              <li>
+              <li className=" hover:text-gray-500 transition">
                 <Link href="/admin/student/grades">성적 관리</Link>
               </li>
             </ul>
@@ -98,12 +98,12 @@ export default function SideNav() {
             <div
               className={`flex justify-between cursor-pointer items-center ${
                 pathname === '/admin/problems'
-                  ? 'text-primary'
-                  : 'text-primaryFont'
+                  ? 'text-primary hover:text-[#5679c4]'
+                  : 'text-primaryFont hover:text-gray-500'
               }`}
               onClick={toggleProblemsDropdown}
             >
-              <div className="flex items-center">
+              <div className="flex items-center  transition">
                 <HiOutlinePencilSquare className="text-xl mr-2" />
                 <span>문제</span>
               </div>
@@ -118,13 +118,13 @@ export default function SideNav() {
                 isProblemsDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5">
+              <li className="mt-5  hover:text-gray-500 transition">
                 <Link href="/admin/problems/list">문제 목록</Link>
               </li>
-              <li>
+              <li className=" hover:text-gray-500 transition">
                 <Link href="/admin/problems/add">문제 추가</Link>
               </li>
-              <li>
+              <li className=" hover:text-gray-500 transition">
                 <Link href="/admin/problems/analytics">문제 분석</Link>
               </li>
             </ul>
@@ -134,12 +134,12 @@ export default function SideNav() {
             <div
               className={`flex justify-between cursor-pointer items-center  ${
                 pathname === '/admin/example'
-                  ? 'text-primary'
-                  : 'text-primaryFont'
+                  ? 'text-primary hover:text-[#5679c4]'
+                  : 'text-primaryFont hover:text-gray-500'
               }`}
               onClick={toggleExampleDropdown}
             >
-              <div className="flex items-center">
+              <div className="flex items-center  transition">
                 <MdNotes className="text-xl mr-2" />
                 <span>example</span>
               </div>
@@ -154,13 +154,13 @@ export default function SideNav() {
                 isExampleDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5">
+              <li className="mt-5  hover:text-gray-500 transition">
                 <Link href="/admin/example/item1">Item 1</Link>
               </li>
-              <li>
+              <li className=" hover:text-gray-500 transition">
                 <Link href="/admin/example/item2">Item 2</Link>
               </li>
-              <li>
+              <li className=" hover:text-gray-500 transition">
                 <Link href="/admin/example/item3">Item 3</Link>
               </li>
             </ul>

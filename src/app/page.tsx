@@ -47,11 +47,11 @@ export default function Home() {
   };
   const onSubmit = (data: { username: string; password: string }) => {
     const { username, password } = data;
-    if (username === 'root' && password === 'rootroot') {
+    if (username === 'root' && password === 'root') {
       if (isStaff) {
         router.push('/admin');
       } else {
-        router.push('/select');
+        router.push('/student');
       }
     } else {
       error();
@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-[100vw] h-[100vh] flex">
+      <div className="w-screen h-screen flex">
         {/* left */}
         <section className="w-1/2 flex items-center justify-center bg-primary">
           <div className="w-1/3 h-2/5 relative">
