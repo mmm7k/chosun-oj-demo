@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { PiStudent } from 'react-icons/pi';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
-import { MdNotes } from 'react-icons/md';
+import { MdLogout, MdNotes } from 'react-icons/md';
 
 export default function SideNav() {
   const pathname = usePathname();
@@ -28,8 +28,8 @@ export default function SideNav() {
   };
 
   return (
-    <nav className="w-52 h-full bg-white fixed left-0 top-0 text-primaryFont text-sm font-semibold">
-      <div className="flex flex-col items-center w-full h-full">
+    <nav className="w-52 min-h-screen bg-white fixed left-0 top-0 text-secondary text-sm font-semibold ">
+      <div className="flex flex-col items-center w-full min-h-screen relative">
         {/* 로고 이미지 */}
         <div className="w-16 h-16 relative mt-11">
           <Link href="/admin/dashboard">
@@ -47,8 +47,8 @@ export default function SideNav() {
             <div
               className={`flex justify-between  items-center  ${
                 pathname === '/admin/dashboard'
-                  ? 'text-primary hover:text-[#5679c4]'
-                  : 'text-primaryFont hover:text-gray-500'
+                  ? 'text-primary hover:text-primaryHover'
+                  : 'text-secondary hover:text-secondaryHover'
               }`}
             >
               <div className="flex items-center  transition">
@@ -62,8 +62,8 @@ export default function SideNav() {
             <div
               className={`flex justify-between cursor-pointer items-center ${
                 pathname === '/admin/student'
-                  ? 'text-primary hover:text-[#5679c4]'
-                  : 'text-primaryFont hover:text-gray-500'
+                  ? 'text-primary hover:text-primaryHover'
+                  : 'text-secondary hover:text-secondaryHover'
               }`}
               onClick={toggleStudentDropdown}
             >
@@ -82,13 +82,13 @@ export default function SideNav() {
                 isStudentDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5  hover:text-gray-500 transition">
+              <li className="mt-5  hover:text-secondaryHover transition">
                 <Link href="/admin/student/overview">학생 개요</Link>
               </li>
-              <li className=" hover:text-gray-500 transition">
+              <li className="  hover:text-secondaryHover transition">
                 <Link href="/admin/student/attendance">출석 관리</Link>
               </li>
-              <li className=" hover:text-gray-500 transition">
+              <li className=" hover:text-secondaryHover transition">
                 <Link href="/admin/student/grades">성적 관리</Link>
               </li>
             </ul>
@@ -98,8 +98,8 @@ export default function SideNav() {
             <div
               className={`flex justify-between cursor-pointer items-center ${
                 pathname === '/admin/problems'
-                  ? 'text-primary hover:text-[#5679c4]'
-                  : 'text-primaryFont hover:text-gray-500'
+                  ? 'text-primary hover:text-primaryHover'
+                  : 'text-secondary hover:text-secondaryHover'
               }`}
               onClick={toggleProblemsDropdown}
             >
@@ -118,13 +118,13 @@ export default function SideNav() {
                 isProblemsDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5  hover:text-gray-500 transition">
+              <li className="mt-5  hover:text-secondaryHover transition">
                 <Link href="/admin/problems/list">문제 목록</Link>
               </li>
-              <li className=" hover:text-gray-500 transition">
+              <li className=" hover:text-secondaryHover transition">
                 <Link href="/admin/problems/add">문제 추가</Link>
               </li>
-              <li className=" hover:text-gray-500 transition">
+              <li className=" hover:text-secondaryHover transition">
                 <Link href="/admin/problems/analytics">문제 분석</Link>
               </li>
             </ul>
@@ -134,8 +134,8 @@ export default function SideNav() {
             <div
               className={`flex justify-between cursor-pointer items-center  ${
                 pathname === '/admin/example'
-                  ? 'text-primary hover:text-[#5679c4]'
-                  : 'text-primaryFont hover:text-gray-500'
+                  ? 'text-primary hover:text-primaryHover'
+                  : 'text-secondary hover:text-secondaryHover'
               }`}
               onClick={toggleExampleDropdown}
             >
@@ -154,17 +154,26 @@ export default function SideNav() {
                 isExampleDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5  hover:text-gray-500 transition">
+              <li className="mt-5  hover:text-secondaryHover transition">
                 <Link href="/admin/example/item1">Item 1</Link>
               </li>
-              <li className=" hover:text-gray-500 transition">
+              <li className=" hover:text-secondaryHover transition">
                 <Link href="/admin/example/item2">Item 2</Link>
               </li>
-              <li className=" hover:text-gray-500 transition">
+              <li className=" hover:text-secondaryHover transition">
                 <Link href="/admin/example/item3">Item 3</Link>
               </li>
             </ul>
           </div>
+          {/* 로그아웃 */}
+          <Link href="/">
+            <div className="absolute bottom-10 cursor-pointer">
+              <div className="flex items-center  transition hover:text-secondaryHover">
+                <MdLogout className="text-xl mr-2" />
+                <span>로그아웃</span>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </nav>
