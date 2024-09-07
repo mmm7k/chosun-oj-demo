@@ -76,9 +76,10 @@ export default function Home() {
         {/* right */}
         <section className="w-1/2 flex items-center justify-center">
           <div className="w-1/2 h-1/2 rounded-sm border-solid border-[1px] border-slate-200 shadow-xl flex flex-col justify-center items-center">
-            <span className="text-[#5a5a5a] text-2xl font-bold mb-4 ">
-              Chosun Online Judge
-            </span>
+            <div className=" text-2xl font-bold mb-4 ">
+              <span className="text-primary">Chosun </span>
+              <span className="text-secondary">Online Judge</span>
+            </div>
 
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -119,14 +120,14 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center mt-4 cursor-pointer"
+                className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center mt-4 cursor-pointer hover:bg-primaryButtonHover transition"
               >
                 로그인
               </button>
             </form>
             <Link
               href="/signup"
-              className="w-3/4 h-11 rounded-md bg-gray-100 border-[1px] border-gray-200 text-[#5a5a5a] flex items-center justify-center mt-4 cursor-pointer"
+              className="w-3/4 h-11 rounded-md bg-secondaryButton border-[1px] border-secondaryButtonBorder text-secondary flex items-center justify-center mt-4 cursor-pointer hover:bg-secondaryButtonHover transition"
             >
               회원가입
             </Link>

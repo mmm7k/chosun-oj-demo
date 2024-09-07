@@ -19,7 +19,7 @@ export default function Home() {
         {/* right */}
         <section className="w-1/2 flex items-center justify-center">
           <div className="w-1/2 h-1/2 rounded-sm border-solid border-[1px] border-slate-200 shadow-xl flex flex-col justify-center items-center">
-            <span className="text-[#5a5a5a] text-2xl font-bold mb-4 ">
+            <span className="text-secondary text-2xl font-bold mb-4 ">
               회원가입
             </span>
             <input
@@ -38,12 +38,12 @@ export default function Home() {
               placeholder="다시 한번 비밀번호를 입력해주세요"
             />
             {/* 교직원 로그인 체크박스 */}
-            <div className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center mt-4">
+            <div className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center mt-4 hover:bg-primaryButtonHover transition">
               회원가입
             </div>
             <Link
               href="/"
-              className="w-3/4 h-11 rounded-md bg-gray-100 border-[1px] border-gray-200 text-[#5a5a5a]  flex items-center justify-center mt-4"
+              className="w-3/4 h-11 rounded-md bg-secondaryButton border-[1px] border-secondaryButtonBorder text-secondary flex items-center justify-center mt-4 cursor-pointer hover:bg-secondaryButtonHover transition"
             >
               이전으로
             </Link>

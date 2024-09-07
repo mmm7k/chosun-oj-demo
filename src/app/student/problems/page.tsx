@@ -11,20 +11,20 @@ export default function Problems() {
         <section className="mt-4 pl-7">
           <span> &#8226; 기초 프로그래밍</span>
           <ul className="space-y-2 mt-2 mb-2 pl-3">
-            <li className="cursor-pointer hover:text-primaryHover transition">
+            <li className="cursor-pointer hover:text-secondaryHover transition">
               - 01분반
             </li>
-            <li className="cursor-pointer hover:text-primaryHover transition"></li>
+            <li className="cursor-pointer hover:text-secondaryHover transition"></li>
           </ul>
           <span> &#8226; 심화 프로그래밍</span>
           <ul className="space-y-2 mt-2 mb-2 pl-3">
-            <li className="cursor-pointer hover:text-primaryHover transition">
+            <li className="cursor-pointer hover:text-secondaryHover transition">
               - 02분반
             </li>
           </ul>
           <span> &#8226; 자바 프로그래밍</span>
           <ul className="space-y-2 mt-2 pl-3">
-            <li className="cursor-pointer hover:text-primaryHover transition">
+            <li className="cursor-pointer hover:text-secondaryHover transition">
               - 02분반
             </li>
           </ul>
