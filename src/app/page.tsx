@@ -87,7 +87,7 @@ export default function Home() {
             >
               <input
                 {...register('username')}
-                className="w-3/4 h-10 mt-4 rounded-md border-solid border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="w-3/4 h-10 mt-4 rounded-md  border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="text"
                 placeholder="학번을 입력해주세요"
               />
@@ -99,7 +99,7 @@ export default function Home() {
 
               <input
                 {...register('password')}
-                className="w-3/4 h-10 mt-4 rounded-md border-solid border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="w-3/4 h-10 mt-4 rounded-md  border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="password"
                 placeholder="비밀번호를 입력해주세요"
               />

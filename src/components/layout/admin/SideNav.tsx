@@ -61,7 +61,7 @@ export default function SideNav() {
           <div>
             <div
               className={`flex justify-between cursor-pointer items-center ${
-                pathname === '/admin/student'
+                pathname.startsWith('/admin/stundet')
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
@@ -82,13 +82,31 @@ export default function SideNav() {
                 isStudentDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5  hover:text-secondaryHover transition">
+              <li
+                className={`transition mt-5  ${
+                  pathname === '/admin/student/overview'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/student/overview">학생 개요</Link>
               </li>
-              <li className="  hover:text-secondaryHover transition">
+              <li
+                className={`transition  ${
+                  pathname === '/admin/student/attendance'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/student/attendance">출석 관리</Link>
               </li>
-              <li className=" hover:text-secondaryHover transition">
+              <li
+                className={`transition  ${
+                  pathname === '/admin/student/grades'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/student/grades">성적 관리</Link>
               </li>
             </ul>
@@ -97,7 +115,7 @@ export default function SideNav() {
           <div>
             <div
               className={`flex justify-between cursor-pointer items-center ${
-                pathname === '/admin/problems'
+                pathname.startsWith('/admin/problems')
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
@@ -118,13 +136,31 @@ export default function SideNav() {
                 isProblemsDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5  hover:text-secondaryHover transition">
+              <li
+                className={`transition mt-5 ${
+                  pathname === '/admin/problems/list'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/problems/list">문제 목록</Link>
               </li>
-              <li className=" hover:text-secondaryHover transition">
-                <Link href="/admin/problems/add">문제 추가</Link>
+              <li
+                className={`transition  ${
+                  pathname === '/admin/problems/post'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
+                <Link href="/admin/problems/post">문제 추가</Link>
               </li>
-              <li className=" hover:text-secondaryHover transition">
+              <li
+                className={`transition  ${
+                  pathname === '/admin/problems/analytics'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/problems/analytics">문제 분석</Link>
               </li>
             </ul>
@@ -133,7 +169,7 @@ export default function SideNav() {
           <div>
             <div
               className={`flex justify-between cursor-pointer items-center  ${
-                pathname === '/admin/example'
+                pathname.startsWith('/admin/example')
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
@@ -154,13 +190,31 @@ export default function SideNav() {
                 isExampleDropdownOpen ? 'max-h-40' : 'max-h-0'
               }`}
             >
-              <li className="mt-5  hover:text-secondaryHover transition">
+              <li
+                className={`transition mt-5  ${
+                  pathname === '/admin/example/item1'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/example/item1">Item 1</Link>
               </li>
-              <li className=" hover:text-secondaryHover transition">
+              <li
+                className={`transition  ${
+                  pathname === '/admin/example/item2'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/example/item2">Item 2</Link>
               </li>
-              <li className=" hover:text-secondaryHover transition">
+              <li
+                className={`transition  ${
+                  pathname === '/admin/example/item3'
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover '
+                }`}
+              >
                 <Link href="/admin/example/item3">Item 3</Link>
               </li>
             </ul>
