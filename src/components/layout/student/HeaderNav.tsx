@@ -28,33 +28,39 @@ export default function HeaderNav() {
         {/* 메뉴 */}
         {pathname !== '/student/selectclass' && (
           <section className="mr-64 space-x-28 ">
-            <span
-              className={`cursor-pointer transition ${
-                pathname === '/student/problems'
-                  ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
-                  : 'hover:text-secondaryHover'
-              }`}
-            >
-              문제
-            </span>
-            <span
-              className={`cursor-pointer transition ${
-                pathname === '/student/grade'
-                  ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
-                  : 'hover:text-secondaryHover'
-              }`}
-            >
-              성적
-            </span>
-            <span
-              className={`cursor-pointer transition ${
-                pathname === '/student/questions'
-                  ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
-                  : 'hover:text-secondaryHover'
-              }`}
-            >
-              Q&A
-            </span>
+            <Link href="/student/problems">
+              <span
+                className={`cursor-pointer transition ${
+                  pathname === '/student/problems'
+                    ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
+                    : 'hover:text-secondaryHover'
+                }`}
+              >
+                문제
+              </span>
+            </Link>
+            <Link href="/student/grade">
+              <span
+                className={`cursor-pointer transition ${
+                  pathname === '/student/grade'
+                    ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
+                    : 'hover:text-secondaryHover'
+                }`}
+              >
+                성적
+              </span>
+            </Link>
+            <Link href="/student/questions">
+              <span
+                className={`cursor-pointer transition ${
+                  pathname === '/student/questions'
+                    ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
+                    : 'hover:text-secondaryHover'
+                }`}
+              >
+                Q&A
+              </span>
+            </Link>
           </section>
         )}
         {/* 분반 , 로그아웃 */}

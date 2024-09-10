@@ -9,7 +9,7 @@ export default function Post() {
         </section>
         <hr className="border-t-2 mt-5 border-gray-200" />
         <section className="flex flex-col text-sm ">
-          {/* 문제코드 */}
+          {/* 문제 코드 */}
           <div className="flex flex-col justify-center px-10 py-4 border-b-2 border-gray-200 ">
             <div className="flex items-center">
               <span>문제 코드: </span>
@@ -27,7 +27,7 @@ export default function Post() {
               </span>
             </span>
           </div>
-          {/* 문제이름 */}
+          {/* 문제 이름 */}
           <div className="flex flex-col justify-center px-10 py-4 border-b-2 border-gray-200 ">
             <div className="flex items-center">
               <span>문제 이름: </span>
