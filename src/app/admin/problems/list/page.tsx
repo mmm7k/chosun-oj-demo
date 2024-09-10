@@ -6,7 +6,7 @@ import { IoSearchSharp } from 'react-icons/io5';
 import { TbEdit } from 'react-icons/tb';
 
 export default function List() {
-  const list = Array.from({ length: 60 }, (_, i) => i + 1); // 1부터 60까지의 숫자 배열
+  const list = Array.from({ length: 60 }, (_, i) => i + 1);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const itemsPerPage = 8; // 한 페이지당 항목 수
   const pagesPerBlock = 5; // 한 페이지 블록당 페이지 수
