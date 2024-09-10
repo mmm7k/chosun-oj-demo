@@ -71,7 +71,7 @@ export default function List() {
         <section className="flex justify-between w-full px-16 items-center mt-12">
           {/* 문제 등록 링크 버튼 */}
           <Link href="/admin/problems/post">
-            <button className="px-4 py-2 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
+            <button className="px-4 py-2 bg-primary text-white text-base rounded-md font-normal hover:bg-primaryButtonHover">
               문제 등록
             </button>
           </Link>

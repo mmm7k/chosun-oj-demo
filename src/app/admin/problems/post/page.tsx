@@ -72,8 +72,8 @@ export default function Post() {
             </span>
           </div>
           {/* 등록 버튼 */}
-          <div className="w-full flex justify-end px-10">
-            <button className="px-4 py-2 w-[7%] mt-5 h-10 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
+          <div className="w-full flex justify-end px-10 mt-12">
+            <button className="text-base px-4 py-2 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
               문제 등록
             </button>
           </div>
