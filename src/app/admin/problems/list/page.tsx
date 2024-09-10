@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { IoSearchSharp } from 'react-icons/io5';
@@ -31,10 +32,10 @@ export default function List() {
 
   return (
     <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-md text-secondary font-semibold">
-        <section className="flex justify-between items-center border-b-2 px-16 pb-4">
+      <div className="w-full h-full bg-white shadow-lg py-10 rounded-md text-secondary font-semibold">
+        <section className="flex justify-between items-center px-16 relative ">
           <h1 className="text-xl">문제 목록</h1>
-          <div className="flex items-center w-[15%] border-[2px] border-gray-200 rounded-md px-3 py-2.5 ">
+          <div className="absolute right-16 flex items-center w-[15%] border-[2px] border-gray-200 rounded-md px-3 py-2.5 ">
             <IoSearchSharp className="text-gray-400 text-xl" />
             <input
               className="w-full pb-0.5 pl-2  text-gray-500 text-sm  placeholder:text-sm placeholder:font-normal focus:outline-none"
@@ -43,6 +44,7 @@ export default function List() {
             />
           </div>
         </section>
+        <hr className="border-t-2 mt-5 border-gray-200" />
         <section className="flex flex-col px-16 ">
           <div className="flex justify-between items-center py-6 border-b-2">
             <span className="w-[10%] ">ID</span>
@@ -68,10 +70,11 @@ export default function List() {
         {/* 페이지네이션 및 버튼 */}
         <section className="flex justify-between w-full px-16 items-center mt-12">
           {/* 문제 등록 버튼 */}
-          <button className="px-4 py-2 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
-            문제 등록
-          </button>
-
+          <Link href="/admin/problems/post">
+            <button className="px-4 py-2 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
+              문제 등록
+            </button>
+          </Link>
           {/* 페이지네이션 */}
           <div className="flex items-center space-x-1">
             {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
