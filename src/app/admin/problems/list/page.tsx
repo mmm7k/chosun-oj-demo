@@ -1,5 +1,6 @@
 'use client';
 
+import PrimaryButton from '@/components/PrimaryButton';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
@@ -71,9 +72,10 @@ export default function List() {
         <section className="flex justify-between w-full px-16 items-center mt-12">
           {/* 문제 등록 링크 버튼 */}
           <Link href="/admin/problems/post">
-            <button className="px-4 py-2 bg-primary text-white text-base rounded-md font-normal hover:bg-primaryButtonHover">
+            {/* <button className="px-4 py-2 bg-primary text-white text-base rounded-md font-normal hover:bg-primaryButtonHover">
               문제 등록
-            </button>
+            </button> */}
+            <PrimaryButton text="문제 등록" />
           </Link>
           {/* 페이지네이션 */}
           <div className="flex items-center space-x-1">

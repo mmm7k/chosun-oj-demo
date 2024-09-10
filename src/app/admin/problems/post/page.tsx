@@ -1,4 +1,5 @@
 'use client';
+import PrimaryButton from '@/components/PrimaryButton';
 import { Checkbox } from 'antd';
 import { useState } from 'react';
 import { PiExclamationMarkFill } from 'react-icons/pi';
@@ -73,9 +74,7 @@ export default function Post() {
           </div>
           {/* 등록 버튼 */}
           <div className="w-full flex justify-end px-10 mt-12">
-            <button className="text-base px-4 py-2 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
-              문제 등록
-            </button>
+            <PrimaryButton text="문제 등록" />
           </div>
         </section>
       </div>
