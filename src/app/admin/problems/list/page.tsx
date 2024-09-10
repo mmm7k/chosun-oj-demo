@@ -9,7 +9,7 @@ import { TbEdit } from 'react-icons/tb';
 export default function List() {
   const list = Array.from({ length: 60 }, (_, i) => i + 1);
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-  const itemsPerPage = 8; // 한 페이지당 항목 수
+  const itemsPerPage = 9; // 한 페이지당 항목 수
   const pagesPerBlock = 5; // 한 페이지 블록당 페이지 수
 
   // 현재 페이지에 해당하는 항목들 가져오기
@@ -32,7 +32,7 @@ export default function List() {
 
   return (
     <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-10 rounded-md text-secondary font-semibold">
+      <div className="w-full h-full bg-white shadow-lg py-8 rounded-md text-secondary font-semibold">
         <section className="flex justify-between items-center px-16 relative ">
           <h1 className="text-xl">문제 목록</h1>
           <div className="absolute right-16 flex items-center w-[15%] border-[2px] border-gray-200 rounded-md px-3 py-2.5 ">
@@ -55,21 +55,21 @@ export default function List() {
           {currentItems.map((item) => (
             <div
               key={item}
-              className="flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
+              className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
             >
               <span className="w-[10%] ">{item}</span>
               <span className="w-[60%] ">피라미드 별찍기{item}</span>
               <span className="w-[20%] ">2024-9-2 16:19:{item}</span>
               <span className="w-[10%] flex items-center">
-                <TbEdit className="text-2xl mr-2" />
-                <FiTrash2 className="text-2xl" />
+                <TbEdit className="text-xl mr-2" />
+                <FiTrash2 className="text-xl" />
               </span>
             </div>
           ))}
         </section>
         {/* 페이지네이션 및 버튼 */}
         <section className="flex justify-between w-full px-16 items-center mt-12">
-          {/* 문제 등록 버튼 */}
+          {/* 문제 등록 링크 버튼 */}
           <Link href="/admin/problems/post">
             <button className="px-4 py-2 bg-primary text-white rounded-md font-normal hover:bg-primaryButtonHover">
               문제 등록
