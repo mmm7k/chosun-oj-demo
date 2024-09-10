@@ -38,7 +38,7 @@ export default function List() {
           <div className="absolute right-16 flex items-center w-[15%] border-[2px] border-gray-200 rounded-md px-3 py-2.5 ">
             <IoSearchSharp className="text-gray-400 text-xl" />
             <input
-              className="w-full pb-0.5 pl-2  text-gray-500 text-sm  placeholder:text-sm placeholder:font-normal focus:outline-none"
+              className="w-full pb-0.5 pl-2  text-gray-500 text-sm  placeholder:text-sm placeholder:font-normal focus:outline-none "
               type="text"
               placeholder="문제를 검색해보세요"
             />
