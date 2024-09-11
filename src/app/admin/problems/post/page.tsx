@@ -1,13 +1,17 @@
 'use client';
 
-import { Checkbox, Select } from 'antd'; // Select를 추가로 임포트
+import { Checkbox, Select } from 'antd';
 import { SetStateAction, useState } from 'react';
 import { PiExclamationMarkFill } from 'react-icons/pi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PrimaryButton from '@/components/PrimaryButton';
+import MdEditor from 'react-markdown-editor-lite';
+import MarkdownIt from 'markdown-it';
+import 'react-markdown-editor-lite/lib/index.css';
 
 const { Option } = Select;
+const mdParser = new MarkdownIt();
 
 export default function Post() {
   const [isDisclose, setIsDisclose] = useState(false);
@@ -16,12 +20,16 @@ export default function Post() {
   const [postDate, setPostDate] = useState(new Date());
   const [selectedOrganizations, setSelectedOrganizations] = useState([]);
   const [selectedVisibility, setSelectedVisibility] = useState([]);
+  const [markdownText, setMarkdownText] = useState('');
 
   const handleOrganizationChange = (value: SetStateAction<never[]>) => {
-    setSelectedOrganizations(value); // 멀티플 셀렉션에 맞게 값 설정
+    setSelectedOrganizations(value);
   };
   const handleVisibilityChange = (value: SetStateAction<never[]>) => {
-    setSelectedVisibility(value); // 멀티플 셀렉션에 맞게 값 설정
+    setSelectedVisibility(value);
+  };
+  const handleEditorChange = ({ text }: { text: string }) => {
+    setMarkdownText(text);
   };
 
   return (
@@ -150,6 +158,21 @@ export default function Post() {
                 checked={isMarkdownAccess}
                 onChange={(e) => setIsMarkdownAccess(e.target.checked)}
               />
+            </div>
+          </div>
+          {/* 마크다운 에디터 들어갈곳 */}
+          <div className="flex flex-col justify-center px-10 py-7  border-b-[1.5px] border-gray-200 ">
+            <div>
+              <span>문제 본문: </span>
+
+              <div className="mt-6">
+                <MdEditor
+                  value={markdownText}
+                  style={{ height: '400px' }}
+                  renderHTML={(text) => mdParser.render(text)}
+                  onChange={handleEditorChange}
+                />
+              </div>
             </div>
           </div>
           {/* 등록 버튼 */}
