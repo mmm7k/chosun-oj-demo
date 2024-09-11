@@ -160,7 +160,7 @@ export default function Post() {
               />
             </div>
           </div>
-          {/* 마크다운 에디터 들어갈곳 */}
+          {/* 마크다운 에디터*/}
           <div className="flex flex-col justify-center px-10 py-7  border-b-[1.5px] border-gray-200 ">
             <div>
               <span>문제 본문: </span>
@@ -173,6 +173,54 @@ export default function Post() {
                   onChange={handleEditorChange}
                 />
               </div>
+            </div>
+          </div>
+          {/* 문제 유형  */}
+          <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
+            <div className="flex items-center">
+              <span className="mr-3">문제 유형: </span>
+              <Select
+                mode="multiple"
+                placeholder="문제 유형을 선택하세요."
+                value={selectedOrganizations}
+                onChange={handleOrganizationChange}
+                className="w-[15%]"
+              >
+                <Option value="java">Java</Option>
+                <Option value="c++">C++</Option>
+                <Option value="c">C</Option>
+              </Select>
+            </div>
+          </div>
+          {/* 문제 그룹 */}
+          <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
+            <div className="flex items-center">
+              <span className="mr-3">문제 그룹: </span>
+              <Select
+                placeholder="문제 그룹을 선택하세요."
+                value={selectedVisibility}
+                onChange={handleVisibilityChange}
+                className="w-[19%]"
+              >
+                <Option value="전역 설정 따르기">전역 설정 따르기</Option>
+                <Option value="항상 보이기">항상 보이기</Option>
+                <Option value="문제가 해결됐을 경우 보이기">
+                  문제가 해결됐을 경우 보이기
+                </Option>
+                <Option value="자신의 제출물만">자신의 제출물만</Option>
+              </Select>
+            </div>
+          </div>
+          {/* 점 수 */}
+          <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
+            <div className="flex items-center">
+              <span>점수: </span>
+              <input
+                className="ml-5 w-[5%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                type="number"
+                min={1}
+                max={100}
+              />
             </div>
           </div>
           {/* 등록 버튼 */}
