@@ -223,6 +223,30 @@ export default function Post() {
               />
             </div>
           </div>
+          {/* 시간 제한 */}
+          <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
+            <div className="flex items-center">
+              <span>시간 제한: </span>
+              <input
+                className="ml-5 w-[5%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                type="number"
+                min={1}
+                max={1}
+              />
+            </div>
+          </div>
+          {/* 메모리 제한 */}
+          <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
+            <div className="flex items-center">
+              <span>메모리 제한: </span>
+              <input
+                className="ml-5 w-[5%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                type="number"
+                min={1}
+                max={262144}
+              />
+            </div>
+          </div>
           {/* 등록 버튼 */}
           <div className="w-full flex justify-end px-10 mt-8">
             <PrimaryButton text="문제 등록" />
