@@ -34,7 +34,7 @@ export default function List() {
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-md text-secondary font-semibold">
-        <section className="flex justify-between items-center px-16 relative ">
+        <section className="flex justify-between items-center px-16 relative  ">
           <h1 className="text-xl">문제 목록</h1>
           <div className="absolute right-16 flex items-center w-[15%] border-[2px] border-gray-200 rounded-md px-3 py-2.5 ">
             <IoSearchSharp className="text-gray-400 text-xl" />
