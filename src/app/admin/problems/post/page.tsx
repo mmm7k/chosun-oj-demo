@@ -131,7 +131,7 @@ export default function Post() {
                 placeholder="제출 소스 가시성을 선택하세요."
                 value={selectedVisibility}
                 onChange={handleVisibilityChange}
-                className="w-[17%]"
+                className="w-[19%]"
               >
                 <Option value="전역 설정 따르기">전역 설정 따르기</Option>
                 <Option value="항상 보이기">항상 보이기</Option>
