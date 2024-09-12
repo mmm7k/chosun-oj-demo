@@ -49,3 +49,23 @@
     font-size: 8px;
   }
 }
+
+.gutter {
+  background-image: radial-gradient(circle, #c0c0c0 20%, transparent 20%);
+  background-size: 6px 6px;
+  background-repeat: repeat;
+}
+
+.gutter.gutter-horizontal {
+  cursor: col-resize;
+}
+
+.gutter.gutter-vertical {
+  cursor: row-resize;
+}
+
+.gutter:hover {
+  background-image: radial-gradient(circle, #c0c0c0 40%, transparent 20%);
+  background-size: 6px 6px;
+  background-repeat: repeat;
+}

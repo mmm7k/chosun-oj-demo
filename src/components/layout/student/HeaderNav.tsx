@@ -15,7 +15,7 @@ export default function HeaderNav() {
     return null; // 헤더를 렌더링하지 않음
   }
   return (
-    <nav className="min-w-screen h-16 bg-white text-secondary shadow-md flex justify-center">
+    <nav className="min-w-screen h-14 bg-white text-secondary shadow-md flex justify-center">
       <div className="w-[70%] h-full flex justify-between items-center">
         {/* 로고 */}
         <section className="flex items-center text-lg font-semibold">
@@ -37,7 +37,7 @@ export default function HeaderNav() {
               <span
                 className={`cursor-pointer transition ${
                   pathname === `${classPath}/problems`
-                    ? 'text-primary border-b-4 border-primary pb-[1.1rem] hover:text-primaryHover hover:border-primaryHover'
+                    ? 'text-primary border-b-4 border-primary pb-[0.9rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >
@@ -48,7 +48,7 @@ export default function HeaderNav() {
               <span
                 className={`cursor-pointer transition ${
                   pathname === `${classPath}/grade`
-                    ? 'text-primary border-b-4 border-primary pb-[1.1rem] hover:text-primaryHover hover:border-primaryHover'
+                    ? 'text-primary border-b-4 border-primary pb-[0.9rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >
@@ -59,7 +59,7 @@ export default function HeaderNav() {
               <span
                 className={`cursor-pointer transition ${
                   pathname === `${classPath}/questions`
-                    ? 'text-primary border-b-4 border-primary pb-[1.1rem] hover:text-primaryHover hover:border-primaryHover'
+                    ? 'text-primary border-b-4 border-primary pb-[0.9rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >

@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 
@@ -8,6 +10,13 @@ export default function Problems() {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const itemsPerPage = 9; // 한 페이지당 항목 수
   const pagesPerBlock = 5; // 한 페이지 블록당 페이지 수
+  const pathname = usePathname();
+
+  const parts = pathname.split('/');
+  const selectedClass = parts.find(
+    (part, index) =>
+      parts[index - 1] === 'student' && parts[index + 1] === 'problems',
+  );
 
   // 현재 페이지에 해당하는 항목들 가져오기
   const currentItems = list.slice(
@@ -50,15 +59,17 @@ export default function Problems() {
               <span className="w-[10%]">제출</span>
             </div>
             {currentItems.map((item) => (
-              <div
+              <Link
+                href={`/student/${selectedClass}/problems/${item}`}
                 key={item}
-                className="flex justify-between items-center text-sm py-5 px-5 border-b  hover:bg-gray-100 cursor-pointer  last:border-none"
               >
-                <span className="w-[10%] ">✔</span>
-                <span className="w-[60%] ">피라미드 별찍기{item}</span>
-                <span className="w-[20%] text-primary ">Lv.1</span>
-                <span className="w-[10%] flex items-center">{item}명</span>
-              </div>
+                <div className="flex justify-between items-center text-sm py-5 px-5 border-b  hover:bg-gray-100 cursor-pointer  last:border-none">
+                  <span className="w-[10%] ">✔</span>
+                  <span className="w-[60%] ">피라미드 별찍기{item}</span>
+                  <span className="w-[20%] text-primary ">Lv.1</span>
+                  <span className="w-[10%] flex items-center">{item}명</span>
+                </div>
+              </Link>
             ))}
           </div>
           {/* 페이지네이션 */}
