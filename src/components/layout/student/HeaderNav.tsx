@@ -11,7 +11,9 @@ export default function HeaderNav() {
 
   // 분반 경로
   const classPath = pathname.split('/').slice(0, 3).join('/');
-
+  if (pathname.includes('/problems/')) {
+    return null; // 헤더를 렌더링하지 않음
+  }
   return (
     <nav className="min-w-screen h-16 bg-white text-secondary shadow-md flex justify-center">
       <div className="w-[70%] h-full flex justify-between items-center">
