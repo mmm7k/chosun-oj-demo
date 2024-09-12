@@ -154,7 +154,7 @@ export default function SideNav() {
               >
                 <Link href="/admin/problems/post">문제 추가</Link>
               </li>
-              <li
+              {/* <li
                 className={`transition  ${
                   pathname === '/admin/problems/analytics'
                     ? 'text-primary hover:text-primaryHover'
@@ -162,7 +162,7 @@ export default function SideNav() {
                 }`}
               >
                 <Link href="/admin/problems/analytics">문제 분석</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           {/* example 드롭다운 */}

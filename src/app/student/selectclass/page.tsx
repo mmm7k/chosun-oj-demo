@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function SelectClass() {
   return (
     <div
@@ -8,25 +10,30 @@ export default function SelectClass() {
         <span className="text-lg text-center">
           강의와 분반을 선택해 주세요.
         </span>
-        <section className="mt-4 pl-7">
+        <section className="mt-4 pl-7 font-normal">
           <span> &#8226; 기초 프로그래밍</span>
           <ul className="space-y-2 mt-2 mb-2 pl-3">
-            <li className="cursor-pointer hover:text-secondaryHover transition">
-              - 01분반
-            </li>
-            <li className="cursor-pointer hover:text-secondaryHover transition"></li>
+            <Link href="/student/기초프로그래밍-01분반/problems">
+              <li className="cursor-pointer hover:text-secondaryHover transition">
+                - 01분반
+              </li>
+            </Link>
           </ul>
           <span> &#8226; 심화 프로그래밍</span>
           <ul className="space-y-2 mt-2 mb-2 pl-3">
-            <li className="cursor-pointer hover:text-secondaryHover transition">
-              - 02분반
-            </li>
+            <Link href="/student/심화프로그래밍-02분반/problems">
+              <li className="cursor-pointer hover:text-secondaryHover transition">
+                - 02분반
+              </li>
+            </Link>
           </ul>
           <span> &#8226; 자바 프로그래밍</span>
           <ul className="space-y-2 mt-2 pl-3">
-            <li className="cursor-pointer hover:text-secondaryHover transition">
-              - 02분반
-            </li>
+            <Link href="/student/자바프로그래밍-01분반/problems">
+              <li className="cursor-pointer hover:text-secondaryHover transition">
+                - 02분반
+              </li>
+            </Link>
           </ul>
         </section>
       </div>

@@ -9,11 +9,14 @@ import { RiArrowDropDownLine } from 'react-icons/ri';
 export default function HeaderNav() {
   const pathname = usePathname();
 
+  // 분반 경로
+  const classPath = pathname.split('/').slice(0, 3).join('/');
+
   return (
-    <nav className="min-w-screen h-16 bg-white text-secondary shadow-md  font-semibold flex justify-center">
+    <nav className="min-w-screen h-16 bg-white text-secondary shadow-md flex justify-center">
       <div className="w-[70%] h-full flex justify-between items-center">
         {/* 로고 */}
-        <section className="flex items-center text-lg">
+        <section className="flex items-center text-lg font-semibold">
           <div className="w-9 h-9 relative">
             <Image
               src={'/commons/symbol.png'}
@@ -27,34 +30,34 @@ export default function HeaderNav() {
         </section>
         {/* 메뉴 */}
         {pathname !== '/student/selectclass' && (
-          <section className="mr-64 space-x-28 ">
-            <Link href="/student/problems">
+          <section className="lg:mr-28 xl:mr-52 2xl:mr-60 space-x-28 ">
+            <Link href={`${classPath}/problems`}>
               <span
                 className={`cursor-pointer transition ${
-                  pathname === '/student/problems'
-                    ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
+                  pathname === `${classPath}/problems`
+                    ? 'text-primary border-b-4 border-primary pb-[1.1rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >
                 문제
               </span>
             </Link>
-            <Link href="/student/grade">
+            <Link href={`${classPath}/grade`}>
               <span
                 className={`cursor-pointer transition ${
-                  pathname === '/student/grade'
-                    ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
+                  pathname === `${classPath}/grade`
+                    ? 'text-primary border-b-4 border-primary pb-[1.1rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >
                 성적
               </span>
             </Link>
-            <Link href="/student/questions">
+            <Link href={`${classPath}/questions`}>
               <span
                 className={`cursor-pointer transition ${
-                  pathname === '/student/questions'
-                    ? 'text-primary border-b-4 border-primary pb-[1.1rem]  hover:text-primaryHover hover:border-primaryHover'
+                  pathname === `${classPath}/questions`
+                    ? 'text-primary border-b-4 border-primary pb-[1.1rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >
@@ -64,16 +67,15 @@ export default function HeaderNav() {
           </section>
         )}
         {/* 분반 , 로그아웃 */}
-
         <section className="flex items-center">
           {pathname !== '/student/selectclass' && (
-            <div className="flex items-center transition  hover:text-secondaryHover cursor-pointer mr-7">
+            <div className="flex items-center transition hover:text-secondaryHover cursor-pointer mr-7">
               <span>분반</span>
               <RiArrowDropDownLine className="text-4xl" />
             </div>
           )}
           <Link href="/">
-            <div className="flex items-center transition  hover:text-secondaryHover cursor-pointer">
+            <div className="flex items-center transition hover:text-secondaryHover cursor-pointer">
               <span> 로그아웃</span>
               <MdLogout className="text-xl ml-2 " />
             </div>
