@@ -5,7 +5,7 @@ import MonacoEditor from '@monaco-editor/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Split from 'react-split'; // react-split 임포트
+import Split from 'react-split';
 
 export default function Problem() {
   const [code, setCode] = useState(`#include <string>
