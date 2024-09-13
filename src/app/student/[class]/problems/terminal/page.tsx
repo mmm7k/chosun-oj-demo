@@ -22,8 +22,9 @@ export default function TerminalProblem() {
   const [isConnected, setIsConnected] = useState(false); // 연결 상태 플래그
   const terminalRef = useRef<HTMLDivElement>(null); // 터미널 DOM을 참조할 ref
   const term = useRef<Terminal | null>(null); // Xterm.js 터미널 인스턴스
+  const fitAddon = useRef(new FitAddon()); // FitAddon 인스턴스
 
-  // Xterm.js 터미널과 Socket.IO 연결 함수
+  // 터미널 초기화 및 소켓 연결
   const connectSocket = () => {
     if (!isConnected && terminalRef.current) {
       // Xterm.js 터미널 초기화
@@ -33,56 +34,56 @@ export default function TerminalProblem() {
         cols: 80,
       });
 
-      const fitAddon = new FitAddon();
-      term.current.loadAddon(fitAddon);
+      term.current.loadAddon(fitAddon.current);
       term.current.open(terminalRef.current);
 
-      // DOM이 렌더링된 후 터미널 크기 자동 조정
-      setTimeout(() => {
-        fitAddon.fit();
-      }, 0);
+      // 터미널을 화면 크기에 맞게 조정
+      fitAddon.current.fit();
 
-      term.current.writeln('Welcome to the online judge terminal!\r\n'); // 초기 메시지 출력
+      // DOM 크기 변화 감지
+      const resizeObserver = new ResizeObserver(() => {
+        fitAddon.current.fit();
+      });
+      resizeObserver.observe(terminalRef.current);
+
+      // 터미널 초기 메시지 출력
+      term.current.writeln('Welcome to the online judge terminal!\r\n');
 
       // 입력 버퍼
       let inputBuffer = '';
-
+      let ignoreNextOutput = false; // 첫 번째 출력을 무시할 플래그
+      console.log('Socket.IO 연결 시도');
       // Socket.IO 연결
-
-      const socketConnection = io(''); // 주소
+      //@ts-ignore
+      const socketConnection = io(process.env.NEXT_PUBLIC_SSH); // 서버 주소
+      setSocket(socketConnection); // 소켓을 상태에 저장
 
       socketConnection.on('connect', () => {
         setIsConnected(true);
-        setSocket(socketConnection); // 소켓을 상태에 저장
         console.log('Socket.IO 연결 성공');
 
         // 터미널에서 입력을 처리할 때, 한 글자씩 버퍼에 저장
-        term.current.onData((data) => {
-          // 탭키 처리 (탭 키 코드: \t)
+        term.current?.onData((data) => {
           if (data === '\t') {
-            // 탭 기능을 서버로 보내는 로직 필요할 경우 추가
-            socketConnection.emit('autocomplete', '\t');
-          }
-          // Ctrl+C 처리 (Ctrl+C는 \x03)
-          else if (data === '\x03') {
-            socketConnection.emit('command', '\x03'); // 서버로 Ctrl+C 명령 전송
-          }
-          // 엔터키 입력을 감지하여 명령어 전송
-          else if (data === '\r') {
-            socketConnection.emit('command', inputBuffer); // 입력된 명령어를 서버로 전송
+            // 탭 자동 완성 요청
+            socketConnection.emit('autocomplete', inputBuffer);
+          } else if (data === '\x03') {
+            // 서버로 Ctrl+C 명령 전송
+            socketConnection.emit('command', '\x03');
+          } else if (data === '\r') {
+            // 명령어 입력 후 서버로 전송
+            socketConnection.emit('command', inputBuffer);
             inputBuffer = ''; // 버퍼 초기화
             term.current.write('\r\n'); // 입력 후 줄바꿈 (명령어는 출력 안 함)
-          }
-          // 백스페이스 처리
-          else if (data === '\u007F') {
-            // 백스페이스 입력 처리 (\u007F는 백스페이스)
+            ignoreNextOutput = true; // 첫 번째 서버 출력 무시 플래그 설정
+          } else if (data === '\u007F') {
+            // 백스페이스 처리
             if (inputBuffer.length > 0) {
               inputBuffer = inputBuffer.slice(0, inputBuffer.length - 1);
               term.current.write('\b \b'); // 터미널에서 백스페이스 효과
             }
-          }
-          // 일반적인 문자 입력 처리
-          else {
+          } else {
+            // 일반 입력 처리
             inputBuffer += data; // 버퍼에 데이터 추가
             term.current.write(data); // 입력한 내용을 터미널에 표시
           }
@@ -92,9 +93,21 @@ export default function TerminalProblem() {
       // 서버로부터의 출력 데이터를 터미널에 출력
       socketConnection.on('output', (data) => {
         if (term.current) {
-          term.current.write(data); // 서버에서 출력된 결과만 터미널에 표시
+          if (ignoreNextOutput) {
+            ignoreNextOutput = false; // 첫 번째 출력은 무시
+          } else {
+            term.current.write(data); // 서버에서 출력된 결과만 터미널에 표시
+          }
         }
       });
+
+      return () => {
+        // 컴포넌트 언마운트 시 옵저버와 소켓 연결 해제
+        resizeObserver.disconnect();
+        if (socket) {
+          socket.disconnect();
+        }
+      };
     }
   };
 
@@ -149,7 +162,8 @@ export default function TerminalProblem() {
           {/* 오른쪽 섹션 */}
           <Split direction="vertical" sizes={[50, 50]} minSize={100}>
             {/* Xterm.js 터미널 생성 */}
-            <div className="h-full overflow-auto">
+            {/* <div className="flex-1 flex bg-white min-h-0"> */}
+            <div className="h-full overflow-auto ">
               <div
                 ref={terminalRef}
                 style={{ width: '100%', height: '100%' }}
