@@ -60,63 +60,63 @@
 //           sizes={[50, 50]}
 //           minSize={200}
 //         >
-//           {/* 왼쪽 섹션 */}
-//           <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
-//             <h1 className="font-semibold">문제 설명</h1>
-//             <p className="text-sm">
-//               정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-//               -1을 return 하도록 solution 함수를 완성해주세요.
-//             </p>
-//             <hr className="border-[1px] border-gray-200" />
-//             <h1 className="font-semibold">제한 사항</h1>
-//             <p className="text-sm">
-//               * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
-//               <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
-//               정수입니다.
-//             </p>
-//             <hr className="border-[1px] border-gray-200" />
-//             <h1 className="font-semibold">입출력 예</h1>
-//             <div className="text-sm">
-//               <table className="w-[30%] text-center border-collapse">
-//                 <thead>
-//                   <tr>
-//                     <th className="border border-gray-300">num1</th>
-//                     <th className="border border-gray-300">num2</th>
-//                     <th className="border border-gray-300">return</th>
-//                   </tr>
-//                 </thead>
-//                 <tbody>
-//                   <tr>
-//                     <td className="border border-gray-300">3</td>
-//                     <td className="border border-gray-300">3</td>
-//                     <td className="border border-gray-300">1</td>
-//                   </tr>
-//                   <tr>
-//                     <td className="border border-gray-300">3</td>
-//                     <td className="border border-gray-300">4</td>
-//                     <td className="border border-gray-300">-1</td>
-//                   </tr>
-//                 </tbody>
-//               </table>
-//             </div>
-//             <hr className="border-[1px] border-gray-200" />
-//             <h1 className="font-semibold">입출력 예 설명</h1>
-//             <h2 className="font-semibold">입출력 예 #1</h2>
-//             <p className="text-sm">
-//               정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-//               -1을 return 하도록 solution 함수를 완성해주세요.
-//             </p>
-//             <h2 className="font-semibold">입출력 예 #2</h2>
-//             <p className="text-sm">
-//               정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-//               -1을 return 하도록 solution 함수를 완성해주세요.
-//             </p>
-//             <h2 className="font-semibold">입출력 예 #3</h2>
-//             <p className="text-sm">
-//               정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-//               -1을 return 하도록 solution 함수를 완성해주세요.
-//             </p>
-//           </div>
+// {/* 왼쪽 섹션 */}
+// <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
+//   <h1 className="font-semibold">문제 설명</h1>
+//   <p className="text-sm">
+//     정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+//     -1을 return 하도록 solution 함수를 완성해주세요.
+//   </p>
+//   <hr className="border-[1px] border-gray-200" />
+//   <h1 className="font-semibold">제한 사항</h1>
+//   <p className="text-sm">
+//     * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
+//     <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
+//     정수입니다.
+//   </p>
+//   <hr className="border-[1px] border-gray-200" />
+//   <h1 className="font-semibold">입출력 예</h1>
+//   <div className="text-sm">
+//     <table className="w-[30%] text-center border-collapse">
+//       <thead>
+//         <tr>
+//           <th className="border border-gray-300">num1</th>
+//           <th className="border border-gray-300">num2</th>
+//           <th className="border border-gray-300">return</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//         <tr>
+//           <td className="border border-gray-300">3</td>
+//           <td className="border border-gray-300">3</td>
+//           <td className="border border-gray-300">1</td>
+//         </tr>
+//         <tr>
+//           <td className="border border-gray-300">3</td>
+//           <td className="border border-gray-300">4</td>
+//           <td className="border border-gray-300">-1</td>
+//         </tr>
+//       </tbody>
+//     </table>
+//   </div>
+//   <hr className="border-[1px] border-gray-200" />
+//   <h1 className="font-semibold">입출력 예 설명</h1>
+//   <h2 className="font-semibold">입출력 예 #1</h2>
+//   <p className="text-sm">
+//     정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+//     -1을 return 하도록 solution 함수를 완성해주세요.
+//   </p>
+//   <h2 className="font-semibold">입출력 예 #2</h2>
+//   <p className="text-sm">
+//     정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+//     -1을 return 하도록 solution 함수를 완성해주세요.
+//   </p>
+//   <h2 className="font-semibold">입출력 예 #3</h2>
+//   <p className="text-sm">
+//     정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+//     -1을 return 하도록 solution 함수를 완성해주세요.
+//   </p>
+// </div>
 
 //           {/* 오른쪽 섹션 */}
 //           <Split direction="vertical" sizes={[50, 50]} minSize={100}>
@@ -338,7 +338,55 @@ string solution(string s) {
             정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
             -1을 return 하도록 solution 함수를 완성해주세요.
           </p>
-          {/* 문제 설명 및 테이블 생략 */}
+          <hr className="border-[1px] border-gray-200" />
+          <h1 className="font-semibold">제한 사항</h1>
+          <p className="text-sm">
+            * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
+            <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
+            정수입니다.
+          </p>
+          <hr className="border-[1px] border-gray-200" />
+          <h1 className="font-semibold">입출력 예</h1>
+          <div className="text-sm">
+            <table className="w-[30%] text-center border-collapse">
+              <thead>
+                <tr>
+                  <th className="border border-gray-300">num1</th>
+                  <th className="border border-gray-300">num2</th>
+                  <th className="border border-gray-300">return</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300">3</td>
+                  <td className="border border-gray-300">3</td>
+                  <td className="border border-gray-300">1</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300">3</td>
+                  <td className="border border-gray-300">4</td>
+                  <td className="border border-gray-300">-1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr className="border-[1px] border-gray-200" />
+          <h1 className="font-semibold">입출력 예 설명</h1>
+          <h2 className="font-semibold">입출력 예 #1</h2>
+          <p className="text-sm">
+            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+            -1을 return 하도록 solution 함수를 완성해주세요.
+          </p>
+          <h2 className="font-semibold">입출력 예 #2</h2>
+          <p className="text-sm">
+            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+            -1을 return 하도록 solution 함수를 완성해주세요.
+          </p>
+          <h2 className="font-semibold">입출력 예 #3</h2>
+          <p className="text-sm">
+            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
+            -1을 return 하도록 solution 함수를 완성해주세요.
+          </p>
         </div>
 
         {/* 오른쪽 섹션 */}
