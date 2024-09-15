@@ -61,7 +61,7 @@ export default function SideNav() {
           <div>
             <div
               className={`flex justify-between cursor-pointer items-center ${
-                pathname.startsWith('/admin/stundet')
+                pathname.startsWith('/admin/student')
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
@@ -91,7 +91,7 @@ export default function SideNav() {
               >
                 <Link href="/admin/student/overview">학생 개요</Link>
               </li>
-              <li
+              {/* <li
                 className={`transition  ${
                   pathname === '/admin/student/attendance'
                     ? 'text-primary hover:text-primaryHover'
@@ -108,7 +108,7 @@ export default function SideNav() {
                 }`}
               >
                 <Link href="/admin/student/grades">성적 관리</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           {/* 문제 드롭다운 */}
