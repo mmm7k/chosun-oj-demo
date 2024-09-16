@@ -299,7 +299,7 @@ string solution(string s) {
   return (
     <div className="h-screen flex flex-col text-gray-800">
       {/* 헤더 */}
-      <div className="min-h-14 bg-[#001d5e] text-white flex items-center px-12">
+      <div className="min-h-14 bg-darkPrimary text-white flex items-center px-12">
         <div className="w-9 h-9 relative mr-3">
           <Image
             src={'/commons/whiteSymbol.png'}

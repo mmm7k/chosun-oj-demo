@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         primary: '#0032A0',
+        darkPrimary: '#001d5e',
         secondary: '#4E4E4E',
         secondaryHover: '#9ca3af',
         primaryHover: '#5679c4',

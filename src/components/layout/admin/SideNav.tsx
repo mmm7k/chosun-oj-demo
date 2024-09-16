@@ -28,7 +28,7 @@ export default function SideNav() {
   };
 
   return (
-    <nav className="w-52 min-h-screen bg-white fixed left-0 top-0 text-secondary text-sm font-semibold ">
+    <nav className="w-52 min-h-screen bg-white fixed left-0 top-0 text-secondary text-sm font-semibold shadow-xl ">
       <div className="flex flex-col items-center w-full min-h-screen relative">
         {/* 로고 이미지 */}
         <div className="w-16 h-16 relative mt-11">
