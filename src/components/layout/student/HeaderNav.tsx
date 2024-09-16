@@ -15,7 +15,7 @@ export default function HeaderNav() {
     return null; // 헤더를 렌더링하지 않음
   }
   return (
-    <nav className="min-w-screen h-14 bg-white text-secondary shadow-md flex justify-center">
+    <nav className="min-w-screen h-14 bg-white text-secondary shadow-sm flex justify-center">
       <div className="w-[70%] h-full flex justify-between items-center">
         {/* 로고 */}
         <section className="flex items-center text-lg font-semibold">
