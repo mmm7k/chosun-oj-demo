@@ -84,7 +84,7 @@ export default function Problems() {
                 setCurrentPage(previousBlockStartPage);
               }}
               disabled={currentPage === 1}
-              className="px-3 py-1 bg-white rounded shadow-md  hover:bg-gray-100"
+              className="px-3 py-1 bg-white rounded shadow-md  hover:bg-[#eeeff3]"
             >
               &lt;
             </button>
@@ -94,7 +94,7 @@ export default function Problems() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`shadow-md px-3 py-1 rounded  ${page === currentPage ? 'bg-primary text-white hover:bg-primaryButtonHover' : 'bg-white hover:bg-gray-100'}`}
+                  className={`shadow-md px-3 py-1 rounded  ${page === currentPage ? 'bg-primary text-white hover:bg-primaryButtonHover' : 'bg-white hover:bg-[#eeeff3]'}`}
                 >
                   {page}
                 </button>
@@ -108,7 +108,7 @@ export default function Problems() {
                 setCurrentPage(nextBlockStartPage);
               }}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-white rounded shadow-md hover:bg-gray-100"
+              className="px-3 py-1 bg-white rounded shadow-md hover:bg-[#eeeff3]"
             >
               &gt;
             </button>
