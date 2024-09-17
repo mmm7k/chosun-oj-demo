@@ -69,3 +69,7 @@
   background-size: 6px 6px;
   background-repeat: repeat;
 }
+
+.custom-select .ant-select-selector {
+  border: none !important;
+}
