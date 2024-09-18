@@ -62,7 +62,7 @@ export default function Home() {
     <>
       <div className="w-screen h-screen flex">
         {/* left */}
-        <section className="w-1/2 flex items-center justify-center bg-primary">
+        <section className="flex-1 flex items-center justify-center bg-primary">
           <div className="w-1/3 h-2/5 relative">
             <Image
               src="/commons/logo.png"
@@ -74,7 +74,7 @@ export default function Home() {
         </section>
 
         {/* right */}
-        <section className="w-1/2 flex items-center justify-center">
+        <section className="flex-1 flex items-center justify-center">
           <div className="w-1/2 h-1/2 rounded-sm border-solid border-[1px] border-slate-200 shadow-xl flex flex-col justify-center items-center">
             <div className=" text-2xl font-bold mb-4 ">
               <span className="text-primary">Chosun </span>
