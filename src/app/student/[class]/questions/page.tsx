@@ -14,7 +14,7 @@ export default function Questions() {
         {/* left */}
         <main className="w-[75%]">
           {/* 검색 */}
-          <div className="flex w-[40%] mb-7 items-center bg-white shadow-md rounded-2xl px-4">
+          <div className="flex w-full mb-7 items-center bg-white shadow-md rounded-2xl px-4">
             <IoSearchSharp className="text-gray-400 text-lg" />
             <input
               type="text"
