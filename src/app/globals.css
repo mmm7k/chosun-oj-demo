@@ -72,4 +72,9 @@
 
 .custom-select .ant-select-selector {
   border: none !important;
+  border-radius: 0.75rem !important;
+}
+
+.admin-custom-select .ant-select-selector {
+  border-radius: 1rem !important;
 }

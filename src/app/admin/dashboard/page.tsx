@@ -138,7 +138,7 @@ export default function Dashboard() {
         {/* 좌측 영역 */}
         <div className="flex flex-col gap-4 w-1/3">
           {/* 좌측 프로필 영역 */}
-          <div className="bg-white rounded-md shadow-lg p-6 h-1/2 flex flex-col ">
+          <div className="bg-white rounded-3xl shadow-lg p-6 h-1/2 flex flex-col ">
             <section className="flex flex-col items-center">
               <div className="w-24 h-24 bg-gray-200 rounded-full mb-4"></div>
               <div className="text-primary text-xl font-bold flex items-center">
@@ -156,7 +156,7 @@ export default function Dashboard() {
           </div>
 
           {/* 좌측 하단 도넛 그래프 영역 */}
-          <div className="bg-white rounded-md shadow-lg p-6 flex-grow">
+          <div className="bg-white rounded-3xl shadow-lg p-6 flex-grow">
             <span className="font-bold">💡 학생 분포도</span>
             <hr className="w-full my-4 " />
             <div className="h-72 flex items-center justify-center">
@@ -169,7 +169,7 @@ export default function Dashboard() {
         <div className="flex flex-col w-2/3 gap-4">
           {/* 상단 3개의 작은 카드 영역 */}
           <div className="flex gap-4 text-sm">
-            <div className="bg-white rounded-md shadow-lg p-6 h-32 flex-grow">
+            <div className="bg-white rounded-3xl shadow-lg p-6 h-32 flex-grow">
               <span className="font-bold">📝 할 일 목록</span>
               <hr className="w-full my-2 " />
               <ul className="mt-2 space-y-1 ">
@@ -177,7 +177,7 @@ export default function Dashboard() {
                 <li>• 강의 준비</li>
               </ul>
             </div>
-            <div className="bg-white rounded-md shadow-lg p-6 h-32 flex-grow">
+            <div className="bg-white rounded-3xl shadow-lg p-6 h-32 flex-grow">
               <span className="font-bold">📢 공지사항</span>
               <hr className="w-full my-2 " />
               <ul className="mt-2 space-y-1">
@@ -185,7 +185,7 @@ export default function Dashboard() {
                 <li>• 새 과제 업데이트</li>
               </ul>
             </div>
-            <div className="bg-white rounded-md shadow-lg p-6 h-32 flex-grow">
+            <div className="bg-white rounded-3xl shadow-lg p-6 h-32 flex-grow">
               <span className="font-bold">🗒 메모</span>
               <hr className="w-full my-2 " />
               <p className="mt-2">오늘 할 일 완료</p>
@@ -193,7 +193,7 @@ export default function Dashboard() {
           </div>
 
           {/* 우측 메인 그래프 영역 */}
-          <div className="bg-white rounded-md shadow-lg p-6 flex-grow ">
+          <div className="bg-white rounded-3xl shadow-lg p-6 flex-grow ">
             <h2 className="font-bold text-lg">📊 분반별 성적 비교</h2>
             <hr className="w-full my-6 " />
             <div className="h-[35rem]">

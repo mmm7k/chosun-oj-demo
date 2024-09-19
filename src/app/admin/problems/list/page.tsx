@@ -70,7 +70,7 @@ export default function ProblemsList() {
 
   return (
     <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-md text-secondary font-semibold">
+      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex items-center justify-between px-16">
           <h1 className="text-xl">문제 목록</h1>
           <div className="flex items-center space-x-4">
@@ -79,7 +79,7 @@ export default function ProblemsList() {
               placeholder="연도를 선택하세요."
               value={selectedYear}
               onChange={handleYearChange}
-              className="w-44"
+              className="w-44 admin-custom-select"
               allowClear // 'x' 버튼을 통해 초기화 가능
             >
               <Option value="2020">2020</Option>
@@ -92,7 +92,7 @@ export default function ProblemsList() {
               placeholder="과목을 선택하세요."
               value={selectedSubject}
               onChange={handleSubjectChange}
-              className="w-44"
+              className="w-44 admin-custom-select"
               allowClear // 'x' 버튼을 통해 초기화 가능
             >
               <Option value="기초프로그래밍">기초프로그래밍</Option>
@@ -100,10 +100,10 @@ export default function ProblemsList() {
               <Option value="알고리즘">알고리즘</Option>
             </Select>
 
-            <div className="flex items-center border-[2px] border-gray-200 rounded-md px-3 py-2.5 w-[16rem]">
+            <div className="flex items-center border-[2px] border-gray-200 rounded-2xl px-3 py-2.5 w-[16rem]">
               <IoSearchSharp className="text-gray-400 text-xl" />
               <input
-                className="w-full pl-2 text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                className="w-full pl-2 text-secondary  text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
                 type="text"
                 placeholder="문제를 검색해보세요"
               />
@@ -137,7 +137,7 @@ export default function ProblemsList() {
         </section>
 
         {/* 페이지네이션 및 버튼 */}
-        <section className="flex justify-between w-full px-16 items-center mt-12">
+        <section className="flex justify-between w-full px-16 items-center mt-10">
           {/* 문제 등록 링크 버튼 */}
           <Link href="/admin/problems/post">
             <PrimaryButton text="문제 등록" />
@@ -155,7 +155,7 @@ export default function ProblemsList() {
                 setCurrentPage(previousBlockStartPage);
               }}
               disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-3 py-1 bg-gray-200 rounded-xl  hover:bg-gray-300"
             >
               &lt;
             </button>
@@ -165,7 +165,7 @@ export default function ProblemsList() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 rounded ${
+                  className={`px-3 py-1 rounded-xl  ${
                     page === currentPage
                       ? 'bg-primary text-white hover:bg-primaryButtonHover'
                       : 'bg-gray-200 hover:bg-gray-300'
@@ -183,7 +183,7 @@ export default function ProblemsList() {
                 setCurrentPage(nextBlockStartPage);
               }}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-3 py-1 bg-gray-200 rounded-xl  hover:bg-gray-300"
             >
               &gt;
             </button>

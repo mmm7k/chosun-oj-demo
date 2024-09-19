@@ -38,7 +38,7 @@ export default function Post() {
 
   return (
     <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-md text-secondary font-semibold">
+      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex justify-between items-center px-16 relative ">
           <h1 className="text-xl">문제 등록</h1>
         </section>
@@ -49,7 +49,7 @@ export default function Post() {
             <div className="flex items-center">
               <label htmlFor="problem-code">문제 코드:</label>
               <input
-                className="ml-3 w-[20%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[20%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 id="problem-code"
                 type="text"
                 placeholder="문제코드를 입력해주세요"
@@ -68,7 +68,7 @@ export default function Post() {
             <div className="flex items-center">
               <label htmlFor="problem-name">문제 이름:</label>
               <input
-                className="ml-3 w-[20%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[20%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 id="problem-name"
                 type="text"
                 placeholder="문제이름을 입력해주세요"
@@ -121,7 +121,7 @@ export default function Post() {
                 dateFormat="Pp"
                 timeIntervals={1}
                 minDate={new Date()}
-                className="cursor-pointer ml-2 w-auto h-8 rounded-md border-[1px] border-gray-200 pl-4 focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="cursor-pointer ml-2 w-auto h-8 rounded-lg border-[1px] border-gray-200 pl-4 focus:ring-1 focus:ring-gray-200 focus:outline-none"
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function Post() {
                 <MdEditor
                   id="markdown-editor"
                   value={markdownText}
-                  style={{ height: '400px' }}
+                  style={{ height: '25rem' }}
                   renderHTML={(text) => mdParser.render(text)}
                   onChange={handleEditorChange}
                 />
@@ -244,7 +244,7 @@ export default function Post() {
               <label htmlFor="score-input">점수: </label>
               <input
                 id="score-input"
-                className="ml-3 w-[5%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="number"
                 min={1}
                 max={100}
@@ -257,7 +257,7 @@ export default function Post() {
               <label htmlFor="time-limit-input">시간 제한:</label>
               <input
                 id="time-limit-input"
-                className="ml-3 w-[5%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="number"
                 min={1}
                 max={1}
@@ -277,7 +277,7 @@ export default function Post() {
               <label htmlFor="memory-limit-input">메모리 제한:</label>
               <input
                 id="memory-limit-input"
-                className="ml-3 w-[5%] h-8 rounded-md  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="number"
                 min={1}
                 max={262144}

@@ -105,7 +105,7 @@ export default function Problems() {
         {/* left */}
         <main className="w-[75%]">
           {/* 문제 검색 */}
-          <div className="flex items-center bg-white shadow-md rounded-md px-4">
+          <div className="flex items-center bg-white shadow-md rounded-2xl px-4">
             <IoSearchSharp className="text-gray-400 text-lg" />
             <input
               type="text"
@@ -119,7 +119,7 @@ export default function Problems() {
               placeholder="상태를 선택하세요."
               value={selectedSolved}
               onChange={handleSolvedChange}
-              className="w-full shadow-md custom-select"
+              className="w-full shadow-md custom-select rounded-xl"
               allowClear // 'x' 버튼을 통해 초기화 가능
             >
               <Option value="unsolved">안 푼 문제</Option>
@@ -130,7 +130,7 @@ export default function Problems() {
               placeholder="난이도를 선택하세요."
               value={selectedLevel}
               onChange={handleLevelChange}
-              className="w-full shadow-md custom-select "
+              className="w-full shadow-md custom-select rounded-xl"
               allowClear // 'x' 버튼을 통해 초기화 가능
             >
               <Option value="1">Lv.1</Option>
@@ -142,7 +142,7 @@ export default function Problems() {
               placeholder="제출 인원"
               value={selectedSubmission}
               onChange={handleSubmissionChange}
-              className="w-full shadow-md custom-select"
+              className="w-full shadow-md custom-select rounded-xl"
               allowClear
             >
               <Option value="ascending">제출 인원 오름차순</Option>
@@ -153,7 +153,7 @@ export default function Problems() {
               placeholder="정답률"
               value={selectedAccuracy}
               onChange={handleAccuracyChange}
-              className="w-full shadow-md custom-select"
+              className="w-full shadow-md custom-select rounded-xl"
               allowClear
             >
               <Option value="ascending">정답률 오름차순</Option>
@@ -161,8 +161,8 @@ export default function Problems() {
             </Select>
           </section>
           {/* 문제 목록 */}
-          <div className="mt-5 rounded-md border bg-white shadow-md text-sm text-gray-500">
-            <div className="flex justify-between items-center py-2 px-5 border-b bg-[#eeeff3] text-gray-800">
+          <div className="mt-5 rounded-2xl border bg-white shadow-md text-sm text-gray-500">
+            <div className="flex justify-between items-center rounded-t-2xl py-2 px-5 border-b bg-[#eeeff3] text-gray-800">
               <span className="w-[10%]">상태</span>
               <span className="w-[50%]">문제 이름</span>
               <span className="w-[10%]">난이도</span>
@@ -212,7 +212,7 @@ export default function Problems() {
                 setCurrentPage(previousBlockStartPage);
               }}
               disabled={currentPage === 1}
-              className="px-3 py-1 bg-white rounded shadow-md hover:bg-[#eeeff3]"
+              className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
             >
               &lt;
             </button>
@@ -222,7 +222,7 @@ export default function Problems() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`shadow-md px-3 py-1 rounded ${
+                  className={`shadow-md px-3 py-1 rounded-2xl ${
                     page === currentPage
                       ? 'bg-primary text-white hover:bg-primaryButtonHover'
                       : 'bg-white hover:bg-[#eeeff3]'
@@ -240,14 +240,14 @@ export default function Problems() {
                 setCurrentPage(nextBlockStartPage);
               }}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-white rounded shadow-md hover:bg-[#eeeff3]"
+              className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
             >
               &gt;
             </button>
           </div>
         </main>
         {/* right */}
-        <aside className="flex-1 self-start p-8 text-sm bg-white shadow-md rounded-md">
+        <aside className="flex-1 self-start p-8 text-sm bg-white shadow-md rounded-2xl">
           <h1 className="font-semibold text-secondary mb-8">
             기초프로그래밍 01분반
           </h1>

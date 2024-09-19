@@ -68,7 +68,7 @@ export default function StudentList() {
 
   return (
     <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-md text-secondary font-semibold">
+      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex items-center justify-between px-16">
           <h1 className="text-xl">학생 목록</h1>
           <div className="flex items-center space-x-4">
@@ -77,7 +77,7 @@ export default function StudentList() {
               placeholder="연도를 선택하세요."
               value={selectedYear}
               onChange={handleYearChange}
-              className="w-44"
+              className="w-44 admin-custom-select "
               allowClear
             >
               <Option value="2020">2020</Option>
@@ -90,7 +90,7 @@ export default function StudentList() {
               placeholder="과목을 선택하세요."
               value={selectedSubject}
               onChange={handleSubjectChange}
-              className="w-44"
+              className="w-44 admin-custom-select "
               allowClear
             >
               <Option value="기초프로그래밍">기초프로그래밍</Option>
@@ -98,7 +98,7 @@ export default function StudentList() {
               <Option value="알고리즘">알고리즘</Option>
             </Select>
 
-            <div className="flex items-center border-[2px] border-gray-200 rounded-md px-3 py-2.5 w-[16rem]">
+            <div className="flex items-center border-[2px] border-gray-200 rounded-2xl px-3 py-2.5 w-[16rem]">
               <IoSearchSharp className="text-gray-400 text-xl" />
               <input
                 className="w-full pl-2 text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
@@ -131,7 +131,7 @@ export default function StudentList() {
         {/* 페이지네이션 및 버튼 */}
         <section className="flex justify-end w-full px-16 items-center mt-12">
           {/* 페이지네이션 */}
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1 ">
             {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
             <button
               onClick={() => {
@@ -142,7 +142,7 @@ export default function StudentList() {
                 setCurrentPage(previousBlockStartPage);
               }}
               disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-200 rounded  hover:bg-gray-300"
+              className="px-3 py-1 bg-gray-200 rounded-xl  hover:bg-gray-300"
             >
               &lt;
             </button>
@@ -152,7 +152,7 @@ export default function StudentList() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 rounded ${
+                  className={`px-3 py-1 rounded-xl ${
                     page === currentPage
                       ? 'bg-primary text-white hover:bg-primaryButtonHover'
                       : 'bg-gray-200 hover:bg-gray-300'
@@ -170,7 +170,7 @@ export default function StudentList() {
                 setCurrentPage(nextBlockStartPage);
               }}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300"
             >
               &gt;
             </button>
