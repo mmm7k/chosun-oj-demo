@@ -71,7 +71,11 @@ string solution(string s) {
 
       console.log('Socket.IO 연결 시도');
       //@ts-ignore
-      const socketConnection = io(process.env.NEXT_PUBLIC_SSH);
+      // const socketConnection = io(process.env.NEXT_PUBLIC_SSH);
+      const socketConnection = io(process.env.NEXT_PUBLIC_SSH, {
+        secure: true, // HTTPS 연결을 강제하는 설정
+        transports: ['websocket', 'polling'], // 필요한 경우 transport 설정 추가
+      });
       setSocket(socketConnection);
 
       socketConnection.on('connect', () => {
