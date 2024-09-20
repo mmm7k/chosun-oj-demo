@@ -62,7 +62,7 @@ export default function Home() {
     <>
       <div className="w-screen h-screen flex">
         {/* left */}
-        <section className="flex-1 flex items-center justify-center bg-primary">
+        <section className="hidden flex-1 lg:flex items-center justify-center bg-primary">
           <div className="w-1/3 h-2/5 relative">
             <Image
               src="/commons/logo.png"
@@ -74,20 +74,24 @@ export default function Home() {
         </section>
 
         {/* right */}
-        <section className="flex-1 flex items-center justify-center">
-          <div className="w-1/2 h-1/2 rounded-sm border-solid border-[1px] border-slate-200 shadow-xl flex flex-col justify-center items-center">
-            <div className=" text-2xl font-bold mb-4 ">
-              <span className="text-primary">Chosun </span>
-              <span className="text-secondary">Online Judge</span>
+        <section className="flex-1 flex items-center justify-center ">
+          <div className=" w-1/2 h-1/2  space-y-4 rounded-sm border-solid border-[1px] border-slate-200 shadow-xl flex flex-col justify-center items-center">
+            <div className=" font-bold mb-4  ">
+              <span className="text-primary text-2xl sm:text-3xl lg:text-2xl">
+                Chosun{' '}
+              </span>
+              <span className="text-secondary text-2xl sm:text-3xl lg:text-2xl">
+                Online Judge
+              </span>
             </div>
 
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="w-full flex flex-col items-center"
+              className="w-full flex flex-col items-center space-y-4"
             >
               <input
                 {...register('username')}
-                className="w-3/4 h-10 mt-4 rounded-md  border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="w-3/4 h-10  rounded-md  border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="text"
                 placeholder="학번을 입력해주세요"
               />
@@ -99,7 +103,7 @@ export default function Home() {
 
               <input
                 {...register('password')}
-                className="w-3/4 h-10 mt-4 rounded-md  border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="w-3/4 h-10  rounded-md  border-[1px] border-slate-200 pl-4 placeholder:text-sm focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="password"
                 placeholder="비밀번호를 입력해주세요"
               />
@@ -110,7 +114,7 @@ export default function Home() {
               )}
 
               {/* 교직원 로그인 체크박스 */}
-              <div className="mt-4 w-3/4 flex text-[#5a5a5a] text-sm">
+              <div className=" w-3/4 flex text-[#5a5a5a] text-sm items-center">
                 <Checkbox
                   checked={isStaff}
                   onChange={(e) => setIsStaff(e.target.checked)}
@@ -120,14 +124,14 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center mt-4 cursor-pointer hover:bg-primaryButtonHover transition"
+                className="w-3/4 h-11 rounded-md bg-primary text-white flex items-center justify-center  cursor-pointer hover:bg-primaryButtonHover transition"
               >
                 로그인
               </button>
             </form>
             <Link
               href="/signup"
-              className="w-3/4 h-11 rounded-md bg-secondaryButton border-[1px] border-secondaryButtonBorder text-secondary flex items-center justify-center mt-4 cursor-pointer hover:bg-secondaryButtonHover transition"
+              className="w-3/4 h-11 rounded-md bg-secondaryButton border-[1px] border-secondaryButtonBorder text-secondary flex items-center justify-center cursor-pointer hover:bg-secondaryButtonHover transition"
             >
               회원가입
             </Link>

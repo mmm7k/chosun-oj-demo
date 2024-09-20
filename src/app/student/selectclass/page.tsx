@@ -6,7 +6,7 @@ import { AiOutlineCodeSandbox } from 'react-icons/ai';
 export default function SelectClass() {
   return (
     <div
-      className="font-semibold flex justify-center items-center"
+      className="font-semibold flex justify-center items-center "
       style={{ height: 'calc(100vh - 4rem)' }}
     >
       <section className="flex justify-center space-x-16 mb-[4rem]">

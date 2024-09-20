@@ -6,7 +6,7 @@ export default function StudentLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-[#f0f4fc] min-w-screen min-h-screen">
+    <div className="bg-[#f0f4fc] min-w-screen  min-h-screen overflow-hidden">
       <HeaderNav />
       {children}
     </div>

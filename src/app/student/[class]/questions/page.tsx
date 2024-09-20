@@ -7,7 +7,7 @@ import { BsSendCheck } from 'react-icons/bs';
 import { IoSearchSharp } from 'react-icons/io5';
 import { UserOutlined } from '@ant-design/icons';
 export default function Questions() {
-  const questionsList = [1, 2, 3, 4, 5];
+  const questionsList: number[] = [1, 2, 3, 4, 5];
   return (
     <div className="w-full flex justify-center text-secondary ">
       <div className="w-[70%] flex gap-12 pt-14 pb-14">
