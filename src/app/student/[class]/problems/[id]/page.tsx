@@ -130,7 +130,7 @@ string solution(string s) {
   };
 
   return (
-    <div className="h-screen flex flex-col text-gray-800">
+    <div className="h-[100dvh] flex flex-col text-gray-800">
       {/* 헤더 */}
       <div className="h-20 lg:h-14 bg-darkPrimary text-white flex items-center px-4 sm:px-12">
         <div className="w-9 h-9 relative mr-3">
