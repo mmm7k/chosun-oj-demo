@@ -73,14 +73,14 @@ export default function ProblemsList() {
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex flex-col md:flex-row  items-center justify-between px-0 md:px-16">
           <h1 className="text-xl mb-3 md:mb-0">문제 목록</h1>
-          <div className="flex flex-col sm:flex-row  items-center space-y-3 sm:space-y-0  space-x-0 sm:space-x-2 md:space-x-4">
+          <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
             <Select
               id="year-select"
               placeholder="연도를 선택하세요."
               value={selectedYear}
               onChange={handleYearChange}
               className="w-44 admin-custom-select"
-              allowClear // 'x' 버튼을 통해 초기화 가능
+              allowClear
             >
               <Option value="2020">2020</Option>
               <Option value="2021">2021</Option>
@@ -93,7 +93,7 @@ export default function ProblemsList() {
               value={selectedSubject}
               onChange={handleSubjectChange}
               className="w-44 admin-custom-select"
-              allowClear // 'x' 버튼을 통해 초기화 가능
+              allowClear
             >
               <Option value="기초프로그래밍">기초프로그래밍</Option>
               <Option value="심화프로그래밍">심화프로그래밍</Option>
@@ -107,6 +107,47 @@ export default function ProblemsList() {
                 type="text"
                 placeholder="문제를 검색해보세요"
               />
+            </div>
+          </div>
+
+          {/* sm 이하 일 떄 필터,검색 */}
+          <div className=" w-full sm:hidden flex-col  space-y-3 ">
+            <div className="space-x-[2%] flex justify-center">
+              <Select
+                id="year-select"
+                placeholder="연도를 선택하세요."
+                value={selectedYear}
+                onChange={handleYearChange}
+                className="w-[43%] admin-custom-select "
+                allowClear
+              >
+                <Option value="2020">2020</Option>
+                <Option value="2021">2021</Option>
+                <Option value="2022">2022</Option>
+              </Select>
+
+              <Select
+                id="subject-select"
+                placeholder="과목을 선택하세요."
+                value={selectedSubject}
+                onChange={handleSubjectChange}
+                className="w-[43%] admin-custom-select "
+                allowClear
+              >
+                <Option value="기초프로그래밍">기초프로그래밍</Option>
+                <Option value="심화프로그래밍">심화프로그래밍</Option>
+                <Option value="알고리즘">알고리즘</Option>
+              </Select>
+            </div>
+            <div className="flex justify-center">
+              <div className="flex items-center border-[2px] border-gray-200 rounded-2xl px-3 py-2.5 w-[88%]">
+                <IoSearchSharp className="text-gray-400 text-xl" />
+                <input
+                  className="w-full pl-2 text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                  type="text"
+                  placeholder="학번,이름,이메일로 검색해보세요"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -141,14 +182,14 @@ export default function ProblemsList() {
         </section>
 
         {/* 페이지네이션 및 버튼 */}
-        <section className="flex flex-col sm:flex-row justify-between w-full px-16 items-center mt-10">
+        <section className="flex justify-center sm:justify-between w-full px-16 items-center mt-4 ">
           {/* 문제 등록 링크 버튼 */}
-          <Link href="/admin/problems/post">
+          <Link href="/admin/problems/post" className="hidden sm:block">
             <PrimaryButton text="문제 등록" />
           </Link>
 
           {/* 페이지네이션 */}
-          <div className="flex pt-5 sm:mt-0 items-center space-x-1">
+          <div className="flex  items-center space-x-1">
             {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
             <button
               onClick={() => {
