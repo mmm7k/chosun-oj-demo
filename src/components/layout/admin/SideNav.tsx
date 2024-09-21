@@ -431,6 +431,7 @@ export default function SideNav() {
             <Link
               href="/admin/dashboard"
               className="0 w-full flex justify-center items-center py-4 hover:bg-gray-100"
+              onClick={() => setMenuOpen(!menuOpen)}
             >
               <span
                 className={`    ${
@@ -463,7 +464,10 @@ export default function SideNav() {
               {/* 학생 드롭다운 메뉴 */}
               {isStudentDropdownOpen && (
                 <ul className="space-y-2 bg-white w-full">
-                  <Link href="/admin/student/overview">
+                  <Link
+                    href="/admin/student/overview"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
                     <li
                       className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
                         pathname === '/admin/student/overview' &&
@@ -498,7 +502,10 @@ export default function SideNav() {
               {/* 문제 드롭다운 메뉴 */}
               {isProblemsDropdownOpen && (
                 <ul className="py-2 space-y-2 bg-white w-full">
-                  <Link href="/admin/problems/list">
+                  <Link
+                    href="/admin/problems/list"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
                     <li
                       className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
                         pathname === '/admin/problems/list' &&
@@ -508,7 +515,10 @@ export default function SideNav() {
                       문제 목록
                     </li>
                   </Link>
-                  <Link href="/admin/problems/post">
+                  <Link
+                    href="/admin/problems/post"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
                     <li
                       className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
                         pathname === '/admin/problems/post' &&
@@ -543,7 +553,10 @@ export default function SideNav() {
               {/* example 드롭다운 메뉴 */}
               {isExampleDropdownOpen && (
                 <ul className="py-2 space-y-2 bg-white w-full">
-                  <Link href="/admin/example/item1">
+                  <Link
+                    href="/admin/example/item1"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
                     <li
                       className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
                         pathname === '/admin/example/item1' &&
@@ -553,7 +566,10 @@ export default function SideNav() {
                       Item 1
                     </li>
                   </Link>
-                  <Link href="/admin/example/item2">
+                  <Link
+                    href="/admin/example/item2"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
                     <li
                       className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
                         pathname === '/admin/example/item2' &&

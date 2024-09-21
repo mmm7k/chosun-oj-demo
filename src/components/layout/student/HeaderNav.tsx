@@ -121,6 +121,7 @@ export default function HeaderNav() {
                   pathname === `${classPath}/problems` &&
                   'text-primary font-semibold  '
                 }`}
+                onClick={() => setMenuOpen(!menuOpen)}
               >
                 <span className="cursor-pointer transition ">문제</span>
               </Link>
@@ -130,6 +131,7 @@ export default function HeaderNav() {
                   pathname === `${classPath}/grade` &&
                   'text-primary font-semibold  '
                 }`}
+                onClick={() => setMenuOpen(!menuOpen)}
               >
                 <span className="cursor-pointer transition ">성적</span>
               </Link>
@@ -139,6 +141,7 @@ export default function HeaderNav() {
                   pathname === `${classPath}/questions` &&
                   'text-primary font-semibold  '
                 }`}
+                onClick={() => setMenuOpen(!menuOpen)}
               >
                 <span className="cursor-pointer transition ">Q&A</span>
               </Link>
