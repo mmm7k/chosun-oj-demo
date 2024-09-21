@@ -11,6 +11,8 @@ import io, { Socket } from 'socket.io-client';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import 'xterm/css/xterm.css';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 export default function Problem() {
   const [code, setCode] = useState(`#include <string>
@@ -35,6 +37,7 @@ string solution(string s) {
   const terminalRef = useRef<HTMLDivElement>(null); // 터미널 DOM을 참조할 ref
   const term = useRef<Terminal | null>(null); // Xterm.js 터미널 인스턴스
   const fitAddon = useRef(new FitAddon()); // FitAddon 인스턴스
+  const [isLeftVisible, setIsLeftVisible] = useState(true);
 
   useEffect(() => {
     if (isTerminalMode) {
@@ -129,7 +132,7 @@ string solution(string s) {
   return (
     <div className="h-screen flex flex-col text-gray-800">
       {/* 헤더 */}
-      <div className="min-h-14 bg-darkPrimary text-white flex items-center px-12">
+      <div className="h-20 lg:h-14 bg-darkPrimary text-white flex items-center px-4 sm:px-12">
         <div className="w-9 h-9 relative mr-3">
           <Image
             src={'/commons/whiteSymbol.png'}
@@ -142,11 +145,32 @@ string solution(string s) {
       </div>
 
       {/* 문제 이름 */}
-      <div className="w-full h-14 border-b-[1.5px] bg-white border-gray-300 px-12 flex justify-between items-center">
+      <div className="w-full h-14 border-b-[1.5px] bg-white border-gray-300 px-4 sm:px-12 flex justify-between items-center">
         <span className="mt-4 text-primary font-semibold border-b-[3px] pb-3 border-primary">
           피라미드 문제
         </span>
         <div className="flex items-center">
+          <div className="sm:hidden">
+            {/* sm 이하에서만 보이는 토글 버튼 그룹 */}
+            <ToggleButtonGroup
+              color="primary"
+              value={isLeftVisible ? 'left' : 'right'}
+              exclusive
+              onChange={(event, newAlignment) => {
+                if (newAlignment !== null) {
+                  setIsLeftVisible(newAlignment === 'left');
+                }
+              }}
+              aria-label="Section Visibility"
+            >
+              <ToggleButton value="left" sx={{ fontWeight: 900 }}>
+                문제 설명
+              </ToggleButton>
+              <ToggleButton value="right" sx={{ fontWeight: 900 }}>
+                에디터
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
           <Switch
             checked={isTerminalMode}
             onChange={() => setIsTerminalMode((prev) => !prev)}
@@ -156,105 +180,202 @@ string solution(string s) {
       </div>
 
       {/* 가변 섹션 */}
-      <Split
-        className="flex-1 flex bg-white min-h-0"
-        sizes={[50, 50]}
-        minSize={200}
-      >
-        {/* 왼쪽 섹션 */}
-        <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
-          <h1 className="font-semibold">문제 설명</h1>
-          <p className="text-sm">
-            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-            -1을 return 하도록 solution 함수를 완성해주세요.
-          </p>
-          <hr className="border-[1px] border-gray-200" />
-          <h1 className="font-semibold">제한 사항</h1>
-          <p className="text-sm">
-            * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
-            <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
-            정수입니다.
-          </p>
-          <hr className="border-[1px] border-gray-200" />
-          <h1 className="font-semibold">입출력 예</h1>
-          <div className="text-sm">
-            <table className="w-[30%] text-center border-collapse">
-              <thead>
-                <tr>
-                  <th className="border border-gray-300">num1</th>
-                  <th className="border border-gray-300">num2</th>
-                  <th className="border border-gray-300">return</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-gray-300">3</td>
-                  <td className="border border-gray-300">3</td>
-                  <td className="border border-gray-300">1</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300">3</td>
-                  <td className="border border-gray-300">4</td>
-                  <td className="border border-gray-300">-1</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <hr className="border-[1px] border-gray-200" />
-          <h1 className="font-semibold">입출력 예 설명</h1>
-          <h2 className="font-semibold">입출력 예 #1</h2>
-          <p className="text-sm">
-            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-            -1을 return 하도록 solution 함수를 완성해주세요.
-          </p>
-          <h2 className="font-semibold">입출력 예 #2</h2>
-          <p className="text-sm">
-            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-            -1을 return 하도록 solution 함수를 완성해주세요.
-          </p>
-          <h2 className="font-semibold">입출력 예 #3</h2>
-          <p className="text-sm">
-            정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면
-            -1을 return 하도록 solution 함수를 완성해주세요.
-          </p>
+      <div className="flex-1 flex bg-white min-h-0">
+        {/* sm 이상에서는 좌/우 분할된 화면 */}
+        <div className="hidden sm:flex w-full">
+          <Split className="flex-1 flex" sizes={[50, 50]} minSize={200}>
+            {/* 왼쪽 섹션 */}
+            <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
+              <h1 className="font-semibold">문제 설명</h1>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+              <hr className="border-[1px] border-gray-200" />
+              <h1 className="font-semibold">제한 사항</h1>
+              <p className="text-sm">
+                * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
+                <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
+                정수입니다.
+              </p>
+              <hr className="border-[1px] border-gray-200" />
+              <h1 className="font-semibold">입출력 예</h1>
+              <div className="text-sm">
+                <table className="w-[30%] text-center border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-300">num1</th>
+                      <th className="border border-gray-300">num2</th>
+                      <th className="border border-gray-300">return</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-300">3</td>
+                      <td className="border border-gray-300">3</td>
+                      <td className="border border-gray-300">1</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300">3</td>
+                      <td className="border border-gray-300">4</td>
+                      <td className="border border-gray-300">-1</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr className="border-[1px] border-gray-200" />
+              <h1 className="font-semibold">입출력 예 설명</h1>
+              <h2 className="font-semibold">입출력 예 #1</h2>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+              <h2 className="font-semibold">입출력 예 #2</h2>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+              <h2 className="font-semibold">입출력 예 #3</h2>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+            </div>
+            {/* 오른쪽 섹션 */}
+            <Split direction="vertical" sizes={[50, 50]} minSize={100}>
+              {isTerminalMode ? (
+                <div className="h-full overflow-auto ">
+                  <div
+                    ref={terminalRef}
+                    style={{ width: '100%', height: '100%' }}
+                  ></div>
+                </div>
+              ) : (
+                <div className="h-full overflow-auto ">
+                  <MonacoEditor
+                    language="cpp"
+                    theme="vs-light"
+                    value={code}
+                    onChange={(newCode) => setCode(newCode || '')}
+                    options={{
+                      suggestOnTriggerCharacters: false,
+                      quickSuggestions: false,
+                      tabCompletion: 'off',
+                    }}
+                  />
+                </div>
+              )}
+              <div className="bg-gray-100 overflow-auto">
+                <h1 className="font-semibold border-b py-3 px-5 border-gray-300">
+                  실행 결과
+                </h1>
+                <p className="text-sm py-3 px-5">실행 결과가 표시됩니다.</p>
+              </div>
+            </Split>
+          </Split>
         </div>
 
-        {/* 오른쪽 섹션 */}
-        <Split direction="vertical" sizes={[50, 50]} minSize={100}>
-          {isTerminalMode ? (
-            <div className="h-full overflow-auto ">
-              <div
-                ref={terminalRef}
-                style={{ width: '100%', height: '100%' }}
-              ></div>
+        {/* sm 이하에서는 좌/우 토글된 화면 */}
+        <div className="flex  sm:hidden w-screen h-full">
+          {isLeftVisible ? (
+            <div className="px-4 sm:px-12 py-5 space-y-5 overflow-auto w-full ">
+              <h1 className="font-semibold">문제 설명</h1>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+              <hr className="border-[1px] border-gray-200" />
+              <h1 className="font-semibold">제한 사항</h1>
+              <p className="text-sm">
+                * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
+                <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
+                정수입니다.
+              </p>
+              <hr className="border-[1px] border-gray-200" />
+              <h1 className="font-semibold">입출력 예</h1>
+              <div className="text-sm">
+                <table className="w-[30%] text-center border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-300">num1</th>
+                      <th className="border border-gray-300">num2</th>
+                      <th className="border border-gray-300">return</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-300">3</td>
+                      <td className="border border-gray-300">3</td>
+                      <td className="border border-gray-300">1</td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-300">3</td>
+                      <td className="border border-gray-300">4</td>
+                      <td className="border border-gray-300">-1</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr className="border-[1px] border-gray-200" />
+              <h1 className="font-semibold">입출력 예 설명</h1>
+              <h2 className="font-semibold">입출력 예 #1</h2>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+              <h2 className="font-semibold">입출력 예 #2</h2>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
+              <h2 className="font-semibold">입출력 예 #3</h2>
+              <p className="text-sm">
+                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+              </p>
             </div>
           ) : (
-            <div className="h-full overflow-auto ">
-              <MonacoEditor
-                language="cpp"
-                theme="vs-light"
-                value={code}
-                onChange={(newCode) => setCode(newCode || '')}
-                options={{
-                  suggestOnTriggerCharacters: false,
-                  quickSuggestions: false,
-                  tabCompletion: 'off',
-                }}
-              />
-            </div>
+            <Split
+              direction="vertical"
+              sizes={[50, 50]}
+              minSize={100}
+              className="w-screen"
+            >
+              {isTerminalMode ? (
+                <div className="h-full overflow-auto ">
+                  <div
+                    ref={terminalRef}
+                    style={{ width: '100%', height: '100%' }}
+                  ></div>
+                </div>
+              ) : (
+                <div className="h-full overflow-auto ">
+                  <MonacoEditor
+                    language="cpp"
+                    theme="vs-light"
+                    value={code}
+                    onChange={(newCode) => setCode(newCode || '')}
+                    options={{
+                      suggestOnTriggerCharacters: false,
+                      quickSuggestions: false,
+                      tabCompletion: 'off',
+                    }}
+                  />
+                </div>
+              )}
+              <div className="bg-gray-100  overflow-auto">
+                <h1 className="font-semibold border-b py-3 px-5 border-gray-300">
+                  실행 결과
+                </h1>
+                <p className="text-sm py-3 px-5">실행 결과가 표시됩니다.</p>
+              </div>
+            </Split>
           )}
-
-          <div className="bg-gray-100 overflow-auto">
-            <h1 className="font-semibold border-b py-3 px-5 border-gray-300">
-              실행 결과
-            </h1>
-            <p className="text-sm py-3 px-5">실행 결과가 표시됩니다.</p>
-          </div>
-        </Split>
-      </Split>
+        </div>
+      </div>
 
       {/* 푸터 */}
-      <div className="min-h-16 bg-white text-white flex items-center justify-between px-12 border-t border-gray-300">
+      <div className="min-h-16 bg-white text-white flex items-center justify-between px-4 sm:px-12 border-t border-gray-300">
         <Link href={`/student/${selectedClass}/problems`}>
           <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition">
             이전으로
