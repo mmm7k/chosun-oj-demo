@@ -3,12 +3,14 @@
 import { Select } from 'antd';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
+import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 
 const { Option } = Select;
 
 export default function Problems() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedSolved, setSelectedSolved] = useState<string | null>(null);
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<string | null>(
@@ -32,25 +34,10 @@ export default function Problems() {
     setSelectedAccuracy(value);
   };
 
-  const list = Array.from({ length: 60 }, (_, i) => {
-    const randomLevel = Math.floor(Math.random() * 3) + 1;
-    const randomSolved = Math.random() > 0.5 ? 'solved' : 'unsolved';
-    const randomSubmission = Math.floor(Math.random() * 100) + 1;
-    const randomAccuracy = Math.floor(Math.random() * 101);
-
-    return {
-      id: i + 1,
-      name: `피라미드 별찍기${i + 1}`,
-      level: `Lv.${randomLevel}`,
-      solved: randomSolved,
-      submissionCount: randomSubmission,
-      accuracyRate: randomAccuracy,
-    };
-  });
-
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
-  const itemsPerPage = 9; // 한 페이지당 항목 수
-  const pagesPerBlock = 5; // 한 페이지 블록당 페이지 수
+  const [currentPage, setCurrentPage] = useState(1);
+  const [list, setList] = useState<any[]>([]);
+  const itemsPerPage = 9;
+  const pagesPerBlock = 5;
   const pathname = usePathname();
 
   const parts = pathname.split('/');
@@ -58,6 +45,28 @@ export default function Problems() {
     (part, index) =>
       parts[index - 1] === 'student' && parts[index + 1] === 'problems',
   );
+
+  useEffect(() => {
+    const generateRandomList = () => {
+      return Array.from({ length: 60 }, (_, i) => {
+        const randomLevel = Math.floor(Math.random() * 3) + 1;
+        const randomSolved = Math.random() > 0.5 ? 'solved' : 'unsolved';
+        const randomSubmission = Math.floor(Math.random() * 100) + 1;
+        const randomAccuracy = Math.floor(Math.random() * 101);
+
+        return {
+          id: i + 1,
+          name: `피라미드 별찍기${i + 1}`,
+          level: `Lv.${randomLevel}`,
+          solved: randomSolved,
+          submissionCount: randomSubmission,
+          accuracyRate: randomAccuracy,
+        };
+      });
+    };
+
+    setList(generateRandomList());
+  }, []);
 
   let filteredList = list
     .filter((item) => (selectedSolved ? item.solved === selectedSolved : true))
@@ -81,16 +90,12 @@ export default function Problems() {
     );
   }
 
-  // 현재 페이지에 해당하는 항목들 가져오기
   const currentItems = filteredList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
 
-  // 총 페이지 수 계산
   const totalPages = Math.ceil(filteredList.length / itemsPerPage);
-
-  // 현재 페이지 블록에 해당하는 페이지 번호들 가져오기
   const currentBlock = Math.ceil(currentPage / pagesPerBlock);
   const startPage = (currentBlock - 1) * pagesPerBlock + 1;
   const endPage = Math.min(startPage + pagesPerBlock - 1, totalPages);
@@ -100,10 +105,50 @@ export default function Problems() {
   );
 
   return (
-    <div className="w-full flex justify-center text-secondary">
-      <div className="w-[70%] flex gap-12 pt-14">
+    <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center text-secondary">
+      {/* lg 이하에서 햄버거 메뉴 */}
+      <div className="block lg:hidden bg-white w-full">
+        <div
+          className="flex justify-center items-center cursor-pointer py-4 border-[1.5px] border-gray-200 "
+          onClick={() => setIsMenuOpen(!isMenuOpen)} // 클릭 시 메뉴 열기/닫기 토글
+        >
+          <span className="font-semibold text-secondary mr-2">
+            기초프로그래밍 01분반
+          </span>
+          {isMenuOpen ? (
+            <IoChevronUp className="text-xl text-gray-500 transition-transform duration-300" />
+          ) : (
+            <IoChevronDown className="text-xl text-gray-500 transition-transform duration-300" />
+          )}
+        </div>
+
+        <div
+          className={`transition-all duration-500 ease-in-out overflow-hidden ${
+            isMenuOpen ? 'max-h-96' : 'max-h-0'
+          }`}
+        >
+          <ul className="space-y-4 text-gray-500  ">
+            <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
+              1. 변수
+            </li>
+            <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
+              2. 문자열
+            </li>
+            <li className="text-primary hover:text-primaryHover transition  font-semibold  hover:bg-gray-200 cursor-pointer pl-[5%] py-2">
+              3. 반복문
+            </li>
+            <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
+              4. 조건문
+            </li>
+            <li className="hover:text-gray-700 transition cursor-pointe hover:bg-gray-200 pl-[5%] py-2">
+              5. 포인터
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="w-[90%] lg:w-[70%] flex gap-0 lg:gap-12 pt-14 items-start pb-14 sm:pb-0">
         {/* left */}
-        <main className="w-[75%]">
+        <main className="w-full lg:w-[70%]">
           {/* 문제 검색 */}
           <div className="flex items-center bg-white shadow-md rounded-2xl px-4">
             <IoSearchSharp className="text-gray-400 text-lg" />
@@ -113,52 +158,60 @@ export default function Problems() {
               placeholder="문제 제목을 입력하세요."
             />
           </div>
-          <section className="flex w-[100%] gap-4 mt-3">
-            <Select
-              id="solved-select"
-              placeholder="상태를 선택하세요."
-              value={selectedSolved}
-              onChange={handleSolvedChange}
-              className="w-full shadow-md custom-select rounded-xl"
-              allowClear // 'x' 버튼을 통해 초기화 가능
-            >
-              <Option value="unsolved">안 푼 문제</Option>
-              <Option value="solved">푼 문제</Option>
-            </Select>
-            <Select
-              id="level-select"
-              placeholder="난이도를 선택하세요."
-              value={selectedLevel}
-              onChange={handleLevelChange}
-              className="w-full shadow-md custom-select rounded-xl"
-              allowClear // 'x' 버튼을 통해 초기화 가능
-            >
-              <Option value="1">Lv.1</Option>
-              <Option value="2">Lv.2</Option>
-              <Option value="3">Lv.3</Option>
-            </Select>
-            <Select
-              id="submission-select"
-              placeholder="제출 인원"
-              value={selectedSubmission}
-              onChange={handleSubmissionChange}
-              className="w-full shadow-md custom-select rounded-xl"
-              allowClear
-            >
-              <Option value="ascending">제출 인원 오름차순</Option>
-              <Option value="descending">제출 인원 내림차순</Option>
-            </Select>
-            <Select
-              id="accuracy-select"
-              placeholder="정답률"
-              value={selectedAccuracy}
-              onChange={handleAccuracyChange}
-              className="w-full shadow-md custom-select rounded-xl"
-              allowClear
-            >
-              <Option value="ascending">정답률 오름차순</Option>
-              <Option value="descending">정답률 내림차순</Option>
-            </Select>
+          <section className="flex gap-4 mt-3  overflow-auto overflow-y-hidden">
+            <div className="h-9 w-full ">
+              <Select
+                id="solved-select"
+                placeholder="상태를 선택하세요."
+                value={selectedSolved}
+                onChange={handleSolvedChange}
+                className="w-full h-[85%] shadow-md custom-select rounded-xl"
+                allowClear
+              >
+                <Option value="unsolved">안 푼 문제</Option>
+                <Option value="solved">푼 문제</Option>
+              </Select>
+            </div>
+            <div className="h-9 w-full">
+              <Select
+                id="level-select"
+                placeholder="난이도를 선택하세요."
+                value={selectedLevel}
+                onChange={handleLevelChange}
+                className="w-full h-[85%] shadow-md custom-select rounded-xl"
+                allowClear
+              >
+                <Option value="1">Lv.1</Option>
+                <Option value="2">Lv.2</Option>
+                <Option value="3">Lv.3</Option>
+              </Select>
+            </div>
+            <div className="h-9 w-full">
+              <Select
+                id="submission-select"
+                placeholder="제출 인원"
+                value={selectedSubmission}
+                onChange={handleSubmissionChange}
+                className="w-full h-[85%] shadow-md custom-select rounded-xl"
+                allowClear
+              >
+                <Option value="ascending">제출 인원 오름차순</Option>
+                <Option value="descending">제출 인원 내림차순</Option>
+              </Select>
+            </div>
+            <div className="h-9 w-full">
+              <Select
+                id="accuracy-select"
+                placeholder="정답률"
+                value={selectedAccuracy}
+                onChange={handleAccuracyChange}
+                className="w-full h-[85%] shadow-md custom-select rounded-xl"
+                allowClear
+              >
+                <Option value="ascending">정답률 오름차순</Option>
+                <Option value="descending">정답률 내림차순</Option>
+              </Select>
+            </div>
           </section>
           {/* 문제 목록 */}
           <div className="mt-5 rounded-2xl border bg-white shadow-md text-sm text-gray-500">
@@ -202,7 +255,6 @@ export default function Problems() {
           </div>
           {/* 페이지네이션 */}
           <div className="flex justify-center items-center mt-4 space-x-1">
-            {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
             <button
               onClick={() => {
                 const previousBlockStartPage = Math.max(
@@ -233,7 +285,6 @@ export default function Problems() {
               ))}
             </div>
 
-            {/* > 버튼 - 다음 블록의 첫 페이지로 이동 */}
             <button
               onClick={() => {
                 const nextBlockStartPage = Math.min(endPage + 1, totalPages);
@@ -246,8 +297,8 @@ export default function Problems() {
             </button>
           </div>
         </main>
-        {/* right */}
-        <aside className="flex-1 self-start p-8 text-sm bg-white shadow-md rounded-2xl">
+        {/* lg: 이상일때 aside bar  */}
+        <aside className="hidden lg:block flex-1  p-8 text-sm bg-white shadow-md rounded-2xl ">
           <h1 className="font-semibold text-secondary mb-8">
             기초프로그래밍 01분반
           </h1>

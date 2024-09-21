@@ -73,7 +73,6 @@ string solution(string s) {
       //@ts-ignore
       // const socketConnection = io(process.env.NEXT_PUBLIC_SSH);
       const socketConnection = io(process.env.NEXT_PUBLIC_SSH, {
-        // secure: true, // HTTPS 연결을 강제하는 설정
         transports: ['websocket'],
       });
       setSocket(socketConnection);
