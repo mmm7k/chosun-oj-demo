@@ -106,7 +106,7 @@ export default function Problems() {
 
   return (
     <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center text-secondary">
-      {/* lg 이하에서 햄버거 메뉴 */}
+      {/* lg 이하에서 카테고리 메뉴 */}
       <div className="block lg:hidden bg-white w-full">
         <div
           className="flex justify-center items-center cursor-pointer py-4 border-[1.5px] border-gray-200 "

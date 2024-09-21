@@ -49,7 +49,7 @@ export default function Post() {
             <div className="flex items-center">
               <label htmlFor="problem-code">문제 코드:</label>
               <input
-                className="ml-3 w-[20%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[60%] sm:w-[20%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 id="problem-code"
                 type="text"
                 placeholder="문제코드를 입력해주세요"
@@ -57,10 +57,7 @@ export default function Post() {
             </div>
             <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
               <PiExclamationMarkFill className="text-lg" />
-              <span>
-                &nbsp; /problem/ 뒤의 URL에서 사용되는 문제에 대한 짧고 고유한
-                코드.
-              </span>
+              <span>&nbsp; URL에서 사용되는 문제에 대한 고유한 코드.</span>
             </span>
           </div>
           {/* 문제 이름 */}
@@ -68,7 +65,7 @@ export default function Post() {
             <div className="flex items-center">
               <label htmlFor="problem-name">문제 이름:</label>
               <input
-                className="ml-3 w-[20%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[60%] sm:w-[20%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 id="problem-name"
                 type="text"
                 placeholder="문제이름을 입력해주세요"
@@ -137,7 +134,7 @@ export default function Post() {
                 placeholder="조직을 선택하세요."
                 value={selectedOrganizations}
                 onChange={handleOrganizationChange}
-                className="w-[15%]"
+                className="w-[60%] sm:w-[20%] h-8"
               >
                 <Option value="java">Java</Option>
                 <Option value="c++">C++</Option>
@@ -156,7 +153,7 @@ export default function Post() {
                 placeholder="제출 소스 가시성을 선택하세요."
                 value={selectedVisibility}
                 onChange={handleVisibilityChange}
-                className="w-[19%]"
+                className="w-[60%] sm:w-[20%] h-8"
               >
                 <Option value="전역 설정 따르기">전역 설정 따르기</Option>
                 <Option value="항상 보이기">항상 보이기</Option>
@@ -208,7 +205,7 @@ export default function Post() {
                 placeholder="문제 유형을 선택하세요."
                 value={selectedOrganizations}
                 onChange={handleOrganizationChange}
-                className="w-[15%]"
+                className="w-[60%] sm:w-[20%] h-8"
               >
                 <Option value="java">Java</Option>
                 <Option value="c++">C++</Option>
@@ -227,7 +224,7 @@ export default function Post() {
                 placeholder="문제 그룹을 선택하세요."
                 value={selectedVisibility}
                 onChange={handleVisibilityChange}
-                className="w-[19%]"
+                className="w-[60%] sm:w-[20%] h-8"
               >
                 <Option value="전역 설정 따르기">전역 설정 따르기</Option>
                 <Option value="항상 보이기">항상 보이기</Option>
@@ -244,7 +241,7 @@ export default function Post() {
               <label htmlFor="score-input">점수: </label>
               <input
                 id="score-input"
-                className="ml-3 w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[10%] sm:w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-[0.4rem] sm:pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="number"
                 min={1}
                 max={100}
@@ -257,7 +254,7 @@ export default function Post() {
               <label htmlFor="time-limit-input">시간 제한:</label>
               <input
                 id="time-limit-input"
-                className="ml-3 w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[10%] sm:w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-[0.4rem] sm:pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="number"
                 min={1}
                 max={1}
@@ -277,7 +274,7 @@ export default function Post() {
               <label htmlFor="memory-limit-input">메모리 제한:</label>
               <input
                 id="memory-limit-input"
-                className="ml-3 w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
+                className="ml-3 w-[10%] sm:w-[5%] h-8 rounded-lg  border-[1px] border-gray-200 font-norm pl-4 placeholder:text-sm placeholder:font-normal focus:ring-1 focus:ring-gray-200 focus:outline-none"
                 type="number"
                 min={1}
                 max={262144}
@@ -292,7 +289,7 @@ export default function Post() {
             </span>
           </div>
           {/* 언어 */}
-          <div className="flex px-10 py-4 border-b-[1.5px] border-gray-200 ">
+          <div className="flex items-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
             <div>
               <span className="mr-5">언어:</span>
               <label htmlFor="java-checkbox" className="mr-2">

@@ -117,36 +117,33 @@ export default function HeaderNav() {
             <>
               <Link
                 href={`${classPath}/problems`}
-                className={`w-full flex justify-center items-center py-3 hover:bg-gray-200  ${
-                  pathname === `${classPath}/problems`
-                    ? 'text-primary font-semibold  hover:text-primaryHover hover:border-primaryHover'
-                    : 'hover:text-secondaryHover'
+                className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+                  pathname === `${classPath}/problems` &&
+                  'text-primary font-semibold  '
                 }`}
               >
                 <span className="cursor-pointer transition ">문제</span>
               </Link>
               <Link
                 href={`${classPath}/grade`}
-                className={`w-full flex justify-center items-center py-3 hover:bg-gray-200  ${
-                  pathname === `${classPath}/grade`
-                    ? 'text-primary font-semibold  hover:text-primaryHover hover:border-primaryHover'
-                    : 'hover:text-secondaryHover'
+                className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+                  pathname === `${classPath}/grade` &&
+                  'text-primary font-semibold  '
                 }`}
               >
                 <span className="cursor-pointer transition ">성적</span>
               </Link>
               <Link
                 href={`${classPath}/questions`}
-                className={`w-full flex justify-center items-center py-3 hover:bg-gray-200  ${
-                  pathname === `${classPath}/questions`
-                    ? 'text-primary font-semibold  hover:text-primaryHover hover:border-primaryHover'
-                    : 'hover:text-secondaryHover'
+                className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+                  pathname === `${classPath}/questions` &&
+                  'text-primary font-semibold  '
                 }`}
               >
                 <span className="cursor-pointer transition ">Q&A</span>
               </Link>
 
-              <div className="w-full flex justify-center items-center py-3 hover:bg-gray-200 hover:text-secondaryHover ">
+              <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
                 <span className="cursor-pointer transition flex items-center">
                   분반 <RiArrowDropDownLine className="text-2xl" />
                 </span>
@@ -157,7 +154,7 @@ export default function HeaderNav() {
           {/* 로그아웃은 항상 표시 */}
           <Link
             href="/"
-            className="w-full flex justify-center items-center py-3 hover:bg-gray-200 hover:text-secondaryHover  "
+            className="w-full flex justify-center items-center py-3 hover:bg-gray-100"
           >
             <span className="cursor-pointer transition flex items-center">
               로그아웃 <MdLogout className="text-lg ml-2" />

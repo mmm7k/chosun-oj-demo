@@ -71,9 +71,9 @@ export default function ProblemsList() {
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex items-center justify-between px-16">
-          <h1 className="text-xl">문제 목록</h1>
-          <div className="flex items-center space-x-4">
+        <section className="flex flex-col md:flex-row  items-center justify-between px-0 md:px-16">
+          <h1 className="text-xl mb-3 md:mb-0">문제 목록</h1>
+          <div className="flex flex-col sm:flex-row  items-center space-y-3 sm:space-y-0  space-x-0 sm:space-x-2 md:space-x-4">
             <Select
               id="year-select"
               placeholder="연도를 선택하세요."
@@ -110,41 +110,45 @@ export default function ProblemsList() {
             </div>
           </div>
         </section>
-
         <hr className="border-t-2 mt-5 border-gray-200" />
-
-        <section className="flex flex-col px-16">
+        <section className="flex flex-col px-3 sm:px-16 ">
           <div className="flex justify-between items-center py-6 border-b-2">
-            <span className="w-[10%]">ID</span>
-            <span className="w-[60%]">문제 이름</span>
-            <span className="w-[20%]">문제 등록 시간</span>
-            <span className="w-[10%]">문제 관리</span>
+            <span className="w-[10%] lg:w-[10%] ">ID</span>
+            <span className="w-[30%] lg:w-[60%]">문제 이름</span>
+            <span className="w-[40%] lg:w-[20%]">문제 등록 시간</span>
+            <span className="w-[20%]">문제 관리</span>
           </div>
           {currentItems.map((item) => (
             <div
               key={item.id}
               className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
             >
-              <span className="w-[10%]">{item.id}</span>
-              <span className="w-[60%]">{item.name}</span>
-              <span className="w-[20%]">{item.registrationTime}</span>
-              <span className="w-[10%] flex items-center">
-                <TbEdit className="text-xl mr-2" />
-                <FiTrash2 className="text-xl" />
+              <span className="w-[10%] lg:w-[10%] text-xs sm:text-base  ">
+                {item.id}
+              </span>
+              <span className="w-[30%] lg:w-[60%] text-xs sm:text-base ">
+                {item.name}
+              </span>
+              <span className="w-[40%] lg:w-[20%] text-xs sm:text-base ">
+                {item.registrationTime}
+              </span>
+              <span className="w-[20%] text-xs sm:text-base  flex items-center">
+                <TbEdit className="text-lg lg:text-xl mr-2" />
+                <FiTrash2 className="text-lg lg:text-xl" />
               </span>
             </div>
           ))}
         </section>
 
         {/* 페이지네이션 및 버튼 */}
-        <section className="flex justify-between w-full px-16 items-center mt-10">
+        <section className="flex flex-col sm:flex-row justify-between w-full px-16 items-center mt-10">
           {/* 문제 등록 링크 버튼 */}
           <Link href="/admin/problems/post">
             <PrimaryButton text="문제 등록" />
           </Link>
 
           {/* 페이지네이션 */}
-          <div className="flex items-center space-x-1">
+          <div className="flex pt-5 sm:mt-0 items-center space-x-1">
             {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
             <button
               onClick={() => {
