@@ -95,12 +95,12 @@ export default function Questions() {
         </p>
         <div className="flex flex-col sm:flex-row justify-between items-center w-[90%]  mx-auto">
           {/* 도넛 차트 */}
-          <div className="w-[25%] h-48">
+          <div className="w-[80%] mb-14 sm:mb-0 sm:w-[40%] lg:w-[25%] h-48">
             <Doughnut data={donutData} options={donutOptions} />
           </div>
 
           {/* 오른쪽 레이블 표시 */}
-          <div className="w-[80%] sm:w-[60%] flex flex-col">
+          <div className="w-[80%] sm:w-[50%] lg:w-[60%] flex flex-col">
             <div className="flex justify-between font-semibold pl-[20%] pr-[25%]">
               <span>레벨</span>
               <span>문제</span>
@@ -145,13 +145,13 @@ export default function Questions() {
           <span>알고리즘 분포</span>
         </p>
         <div className="flex flex-col sm:flex-row justify-between items-center w-[90%]  mx-auto">
-          {/* 도넛 차트 */}
-          <div className="w-[25%] h-48">
+          {/* Radar 차트 */}
+          <div className="w-[80%] mb-14 sm:mb-0 sm:w-[40%] lg:w-[25%] h-64">
             <Radar data={radarData} options={radarOptions} />
           </div>
 
           {/* 오른쪽 레이블 표시 */}
-          <div className="w-[80%] sm:w-[60%] flex flex-col">
+          <div className="w-[80%] sm:w-[50%] lg:w-[60%] flex flex-col">
             <div className="flex justify-between font-semibold pl-[20%] pr-[25%]">
               <span>레벨</span>
               <span>문제</span>
