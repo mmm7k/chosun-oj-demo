@@ -114,7 +114,7 @@ export default function HeaderNav() {
       <section
         className={`absolute top-20 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 sm:hidden z-50 overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen
-            ? 'max-h-64 opacity-100 visible'
+            ? 'max-h-80 opacity-100 visible'
             : 'max-h-0 opacity-0 invisible'
         }`}
       >
@@ -162,7 +162,7 @@ export default function HeaderNav() {
         {/* 로그아웃은 항상 표시 */}
         <Link
           href="/"
-          className="w-full flex justify-center items-center py-3 hover:bg-gray-100"
+          className="w-full flex justify-center items-center py-3 hover:bg-gray-100 "
         >
           <span className="cursor-pointer transition flex items-center">
             로그아웃 <MdLogout className="text-lg ml-2" />

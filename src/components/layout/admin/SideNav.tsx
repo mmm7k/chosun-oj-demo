@@ -209,9 +209,9 @@ export default function SideNav() {
         {/* 2xl 이하 메뉴 (햄버거 메뉴 클릭 시 열림) */}
         {/* 2xl 이하 메뉴 (햄버거 메뉴 클릭 시 열림) */}
         <div
-          className={`absolute top-20 left-0 w-screen bg-white shadow-md flex flex-col justify-center items-center space-y-4 2xl:hidden z-50 overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`absolute top-20 left-0 w-screen bg-white shadow-md flex flex-col justify-center items-center space-y-4 2xl:hidden z-50 overflow-hidden transition-all duration-[360ms] ease-in-out ${
             menuOpen
-              ? 'max-h-96 opacity-100 visible'
+              ? 'max-h-[34rem] opacity-100 visible'
               : 'max-h-0 opacity-0 invisible'
           }`}
         >
