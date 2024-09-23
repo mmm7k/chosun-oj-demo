@@ -158,7 +158,7 @@ export default function Problems() {
               placeholder="문제 제목을 입력하세요."
             />
           </div>
-          <section className="flex gap-4 mt-3  overflow-auto overflow-y-hidden">
+          <section className="flex gap-4 mt-3  overflow-auto no-scrollbar overflow-y-hidden">
             <div className="h-9 w-full ">
               <Select
                 id="solved-select"

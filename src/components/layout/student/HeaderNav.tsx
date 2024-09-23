@@ -111,60 +111,64 @@ export default function HeaderNav() {
         )}
       </div>
       {/* 모바일 메뉴 (햄버거 메뉴 클릭 시 열림) */}
-      {menuOpen && (
-        <section className="absolute top-20 left-0 w-full  bg-white shadow-md flex flex-col items-center space-y-4 sm:hidden z-50">
-          {!isSelectClassPage && (
-            <>
-              <Link
-                href={`${classPath}/problems`}
-                className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
-                  pathname === `${classPath}/problems` &&
-                  'text-primary font-semibold  '
-                }`}
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <span className="cursor-pointer transition ">문제</span>
-              </Link>
-              <Link
-                href={`${classPath}/grade`}
-                className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
-                  pathname === `${classPath}/grade` &&
-                  'text-primary font-semibold  '
-                }`}
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <span className="cursor-pointer transition ">성적</span>
-              </Link>
-              <Link
-                href={`${classPath}/questions`}
-                className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
-                  pathname === `${classPath}/questions` &&
-                  'text-primary font-semibold  '
-                }`}
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <span className="cursor-pointer transition ">Q&A</span>
-              </Link>
+      <section
+        className={`absolute top-20 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 sm:hidden z-50 overflow-hidden transition-all duration-300 ease-in-out ${
+          menuOpen
+            ? 'max-h-64 opacity-100 visible'
+            : 'max-h-0 opacity-0 invisible'
+        }`}
+      >
+        {!isSelectClassPage && (
+          <>
+            <Link
+              href={`${classPath}/problems`}
+              className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+                pathname === `${classPath}/problems` &&
+                'text-primary font-semibold  '
+              }`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span className="cursor-pointer transition ">문제</span>
+            </Link>
+            <Link
+              href={`${classPath}/grade`}
+              className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+                pathname === `${classPath}/grade` &&
+                'text-primary font-semibold  '
+              }`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span className="cursor-pointer transition ">성적</span>
+            </Link>
+            <Link
+              href={`${classPath}/questions`}
+              className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+                pathname === `${classPath}/questions` &&
+                'text-primary font-semibold  '
+              }`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span className="cursor-pointer transition ">Q&A</span>
+            </Link>
 
-              <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
-                <span className="cursor-pointer transition flex items-center">
-                  분반 <RiArrowDropDownLine className="text-2xl" />
-                </span>
-              </div>
-            </>
-          )}
+            <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
+              <span className="cursor-pointer transition flex items-center">
+                분반 <RiArrowDropDownLine className="text-2xl" />
+              </span>
+            </div>
+          </>
+        )}
 
-          {/* 로그아웃은 항상 표시 */}
-          <Link
-            href="/"
-            className="w-full flex justify-center items-center py-3 hover:bg-gray-100"
-          >
-            <span className="cursor-pointer transition flex items-center">
-              로그아웃 <MdLogout className="text-lg ml-2" />
-            </span>
-          </Link>
-        </section>
-      )}
+        {/* 로그아웃은 항상 표시 */}
+        <Link
+          href="/"
+          className="w-full flex justify-center items-center py-3 hover:bg-gray-100"
+        >
+          <span className="cursor-pointer transition flex items-center">
+            로그아웃 <MdLogout className="text-lg ml-2" />
+          </span>
+        </Link>
+      </section>
     </nav>
   );
 }
