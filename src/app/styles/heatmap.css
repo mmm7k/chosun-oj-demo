@@ -1,0 +1,32 @@
+/* 잔디 스타일 */
+.color-scale-0 {
+  fill: #ebedf0; /* 빈칸 색상 (아주 밝은 회색) */
+}
+
+.color-scale-1 {
+  fill: #9be9a8; /* 첫 번째 강도 (밝은 녹색) */
+}
+
+.color-scale-2 {
+  fill: #40c463; /* 두 번째 강도 (중간 밝기 녹색) */
+}
+
+.color-scale-3 {
+  fill: #30a14e; /* 세 번째 강도 (진한 녹색) */
+}
+
+.color-scale-4 {
+  fill: #216e39; /* 네 번째 강도 (아주 진한 녹색) */
+}
+
+rect {
+  rx: 3px; /* 셀의 border-radius를 표현하는 값 */
+  ry: 3px; /* 셀의 border-radius를 표현하는 값 */
+}
+.react-calendar-heatmap-month-label {
+  font-size: 0.5rem !important; /* 원하는 크기로 폰트 크기 조정 */
+}
+
+.react-calendar-heatmap-weekday-label {
+  font-size: 0.5rem !important; /* 원하는 크기로 폰트 크기 조정 */
+}
