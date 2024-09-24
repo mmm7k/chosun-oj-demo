@@ -75,7 +75,6 @@ export default function Grade() {
   // 레이다 차트 데이터
   const radarData = {
     labels: [
-      'math',
       'implementation',
       'greedy',
       'string',
@@ -85,7 +84,7 @@ export default function Grade() {
     ],
     datasets: [
       {
-        data: [13, 15, 18, 4, 7, 8, 17],
+        data: [15, 18, 4, 7, 8, 17],
         fill: true,
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
