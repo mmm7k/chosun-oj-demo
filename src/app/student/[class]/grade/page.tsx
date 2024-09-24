@@ -157,35 +157,35 @@ export default function Grade() {
 
   return (
     <div className="w-full flex flex-col items-center py-14 gap-12 justify-center">
-      <div className="bg-white shadow-md rounded-2xl w-[70%] pt-5 sm:pt-10 flex flex-col sm:flex-row items-center justify-between px-[1%] lg:px-[5%]">
+      <section className=" bg-white shadow-md rounded-2xl w-[70%] pt-10 pb-10 sm:pb-0 sm:pt-10 flex flex-col sm:flex-row items-center justify-between px-[1%] lg:px-[5%]">
         {/* 스탯과 랭크 카드 */}
-        <div className=" flex flex-col sm:flex-row items-center text-secondary mt-5 sm:mt-0 sm:mb-10">
+        <div className=" flex flex-col sm:flex-row items-center text-secondary mb-0 sm:mb-10">
           <BiSolidAward className="text-[10rem] lg:text-[13rem] text-[#FFD700] animate-pulse mb-5 sm:mb-0" />
           <div className="ml-0 sm:ml-4 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
-            <span className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
+            <span className="text-lg lg:text-xl 2xl:text-2xl font-semibold">
               <span>Rank:</span> <span className="text-gray-900 ">Gold 5</span>
             </span>
-            <span className="text-lg lg:text-xl">
-              🌱 Total Grass:{' '}
+            <div className="text-sm lg:text-lg">
+              <span> 🌱 Total Grass: </span>
               <span className="font-semibold text-gray-900">{totalGrass}</span>
-            </span>
-            <span className="text-lg lg:text-xl">
-              ⭐ Most Solved Level:{' '}
+            </div>
+            <div className="text-sm lg:text-lg">
+              <span> ⭐ Most Solved Level: </span>
               <span className="font-semibold text-gray-900">
                 {highestLevel}
               </span>
-            </span>
-            <span className="text-lg lg:text-xl">
-              🏷️ Most Solved Tag:{' '}
+            </div>
+            <div className="text-sm lg:text-lg">
+              <span>🏷️ Most Solved Tag: </span>
               <span className="font-semibold text-gray-900">
                 {mostSolvedTag}
               </span>
-            </span>
+            </div>
           </div>
         </div>
 
         {/* 잔디심기 */}
-        <div className="w-[80%] sm:w-[33%] lg:w-[30%]  mr-[5%] 2xl:mr-[10%]">
+        <div className="w-[80%] sm:w-[33%] lg:w-[30%] mr-[5%] 2xl:mr-[10%] mb-0 sm:mb-5 lg:mb-0 relative">
           <CalendarHeatmap
             startDate={
               new Date(
@@ -205,9 +205,18 @@ export default function Grade() {
             showWeekdayLabels
             gutterSize={1.5}
           />
+          <div className="absolute space-x-2 font-light text-gray-500 text-sm bottom-0 right-0 flex items-center ">
+            <span>Less</span>
+            <div className="rounded-[0.27rem] bg-[#ebedf0] w-[0.9rem] h-[0.9rem]" />
+            <div className="rounded-[0.27rem] bg-[#9be9a8] w-[0.9rem] h-[0.9rem]" />
+            <div className="rounded-[0.27rem] bg-[#40c463] w-[0.9rem] h-[0.9rem]" />
+            <div className="rounded-[0.27rem] bg-[#30a14e] w-[0.9rem] h-[0.9rem]" />
+            <div className="rounded-[0.27rem] bg-[#216e39] w-[0.9rem] h-[0.9rem]" />
+            <span>More</span>
+          </div>
         </div>
-      </div>
-      <div className="bg-white shadow-md rounded-2xl w-[70%] py-10 flex-col">
+      </section>
+      <section className="bg-white shadow-md rounded-2xl w-[70%] py-10 flex-col">
         <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
           <PiRanking className="text-2xl mr-1 mt-[0.18rem] " />
 
@@ -258,8 +267,8 @@ export default function Grade() {
             <hr className="w-full border-b-1 border-gray-300 my-2" />
           </div>
         </div>
-      </div>
-      <div className="bg-white shadow-md rounded-2xl w-[70%] py-10 flex-col">
+      </section>
+      <section className="bg-white shadow-md rounded-2xl w-[70%] py-10 flex-col">
         <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
           <FaCodeBranch className="text-xl mr-1 mt-[0.18rem]" />
           <span>알고리즘 분포</span>
@@ -308,7 +317,7 @@ export default function Grade() {
             <hr className="w-full border-b-1 border-gray-300 my-2" />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
