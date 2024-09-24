@@ -161,21 +161,25 @@ export default function Grade() {
         {/* 스탯과 랭크 카드 */}
         <div className=" flex flex-col sm:flex-row items-center text-secondary mt-5 sm:mt-0 sm:mb-10">
           <BiSolidAward className="text-[10rem] lg:text-[13rem] text-[#FFD700] animate-pulse mb-5 sm:mb-0" />
-          <div className="ml-0 sm:ml-4 flex flex-col justify-center items-start text-blue-800 space-y-3 mb-5 sm:mb-0">
+          <div className="ml-0 sm:ml-4 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
             <span className="text-2xl lg:text-3xl 2xl:text-4xl font-semibold">
-              <span>Rank:</span> <span className="text-blue-800 ">Gold 5</span>
+              <span>Rank:</span> <span className="text-gray-900 ">Gold 5</span>
             </span>
             <span className="text-lg lg:text-xl">
               🌱 Total Grass:{' '}
-              <span className="font-semibold">{totalGrass}</span>
+              <span className="font-semibold text-gray-900">{totalGrass}</span>
             </span>
             <span className="text-lg lg:text-xl">
               ⭐ Most Solved Level:{' '}
-              <span className="font-semibold">{highestLevel}</span>
+              <span className="font-semibold text-gray-900">
+                {highestLevel}
+              </span>
             </span>
             <span className="text-lg lg:text-xl">
               🏷️ Most Solved Tag:{' '}
-              <span className="font-semibold">{mostSolvedTag}</span>
+              <span className="font-semibold text-gray-900">
+                {mostSolvedTag}
+              </span>
             </span>
           </div>
         </div>
