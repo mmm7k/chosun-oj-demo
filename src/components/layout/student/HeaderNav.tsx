@@ -60,15 +60,15 @@ export default function HeaderNav() {
                 문제
               </span>
             </Link>
-            <Link href={`${classPath}/grade`}>
+            <Link href={`${classPath}/analysis`}>
               <span
                 className={`cursor-pointer transition ${
-                  pathname === `${classPath}/grade`
+                  pathname === `${classPath}/analysis`
                     ? 'text-primary border-b-4 border-primary pb-[0.9rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
               >
-                성적
+                분석
               </span>
             </Link>
             <Link href={`${classPath}/questions`}>
@@ -131,14 +131,14 @@ export default function HeaderNav() {
               <span className="cursor-pointer transition ">문제</span>
             </Link>
             <Link
-              href={`${classPath}/grade`}
+              href={`${classPath}/analysis`}
               className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
-                pathname === `${classPath}/grade` &&
+                pathname === `${classPath}/analysis` &&
                 'text-primary font-semibold  '
               }`}
               onClick={() => setMenuOpen(!menuOpen)}
             >
-              <span className="cursor-pointer transition ">성적</span>
+              <span className="cursor-pointer transition ">분석</span>
             </Link>
             <Link
               href={`${classPath}/questions`}
