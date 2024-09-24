@@ -42,6 +42,50 @@ export default function Grade() {
     };
   });
 
+  // 랭크
+  const rank = useMemo(() => {
+    const totalGrass = heatmapData.filter((item) => item.count > 0).length;
+
+    if (totalGrass >= 300) {
+      return 'Challenger';
+    } else if (totalGrass >= 250) {
+      return 'Grandmaster';
+    } else if (totalGrass >= 200) {
+      const level = Math.ceil((250 - totalGrass) / 10);
+      return `Diamond ${level}`;
+    } else if (totalGrass >= 150) {
+      const level = Math.ceil((200 - totalGrass) / 10);
+      return `Platinum ${level}`;
+    } else if (totalGrass >= 100) {
+      const level = Math.ceil((150 - totalGrass) / 10);
+      return `Gold ${level}`;
+    } else if (totalGrass >= 50) {
+      const level = Math.ceil((100 - totalGrass) / 10);
+      return `Silver ${level}`;
+    } else {
+      const level = Math.ceil((50 - totalGrass) / 10);
+      return `Bronze ${level}`;
+    }
+  }, [heatmapData]);
+
+  const rankColor = useMemo(() => {
+    if (rank.startsWith('Challenger')) {
+      return '#ff0000'; // 빨간색
+    } else if (rank.startsWith('Grandmaster')) {
+      return '#ff4500'; // 주황색
+    } else if (rank.startsWith('Diamond')) {
+      return '#00ffff'; // 청록색
+    } else if (rank.startsWith('Platinum')) {
+      return '#00d9ff'; // 플래티넘 은색
+    } else if (rank.startsWith('Gold')) {
+      return '#FFD700'; // 황금색
+    } else if (rank.startsWith('Silver')) {
+      return '#C0C0C0'; // 은색
+    } else {
+      return '#cd7f32'; // 청동색
+    }
+  }, [rank]);
+
   //도넛 차트 데이터
   const donutData = {
     labels: ['Lv.1', 'Lv.2', 'Lv.3'],
@@ -159,10 +203,13 @@ export default function Grade() {
       <section className=" bg-white shadow-md rounded-2xl w-[70%] pt-10 pb-10 sm:pb-0 sm:pt-10 flex flex-col sm:flex-row items-center justify-between px-[1%] lg:px-[5%]">
         {/* 스탯과 랭크 카드 */}
         <div className=" flex flex-col sm:flex-row items-center text-secondary mb-0 sm:mb-10">
-          <BiSolidAward className="text-[10rem] lg:text-[13rem] text-[#FFD700] animate-pulse mb-5 sm:mb-0" />
+          <BiSolidAward
+            className={`text-[10rem] lg:text-[13rem] animate-pulse mb-5 sm:mb-0`}
+            style={{ color: rankColor }}
+          />
           <div className="ml-0 sm:ml-4 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
             <span className="text-lg lg:text-xl 2xl:text-2xl font-semibold">
-              <span>Rank:</span> <span className="text-gray-900 ">Gold 5</span>
+              <span>Rank:</span> <span className="text-gray-900 ">{rank}</span>
             </span>
             <div className="text-sm lg:text-lg">
               <span> 🌱 Total Grass: </span>
