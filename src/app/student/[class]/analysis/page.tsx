@@ -46,24 +46,24 @@ export default function Grade() {
   const rank = useMemo(() => {
     const totalGrass = heatmapData.filter((item) => item.count > 0).length;
 
-    if (totalGrass >= 300) {
+    if (totalGrass >= 170) {
       return 'Challenger';
-    } else if (totalGrass >= 250) {
-      return 'Grandmaster';
-    } else if (totalGrass >= 200) {
-      const level = Math.ceil((250 - totalGrass) / 10);
-      return `Diamond ${level}`;
     } else if (totalGrass >= 150) {
-      const level = Math.ceil((200 - totalGrass) / 10);
-      return `Platinum ${level}`;
+      return 'Grandmaster';
+    } else if (totalGrass >= 125) {
+      const level = Math.ceil((150 - totalGrass) / 5);
+      return `Diamond ${level}`;
     } else if (totalGrass >= 100) {
-      const level = Math.ceil((150 - totalGrass) / 10);
+      const level = Math.ceil((125 - totalGrass) / 5);
+      return `Platinum ${level}`;
+    } else if (totalGrass >= 75) {
+      const level = Math.ceil((100 - totalGrass) / 5);
       return `Gold ${level}`;
     } else if (totalGrass >= 50) {
-      const level = Math.ceil((100 - totalGrass) / 10);
+      const level = Math.ceil((75 - totalGrass) / 5);
       return `Silver ${level}`;
     } else {
-      const level = Math.ceil((50 - totalGrass) / 10);
+      const level = Math.ceil((50 - totalGrass) / 5);
       return `Bronze ${level}`;
     }
   }, [heatmapData]);
