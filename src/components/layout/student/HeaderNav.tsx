@@ -71,7 +71,7 @@ export default function HeaderNav() {
                 분석
               </span>
             </Link>
-            <a href={`${classPath}/questions`}>
+            <Link href={`${classPath}/questions`}>
               <span
                 className={`cursor-pointer transition ${
                   pathname === `${classPath}/questions`
@@ -81,7 +81,7 @@ export default function HeaderNav() {
               >
                 Q&A
               </span>
-            </a>
+            </Link>
           </section>
         )}
 
