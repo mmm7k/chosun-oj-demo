@@ -1,0 +1,11 @@
+version: '3'
+services:
+  oj-app:
+    build:
+      context: .
+    container_name: oj-app
+    ports:
+      - '7112:7112'
+    env_file:
+      - .env.local
+    command: npm start
