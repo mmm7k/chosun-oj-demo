@@ -5,7 +5,7 @@ services:
       context: .
     container_name: oj-app
     ports:
-      - '7112:7112'
+      - '8112:8112'
     env_file:
       - .env.local
     command: npm start
