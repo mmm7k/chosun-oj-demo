@@ -126,7 +126,7 @@ export default function Home() {
 
               <button
                 type="submit"
-                className="w-3/4 py-2 md:py-5 lg:py-2 rounded-md bg-primary text-white flex items-center justify-center  cursor-pointer hover:bg-primaryButtonHover transition"
+                className="w-3/4 py-2 md:py-5 lg:py-2 rounded-md bg-primary text-white flex items-center justify-center cursor-pointer hover:bg-primaryButtonHover transition"
               >
                 로그인
               </button>
