@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="h-72 w-full px-[10%] lg:px-[19%] bg-white text-sm text-gray-400 pt-14 flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-20 border-t border-gray-200 ">
+    <footer className=" w-full px-[10%] lg:px-[19%]  text-sm text-gray-400 py-14 flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-20 border-t border-gray-200 ">
       <div className="flex flex-col space-y-3">
         <span className="text-gray-500 font-semibold">TEAM Oops</span>
         <span>강문수&nbsp;&nbsp;김재호</span>
