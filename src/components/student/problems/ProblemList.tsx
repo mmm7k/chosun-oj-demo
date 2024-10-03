@@ -180,7 +180,8 @@ export default function ProblemList() {
           </div>
           {currentItems.map((item) => (
             <Link
-              href={`/student/${selectedClass}/problems/${item.id}`}
+              // href={`/student/${selectedClass}/problems/${item.id}`}
+              href={`/student/problems/${item.id}`}
               key={item.id}
             >
               <div className="flex justify-between items-center text-sm py-5 px-5 border-b hover:bg-[#eeeff3] cursor-pointer last:border-none">
