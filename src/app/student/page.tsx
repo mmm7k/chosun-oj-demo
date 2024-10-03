@@ -9,7 +9,7 @@ import {
   LineElement,
   Tooltip,
 } from 'chart.js';
-import { FaCodeBranch } from 'react-icons/fa';
+import { FaCodeBranch, FaExclamationCircle } from 'react-icons/fa';
 import { PiRanking } from 'react-icons/pi';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
@@ -31,8 +31,8 @@ ChartJS.register(
 );
 
 export default function StudentMain() {
-  // 캐러셀 세팅
-  const settings = {
+  // 배너 캐러셀 세팅
+  const bannerSettings = {
     dots: true,
     infinite: true,
     speed: 1000,
@@ -45,6 +45,19 @@ export default function StudentMain() {
     waitForAnimate: false,
   };
 
+  // 배너 캐러셀 세팅
+  const noticeSettings = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3500,
+    arrows: false,
+    fade: true,
+    waitForAnimate: false,
+  };
   // 오늘 날짜 가져오기
   const today = new Date();
 
@@ -222,7 +235,7 @@ export default function StudentMain() {
     <div className=" w-full flex flex-col items-center mb-36  gap-12 justify-center">
       {/* 배너 캐러셀 */}
       <section className="w-screen h-96 bg-black">
-        <Slider {...settings} className="w-full h-full text-white">
+        <Slider {...bannerSettings} className="w-full h-full text-white">
           <div className="bg-black  w-screen px-[10%] lg:px-[20%] h-96 ">
             <div className="h-96 flex justify-between items-center">
               <div className="flex flex-col gap-3">
@@ -300,6 +313,16 @@ export default function StudentMain() {
           </div>
         </Slider>
       </section>
+      {/* 공지사항 */}
+      <section className="w-[90%] lg:w-[62%] p-2 border border-gray-300 rounded-lg">
+        <Slider {...noticeSettings} className="w-full h-full text-gray-700">
+          <span>
+            📢 터미널 접속 시 간헐적으로 연결이 끊기는 문제를 해결했습니다.
+          </span>
+          <span>📢 서비스 이용 중 문의 사항은 Q&A 게시판을 이용해주세요.</span>
+          <span>📢 랭크는 획득한 누적 점수를 기준으로 결정됩니다.</span>
+        </Slider>
+      </section>
       <section className="w-[90%] lg:w-[62%] flex flex-col sm:flex-row space-x-0 sm:space-x-12 space-y-12 sm:space-y-0">
         {/* 왼쪽 섹션 유저 프로필 */}
         <div className="w-[100%] sm:w-[25%] flex flex-col justify-center items-center py-10 px-10 border border-gray-300 rounded-xl space-y-1  text-gray-700">
@@ -323,7 +346,7 @@ export default function StudentMain() {
             />
             <div className="ml-0 sm:ml-0 lg:ml-3 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
               <span className=" lg:text-lg  2xl:text-xl font-semibold">
-                <span>Rank:</span>
+                <span>Rank : </span>
                 <span className="text-gray-900 ">{rank}</span>
               </span>
               <div className="text-xs lg:text-base">
