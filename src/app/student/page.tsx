@@ -318,7 +318,7 @@ export default function StudentMain() {
           {/* 랭크와 스텟 */}
           <div className="flex-1 flex flex-col items-center sm:flex-row  ">
             <BiSolidAward
-              className={`text-[12rem] sm:text-[9rem] lg:text-[10rem] xl:text-[11rem] 2xl:text-[13rem] animate-pulse mb-5 sm:mb-0`}
+              className={`text-[11rem] sm:text-[8rem]  lg:text-[9rem] xl:text-[10rem] 2xl:text-[11rem] animate-pulse mb-5 sm:mb-0`}
               style={{ color: rankColor }}
             />
             <div className="ml-0 sm:ml-0 lg:ml-3 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
@@ -368,14 +368,14 @@ export default function StudentMain() {
               showWeekdayLabels
               gutterSize={1.5}
             />
-            <div className="absolute space-x-2 font-light text-gray-500 text-sm bottom-0 right-0 flex items-center ">
-              <span>Less</span>
+            <div className="absolute space-x-2 font-light text-gray-500  bottom-0 right-0 flex items-center ">
+              <span className="text-xs 2xl:text-sm">Less</span>
               <div className="rounded-[0.27rem] bg-[#ebedf0] w-[0.9rem] h-[0.9rem]" />
               <div className="rounded-[0.27rem] bg-[#9be9a8] w-[0.9rem] h-[0.9rem]" />
               <div className="rounded-[0.27rem] bg-[#40c463] w-[0.9rem] h-[0.9rem]" />
               <div className="rounded-[0.27rem] bg-[#30a14e] w-[0.9rem] h-[0.9rem]" />
               <div className="rounded-[0.27rem] bg-[#216e39] w-[0.9rem] h-[0.9rem]" />
-              <span>More</span>
+              <span className="text-xs 2xl:text-sm ">More</span>
             </div>
           </div>
         </div>
