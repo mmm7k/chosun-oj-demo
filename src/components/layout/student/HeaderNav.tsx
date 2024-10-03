@@ -23,7 +23,7 @@ export default function HeaderNav() {
 
   return (
     <nav className="min-w-screen h-20 lg:h-16 bg-white text-secondary border-b border-gray-300 flex justify-center">
-      <div className="w-[90%] md:[90%] lg:w-[62%] h-full flex justify-between items-center">
+      <div className="w-[90%] md:[90%] lg:w-[62%] h-full flex  items-center">
         {/* 로고 */}
         {/* <section className="flex items-center text-lg font-semibold"> */}
         <Link
@@ -44,7 +44,7 @@ export default function HeaderNav() {
         {/* </section> */}
 
         {/* 햄버거 메뉴 */}
-        <div className="sm:hidden">
+        <div className="sm:hidden ml-auto">
           <GiHamburgerMenu
             className="text-3xl cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -53,7 +53,7 @@ export default function HeaderNav() {
 
         {/* 메뉴 (sm 이상에서만 표시) */}
         {!isSelectClassPage && (
-          <section className="hidden sm:flex lg:mr-28 xl:mr-52 2xl:mr-60 space-x-28">
+          <section className="hidden sm:flex ml-[10%] space-x-28">
             {/* <Link href={`${classPath}/problems`}> */}
             <Link href={'/student/problems'}>
               <span
@@ -96,7 +96,7 @@ export default function HeaderNav() {
 
         {/* 분반 및 로그아웃 (sm 이상에서만 표시) */}
         {/* {!isSelectClassPage ? ( */}
-        <section className="hidden sm:flex items-center">
+        <section className="hidden sm:flex items-center ml-auto">
           <div className="flex items-center transition hover:text-secondaryHover cursor-pointer mr-7">
             <span>분반</span>
             <RiArrowDropDownLine className="text-4xl" />
