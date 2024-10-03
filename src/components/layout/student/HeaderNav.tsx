@@ -22,8 +22,8 @@ export default function HeaderNav() {
   const isSelectClassPage = pathname === '/student/selectclass';
 
   return (
-    <nav className="min-w-screen h-20 lg:h-14 bg-white text-secondary shadow-md flex justify-center">
-      <div className="w-[90%] md:[90%] lg:w-[70%] h-full flex justify-between items-center">
+    <nav className="min-w-screen h-20 lg:h-16 bg-white text-secondary shadow-md flex justify-center">
+      <div className="w-[90%] md:[90%] lg:w-[62%] h-full flex justify-between items-center">
         {/* 로고 */}
         {/* <section className="flex items-center text-lg font-semibold"> */}
         <Link

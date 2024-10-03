@@ -54,7 +54,7 @@ export default function Questions() {
           </ul>
         </div>
       </div>
-      <div className="w-[90%] lg:w-[70%] flex gap-0 lg:gap-12 pt-14 items-start pb-14 sm:pb-0">
+      <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-14 items-start pb-14 sm:pb-0">
         {/* left */}
         <main className="w-full lg:w-[70%]">
           {/* 검색 */}

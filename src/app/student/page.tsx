@@ -19,6 +19,7 @@ import { useMemo } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Image from 'next/image';
 
 ChartJS.register(
   ArcElement,
@@ -33,7 +34,7 @@ export default function StudentMain() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 900,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -220,31 +221,85 @@ export default function StudentMain() {
     <div className="w-full flex flex-col items-center  gap-12 justify-center">
       {/* 배너 캐러셀 */}
       <section className="w-screen h-96 bg-black">
-        <Slider {...settings} className="w-full h-full text-white font-bold ">
-          <div className="bg-black  w-screen px-[15%] h-96 ">
-            <div className="h-96 flex justify-center items-center">
-              <span className="text-4xl">
-                배너 테스트 1 ex 탑싯 지원 하세요
-              </span>
+        <Slider {...settings} className="w-full h-full text-white">
+          <div className="bg-black  w-screen px-[10%] lg:px-[20%] h-96 ">
+            <div className="h-96 flex justify-between items-center">
+              <div className="flex flex-col gap-3">
+                <span className="">예시 타이틀1</span>
+                <span className="text-2xl">
+                  조선대학교는 학생들의
+                  <br />
+                  성장을 응원합니다
+                </span>
+                <span className="text-gray-500">
+                  1700개 기업의 채용 평가 데이터를
+                  <br />
+                  집중 분석한 문제풀이 플랫폼
+                </span>
+              </div>
+              <div className="h-full w-[50%] relative">
+                <Image
+                  src={'/banner/banner1.png'}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="banner1"
+                />
+              </div>
             </div>
           </div>
-          <div className="bg-black  w-screen px-[15%] h-96 ">
-            <div className="h-96 flex justify-center items-center">
-              <span className="text-4xl">
-                배너 테스트 2 ex 탑싯 지원 하세요
-              </span>
+          <div className="bg-black  w-screen  px-[10%] lg:px-[20%] h-96 ">
+            <div className="h-96 flex justify-between items-center">
+              <div className="flex flex-col gap-3">
+                <span className="">예시 타이틀2</span>
+                <span className="text-2xl">
+                  조선대학교는 학생들의
+                  <br />
+                  성장을 응원합니다
+                </span>
+                <span className="text-gray-500">
+                  1700개 기업의 채용 평가 데이터를
+                  <br />
+                  집중 분석한 문제풀이 플랫폼
+                </span>
+              </div>
+              <div className="h-full w-[50%] relative">
+                <Image
+                  src={'/banner/banner2.png'}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="banner2"
+                />
+              </div>
             </div>
           </div>
-          <div className="bg-black  w-screen px-[15%] h-96 ">
-            <div className="h-96 flex justify-center items-center">
-              <span className="text-4xl">
-                배너 테스트 3 ex 탑싯 지원 하세요
-              </span>
+          <div className="bg-black  w-screen  px-[10%] lg:px-[20%] h-96 ">
+            <div className="h-96 flex justify-between items-center">
+              <div className="flex flex-col gap-3">
+                <span className="">예시 타이틀3</span>
+                <span className="text-2xl">
+                  조선대학교는 학생들의
+                  <br />
+                  성장을 응원합니다
+                </span>
+                <span className="text-gray-500">
+                  1700개 기업의 채용 평가 데이터를
+                  <br />
+                  집중 분석한 문제풀이 플랫폼
+                </span>
+              </div>
+              <div className="h-full w-[50%]  relative">
+                <Image
+                  src={'/banner/banner3.png'}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="banner3"
+                />
+              </div>
             </div>
           </div>
         </Slider>
       </section>
-      <section className=" bg-white shadow-md rounded-2xl w-[70%] pt-10 pb-10 sm:pb-0 sm:pt-10 flex flex-col sm:flex-row items-center justify-between px-[1%] lg:px-[5%]">
+      <section className=" bg-white shadow-md rounded-2xl w-[64%] pt-10 pb-10 sm:pb-0 sm:pt-10 flex flex-col sm:flex-row items-center justify-between px-[1%] lg:px-[5%]">
         {/* 스탯과 랭크 카드 */}
         <div className=" flex flex-col sm:flex-row items-center text-secondary mb-0 sm:mb-10">
           <BiSolidAward
@@ -306,7 +361,7 @@ export default function StudentMain() {
           </div>
         </div>
       </section>
-      <section className="bg-white shadow-md rounded-2xl w-[70%] py-10 flex-col">
+      <section className="bg-white shadow-md rounded-2xl w-[64%] py-10 flex-col">
         <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
           <PiRanking className="text-2xl mr-1 mt-[0.18rem] " />
 
@@ -358,7 +413,7 @@ export default function StudentMain() {
           </div>
         </div>
       </section>
-      <section className="bg-white shadow-md rounded-2xl w-[70%] py-10 flex-col">
+      <section className="bg-white shadow-md rounded-2xl w-[64%] py-10 flex-col">
         <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
           <FaCodeBranch className="text-xl mr-1 mt-[0.18rem]" />
           <span>알고리즘 분포</span>
