@@ -13,9 +13,9 @@ export default function Questions() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const questionsList: number[] = [1, 2, 3, 4, 5];
   return (
-    <div className="w-full flex  flex-col lg:flex-row  items-center lg:items-start justify-center text-secondary ">
+    <div className="bg-[#f0f4fc] w-full flex  flex-col lg:flex-row  items-center lg:items-start justify-center text-secondary ">
       {/* lg 이하에서 카테고리 메뉴 */}
-      <div className="block lg:hidden bg-white w-full">
+      <div className="block lg:hidden bg-white w-full ">
         <div
           className="flex justify-center items-center cursor-pointer py-4 border-[1.5px] border-gray-200 "
           onClick={() => setIsMenuOpen(!isMenuOpen)} // 클릭 시 메뉴 열기/닫기 토글
@@ -54,7 +54,7 @@ export default function Questions() {
           </ul>
         </div>
       </div>
-      <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-14 items-start pb-14 sm:pb-0">
+      <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-14 items-start mb-56 ">
         {/* left */}
         <main className="w-full lg:w-[70%]">
           {/* 검색 */}

@@ -20,6 +20,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
+import { FaUserGraduate } from 'react-icons/fa6';
 
 ChartJS.register(
   ArcElement,
@@ -34,11 +35,11 @@ export default function StudentMain() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 3500,
     arrows: false,
     fade: true,
     waitForAnimate: false,
@@ -218,7 +219,7 @@ export default function StudentMain() {
   }, [radarData]);
 
   return (
-    <div className="w-full flex flex-col items-center  gap-12 justify-center">
+    <div className=" w-full flex flex-col items-center mb-36  gap-12 justify-center">
       {/* 배너 캐러셀 */}
       <section className="w-screen h-96 bg-black">
         <Slider {...settings} className="w-full h-full text-white">
@@ -299,69 +300,87 @@ export default function StudentMain() {
           </div>
         </Slider>
       </section>
-      <section className=" bg-white shadow-md rounded-2xl w-[64%] pt-10 pb-10 sm:pb-0 sm:pt-10 flex flex-col sm:flex-row items-center justify-between px-[1%] lg:px-[5%]">
-        {/* 스탯과 랭크 카드 */}
-        <div className=" flex flex-col sm:flex-row items-center text-secondary mb-0 sm:mb-10">
-          <BiSolidAward
-            className={`text-[10rem] lg:text-[13rem] animate-pulse mb-5 sm:mb-0`}
-            style={{ color: rankColor }}
-          />
-          <div className="ml-0 sm:ml-4 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
-            <span className="text-lg lg:text-xl 2xl:text-2xl font-semibold">
-              <span>Rank:</span> <span className="text-gray-900 ">{rank}</span>
-            </span>
-            <div className="text-sm lg:text-lg">
-              <span> 🌱 Total Grass: </span>
-              <span className="font-semibold text-gray-900">{totalGrass}</span>
-            </div>
-            <div className="text-sm lg:text-lg">
-              <span> ⭐ Most Solved Level: </span>
-              <span className="font-semibold text-gray-900">
-                {highestLevel}
-              </span>
-            </div>
-            <div className="text-sm lg:text-lg">
-              <span>🏷️ Most Solved Tag: </span>
-              <span className="font-semibold text-gray-900">
-                {mostSolvedTag}
-              </span>
-            </div>
+      <section className="w-[90%] lg:w-[62%] flex flex-col sm:flex-row space-x-0 sm:space-x-12 space-y-12 sm:space-y-0">
+        {/* 왼쪽 섹션 유저 프로필 */}
+        <div className="w-[100%] sm:w-[25%] flex flex-col justify-center items-center py-10 px-10 border border-gray-300 rounded-xl space-y-1  text-gray-700">
+          <FaUserGraduate className="text-primary text-[4rem] mb-2" />
+          <span className="font-semibold text-xl">김민수</span>
+          <span className=" text-lg">Developer</span>
+          <div>
+            <span className="font-semibold">Major : </span> 컴퓨터 공학과
+          </div>
+          <div>
+            <span className="font-semibold">ID : </span> 20214931
           </div>
         </div>
+        {/* 오른쪽 섹션 랭크,잔디 */}
+        <div className="flex-1 flex flex-col sm:flex-row items-center justify-between  py-10 px-10 sm:px-1 md:px-10 lg:px-1 2xl:px-10 border border-gray-300 rounded-xl">
+          {/* 랭크와 스텟 */}
+          <div className="flex-1 flex flex-col items-center sm:flex-row  ">
+            <BiSolidAward
+              className={`text-[12rem] sm:text-[9rem] lg:text-[10rem] xl:text-[11rem] 2xl:text-[13rem] animate-pulse mb-5 sm:mb-0`}
+              style={{ color: rankColor }}
+            />
+            <div className="ml-0 sm:ml-0 lg:ml-3 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
+              <span className=" lg:text-lg  2xl:text-xl font-semibold">
+                <span>Rank:</span>
+                <span className="text-gray-900 ">{rank}</span>
+              </span>
+              <div className="text-xs lg:text-base">
+                <span> 🌱 Total Grass: </span>
+                <span className="font-semibold text-gray-900">
+                  {totalGrass}
+                </span>
+              </div>
+              <div className="text-xs lg:text-base">
+                <span> ⭐ Most Solved Level: </span>
+                <span className="font-semibold text-gray-900">
+                  {highestLevel}
+                </span>
+              </div>
+              <div className="text-xs lg:text-base">
+                <span>🏷️ Most Solved Tag: </span>
+                <span className="font-semibold text-gray-900">
+                  {mostSolvedTag}
+                </span>
+              </div>
+            </div>
+          </div>
 
-        {/* 잔디심기 */}
-        <div className="w-[80%] sm:w-[33%] lg:w-[30%] mr-[5%] 2xl:mr-[10%] mb-0 sm:mb-5 lg:mb-0 relative">
-          <CalendarHeatmap
-            startDate={
-              new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                today.getDate() - 90,
-              )
-            }
-            endDate={today}
-            values={heatmapData}
-            classForValue={(value: any) => {
-              if (!value) {
-                return 'color-empty';
+          {/* 잔디심기 */}
+          <div className="w-[50%] sm:w-[33%] lg:w-[35%] mr-1 relative">
+            <CalendarHeatmap
+              startDate={
+                new Date(
+                  today.getFullYear(),
+                  today.getMonth(),
+                  today.getDate() - 90,
+                )
               }
-              return `color-scale-${Math.min(value.count, 4)}`;
-            }}
-            showWeekdayLabels
-            gutterSize={1.5}
-          />
-          <div className="absolute space-x-2 font-light text-gray-500 text-sm bottom-0 right-0 flex items-center ">
-            <span>Less</span>
-            <div className="rounded-[0.27rem] bg-[#ebedf0] w-[0.9rem] h-[0.9rem]" />
-            <div className="rounded-[0.27rem] bg-[#9be9a8] w-[0.9rem] h-[0.9rem]" />
-            <div className="rounded-[0.27rem] bg-[#40c463] w-[0.9rem] h-[0.9rem]" />
-            <div className="rounded-[0.27rem] bg-[#30a14e] w-[0.9rem] h-[0.9rem]" />
-            <div className="rounded-[0.27rem] bg-[#216e39] w-[0.9rem] h-[0.9rem]" />
-            <span>More</span>
+              endDate={today}
+              values={heatmapData}
+              classForValue={(value: any) => {
+                if (!value) {
+                  return 'color-empty';
+                }
+                return `color-scale-${Math.min(value.count, 4)}`;
+              }}
+              showWeekdayLabels
+              gutterSize={1.5}
+            />
+            <div className="absolute space-x-2 font-light text-gray-500 text-sm bottom-0 right-0 flex items-center ">
+              <span>Less</span>
+              <div className="rounded-[0.27rem] bg-[#ebedf0] w-[0.9rem] h-[0.9rem]" />
+              <div className="rounded-[0.27rem] bg-[#9be9a8] w-[0.9rem] h-[0.9rem]" />
+              <div className="rounded-[0.27rem] bg-[#40c463] w-[0.9rem] h-[0.9rem]" />
+              <div className="rounded-[0.27rem] bg-[#30a14e] w-[0.9rem] h-[0.9rem]" />
+              <div className="rounded-[0.27rem] bg-[#216e39] w-[0.9rem] h-[0.9rem]" />
+              <span>More</span>
+            </div>
           </div>
         </div>
       </section>
-      <section className="bg-white shadow-md rounded-2xl w-[64%] py-10 flex-col">
+      <section className="border border-gray-300 rounded-xl w-[90%] lg:w-[62%] py-10 flex-col">
         <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
           <PiRanking className="text-2xl mr-1 mt-[0.18rem] " />
 
@@ -413,7 +432,7 @@ export default function StudentMain() {
           </div>
         </div>
       </section>
-      <section className="bg-white shadow-md rounded-2xl w-[64%] py-10 flex-col">
+      <section className="border border-gray-300 rounded-xl w-[90%] lg:w-[62%] py-10 flex-col">
         <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
           <FaCodeBranch className="text-xl mr-1 mt-[0.18rem]" />
           <span>알고리즘 분포</span>

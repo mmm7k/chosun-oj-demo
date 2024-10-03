@@ -3,10 +3,10 @@ import ProblemList from '@/components/student/problems/ProblemList';
 
 export default function Problems() {
   return (
-    <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-center text-secondary">
+    <div className="bg-[#f0f4fc] w-full flex flex-col lg:flex-row items-center lg:items-start justify-center text-secondary">
       {/* lg 이하에서 카테고리(aside bar 대체) */}
       <MobileCategory />
-      <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-14 items-start pb-14 sm:pb-0">
+      <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-14 items-start mb-56">
         <ProblemList />
         {/* lg: 이상일때 aside bar  */}
         <aside className="hidden lg:block flex-1  p-8 text-sm bg-white shadow-md rounded-2xl ">
