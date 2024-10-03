@@ -25,7 +25,11 @@ export default function HeaderNav() {
     <nav className="min-w-screen h-20 lg:h-14 bg-white text-secondary shadow-md flex justify-center">
       <div className="w-[90%] md:[90%] lg:w-[70%] h-full flex justify-between items-center">
         {/* 로고 */}
-        <section className="flex items-center text-lg font-semibold">
+        {/* <section className="flex items-center text-lg font-semibold"> */}
+        <Link
+          href="/student"
+          className="flex items-center text-lg font-semibold"
+        >
           <div className="w-9 h-9 relative">
             <Image
               src={'/commons/symbol.png'}
@@ -36,7 +40,8 @@ export default function HeaderNav() {
           </div>
           <span className="text-primary">&nbsp;Chosun&nbsp;</span>
           <span>Online Judge</span>
-        </section>
+        </Link>
+        {/* </section> */}
 
         {/* 햄버거 메뉴 */}
         <div className="sm:hidden">
@@ -49,10 +54,12 @@ export default function HeaderNav() {
         {/* 메뉴 (sm 이상에서만 표시) */}
         {!isSelectClassPage && (
           <section className="hidden sm:flex lg:mr-28 xl:mr-52 2xl:mr-60 space-x-28">
-            <Link href={`${classPath}/problems`}>
+            {/* <Link href={`${classPath}/problems`}> */}
+            <Link href={'/student/problems'}>
               <span
                 className={`cursor-pointer transition ${
-                  pathname === `${classPath}/problems`
+                  // pathname === `${classPath}/problems`
+                  pathname === '/student/problems'
                     ? 'text-primary border-b-4 border-primary pb-[0.9rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
@@ -60,7 +67,7 @@ export default function HeaderNav() {
                 문제
               </span>
             </Link>
-            <Link href={`${classPath}/analysis`}>
+            {/* <Link href={`${classPath}/analysis`}>
               <span
                 className={`cursor-pointer transition ${
                   pathname === `${classPath}/analysis`
@@ -70,11 +77,13 @@ export default function HeaderNav() {
               >
                 분석
               </span>
-            </Link>
-            <Link href={`${classPath}/questions`}>
+            </Link> */}
+            {/* <Link href={`${classPath}/questions`}> */}
+            <Link href={'/student/questions'}>
               <span
                 className={`cursor-pointer transition ${
-                  pathname === `${classPath}/questions`
+                  // pathname === `${classPath}/questions`
+                  pathname === '/student/questions'
                     ? 'text-primary border-b-4 border-primary pb-[0.9rem] hover:text-primaryHover hover:border-primaryHover'
                     : 'hover:text-secondaryHover'
                 }`}
@@ -86,29 +95,29 @@ export default function HeaderNav() {
         )}
 
         {/* 분반 및 로그아웃 (sm 이상에서만 표시) */}
-        {!isSelectClassPage ? (
-          <section className="hidden sm:flex items-center">
-            <div className="flex items-center transition hover:text-secondaryHover cursor-pointer mr-7">
-              <span>분반</span>
-              <RiArrowDropDownLine className="text-4xl" />
+        {/* {!isSelectClassPage ? ( */}
+        <section className="hidden sm:flex items-center">
+          <div className="flex items-center transition hover:text-secondaryHover cursor-pointer mr-7">
+            <span>분반</span>
+            <RiArrowDropDownLine className="text-4xl" />
+          </div>
+          <Link href="/">
+            <div className="flex items-center transition hover:text-secondaryHover cursor-pointer">
+              <span> 로그아웃</span>
+              <MdLogout className="text-xl ml-2" />
             </div>
+          </Link>
+        </section>
+        {/* ) : ( */}
+        {/* <section className="hidden sm:flex items-center">
             <Link href="/">
               <div className="flex items-center transition hover:text-secondaryHover cursor-pointer">
                 <span> 로그아웃</span>
                 <MdLogout className="text-xl ml-2" />
               </div>
             </Link>
-          </section>
-        ) : (
-          <section className="hidden sm:flex items-center">
-            <Link href="/">
-              <div className="flex items-center transition hover:text-secondaryHover cursor-pointer">
-                <span> 로그아웃</span>
-                <MdLogout className="text-xl ml-2" />
-              </div>
-            </Link>
-          </section>
-        )}
+          </section> */}
+        {/* )} */}
       </div>
       {/* 모바일 메뉴 (햄버거 메뉴 클릭 시 열림) */}
       <section
@@ -118,19 +127,20 @@ export default function HeaderNav() {
             : 'max-h-0 opacity-0 invisible'
         }`}
       >
-        {!isSelectClassPage && (
-          <>
-            <Link
-              href={`${classPath}/problems`}
-              className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
-                pathname === `${classPath}/problems` &&
-                'text-primary font-semibold  '
-              }`}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <span className="cursor-pointer transition ">문제</span>
-            </Link>
-            <Link
+        {/* {!isSelectClassPage && ( */}
+        {/* <> */}
+        <Link
+          // href={`${classPath}/problems`}
+          href={'/student/problems'}
+          className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+            // pathname === `${classPath}/problems` &&
+            pathname === '/student/problems' && 'text-primary font-semibold  '
+          }`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="cursor-pointer transition ">문제</span>
+        </Link>
+        {/* <Link
               href={`${classPath}/analysis`}
               className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
                 pathname === `${classPath}/analysis` &&
@@ -139,25 +149,26 @@ export default function HeaderNav() {
               onClick={() => setMenuOpen(!menuOpen)}
             >
               <span className="cursor-pointer transition ">분석</span>
-            </Link>
-            <Link
-              href={`${classPath}/questions`}
-              className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
-                pathname === `${classPath}/questions` &&
-                'text-primary font-semibold  '
-              }`}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <span className="cursor-pointer transition ">Q&A</span>
-            </Link>
+            </Link> */}
+        <Link
+          // href={`${classPath}/questions`}
+          href={'/student/questions'}
+          className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+            // pathname === `${classPath}/questions` &&
+            pathname === '/student/questions' && 'text-primary font-semibold  '
+          }`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="cursor-pointer transition ">Q&A</span>
+        </Link>
 
-            <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
-              <span className="cursor-pointer transition flex items-center">
-                분반 <RiArrowDropDownLine className="text-2xl" />
-              </span>
-            </div>
-          </>
-        )}
+        <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
+          <span className="cursor-pointer transition flex items-center">
+            분반 <RiArrowDropDownLine className="text-2xl" />
+          </span>
+        </div>
+        {/* </> */}
+        {/* )} */}
 
         {/* 로그아웃은 항상 표시 */}
         <Link

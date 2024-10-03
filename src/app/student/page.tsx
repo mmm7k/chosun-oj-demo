@@ -219,7 +219,7 @@ export default function StudentMain() {
   return (
     <div className="w-full flex flex-col items-center  gap-12 justify-center">
       {/* 배너 캐러셀 */}
-      <section className="w-screen h-96 bg-red-100">
+      <section className="w-screen h-96 bg-black">
         <Slider {...settings} className="w-full h-full text-white font-bold ">
           <div className="bg-black  w-screen px-[15%] h-96 ">
             <div className="h-96 flex justify-center items-center">
