@@ -320,7 +320,7 @@ export default function StudentMain() {
             📢 터미널 접속 시 간헐적으로 연결이 끊기는 문제를 해결했습니다.
           </span>
           <span>📢 서비스 이용 중 문의 사항은 Q&A 게시판을 이용해주세요.</span>
-          <span>📢 랭크는 획득한 누적 점수를 기준으로 결정됩니다.</span>
+          <span>📢 자세한 공지사항은 공지사항 게시판을 이용해주세요.</span>
         </Slider>
       </section>
       <section className="w-[90%] lg:w-[62%] flex flex-col sm:flex-row space-x-0 sm:space-x-12 space-y-12 sm:space-y-0">
