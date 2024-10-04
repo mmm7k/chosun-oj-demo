@@ -1,5 +1,21 @@
 version: '3'
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - nextjs-app
+    environment:
+      - TZ=Asia/Seoul
+    networks:
+      - oj-network
+
+    restart: always
+
   oj-app:
     build:
       context: .
@@ -9,3 +25,8 @@ services:
     env_file:
       - .env.local
     command: npm start
+
+networks:
+  oj-network:
+    name: oj-network
+    driver: bridge
