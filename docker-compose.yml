@@ -25,7 +25,8 @@ services:
     env_file:
       - .env.local
     command: npm start
-
+    networks:
+      - oj-network
 networks:
   oj-network:
     name: nginx
