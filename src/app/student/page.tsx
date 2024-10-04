@@ -45,7 +45,7 @@ export default function StudentMain() {
     waitForAnimate: false,
   };
 
-  // 배너 캐러셀 세팅
+  // 공지 캐러셀 세팅
   const noticeSettings = {
     dots: false,
     infinite: true,

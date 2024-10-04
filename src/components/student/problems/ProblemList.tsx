@@ -103,7 +103,7 @@ export default function ProblemList() {
   );
   return (
     <>
-      <main className="w-full lg:w-[70%]">
+      <main className="w-full lg:w-[75%]">
         {/* 문제 검색 */}
         <div className="flex items-center bg-white shadow-md rounded-2xl px-4">
           <IoSearchSharp className="text-gray-400 text-lg" />

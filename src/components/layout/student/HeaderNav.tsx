@@ -13,13 +13,13 @@ export default function HeaderNav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // 분반 경로
-  const classPath = pathname.split('/').slice(0, 3).join('/');
+  // const classPath = pathname.split('/').slice(0, 3).join('/');
 
-  if (pathname.includes('/problems/')) {
-    return null; // 헤더를 렌더링하지 않음
-  }
+  // if (pathname.includes('/problems/')) {
+  //   return null; // 헤더를 렌더링하지 않음
+  // }
 
-  const isSelectClassPage = pathname === '/student/selectclass';
+  // const isSelectClassPage = pathname === '/student/selectclass';
 
   return (
     <nav className="min-w-screen h-20 lg:h-16 text-secondary border-b border-gray-200 flex justify-center">
@@ -52,22 +52,22 @@ export default function HeaderNav() {
         </div>
 
         {/* 메뉴 (sm 이상에서만 표시) */}
-        {!isSelectClassPage && (
-          <section className="hidden sm:flex ml-[10%] space-x-28">
-            {/* <Link href={`${classPath}/problems`}> */}
-            <Link href={'/student/problems'}>
-              <span
-                className={`cursor-pointer transition ${
-                  // pathname === `${classPath}/problems`
-                  pathname === '/student/problems'
-                    ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
-                    : 'hover:text-secondaryHover'
-                }`}
-              >
-                문제
-              </span>
-            </Link>
-            {/* <Link href={`${classPath}/analysis`}>
+        {/* {!isSelectClassPage && ( */}
+        <section className="hidden sm:flex ml-[10%] space-x-28">
+          {/* <Link href={`${classPath}/problems`}> */}
+          <Link href={'/student/problems'}>
+            <span
+              className={`cursor-pointer transition ${
+                // pathname === `${classPath}/problems`
+                pathname === '/student/problems'
+                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  : 'hover:text-secondaryHover'
+              }`}
+            >
+              문제
+            </span>
+          </Link>
+          {/* <Link href={`${classPath}/analysis`}>
               <span
                 className={`cursor-pointer transition ${
                   pathname === `${classPath}/analysis`
@@ -78,21 +78,21 @@ export default function HeaderNav() {
                 분석
               </span>
             </Link> */}
-            {/* <Link href={`${classPath}/questions`}> */}
-            <Link href={'/student/questions'}>
-              <span
-                className={`cursor-pointer transition ${
-                  // pathname === `${classPath}/questions`
-                  pathname === '/student/questions'
-                    ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
-                    : 'hover:text-secondaryHover'
-                }`}
-              >
-                Q&A
-              </span>
-            </Link>
-          </section>
-        )}
+          {/* <Link href={`${classPath}/questions`}> */}
+          <Link href={'/student/questions'}>
+            <span
+              className={`cursor-pointer transition ${
+                // pathname === `${classPath}/questions`
+                pathname === '/student/questions'
+                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  : 'hover:text-secondaryHover'
+              }`}
+            >
+              Q&A
+            </span>
+          </Link>
+        </section>
+        {/* )} */}
 
         {/* 분반 및 로그아웃 (sm 이상에서만 표시) */}
         {/* {!isSelectClassPage ? ( */}

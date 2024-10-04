@@ -20,9 +20,7 @@ export default function Questions() {
           className="flex justify-center items-center cursor-pointer py-4 border-[1.5px] border-gray-200 "
           onClick={() => setIsMenuOpen(!isMenuOpen)} // 클릭 시 메뉴 열기/닫기 토글
         >
-          <span className="font-semibold text-secondary mr-2">
-            기초프로그래밍 01분반
-          </span>
+          <span className="font-semibold text-secondary mr-2">카테고리</span>
           {isMenuOpen ? (
             <IoChevronUp className="text-xl text-gray-500 transition-transform duration-300" />
           ) : (
@@ -37,26 +35,23 @@ export default function Questions() {
         >
           <ul className="space-y-4 text-gray-500  ">
             <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
-              1. 변수
+              공통 Q&A
             </li>
             <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
-              2. 문자열
+              자바 프로그래밍
             </li>
             <li className="text-primary hover:text-primaryHover transition  font-semibold  hover:bg-gray-200 cursor-pointer pl-[5%] py-2">
-              3. 반복문
+              기초프로그래밍
             </li>
             <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
-              4. 조건문
-            </li>
-            <li className="hover:text-gray-700 transition cursor-pointe hover:bg-gray-200 pl-[5%] py-2">
-              5. 포인터
+              알고리즘
             </li>
           </ul>
         </div>
       </div>
       <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-14 items-start mb-56 ">
         {/* left */}
-        <main className="w-full lg:w-[70%]">
+        <main className="w-full lg:w-[75%]">
           {/* 검색 */}
           <div className="flex w-full mb-7 items-center bg-white shadow-md rounded-2xl px-4">
             <IoSearchSharp className="text-gray-400 text-lg" />
@@ -70,11 +65,23 @@ export default function Questions() {
           <div className="py-10 px-12 bg-white shadow-md rounded-2xl">
             {/* Header */}
             <h1 className="text-lg font-semibold mb-4">💡 Create Question</h1>
-
-            {/* Input Box */}
-            <div className="flex items-center bg-gray-100 py-8 px-8 rounded-2xl mb-6">
+            {/* 제목 Box */}
+            <div className="flex  items-center bg-gray-100 py-4 px-8 rounded-2xl mb-6">
               <textarea
-                placeholder="질문을 입력해 주세요 !"
+                placeholder="제목을 입력해 주세요"
+                className="bg-transparent w-full outline-none text-gray-600 resize-none overflow-hidden"
+                rows={1}
+                onInput={(e) => {
+                  const target = e.target as HTMLTextAreaElement;
+                  target.style.height = 'auto'; // Reset height
+                  target.style.height = `${target.scrollHeight}px`; // Set to scrollHeight
+                }}
+              ></textarea>
+            </div>
+            {/* Input Box */}
+            <div className="flex items-center bg-gray-100 py-16 px-8 rounded-2xl mb-6">
+              <textarea
+                placeholder="질문을 입력해 주세요"
                 className="bg-transparent w-full outline-none text-gray-600 resize-none overflow-hidden"
                 rows={1}
                 onInput={(e) => {
@@ -86,20 +93,20 @@ export default function Questions() {
             </div>
 
             {/* Buttons Section */}
-            <div className="flex justify-between">
+            <div className="flex justify-end gap-4">
               {/*  Button */}
-              <div className="flex items-center space-x-4">
-                <button className="flex items-center space-x-2 bg-blue-100 hover:bg-blue-200 transition-all text-blue-700 py-3 px-7 rounded-full">
+              {/* <div className="flex items-center space-x-4"> */}
+              {/* <button className="flex items-center space-x-2 bg-blue-100 hover:bg-blue-200 transition-all text-blue-700 py-3 px-7 rounded-full">
                   <GrGallery />
                   <span className="text-sm">Gallery</span>
-                </button>
+                </button> */}
 
-                {/*Button */}
-                <button className="flex items-center space-x-2 bg-red-100 hover:bg-red-200 transition-all text-red-600 py-3 px-7 rounded-full">
-                  <LuTags />
-                  <span className="text-sm">Tag</span>
-                </button>
-              </div>
+              {/*Button */}
+              <button className="flex items-center space-x-2 bg-red-100 hover:bg-red-200 transition-all text-red-600 py-3 px-7 rounded-full">
+                <LuTags />
+                <span className="text-sm">Tag</span>
+              </button>
+              {/* </div> */}
               {/* 등록 Button */}
               <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 transition-all text-white py-3 px-7 rounded-full ">
                 <BsSendCheck />
@@ -165,22 +172,19 @@ export default function Questions() {
         </main>
         {/* right */}
         <aside className="hidden lg:block flex-1  p-8 text-sm bg-white shadow-md rounded-2xl ">
-          <h1 className="font-semibold text-secondary mb-8">기초프로그래밍</h1>
+          <h1 className="font-semibold text-secondary mb-8">카테고리</h1>
           <ul className="space-y-7 text-gray-500">
             <li className="hover:text-gray-700 transition cursor-pointer">
-              1. 변수
+              공통 Q&A
             </li>
             <li className="hover:text-gray-700 transition cursor-pointer">
-              2. 문자열
+              자바 프로그래밍
             </li>
             <li className="text-primary hover:text-primaryHover transition font-semibold cursor-pointer">
-              3. 반복문
+              기초 프로그래밍
             </li>
             <li className="hover:text-gray-700 transition cursor-pointer">
-              4. 조건문
-            </li>
-            <li className="hover:text-gray-700 transition cursor-pointer">
-              5. 포인터
+              알고리즘
             </li>
           </ul>
         </aside>
