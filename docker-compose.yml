@@ -12,7 +12,9 @@ services:
     environment:
       - TZ=Asia/Seoul
     networks:
-      - oj-network
+      oj-network:
+        aliases:
+          - oj-app
 
   oj-app:
     build:
@@ -25,7 +27,9 @@ services:
       - .env.local
     command: npm start
     networks:
-      - oj-network
+      oj-network:
+        aliases:
+          - oj-app
 
 networks:
   oj-network:
