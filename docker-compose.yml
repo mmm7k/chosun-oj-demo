@@ -30,5 +30,5 @@ services:
       - oj-network
 networks:
   oj-network:
-  name: oj-network
-  driver: bridge
+    name: oj-network
+    driver: bridge
