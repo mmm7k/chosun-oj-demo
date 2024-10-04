@@ -16,8 +16,6 @@ services:
     networks:
       - oj-network
 
-    restart: always
-
   oj-app:
     build:
       context: .
@@ -31,5 +29,5 @@ services:
       - oj-network
 networks:
   oj-network:
-    name: nginx
-    driver: bridge
+  # name: nginx
+  # driver: bridge
