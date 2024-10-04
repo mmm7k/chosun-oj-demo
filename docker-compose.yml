@@ -1,57 +1,23 @@
-# version: '3'
-# services:
-#   nginx:
-#     image: nginx:latest
-#     container_name: oj-nginx
-#     ports:
-#       - '80:80'
-#     volumes:
-#       - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
-#     depends_on:
-#       - oj-app
-#     environment:
-#       - TZ=Asia/Seoul
-#     networks:
-#       - oj-network
-
-#   oj-app:
-#     build:
-#       context: .
-#     container_name: oj-app
-
-#     ports:
-#       - '3000:3000'
-#     env_file:
-#       - .env.local
-#     command: npm start
-#     networks:
-#       - oj-network
-
-# networks:
-#   oj-network:
-#     name: oj-network
-#     driver: bridge
-
 version: '3'
 services:
   nginx:
     image: nginx:latest
-    container_name: my-nginx
+    container_name: oj-nginx
     ports:
       - '80:80'
     volumes:
       - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
-      - nextjs-app
+      - oj-app
     environment:
       - TZ=Asia/Seoul
     networks:
-      - gotrip-network
+      - oj-network
 
-  nextjs-app:
+  oj-app:
     build:
       context: .
-    container_name: nextjs-app
+    container_name: oj-app
 
     ports:
       - '3000:3000'
@@ -59,9 +25,9 @@ services:
       - .env.local
     command: npm start
     networks:
-      - gotrip-network
+      - oj-network
 
 networks:
-  gotrip-network:
-    name: gotrip-network
+  oj-network:
+    name: oj-network
     driver: bridge
