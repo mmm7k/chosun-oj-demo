@@ -6,7 +6,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ./etc/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./etc/nginx/:/etc/nginx/
     depends_on:
       - oj-app
     environment:
