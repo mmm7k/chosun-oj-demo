@@ -26,11 +26,11 @@ string solution(string s) {
 }
 `);
   const pathname = usePathname();
-  const parts = pathname.split('/');
-  const selectedClass = parts.find(
-    (part, index) =>
-      parts[index - 1] === 'student' && parts[index + 1] === 'problems',
-  );
+  // const parts = pathname.split('/');
+  // const selectedClass = parts.find(
+  //   (part, index) =>
+  //     parts[index - 1] === 'student' && parts[index + 1] === 'problems',
+  // );
   const [isTerminalMode, setIsTerminalMode] = useState(false); // 터미널 모드 플래그
   const [socket, setSocket] = useState<Socket | null>(null); // Socket.IO 연결 상태 관리
   const [isConnected, setIsConnected] = useState(false); // 연결 상태 플래그
@@ -376,7 +376,8 @@ string solution(string s) {
 
       {/* 푸터 */}
       <div className="min-h-16 bg-white text-white flex items-center justify-between px-4 sm:px-12 border-t border-gray-300">
-        <Link href={`/student/${selectedClass}/problems`}>
+        {/* <Link href={`/student/${selectedClass}/problems`}> */}
+        <Link href={`/student/problems`}>
           <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition">
             이전으로
           </button>

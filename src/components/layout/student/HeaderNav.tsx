@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { MdLogout } from 'react-icons/md';
-import { RiArrowDropDownLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 export default function HeaderNav() {
@@ -15,9 +14,9 @@ export default function HeaderNav() {
   // 분반 경로
   // const classPath = pathname.split('/').slice(0, 3).join('/');
 
-  // if (pathname.includes('/problems/')) {
-  //   return null; // 헤더를 렌더링하지 않음
-  // }
+  if (pathname.includes('/problems/')) {
+    return null; // 헤더를 렌더링하지 않음
+  }
 
   // const isSelectClassPage = pathname === '/student/selectclass';
 
@@ -79,11 +78,11 @@ export default function HeaderNav() {
               </span>
             </Link> */}
           {/* <Link href={`${classPath}/questions`}> */}
-          <Link href={'/student/questions'}>
+          <Link href={'/student/questions/common'}>
             <span
               className={`cursor-pointer transition ${
                 // pathname === `${classPath}/questions`
-                pathname === '/student/questions'
+                pathname.startsWith('/student/questions')
                   ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
               }`}
@@ -97,10 +96,10 @@ export default function HeaderNav() {
         {/* 분반 및 로그아웃 (sm 이상에서만 표시) */}
         {/* {!isSelectClassPage ? ( */}
         <section className="hidden sm:flex items-center ml-auto">
-          <div className="flex items-center transition hover:text-secondaryHover cursor-pointer mr-7">
+          {/* <div className="flex items-center transition hover:text-secondaryHover cursor-pointer mr-7">
             <span>분반</span>
             <RiArrowDropDownLine className="text-4xl" />
-          </div>
+          </div> */}
           <Link href="/">
             <div className="flex items-center transition hover:text-secondaryHover cursor-pointer">
               <span> 로그아웃</span>
@@ -134,11 +133,13 @@ export default function HeaderNav() {
           href={'/student/problems'}
           className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
             // pathname === `${classPath}/problems` &&
-            pathname === '/student/problems' && 'text-primary font-semibold  '
+            pathname === '/student/problems' && 'text-primary'
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition ">문제</span>
+          <span className="cursor-pointer transition  font-semibold ">
+            문제
+          </span>
         </Link>
         {/* <Link
               href={`${classPath}/analysis`}
@@ -152,21 +153,21 @@ export default function HeaderNav() {
             </Link> */}
         <Link
           // href={`${classPath}/questions`}
-          href={'/student/questions'}
+          href={'/student/questions/common'}
           className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
             // pathname === `${classPath}/questions` &&
-            pathname === '/student/questions' && 'text-primary font-semibold  '
+            pathname.startsWith('/student/questions') && 'text-primary   '
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition ">Q&A</span>
+          <span className="cursor-pointer transition font-semibold ">Q&A</span>
         </Link>
 
-        <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
-          <span className="cursor-pointer transition flex items-center">
+        {/* <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
+          <span className="cursor-pointer transition flex items-center font-semibold">
             분반 <RiArrowDropDownLine className="text-2xl" />
           </span>
-        </div>
+        </div> */}
         {/* </> */}
         {/* )} */}
 
@@ -175,7 +176,7 @@ export default function HeaderNav() {
           href="/"
           className="w-full flex justify-center items-center py-3 hover:bg-gray-100 "
         >
-          <span className="cursor-pointer transition flex items-center">
+          <span className="cursor-pointer transition flex items-center font-semibold">
             로그아웃 <MdLogout className="text-lg ml-2" />
           </span>
         </Link>

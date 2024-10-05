@@ -1,4 +1,13 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.includes('/problems/')) {
+    return null; // 헤더를 렌더링하지 않음
+  }
+
   return (
     <footer className=" w-full px-[10%] lg:px-[19%]  text-sm text-gray-400 py-14 flex flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-20 border-t border-gray-200 ">
       <div className="flex flex-col space-y-3">

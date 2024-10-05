@@ -240,7 +240,7 @@ export default function StudentMain() {
             <div className="h-96 flex justify-between items-center">
               <div className="flex flex-col gap-3">
                 <span className="">예시 타이틀1</span>
-                <span className="text-2xl">
+                <span className="text-3xl">
                   조선대학교는 학생들의
                   <br />
                   성장을 응원합니다
@@ -265,7 +265,7 @@ export default function StudentMain() {
             <div className="h-96 flex justify-between items-center">
               <div className="flex flex-col gap-3">
                 <span className="">예시 타이틀2</span>
-                <span className="text-2xl">
+                <span className="text-3xl">
                   조선대학교는 학생들의
                   <br />
                   성장을 응원합니다
@@ -290,7 +290,7 @@ export default function StudentMain() {
             <div className="h-96 flex justify-between items-center">
               <div className="flex flex-col gap-3">
                 <span className="">예시 타이틀3</span>
-                <span className="text-2xl">
+                <span className="text-3xl">
                   조선대학교는 학생들의
                   <br />
                   성장을 응원합니다

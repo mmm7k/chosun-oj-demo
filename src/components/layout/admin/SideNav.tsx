@@ -18,18 +18,6 @@ export default function SideNav() {
   const [isExampleDropdownOpen, setIsExampleDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false); // 햄버거 메뉴 상태
 
-  const toggleStudentDropdown = () => {
-    setIsStudentDropdownOpen(!isStudentDropdownOpen);
-  };
-
-  const toggleProblemsDropdown = () => {
-    setIsProblemsDropdownOpen(!isProblemsDropdownOpen);
-  };
-
-  const toggleExampleDropdown = () => {
-    setIsExampleDropdownOpen(!isExampleDropdownOpen);
-  };
-
   return (
     <nav className="w-screen 2xl:w-52 h-20 2xl:min-h-screen bg-white flex justify-center 2xl:fixed 2xl:left-0 2xl:top-0 text-secondary text-sm font-semibold shadow-xl">
       <div className="flex 2xl:flex-col items-center justify-between 2xl:justify-normal w-[100%] px-[5%] 2xl:px-0 2xl:min-h-screen relative">
@@ -77,7 +65,7 @@ export default function SideNav() {
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
-              onClick={toggleStudentDropdown}
+              onClick={() => setIsStudentDropdownOpen(!isStudentDropdownOpen)}
             >
               <div className="flex items-center transition">
                 <PiStudent className="text-xl mr-2" />
@@ -113,7 +101,7 @@ export default function SideNav() {
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
-              onClick={toggleProblemsDropdown}
+              onClick={() => setIsProblemsDropdownOpen(!isProblemsDropdownOpen)}
             >
               <div className="flex items-center transition">
                 <HiOutlinePencilSquare className="text-xl mr-2" />
@@ -158,7 +146,7 @@ export default function SideNav() {
                   ? 'text-primary hover:text-primaryHover'
                   : 'text-secondary hover:text-secondaryHover'
               }`}
-              onClick={toggleExampleDropdown}
+              onClick={() => setIsExampleDropdownOpen(!isExampleDropdownOpen)}
             >
               <div className="flex items-center transition">
                 <MdNotes className="text-xl mr-2" />
@@ -205,8 +193,6 @@ export default function SideNav() {
             </div>
           </Link>
         </div>
-
-        {/* 2xl 이하 메뉴 (햄버거 메뉴 클릭 시 열림) */}
         {/* 2xl 이하 메뉴 (햄버거 메뉴 클릭 시 열림) */}
         <div
           className={`absolute top-20 left-0 w-screen bg-white shadow-md flex flex-col justify-center items-center space-y-4 2xl:hidden z-50 overflow-hidden transition-all duration-[360ms] ease-in-out ${
@@ -236,7 +222,7 @@ export default function SideNav() {
                 pathname.startsWith('/admin/student') &&
                 'text-primary font-semibold'
               }`}
-              onClick={toggleStudentDropdown}
+              onClick={() => setIsStudentDropdownOpen(!isStudentDropdownOpen)}
             >
               <span className="flex items-center">
                 <PiStudent className="text-xl mr-2" />
@@ -274,7 +260,7 @@ export default function SideNav() {
                 pathname.startsWith('/admin/problems') &&
                 'text-primary font-semibold'
               }`}
-              onClick={toggleProblemsDropdown}
+              onClick={() => setIsProblemsDropdownOpen(!isProblemsDropdownOpen)}
             >
               <span className="flex items-center">
                 <HiOutlinePencilSquare className="text-xl mr-2" />
@@ -325,7 +311,7 @@ export default function SideNav() {
                 pathname.startsWith('/admin/example') &&
                 'text-primary font-semibold'
               }`}
-              onClick={toggleExampleDropdown}
+              onClick={() => setIsExampleDropdownOpen(!isExampleDropdownOpen)}
             >
               <span className="flex items-center">
                 <MdNotes className="text-xl mr-2" />
