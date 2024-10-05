@@ -25,24 +25,22 @@ export default function MobileCategory() {
         </div>
 
         <div
-          className={`transition-all duration-500 ease-in-out overflow-hidden ${
-            isMenuOpen ? 'max-h-96' : 'max-h-0'
-          }`}
+          className={` overflow-hidden ${isMenuOpen ? 'h-auto py-3' : 'max-h-0'}`}
         >
           <ul className="space-y-4 text-gray-500  ">
-            <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
+            <li className="hover:text-gray-700 transition cursor-pointer pl-[5%] py-2">
               1. 변수
             </li>
-            <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
+            <li className="hover:text-gray-700 transition cursor-pointer pl-[5%] py-2">
               2. 문자열
             </li>
-            <li className="text-primary hover:text-primaryHover transition  font-semibold  hover:bg-gray-200 cursor-pointer pl-[5%] py-2">
+            <li className="text-primary hover:text-primaryHover transition  font-semibold  cursor-pointer pl-[5%] py-2">
               3. 반복문
             </li>
-            <li className="hover:text-gray-700 transition cursor-pointer hover:bg-gray-200 pl-[5%] py-2">
+            <li className="hover:text-gray-700 transition cursor-pointer pl-[5%] py-2">
               4. 조건문
             </li>
-            <li className="hover:text-gray-700 transition cursor-pointe hover:bg-gray-200 pl-[5%] py-2">
+            <li className="hover:text-gray-700 transition cursor-pointe pl-[5%] py-2">
               5. 포인터
             </li>
           </ul>

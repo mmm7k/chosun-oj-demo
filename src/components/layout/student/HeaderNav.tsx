@@ -90,6 +90,17 @@ export default function HeaderNav() {
               Q&A
             </span>
           </Link>
+          <Link href={'/student/announcement/common'}>
+            <span
+              className={`cursor-pointer transition ${
+                pathname.startsWith('/student/announcement')
+                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  : 'hover:text-secondaryHover'
+              }`}
+            >
+              공지
+            </span>
+          </Link>
         </section>
         {/* )} */}
 
@@ -152,7 +163,6 @@ export default function HeaderNav() {
               <span className="cursor-pointer transition ">분석</span>
             </Link> */}
         <Link
-          // href={`${classPath}/questions`}
           href={'/student/questions/common'}
           className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
             // pathname === `${classPath}/questions` &&
@@ -163,6 +173,15 @@ export default function HeaderNav() {
           <span className="cursor-pointer transition font-semibold ">Q&A</span>
         </Link>
 
+        <Link
+          href={'/student/announcement/common'}
+          className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+            pathname.startsWith('/student/announcement') && 'text-primary   '
+          }`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="cursor-pointer transition font-semibold ">공지</span>
+        </Link>
         {/* <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
           <span className="cursor-pointer transition flex items-center font-semibold">
             분반 <RiArrowDropDownLine className="text-2xl" />

@@ -28,7 +28,6 @@ export default function Questions({ params }: { params: { course: string } }) {
   return (
     <div className="bg-[#f0f4fc] w-full flex  flex-col lg:flex-row  items-center lg:items-start justify-center text-secondary ">
       {/* lg 이하에서 카테고리 메뉴 */}
-      {/* lg 이하에서 카테고리 메뉴 */}
       <div className="block lg:hidden bg-white w-full ">
         <div
           className="flex justify-center items-center cursor-pointer py-4 border-b border-gray-200 "
@@ -43,7 +42,7 @@ export default function Questions({ params }: { params: { course: string } }) {
         </div>
 
         <div
-          className={`overflow-hidden ${isMenuOpen ? ' h-auto' : 'max-h-0'}`}
+          className={` overflow-hidden ${isMenuOpen ? ' h-auto py-3' : 'max-h-0'}`}
         >
           <ul className="py-2 space-y-5 text-gray-500">
             {/* 공통 Q&A */}
