@@ -27,7 +27,7 @@ export default function QuestionsBanner({ course }: { course: string }) {
           </div>
           <div className="h-full w-[50%] relative">
             <Image
-              src={'/banner/questionBanner.png'}
+              src={'/banner/questionsBanner.png'}
               layout="fill"
               objectFit="contain"
               alt="banner1"
