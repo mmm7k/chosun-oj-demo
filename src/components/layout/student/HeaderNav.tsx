@@ -52,13 +52,13 @@ export default function HeaderNav() {
 
         {/* 메뉴 (sm 이상에서만 표시) */}
         {/* {!isSelectClassPage && ( */}
-        <section className="hidden sm:flex ml-[10%] space-x-28">
+        <section className="hidden sm:flex ml-[10%] space-x-20">
           {/* <Link href={`${classPath}/problems`}> */}
-          <Link href={'/student/problems'}>
+          <Link href={'/student/problems?category=all'}>
             <span
               className={`cursor-pointer transition ${
                 // pathname === `${classPath}/problems`
-                pathname === '/student/problems'
+                pathname.startsWith('/student/problems')
                   ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
               }`}
@@ -101,6 +101,17 @@ export default function HeaderNav() {
               공지
             </span>
           </Link>
+          <Link href={'/student/assignment'}>
+            <span
+              className={`cursor-pointer transition ${
+                pathname.startsWith('/student/assignment')
+                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  : 'hover:text-secondaryHover'
+              }`}
+            >
+              과제
+            </span>
+          </Link>
         </section>
         {/* )} */}
 
@@ -138,13 +149,14 @@ export default function HeaderNav() {
         }`}
       >
         {/* {!isSelectClassPage && ( */}
+
         {/* <> */}
         <Link
           // href={`${classPath}/problems`}
-          href={'/student/problems'}
+          href={'/student/problems?category=all'}
           className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
             // pathname === `${classPath}/problems` &&
-            pathname === '/student/problems' && 'text-primary'
+            pathname.startsWith('/student/problems') && 'text-primary'
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -181,6 +193,15 @@ export default function HeaderNav() {
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <span className="cursor-pointer transition font-semibold ">공지</span>
+        </Link>
+        <Link
+          href={'/student/assignment'}
+          className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+            pathname.startsWith('/student/assignment') && 'text-primary   '
+          }`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="cursor-pointer transition font-semibold ">과제</span>
         </Link>
         {/* <div className="w-full flex justify-center items-center py-3 hover:bg-gray-100 ">
           <span className="cursor-pointer transition flex items-center font-semibold">

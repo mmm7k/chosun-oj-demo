@@ -34,7 +34,7 @@ export default function ProblemList() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [problemList, setProblemList] = useState<any[]>([]);
-  const itemsPerPage = 9;
+  const itemsPerPage = 20;
   const pagesPerBlock = 5;
   const pathname = usePathname();
 
@@ -207,7 +207,7 @@ export default function ProblemList() {
           ))}
         </div>
         {/* 페이지네이션 */}
-        <div className="flex justify-center items-center mt-4 space-x-1">
+        <div className="flex justify-center items-center mt-16 space-x-1">
           <button
             onClick={() => {
               const previousBlockStartPage = Math.max(
