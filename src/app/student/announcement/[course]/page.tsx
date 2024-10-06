@@ -4,6 +4,7 @@ import AnnouncementBanner from '@/components/student/announcement/AnnouncementBa
 import AnnouncementList from '@/components/student/announcement/AnnouncementList';
 import AnnouncementMenu from '@/components/student/announcement/AnnouncementMenu';
 import AnnouncementMobileMenu from '@/components/student/announcement/AnnouncementMobileMenu';
+import { Suspense } from 'react';
 
 export default function Announcement({
   params,
@@ -21,7 +22,9 @@ export default function Announcement({
         <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-12 items-start mb-44 ">
           {/* left */}
           {/* 공지사항 목록 */}
-          <AnnouncementList />
+          <Suspense>
+            <AnnouncementList />
+          </Suspense>
           {/* right */}
           <AnnouncementMenu course={course} />
         </div>

@@ -8,6 +8,7 @@ import { UserOutlined } from '@ant-design/icons';
 import QuestionsMenu from '@/components/student/questions/QuestionsMenu';
 import QuestionsMobileMenu from '@/components/student/questions/QuestionsMobileMenu';
 import QuestionsBanner from '@/components/student/questions/QuestionsBanner';
+import { Suspense } from 'react';
 
 export default function Questions({ params }: { params: { course: string } }) {
   // 현재 url 파라미터 확인
@@ -18,7 +19,9 @@ export default function Questions({ params }: { params: { course: string } }) {
       {/* lg 이하에서 카테고리 메뉴 */}
       <QuestionsMobileMenu course={course} />
       {/* 배너 */}
-      <QuestionsBanner course={course} />
+      <Suspense>
+        <QuestionsBanner course={course} />
+      </Suspense>
       <div className="bg-[#f0f4fc] w-full flex  flex-col lg:flex-row  items-center lg:items-start justify-center text-secondary ">
         <div className="w-[90%] lg:w-[62%] flex gap-0 pt-12 lg:gap-12 items-start mb-56 ">
           {/* left */}
