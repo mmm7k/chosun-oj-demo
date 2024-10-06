@@ -1,24 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function AssignmentList() {
-  const [selectedSolved, setSelectedSolved] = useState<string | null>(null);
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
-  const [selectedSubmission, setSelectedSubmission] = useState<string | null>(
-    null,
-  );
-  const [selectedAccuracy, setSelectedAccuracy] = useState<string | null>(null);
+export default function AssignmentList({ course }: { course: string }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  // 쿼리 파라미터에서 page와 chapter 값 읽기
+  const pageParam = searchParams.get('page') || '1';
+  const chapterParam = searchParams.get('chapter') || '1';
+
+  const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
   const [problemList, setProblemList] = useState<any[]>([]);
   const itemsPerPage = 12;
   const pagesPerBlock = 5;
-  const pathname = usePathname();
-
-  const parts = pathname.split('/');
 
   useEffect(() => {
     const generateRandomList = () => {
@@ -42,34 +39,12 @@ export default function AssignmentList() {
     setProblemList(generateRandomList());
   }, []);
 
-  let filteredList = problemList
-    .filter((item) => (selectedSolved ? item.solved === selectedSolved : true))
-    .filter((item) =>
-      selectedLevel ? item.level === `Lv.${selectedLevel}` : true,
-    );
-
-  if (selectedSubmission) {
-    filteredList = filteredList.sort((a, b) =>
-      selectedSubmission === 'ascending'
-        ? a.submissionCount - b.submissionCount
-        : b.submissionCount - a.submissionCount,
-    );
-  }
-
-  if (selectedAccuracy) {
-    filteredList = filteredList.sort((a, b) =>
-      selectedAccuracy === 'ascending'
-        ? a.accuracyRate - b.accuracyRate
-        : b.accuracyRate - a.accuracyRate,
-    );
-  }
-
-  const currentItems = filteredList.slice(
+  const currentItems = problemList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
 
-  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
+  const totalPages = Math.ceil(problemList.length / itemsPerPage);
   const currentBlock = Math.ceil(currentPage / pagesPerBlock);
   const startPage = (currentBlock - 1) * pagesPerBlock + 1;
   const endPage = Math.min(startPage + pagesPerBlock - 1, totalPages);
@@ -77,6 +52,20 @@ export default function AssignmentList() {
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i,
   );
+
+  // 페이지 변경 시 쿼리 스트링으로 page 추가, chapter 유지
+  const changePage = (page: number) => {
+    setCurrentPage(page);
+    router.push(
+      `/student/assignment/${course}?chapter=${chapterParam}&page=${page}`,
+    );
+  };
+
+  useEffect(() => {
+    // 쿼리 스트링에서 page 값이 바뀔 때 currentPage 업데이트
+    setCurrentPage(parseInt(pageParam));
+  }, [pageParam]);
+
   return (
     <>
       <main className="w-full lg:w-[75%]">
@@ -125,7 +114,7 @@ export default function AssignmentList() {
                 startPage - pagesPerBlock,
                 1,
               );
-              setCurrentPage(previousBlockStartPage);
+              changePage(previousBlockStartPage);
             }}
             disabled={currentPage === 1}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
@@ -137,7 +126,7 @@ export default function AssignmentList() {
             {pages.map((page) => (
               <button
                 key={page}
-                onClick={() => setCurrentPage(page)}
+                onClick={() => changePage(page)}
                 className={`shadow-md px-3 py-1 rounded-2xl ${
                   page === currentPage
                     ? 'bg-primary text-white hover:bg-primaryButtonHover'
@@ -152,7 +141,7 @@ export default function AssignmentList() {
           <button
             onClick={() => {
               const nextBlockStartPage = Math.min(endPage + 1, totalPages);
-              setCurrentPage(nextBlockStartPage);
+              changePage(nextBlockStartPage);
             }}
             disabled={currentPage === totalPages}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"

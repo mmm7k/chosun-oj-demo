@@ -21,9 +21,7 @@ export default function QuestionsBanner({ course }: { course: string }) {
             <span>
               💡 {decodedCourse === 'common' ? '공통 Q&A' : decodedCourse}
             </span>
-            <span className="pl-[18%]">
-              {chapter ? `Chapter ${chapter}` : ''}
-            </span>
+            <span className="ml-9">{chapter ? `Chapter ${chapter}` : ''}</span>
           </div>
           <div className="h-full w-[50%] relative">
             <Image

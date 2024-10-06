@@ -5,7 +5,6 @@ import AssignmentBanner from '@/components/student/assignment/AssignmentBanner';
 import { Suspense } from 'react';
 
 export default function Assignment({ params }: { params: { course: string } }) {
-  // 현재 url 파라미터 확인
   const course = params.course;
 
   return (
@@ -19,7 +18,7 @@ export default function Assignment({ params }: { params: { course: string } }) {
         <div className="w-[90%] lg:w-[62%] flex gap-0 pt-12 lg:gap-12  items-start mb-56 ">
           {/* left */}
 
-          <AssignmentList />
+          <AssignmentList course={course} />
 
           {/* right 카테고리 메뉴 */}
           <AssignmentMenu course={course} />

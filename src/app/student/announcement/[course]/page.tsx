@@ -23,7 +23,7 @@ export default function Announcement({
           {/* left */}
           {/* 공지사항 목록 */}
           <Suspense>
-            <AnnouncementList />
+            <AnnouncementList course={course} />
           </Suspense>
           {/* right */}
           <AnnouncementMenu course={course} />

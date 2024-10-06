@@ -18,10 +18,8 @@ export default function AssignmentBanner({ course }: { course: string }) {
             className="flex flex-col gap-1 text-white text-2xl "
             style={{ textShadow: '1px 2px 3px rgba(0, 0, 0, 0.5)' }}
           >
-            <span>💡 {decodedCourse}</span>
-            <span className="pl-[18%]">
-              {chapter ? `Chapter ${chapter}` : ''}
-            </span>
+            <span>📝 {decodedCourse}</span>
+            <span className="ml-9">{chapter ? `Chapter ${chapter}` : ''}</span>
           </div>
           <div className="h-full w-[50%] relative">
             <Image

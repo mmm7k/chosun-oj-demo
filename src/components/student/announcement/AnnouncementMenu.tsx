@@ -3,6 +3,7 @@
 import Link from 'next/link';
 
 export default function AnnouncementMenu({ course }: { course: string }) {
+  const decodedCourse = decodeURIComponent(course);
   return (
     <aside className="hidden lg:block flex-1 p-8 text-sm bg-white shadow-md rounded-2xl">
       <div className="w-full h-full flex flex-col space-y-7">
@@ -20,7 +21,7 @@ export default function AnnouncementMenu({ course }: { course: string }) {
         </Link>
         <Link href="/student/announcement/자바 프로그래밍">
           <div
-            className={`${decodeURIComponent(course) === '자바 프로그래밍' ? 'text-primary hover:text-primaryHover font-semibold  transition cursor-pointer flex justify-between items-center' : 'hover:text-gray-900  transition cursor-pointer flex justify-between items-center'}`}
+            className={`${decodedCourse === '자바 프로그래밍' ? 'text-primary hover:text-primaryHover font-semibold  transition cursor-pointer flex justify-between items-center' : 'hover:text-gray-900  transition cursor-pointer flex justify-between items-center'}`}
           >
             자바 프로그래밍
           </div>
@@ -28,14 +29,14 @@ export default function AnnouncementMenu({ course }: { course: string }) {
 
         <Link href="/student/announcement/기초 프로그래밍">
           <div
-            className={`${decodeURIComponent(course) === '기초 프로그래밍' ? 'text-primary hover:text-primaryHover font-semibold  transition cursor-pointer flex justify-between items-center' : 'hover:text-gray-900  transition cursor-pointer flex justify-between items-center'}`}
+            className={`${decodedCourse === '기초 프로그래밍' ? 'text-primary hover:text-primaryHover font-semibold  transition cursor-pointer flex justify-between items-center' : 'hover:text-gray-900  transition cursor-pointer flex justify-between items-center'}`}
           >
             기초 프로그래밍
           </div>
         </Link>
         <Link href="/student/announcement/알고리즘">
           <div
-            className={`${decodeURIComponent(course) === '알고리즘' ? 'text-primary hover:text-primaryHover font-semibold  transition cursor-pointer flex justify-between items-center' : 'hover:text-gray-900  transition cursor-pointer flex justify-between items-center'}`}
+            className={`${decodedCourse === '알고리즘' ? 'text-primary hover:text-primaryHover font-semibold  transition cursor-pointer flex justify-between items-center' : 'hover:text-gray-900  transition cursor-pointer flex justify-between items-center'}`}
           >
             알고리즘
           </div>

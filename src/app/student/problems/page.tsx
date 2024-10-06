@@ -15,7 +15,9 @@ export default function Problems() {
       <ProblemsBanner />
       <main className="bg-[#f0f4fc] w-full flex flex-col lg:flex-row items-center lg:items-start justify-center text-secondary">
         <div className="w-[90%] lg:w-[62%] flex gap-0 lg:gap-12 pt-12 items-start mb-44">
-          <ProblemList />
+          <Suspense>
+            <ProblemList />
+          </Suspense>
           <Suspense>
             <ProblemsMenu />
           </Suspense>

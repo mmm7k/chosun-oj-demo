@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function AnnouncementMobileMenu({ course }: { course: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const decodedCourse = decodeURIComponent(course);
   return (
     <div className="block lg:hidden bg-white w-full ">
       <div
@@ -42,7 +42,7 @@ export default function AnnouncementMobileMenu({ course }: { course: string }) {
           <Link href="/student/announcement/자바%20프로그래밍">
             <li
               className={`${
-                decodeURIComponent(course) === '자바 프로그래밍'
+                decodedCourse === '자바 프로그래밍'
                   ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
                   : 'hover:text-gray-700 transition cursor-pointer flex justify-between items-center'
               } pl-[5%] py-2`}
@@ -55,7 +55,7 @@ export default function AnnouncementMobileMenu({ course }: { course: string }) {
           <Link href="/student/announcement/기초%20프로그래밍">
             <li
               className={`${
-                decodeURIComponent(course) === '기초 프로그래밍'
+                decodedCourse === '기초 프로그래밍'
                   ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
                   : 'hover:text-gray-700 transition cursor-pointer flex justify-between items-center'
               } pl-[5%] py-2`}
@@ -68,7 +68,7 @@ export default function AnnouncementMobileMenu({ course }: { course: string }) {
           <Link href="/student/announcement/알고리즘">
             <li
               className={`${
-                decodeURIComponent(course) === '알고리즘'
+                decodedCourse === '알고리즘'
                   ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
                   : 'hover:text-gray-700 transition cursor-pointer flex justify-between items-center'
               } pl-[5%] py-2`}

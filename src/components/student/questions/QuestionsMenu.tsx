@@ -8,7 +8,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
   const [isJavaDropdownOpen, setIsJavaDropdownOpen] = useState(false);
   const [isBasicDropdownOpen, setIsBasicDropdownOpen] = useState(false);
   const [isAlgorithmDropdownOpen, setIsAlgorithmDropdownOpen] = useState(false);
-
+  const decodedCourse = decodeURIComponent(course);
   return (
     <aside className="hidden lg:block flex-1 p-8 text-sm bg-white shadow-md rounded-2xl">
       <div className="w-full h-full flex flex-col space-y-7">
@@ -31,7 +31,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
         <div>
           <div
             className={`${
-              decodeURIComponent(course) === '자바 프로그래밍'
+              decodedCourse === '자바 프로그래밍'
                 ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
                 : 'hover:text-gray-900 transition cursor-pointer flex justify-between items-center'
             }`}
@@ -41,7 +41,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
             {isJavaDropdownOpen ? (
               <IoChevronUp
                 className={`${
-                  decodeURIComponent(course) === '자바 프로그래밍'
+                  decodedCourse === '자바 프로그래밍'
                     ? 'text-primary'
                     : 'text-gray-500'
                 }`}
@@ -49,7 +49,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
             ) : (
               <IoChevronDown
                 className={`${
-                  decodeURIComponent(course) === '자바 프로그래밍'
+                  decodedCourse === '자바 프로그래밍'
                     ? 'text-primary'
                     : 'text-gray-500'
                 }`}
@@ -83,7 +83,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
         <div>
           <div
             className={`${
-              decodeURIComponent(course) === '기초 프로그래밍'
+              decodedCourse === '기초 프로그래밍'
                 ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
                 : 'hover:text-gray-900 transition cursor-pointer flex justify-between items-center'
             }`}
@@ -93,7 +93,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
             {isBasicDropdownOpen ? (
               <IoChevronUp
                 className={`${
-                  decodeURIComponent(course) === '기초 프로그래밍'
+                  decodedCourse === '기초 프로그래밍'
                     ? 'text-primary'
                     : 'text-gray-500'
                 }`}
@@ -101,7 +101,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
             ) : (
               <IoChevronDown
                 className={`${
-                  decodeURIComponent(course) === '기초 프로그래밍'
+                  decodedCourse === '기초 프로그래밍'
                     ? 'text-primary'
                     : 'text-gray-500'
                 }`}
@@ -135,7 +135,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
         <div>
           <div
             className={`${
-              decodeURIComponent(course) === '알고리즘'
+              decodedCourse === '알고리즘'
                 ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
                 : 'hover:text-gray-900 transition cursor-pointer flex justify-between items-center'
             }`}
@@ -145,7 +145,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
             {isAlgorithmDropdownOpen ? (
               <IoChevronUp
                 className={`${
-                  decodeURIComponent(course) === '알고리즘'
+                  decodedCourse === '알고리즘'
                     ? 'text-primary'
                     : 'text-gray-500'
                 }`}
@@ -153,7 +153,7 @@ export default function QuestionsMenu({ course }: { course: string }) {
             ) : (
               <IoChevronDown
                 className={`${
-                  decodeURIComponent(course) === '알고리즘'
+                  decodedCourse === '알고리즘'
                     ? 'text-primary'
                     : 'text-gray-500'
                 }`}

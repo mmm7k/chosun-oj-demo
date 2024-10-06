@@ -2,7 +2,7 @@
 
 import { Select } from 'antd';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 
@@ -15,34 +15,18 @@ export default function ProblemList() {
     null,
   );
   const [selectedAccuracy, setSelectedAccuracy] = useState<string | null>(null);
-
-  const handleSolvedChange = (value: string | null) => {
-    setSelectedSolved(value);
-  };
-
-  const handleLevelChange = (value: string | null) => {
-    setSelectedLevel(value);
-  };
-
-  const handleSubmissionChange = (value: string | null) => {
-    setSelectedSubmission(value);
-  };
-
-  const handleAccuracyChange = (value: string | null) => {
-    setSelectedAccuracy(value);
-  };
-
   const [currentPage, setCurrentPage] = useState(1);
   const [problemList, setProblemList] = useState<any[]>([]);
+
   const itemsPerPage = 20;
   const pagesPerBlock = 5;
-  const pathname = usePathname();
 
-  const parts = pathname.split('/');
-  const selectedClass = parts.find(
-    (part, index) =>
-      parts[index - 1] === 'student' && parts[index + 1] === 'problems',
-  );
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const categoryParam = searchParams.get('category') || 'all';
+  const pageParam = searchParams.get('page') || '1';
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const generateRandomList = () => {
@@ -92,7 +76,6 @@ export default function ProblemList() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
-
   const totalPages = Math.ceil(filteredList.length / itemsPerPage);
   const currentBlock = Math.ceil(currentPage / pagesPerBlock);
   const startPage = (currentBlock - 1) * pagesPerBlock + 1;
@@ -101,6 +84,16 @@ export default function ProblemList() {
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i,
   );
+
+  const changePage = (page: number) => {
+    setCurrentPage(page);
+    router.push(`/student/problems?category=${categoryParam}&page=${page}`);
+  };
+
+  useEffect(() => {
+    setCurrentPage(parseInt(pageParam));
+  }, [pageParam]);
+
   return (
     <>
       <main className="w-full lg:w-[75%]">
@@ -120,7 +113,7 @@ export default function ProblemList() {
               id="solved-select"
               placeholder="상태를 선택하세요."
               value={selectedSolved}
-              onChange={handleSolvedChange}
+              onChange={setSelectedSolved}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -133,7 +126,7 @@ export default function ProblemList() {
               id="level-select"
               placeholder="난이도를 선택하세요."
               value={selectedLevel}
-              onChange={handleLevelChange}
+              onChange={setSelectedLevel}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -147,7 +140,7 @@ export default function ProblemList() {
               id="submission-select"
               placeholder="제출 인원"
               value={selectedSubmission}
-              onChange={handleSubmissionChange}
+              onChange={setSelectedSubmission}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -160,7 +153,7 @@ export default function ProblemList() {
               id="accuracy-select"
               placeholder="정답률"
               value={selectedAccuracy}
-              onChange={handleAccuracyChange}
+              onChange={setSelectedAccuracy}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -214,7 +207,7 @@ export default function ProblemList() {
                 startPage - pagesPerBlock,
                 1,
               );
-              setCurrentPage(previousBlockStartPage);
+              changePage(previousBlockStartPage);
             }}
             disabled={currentPage === 1}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
@@ -226,7 +219,7 @@ export default function ProblemList() {
             {pages.map((page) => (
               <button
                 key={page}
-                onClick={() => setCurrentPage(page)}
+                onClick={() => changePage(page)}
                 className={`shadow-md px-3 py-1 rounded-2xl ${
                   page === currentPage
                     ? 'bg-primary text-white hover:bg-primaryButtonHover'
@@ -241,7 +234,7 @@ export default function ProblemList() {
           <button
             onClick={() => {
               const nextBlockStartPage = Math.min(endPage + 1, totalPages);
-              setCurrentPage(nextBlockStartPage);
+              changePage(nextBlockStartPage);
             }}
             disabled={currentPage === totalPages}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
