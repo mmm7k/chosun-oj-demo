@@ -1,14 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function AnnouncementList() {
-  const [currentPage, setCurrentPage] = useState(1);
   const [expandedItems, setExpandedItems] = useState<number[]>([]);
   const itemsPerPage = 9;
   const pagesPerBlock = 5;
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // 현재 URL에서 course 경로 추출
+  const coursePath = decodeURIComponent(
+    window.location.pathname.split('/').pop() || 'common',
+  );
+
+  // 현재 page 쿼리 파라미터를 가져옴 (기본값: 1)
+  const initialPage = parseInt(searchParams.get('page') || '1');
+  const [currentPage, setCurrentPage] = useState(initialPage);
 
   const problemList = Array.from({ length: 60 }, (_, i) => ({
     id: i + 1,
@@ -38,6 +50,24 @@ export default function AnnouncementList() {
       setExpandedItems([...expandedItems, id]);
     }
   };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // 페이지 번호를 쿼리 파라미터에 반영
+    if (page === 1) {
+      // 1페이지일 경우에는 쿼리 파라미터를 제거
+      router.push(`/student/announcement/${encodeURIComponent(coursePath)}`);
+    } else {
+      // 그 외 페이지일 경우에는 쿼리 파라미터로 페이지 번호 추가
+      router.push(
+        `/student/announcement/${encodeURIComponent(coursePath)}?page=${page}`,
+      );
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(initialPage);
+  }, [initialPage]);
 
   return (
     <main className="w-full lg:w-[75%]">
@@ -90,15 +120,9 @@ export default function AnnouncementList() {
       {/* 페이지네이션 */}
       <div className="flex justify-center items-center mt-4 space-x-1">
         <button
-          onClick={() => {
-            const previousBlockStartPage = Math.max(
-              startPage - pagesPerBlock,
-              1,
-            );
-            setCurrentPage(previousBlockStartPage);
-          }}
+          onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
           disabled={currentPage === 1}
-          className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
+          className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3] disabled:opacity-50"
         >
           &lt;
         </button>
@@ -107,7 +131,7 @@ export default function AnnouncementList() {
           {pages.map((page) => (
             <button
               key={page}
-              onClick={() => setCurrentPage(page)}
+              onClick={() => handlePageChange(page)}
               className={`shadow-md px-3 py-1 rounded-2xl ${
                 page === currentPage
                   ? 'bg-primary text-white hover:bg-primaryButtonHover'
@@ -120,12 +144,11 @@ export default function AnnouncementList() {
         </div>
 
         <button
-          onClick={() => {
-            const nextBlockStartPage = Math.min(endPage + 1, totalPages);
-            setCurrentPage(nextBlockStartPage);
-          }}
+          onClick={() =>
+            handlePageChange(Math.min(currentPage + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
+          className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]  disabled:opacity-50"
         >
           &gt;
         </button>

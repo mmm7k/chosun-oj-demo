@@ -59,7 +59,7 @@ export default function HeaderNav() {
               className={`cursor-pointer transition ${
                 // pathname === `${classPath}/problems`
                 pathname.startsWith('/student/problems')
-                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  ? 'text-primary border-b-4 border-primary pb-[1.5rem] lg:pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
               }`}
             >
@@ -83,7 +83,7 @@ export default function HeaderNav() {
               className={`cursor-pointer transition ${
                 // pathname === `${classPath}/questions`
                 pathname.startsWith('/student/questions')
-                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  ? 'text-primary border-b-4 border-primary  pb-[1.5rem] lg:pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
               }`}
             >
@@ -94,7 +94,7 @@ export default function HeaderNav() {
             <span
               className={`cursor-pointer transition ${
                 pathname.startsWith('/student/announcement')
-                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  ? 'text-primary border-b-4 border-primary  pb-[1.5rem] lg:pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
               }`}
             >
@@ -105,7 +105,7 @@ export default function HeaderNav() {
             <span
               className={`cursor-pointer transition ${
                 pathname.startsWith('/student/assignment')
-                  ? 'text-primary border-b-4 border-primary pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  ? 'text-primary border-b-4 border-primary  pb-[1.5rem] lg:pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
               }`}
             >
