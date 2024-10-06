@@ -4,13 +4,12 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function AssignmentList({ course }: { course: string }) {
+export default function ContestProblemList({ course }: { course: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 쿼리 파라미터에서 page와 chapter 값 읽기
+  // 쿼리 파라미터에서 page 값 읽기
   const pageParam = searchParams.get('page') || '1';
-  const chapterParam = searchParams.get('chapter') || '1';
 
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
   const [problemList, setProblemList] = useState<any[]>([]);
@@ -53,12 +52,10 @@ export default function AssignmentList({ course }: { course: string }) {
     (_, i) => startPage + i,
   );
 
-  // 페이지 변경 시 쿼리 스트링으로 page 추가, chapter 유지
+  // 페이지 변경 시 쿼리 스트링으로 page 추가, course 유지
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(
-      `/student/assignment/${course}?chapter=${chapterParam}&page=${page}`,
-    );
+    router.push(`/student/contest/${course}?page=${page}`);
   };
 
   useEffect(() => {
@@ -68,7 +65,7 @@ export default function AssignmentList({ course }: { course: string }) {
 
   return (
     <>
-      <main className="w-full lg:w-[75%]">
+      <main className="w-full">
         {/* 문제 목록 */}
         <div className="rounded-2xl border bg-white shadow-md text-sm text-gray-500">
           <div className="flex justify-between items-center rounded-t-2xl py-2 px-5 border-b bg-[#eeeff3] text-gray-800">
@@ -79,7 +76,7 @@ export default function AssignmentList({ course }: { course: string }) {
             <span className="w-[10%]">정답률</span>
           </div>
           {currentItems.map((item) => (
-            // <Link href={`/student/problems/${item.id}`} key={item.id}>
+            // <Link href={`/student/contest/${item.id}`} key={item.id}>
             <div className="flex justify-between items-center text-sm py-5 px-5 border-b hover:bg-[#eeeff3] cursor-pointer ">
               <span className="w-[10%] text-green-500 font-bold">
                 {item.solved === 'solved' ? '✔' : ''}

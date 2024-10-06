@@ -9,7 +9,7 @@ import {
   LineElement,
   Tooltip,
 } from 'chart.js';
-import { FaCodeBranch, FaExclamationCircle } from 'react-icons/fa';
+import { FaCodeBranch } from 'react-icons/fa';
 import { PiRanking } from 'react-icons/pi';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';

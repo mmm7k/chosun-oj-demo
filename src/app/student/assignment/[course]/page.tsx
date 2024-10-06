@@ -14,7 +14,7 @@ export default function Assignment({ params }: { params: { course: string } }) {
       <Suspense>
         <AssignmentBanner course={course} />
       </Suspense>
-      <div className="bg-[#f0f4fc] w-full flex   flex-col lg:flex-row  items-center lg:items-start justify-center text-secondary ">
+      <div className="bg-[#f0f4fc] w-full flex   flex-col lg:flex-row  items-center lg:items-start justify-center ">
         <div className="w-[90%] lg:w-[62%] flex gap-0 pt-12 lg:gap-12  items-start mb-56 ">
           {/* left */}
 
