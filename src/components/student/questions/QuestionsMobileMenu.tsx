@@ -44,58 +44,6 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
             </Link>
           </li>
 
-          {/* 자바 프로그래밍 */}
-          <li>
-            <div
-              className={`${
-                decodedCourse === '자바 프로그래밍'
-                  ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
-                  : 'hover:text-gray-700 transition cursor-pointer flex justify-between items-center'
-              } py-2`}
-              onClick={() => setIsJavaDropdownOpen(!isJavaDropdownOpen)}
-            >
-              자바 프로그래밍
-              {isJavaDropdownOpen ? (
-                <IoChevronUp
-                  className={`${
-                    decodedCourse === '자바 프로그래밍'
-                      ? 'text-primary'
-                      : 'text-gray-500'
-                  }`}
-                />
-              ) : (
-                <IoChevronDown
-                  className={`${
-                    decodedCourse === '자바 프로그래밍'
-                      ? 'text-primary'
-                      : 'text-gray-500'
-                  }`}
-                />
-              )}
-            </div>
-            <ul
-              className={`list-disc pl-[3%] transition-all duration-700 ease-in-out space-y-5 ${
-                isJavaDropdownOpen
-                  ? 'opacity-100 max-h-[80rem]'
-                  : 'opacity-0 max-h-0'
-              } overflow-hidden`}
-            >
-              {[...Array(15)].map((_, idx) => (
-                <li
-                  key={idx}
-                  className="hover:text-gray-900 transition cursor-pointer"
-                >
-                  <Link
-                    href={`/student/questions/자바 프로그래밍?chapter=${idx + 1}`}
-                  >
-                    Chapter {idx + 1}
-                  </Link>
-                </li>
-              ))}
-              <li>기타</li>
-            </ul>
-          </li>
-
           {/* 기초 프로그래밍 */}
           <li>
             <div
@@ -144,7 +92,70 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
                   </Link>
                 </li>
               ))}
-              <li>기타</li>
+              <li>
+                <Link
+                  href={`/student/questions/기초 프로그래밍?chapter=${'etc'}`}
+                >
+                  기타
+                </Link>
+              </li>
+            </ul>
+          </li>
+          {/* 자바 프로그래밍 */}
+          <li>
+            <div
+              className={`${
+                decodedCourse === '자바 프로그래밍'
+                  ? 'text-primary hover:text-primaryHover font-semibold transition cursor-pointer flex justify-between items-center'
+                  : 'hover:text-gray-700 transition cursor-pointer flex justify-between items-center'
+              } py-2`}
+              onClick={() => setIsJavaDropdownOpen(!isJavaDropdownOpen)}
+            >
+              자바 프로그래밍
+              {isJavaDropdownOpen ? (
+                <IoChevronUp
+                  className={`${
+                    decodedCourse === '자바 프로그래밍'
+                      ? 'text-primary'
+                      : 'text-gray-500'
+                  }`}
+                />
+              ) : (
+                <IoChevronDown
+                  className={`${
+                    decodedCourse === '자바 프로그래밍'
+                      ? 'text-primary'
+                      : 'text-gray-500'
+                  }`}
+                />
+              )}
+            </div>
+            <ul
+              className={`list-disc pl-[3%] transition-all duration-700 ease-in-out space-y-5 ${
+                isJavaDropdownOpen
+                  ? 'opacity-100 max-h-[80rem]'
+                  : 'opacity-0 max-h-0'
+              } overflow-hidden`}
+            >
+              {[...Array(15)].map((_, idx) => (
+                <li
+                  key={idx}
+                  className="hover:text-gray-900 transition cursor-pointer"
+                >
+                  <Link
+                    href={`/student/questions/자바 프로그래밍?chapter=${idx + 1}`}
+                  >
+                    Chapter {idx + 1}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href={`/student/questions/자바 프로그래밍?chapter=${'etc'}`}
+                >
+                  기타
+                </Link>
+              </li>
             </ul>
           </li>
 
@@ -196,7 +207,11 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
                   </Link>
                 </li>
               ))}
-              <li>기타</li>
+              <li>
+                <Link href={`/student/questions/알고리즘?chapter=${'etc'}`}>
+                  기타
+                </Link>
+              </li>
             </ul>
           </li>
         </ul>
