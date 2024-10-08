@@ -23,7 +23,7 @@ export default function Questions({ params }: { params: { course: string } }) {
         <QuestionsBanner course={course} />
       </Suspense>
       <div className="bg-[#f0f4fc] w-full flex  flex-col lg:flex-row  items-center lg:items-start justify-center ">
-        <div className="w-[90%] lg:w-[62%] flex gap-0 pt-12 lg:gap-12 items-start mb-56 ">
+        <div className="w-[90%] lg:w-[62%] flex gap-0 pt-12 lg:gap-12 items-start mb-44 ">
           {/* left */}
           <main className="w-full lg:w-[75%]">
             {/* 검색 */}

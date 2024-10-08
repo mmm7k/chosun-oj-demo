@@ -11,7 +11,7 @@ export default function Contest({ params }: { params: { course: string } }) {
         <ContestBanner course={course} />
       </Suspense>
       <div className="bg-[#f0f4fc] w-full flex items-center justify-center ">
-        <div className="w-[90%] lg:w-[62%]  pt-12 mb-56 ">
+        <div className="w-[90%] lg:w-[62%]  pt-12 mb-44 ">
           <ContestProblemList course={course} />
         </div>
       </div>
