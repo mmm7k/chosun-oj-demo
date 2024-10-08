@@ -25,7 +25,6 @@ string solution(string s) {
     return answer;
 }
 `);
-
   const [isTerminalMode, setIsTerminalMode] = useState(false); // 터미널 모드 플래그
   const [socket, setSocket] = useState<Socket | null>(null); // Socket.IO 연결 상태 관리
   const [isConnected, setIsConnected] = useState(false); // 연결 상태 플래그
@@ -34,6 +33,11 @@ string solution(string s) {
   const fitAddon = useRef(new FitAddon()); // FitAddon 인스턴스
   const [isLeftVisible, setIsLeftVisible] = useState(true);
   const router = useRouter();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  // 모달 열기/닫기 함수
+  const toggleModal = () => {
+    setIsModalVisible((prev) => !prev);
+  };
 
   // 뒤로 가기
   const handleBack = () => {
@@ -131,7 +135,7 @@ string solution(string s) {
   };
 
   return (
-    <div className="h-[100dvh] flex flex-col text-gray-800">
+    <div className="h-[100dvh] flex flex-col text-gray-800 ">
       {/* 헤더 */}
       <div className="h-20 lg:h-14 bg-darkPrimary text-white flex items-center px-4 sm:px-12">
         <div className="w-9 h-9 relative mr-3">
@@ -383,7 +387,6 @@ string solution(string s) {
         >
           이전으로
         </button>
-
         <div className="flex space-x-4">
           <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition">
             초기화
@@ -391,11 +394,41 @@ string solution(string s) {
           <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition">
             코드 실행
           </button>
-          <button className="bg-[#002a87] text-white px-4 py-2 rounded-md hover:bg-[#00226e] transition">
+          <button
+            className="bg-[#002a87] text-white px-4 py-2 rounded-md hover:bg-[#00226e] transition"
+            onClick={toggleModal}
+          >
             제출 후 채점하기
           </button>
         </div>
       </div>
+      {/* 제출 후 결과 모달 */}
+
+      {/* 제출 후 결과 모달 */}
+      {isModalVisible && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          {/* 배경 어둡게 만들기 */}
+          <div className="fixed inset-0 bg-black opacity-70"></div>
+          {/* 모달 */}
+          <div className="bg-white p-8 rounded-md shadow-lg z-50 w-[24rem] mx-auto">
+            <h1 className="text-xl font-semibold mb-8 ">정답입니다!</h1>
+            <div className="flex justify-end gap-4">
+              <button
+                className="mt-4 bg-gray-300 text-white px-4 py-2 rounded-md hover:bg-gray-400 transition"
+                onClick={toggleModal} // 모달 닫기
+              >
+                닫기
+              </button>
+              <button
+                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                onClick={handleBack} // 뒤로가기
+              >
+                문제 목록으로 돌아가기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
