@@ -4,14 +4,13 @@ import { usePathname } from 'next/navigation';
 
 export default function Footer() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   if (
     pathname.includes('/problems/') ||
     pathname.match(/^\/student\/assignment\/[^\/]+\/[^\/]+$/) ||
     pathname.match(/^\/student\/contest\/[^\/]+\/[^\/]+$/)
   ) {
-    return null; // 푸터를 렌더링하지 않음
+    return null; // 헤더를 렌더링하지 않음
   }
 
   return (
