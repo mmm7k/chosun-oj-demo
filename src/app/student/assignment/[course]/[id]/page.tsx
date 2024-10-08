@@ -25,6 +25,7 @@ string solution(string s) {
     return answer;
 }
 `);
+
   const [isTerminalMode, setIsTerminalMode] = useState(false); // 터미널 모드 플래그
   const [socket, setSocket] = useState<Socket | null>(null); // Socket.IO 연결 상태 관리
   const [isConnected, setIsConnected] = useState(false); // 연결 상태 플래그
@@ -382,6 +383,7 @@ string solution(string s) {
         >
           이전으로
         </button>
+
         <div className="flex space-x-4">
           <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition">
             초기화

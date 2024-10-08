@@ -7,11 +7,6 @@ const nextConfig = {
         destination: '/admin/dashboard',
         permanent: true,
       },
-      // {
-      //   source: '/student',
-      //   destination: '/student/selectclass',
-      //   permanent: true,
-      // },
     ];
   },
   webpack: (config, { isServer }) => {

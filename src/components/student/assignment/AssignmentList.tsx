@@ -2,11 +2,13 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function AssignmentList({ course }: { course: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  // 현재 url의 pathname
+  const pathname = usePathname();
 
   // 쿼리 파라미터에서 page와 chapter 값 읽기
   const pageParam = searchParams.get('page') || '1';
@@ -79,31 +81,31 @@ export default function AssignmentList({ course }: { course: string }) {
             <span className="w-[10%]">정답률</span>
           </div>
           {currentItems.map((item) => (
-            // <Link href={`/student/problems/${item.id}`} key={item.id}>
-            <div className="flex justify-between items-center text-sm py-5 px-5 border-b hover:bg-[#eeeff3] cursor-pointer ">
-              <span className="w-[10%] text-green-500 font-bold">
-                {item.solved === 'solved' ? '✔' : ''}
-              </span>
-              <span className="w-[50%]">{item.name}</span>
-              <span
-                className={`w-[10%] font-semibold ${
-                  item.level === 'Lv.1'
-                    ? 'text-green-400'
-                    : item.level === 'Lv.2'
-                      ? 'text-sky-400'
-                      : 'text-rose-400'
-                }`}
-              >
-                {item.level}
-              </span>
-              <span className="w-[10%] flex items-center">
-                {item.submissionCount}명
-              </span>
-              <span className="w-[10%] flex items-center">
-                {item.accuracyRate}%
-              </span>
-            </div>
-            // </Link>
+            <Link href={`${pathname}/${item.id}`} key={item.id}>
+              <div className="flex justify-between items-center text-sm py-5 px-5 border-b hover:bg-[#eeeff3] cursor-pointer ">
+                <span className="w-[10%] text-green-500 font-bold">
+                  {item.solved === 'solved' ? '✔' : ''}
+                </span>
+                <span className="w-[50%]">{item.name}</span>
+                <span
+                  className={`w-[10%] font-semibold ${
+                    item.level === 'Lv.1'
+                      ? 'text-green-400'
+                      : item.level === 'Lv.2'
+                        ? 'text-sky-400'
+                        : 'text-rose-400'
+                  }`}
+                >
+                  {item.level}
+                </span>
+                <span className="w-[10%] flex items-center">
+                  {item.submissionCount}명
+                </span>
+                <span className="w-[10%] flex items-center">
+                  {item.accuracyRate}%
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
         {/* 페이지네이션 */}

@@ -25,6 +25,7 @@ string solution(string s) {
     return answer;
 }
 `);
+
   const [isTerminalMode, setIsTerminalMode] = useState(false); // 터미널 모드 플래그
   const [socket, setSocket] = useState<Socket | null>(null); // Socket.IO 연결 상태 관리
   const [isConnected, setIsConnected] = useState(false); // 연결 상태 플래그

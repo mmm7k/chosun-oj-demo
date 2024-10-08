@@ -11,7 +11,6 @@ RUN pnpm install
 
 COPY . .
 
-
 RUN pnpm build
 
 EXPOSE 3000

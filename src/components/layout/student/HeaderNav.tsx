@@ -11,7 +11,11 @@ export default function HeaderNav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (pathname.includes('/problems/')) {
+  if (
+    pathname.includes('/problems/') ||
+    pathname.match(/^\/student\/assignment\/[^\/]+\/[^\/]+$/) ||
+    pathname.match(/^\/student\/contest\/[^\/]+\/[^\/]+$/)
+  ) {
     return null; // 헤더를 렌더링하지 않음
   }
 
