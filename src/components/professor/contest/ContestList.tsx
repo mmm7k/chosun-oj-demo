@@ -23,6 +23,16 @@ export default function ContestList() {
 
   const handleCourseChange = (value: string) => {
     setSelectedCourse(value);
+    setCurrentPage(1); // 페이지를 1로 설정
+    updateQueryParams(1, value);
+  };
+
+  // 페이지 및 필터링된 쿼리 파라미터를 업데이트하는 함수
+  const updateQueryParams = (page: number, course: string | null) => {
+    const query = new URLSearchParams();
+    if (course) query.set('course', course);
+    query.set('page', page.toString());
+    router.push(`/professor/contest/list?${query.toString()}`);
   };
 
   // 문제 리스트에 과목을 랜덤하게 배치
@@ -68,12 +78,13 @@ export default function ContestList() {
   // 페이지 변경 시 쿼리 스트링으로 업데이트
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/professor/assignment/list?page=${page}`);
+    updateQueryParams(page, selectedCourse);
   };
 
   useEffect(() => {
     setCurrentPage(parseInt(pageParam));
-  }, [pageParam]);
+    setSelectedCourse(searchParams.get('course') || null);
+  }, [pageParam, searchParams]);
 
   // 삭제 모달 열기
   const showDeleteModal = (id: number) => {

@@ -25,12 +25,16 @@ export default function ProblemList() {
   const router = useRouter();
   const categoryParam = searchParams.get('category') || 'all';
   const pageParam = searchParams.get('page') || '1';
+  const solvedParam = searchParams.get('solved') || null;
+  const levelParam = searchParams.get('level') || null;
+  const submissionParam = searchParams.get('submission') || null;
+  const accuracyParam = searchParams.get('accuracy') || null;
 
   const pathname = usePathname();
 
   useEffect(() => {
     const generateRandomList = () => {
-      return Array.from({ length: 60 }, (_, i) => {
+      return Array.from({ length: 120 }, (_, i) => {
         const randomLevel = Math.floor(Math.random() * 3) + 1;
         const randomSolved = Math.random() > 0.5 ? 'solved' : 'unsolved';
         const randomSubmission = Math.floor(Math.random() * 100) + 1;
@@ -49,6 +53,31 @@ export default function ProblemList() {
 
     setProblemList(generateRandomList());
   }, []);
+
+  useEffect(() => {
+    setSelectedSolved(solvedParam);
+    setSelectedLevel(levelParam);
+    setSelectedSubmission(submissionParam);
+    setSelectedAccuracy(accuracyParam);
+    setCurrentPage(parseInt(pageParam));
+  }, [solvedParam, levelParam, submissionParam, accuracyParam, pageParam]);
+
+  const updateQueryParams = (
+    page: number,
+    solved: string | null,
+    level: string | null,
+    submission: string | null,
+    accuracy: string | null,
+  ) => {
+    const query = new URLSearchParams();
+    query.set('category', categoryParam);
+    query.set('page', page.toString());
+    if (solved) query.set('solved', solved);
+    if (level) query.set('level', level);
+    if (submission) query.set('submission', submission);
+    if (accuracy) query.set('accuracy', accuracy);
+    router.push(`${pathname}?${query.toString()}`);
+  };
 
   let filteredList = problemList
     .filter((item) => (selectedSolved ? item.solved === selectedSolved : true))
@@ -87,12 +116,32 @@ export default function ProblemList() {
 
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/student/problems?category=${categoryParam}&page=${page}`);
+    updateQueryParams(
+      page,
+      selectedSolved,
+      selectedLevel,
+      selectedSubmission,
+      selectedAccuracy,
+    );
   };
 
-  useEffect(() => {
-    setCurrentPage(parseInt(pageParam));
-  }, [pageParam]);
+  const handleFilterChange = (
+    key: 'solved' | 'level' | 'submission' | 'accuracy',
+    value: string | null,
+  ) => {
+    setCurrentPage(1);
+    if (key === 'solved') setSelectedSolved(value);
+    if (key === 'level') setSelectedLevel(value);
+    if (key === 'submission') setSelectedSubmission(value);
+    if (key === 'accuracy') setSelectedAccuracy(value);
+    updateQueryParams(
+      1,
+      key === 'solved' ? value : selectedSolved,
+      key === 'level' ? value : selectedLevel,
+      key === 'submission' ? value : selectedSubmission,
+      key === 'accuracy' ? value : selectedAccuracy,
+    );
+  };
 
   return (
     <>
@@ -107,13 +156,13 @@ export default function ProblemList() {
           />
         </div>
         {/* 문제 필터 */}
-        <section className="flex gap-4 mt-3  overflow-auto no-scrollbar overflow-y-hidden">
-          <div className="h-9 w-full ">
+        <section className="flex gap-4 mt-3 overflow-auto no-scrollbar overflow-y-hidden">
+          <div className="h-9 w-full">
             <Select
               id="solved-select"
               placeholder="상태를 선택하세요."
               value={selectedSolved}
-              onChange={setSelectedSolved}
+              onChange={(value) => handleFilterChange('solved', value)}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -126,7 +175,7 @@ export default function ProblemList() {
               id="level-select"
               placeholder="난이도를 선택하세요."
               value={selectedLevel}
-              onChange={setSelectedLevel}
+              onChange={(value) => handleFilterChange('level', value)}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -140,7 +189,7 @@ export default function ProblemList() {
               id="submission-select"
               placeholder="제출 인원"
               value={selectedSubmission}
-              onChange={setSelectedSubmission}
+              onChange={(value) => handleFilterChange('submission', value)}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -153,7 +202,7 @@ export default function ProblemList() {
               id="accuracy-select"
               placeholder="정답률"
               value={selectedAccuracy}
-              onChange={setSelectedAccuracy}
+              onChange={(value) => handleFilterChange('accuracy', value)}
               className="w-full h-[85%] shadow-md custom-select rounded-xl"
               allowClear
             >
@@ -173,7 +222,7 @@ export default function ProblemList() {
           </div>
           {currentItems.map((item) => (
             <Link href={`/student/problems/${item.id}`} key={item.id}>
-              <div className="flex justify-between items-center text-sm py-5 px-5 border-b hover:bg-[#eeeff3] cursor-pointer ">
+              <div className="flex justify-between items-center text-sm py-5 px-5 border-b hover:bg-[#eeeff3] cursor-pointer">
                 <span className="w-[10%] text-green-500 font-bold">
                   {item.solved === 'solved' ? '✔' : ''}
                 </span>
@@ -189,12 +238,8 @@ export default function ProblemList() {
                 >
                   {item.level}
                 </span>
-                <span className="w-[10%] flex items-center">
-                  {item.submissionCount}명
-                </span>
-                <span className="w-[10%] flex items-center">
-                  {item.accuracyRate}%
-                </span>
+                <span className="w-[10%]">{item.submissionCount}명</span>
+                <span className="w-[10%]">{item.accuracyRate}%</span>
               </div>
             </Link>
           ))}
@@ -202,13 +247,7 @@ export default function ProblemList() {
         {/* 페이지네이션 */}
         <div className="flex justify-center items-center mt-16 space-x-1">
           <button
-            onClick={() => {
-              const previousBlockStartPage = Math.max(
-                startPage - pagesPerBlock,
-                1,
-              );
-              changePage(previousBlockStartPage);
-            }}
+            onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
             disabled={currentPage === 1}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
           >
@@ -232,10 +271,9 @@ export default function ProblemList() {
           </div>
 
           <button
-            onClick={() => {
-              const nextBlockStartPage = Math.min(endPage + 1, totalPages);
-              changePage(nextBlockStartPage);
-            }}
+            onClick={() =>
+              changePage(Math.min(startPage + pagesPerBlock, totalPages))
+            }
             disabled={currentPage === totalPages}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
           >

@@ -108,7 +108,7 @@ export default function AnnouncementList({ course }: { course: string }) {
       {/* 페이지네이션 */}
       <div className="flex justify-center items-center mt-4 space-x-1">
         <button
-          onClick={() => changePage(Math.max(currentPage - 1, 1))}
+          onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
           disabled={currentPage === 1}
           className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3] disabled:opacity-50"
         >
@@ -132,7 +132,9 @@ export default function AnnouncementList({ course }: { course: string }) {
         </div>
 
         <button
-          onClick={() => changePage(Math.min(currentPage + 1, totalPages))}
+          onClick={() =>
+            changePage(Math.min(startPage + pagesPerBlock, totalPages))
+          }
           disabled={currentPage === totalPages}
           className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
         >

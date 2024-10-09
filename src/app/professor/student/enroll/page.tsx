@@ -1,7 +1,8 @@
 'use client';
 
+import axios from 'axios';
 import { Select, Checkbox, Button, Modal } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 
 const { Option } = Select;
@@ -13,6 +14,40 @@ export default function Enroll() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [courseToEnroll, setCourseToEnroll] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [students, setStudents] = useState<any[]>([]);
+  const [grades, setGrades] = useState<string[]>([]);
+  const [majors, setMajors] = useState<string[]>([]);
+
+  const courseOptions = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
+
+  // Axios로 JSON 데이터를 불러오는 부분
+  useEffect(() => {
+    const fetchStudentList = async () => {
+      try {
+        const response = await axios.get(
+          '/mock/professor/student/studentlist.json',
+        );
+        const studentData = response.data;
+
+        setStudents(studentData);
+
+        // 중복 없이 학년과 전공 목록을 추출하여 셀렉트 박스에 사용
+        const uniqueGrades = Array.from(
+          new Set(studentData.map((student: any) => student.grade)),
+        ) as string[];
+        const uniqueMajors = Array.from(
+          new Set(studentData.map((student: any) => student.major)),
+        ) as string[];
+
+        setGrades(uniqueGrades);
+        setMajors(uniqueMajors);
+      } catch (error) {
+        console.error('Error fetching student list:', error);
+      }
+    };
+
+    fetchStudentList();
+  }, []);
 
   const handleGradeChange = (value: string) => setSelectedGrade(value);
   const handleMajorChange = (value: string) => setSelectedMajor(value);
@@ -39,24 +74,6 @@ export default function Enroll() {
     setIsModalVisible(false);
   };
 
-  const courseOptions = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
-  const gradeOptions = ['1학년', '2학년', '3학년', '4학년'];
-  const majorOptions = [
-    '컴퓨터공학과',
-    '전자공학과',
-    '인공지능공학과',
-    '정보통신공학과',
-  ];
-
-  const students = Array.from({ length: 60 }, (_, i) => ({
-    id: i + 1,
-    studentNumber: 20201110 + i + 1,
-    name: ['박준걸', '전성환', '김재호', '안재빈', '김민수'][i % 5],
-    email: `example@chosun.ac.kr${i + 1}`,
-    major: majorOptions[i % 4],
-    grade: gradeOptions[i % 4],
-  }));
-
   const filteredStudents = students
     .filter((student) =>
       selectedGrade ? student.grade === selectedGrade : true,
@@ -82,7 +99,7 @@ export default function Enroll() {
         <section className="flex flex-col text-sm">
           {/* 학년 및 전공 선택 */}
           <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
-            <div className="flex flex-col  sm:flex-row items-center space-y-3 sm:space-y-0  space-x-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
               <Select
                 placeholder="학년을 선택하세요."
                 value={selectedGrade}
@@ -90,7 +107,7 @@ export default function Enroll() {
                 className="w-[60%] sm:w-[15%]"
                 allowClear
               >
-                {gradeOptions.map((grade) => (
+                {grades.map((grade) => (
                   <Option key={grade} value={grade}>
                     {grade}
                   </Option>
@@ -103,7 +120,7 @@ export default function Enroll() {
                 className="w-[60%] sm:w-[20%]"
                 allowClear
               >
-                {majorOptions.map((major) => (
+                {majors.map((major) => (
                   <Option key={major} value={major}>
                     {major}
                   </Option>
@@ -151,7 +168,7 @@ export default function Enroll() {
                     {student.name}
                   </span>
                   <span className="w-[20%] text-xs sm:text-sm">
-                    {student.grade}
+                    {student.grade}학년
                   </span>
                   <span className="w-[30%] text-xs sm:text-sm">
                     {student.major}
@@ -192,12 +209,13 @@ export default function Enroll() {
         </section>
         {/* 등록 버튼 */}
         <div className="w-full flex justify-end px-10 mt-8">
-          <button
-            className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
+          <Button
+            type="primary"
+            className="px-4 py-2 text-base rounded-xl font-normal"
             onClick={() => setIsModalVisible(true)}
           >
             문제 등록
-          </button>
+          </Button>
         </div>
 
         <Modal
@@ -207,9 +225,6 @@ export default function Enroll() {
           onOk={handleRegister}
           okText="등록"
           cancelText="취소"
-          okButtonProps={{
-            style: { backgroundColor: '#0032A0', borderColor: '#0032A0' },
-          }}
         >
           <Select
             placeholder="과목을 선택하세요."

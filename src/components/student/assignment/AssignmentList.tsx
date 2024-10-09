@@ -111,13 +111,7 @@ export default function AssignmentList({ course }: { course: string }) {
         {/* 페이지네이션 */}
         <div className="flex justify-center items-center mt-16 space-x-1">
           <button
-            onClick={() => {
-              const previousBlockStartPage = Math.max(
-                startPage - pagesPerBlock,
-                1,
-              );
-              changePage(previousBlockStartPage);
-            }}
+            onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
             disabled={currentPage === 1}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
           >
@@ -141,10 +135,9 @@ export default function AssignmentList({ course }: { course: string }) {
           </div>
 
           <button
-            onClick={() => {
-              const nextBlockStartPage = Math.min(endPage + 1, totalPages);
-              changePage(nextBlockStartPage);
-            }}
+            onClick={() =>
+              changePage(Math.min(startPage + pagesPerBlock, totalPages))
+            }
             disabled={currentPage === totalPages}
             className="px-3 py-1 bg-white rounded-2xl shadow-md hover:bg-[#eeeff3]"
           >

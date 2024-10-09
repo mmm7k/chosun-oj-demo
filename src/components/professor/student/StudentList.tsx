@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { Select } from 'antd';
 import { useState, useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
@@ -12,44 +13,76 @@ export default function StudentList() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 쿼리 파라미터에서 page 값 읽기 (기본값은 1)
+  // 쿼리 파라미터에서 page, course, year 값 읽기 (기본값은 1)
   const pageParam = searchParams.get('page') || '1';
+  const courseParam = searchParams.get('course') || null;
+  const yearParam = searchParams.get('year') || null;
+
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-
-  const handleCourseChange = (value: string) => {
-    setSelectedCourse(value);
-  };
-
-  const handleYearChange = (value: string) => {
-    setSelectedYear(value);
-  };
-
-  // 임의의 학생 리스트 데이터에 과목과 연도를 랜덤하게 배치
-  const course = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
-  const years = ['2020', '2021', '2022'];
-
-  const list = Array.from({ length: 60 }, (_, i) => {
-    const randomCourseIndex = Math.floor(Math.random() * course.length);
-    const randomYearIndex = Math.floor(Math.random() * years.length);
-
-    return {
-      id: i + 1,
-      studentNumber: `2020111${i + 1}`,
-      name: ['박준걸', '전성환', '김재호', '안재빈', '김민수'][i % 5],
-      email: `example@chosun.ac.kr${i + 1}`,
-      department: '컴퓨터공학과',
-      course: course[randomCourseIndex],
-      year: years[randomYearIndex],
-    };
-  });
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(
+    courseParam,
+  );
+  const [selectedYear, setSelectedYear] = useState<string | null>(yearParam);
+  const [studentList, setStudentList] = useState<any[]>([]);
+  const [courses, setCourses] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
 
   const itemsPerPage = 9;
   const pagesPerBlock = 5;
 
+  // Axios로 JSON 데이터를 불러오는 부분
+  useEffect(() => {
+    const fetchStudentList = async () => {
+      try {
+        const response = await axios.get(
+          '/mock/professor/student/studentlist.json',
+        );
+        setStudentList(response.data);
+
+        // 중복 없는 course와 year 값을 추출하여 셀렉트 박스에 사용
+        const uniqueCourses = Array.from(
+          new Set(response.data.map((item: any) => item.course)),
+        ) as string[];
+        const uniqueYears = Array.from(
+          new Set(response.data.map((item: any) => item.year)),
+        ) as string[];
+
+        setCourses(uniqueCourses);
+        setYears(uniqueYears);
+      } catch (error) {
+        console.error('Error fetching student list:', error);
+      }
+    };
+
+    fetchStudentList();
+  }, []);
+
+  const handleCourseChange = (value: string | null) => {
+    setSelectedCourse(value);
+    setCurrentPage(1);
+    updateQueryParams(1, value, selectedYear);
+  };
+
+  const handleYearChange = (value: string | null) => {
+    setSelectedYear(value);
+    setCurrentPage(1);
+    updateQueryParams(1, selectedCourse, value);
+  };
+
+  const updateQueryParams = (
+    page: number,
+    course: string | null,
+    year: string | null,
+  ) => {
+    const query = new URLSearchParams();
+    if (year) query.set('year', year);
+    if (course) query.set('course', course);
+    query.set('page', page.toString());
+    router.push(`/professor/student/list?${query.toString()}`);
+  };
+
   // 필터링된 리스트
-  const filteredList = list
+  const filteredList = studentList
     .filter((item) => (selectedCourse ? item.course === selectedCourse : true))
     .filter((item) => (selectedYear ? item.year === selectedYear : true));
 
@@ -71,16 +104,16 @@ export default function StudentList() {
     (_, i) => startPage + i,
   );
 
-  // 페이지 변경 시 쿼리 스트링으로 업데이트
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/professor/student/list?page=${page}`);
+    updateQueryParams(page, selectedCourse, selectedYear);
   };
 
   useEffect(() => {
-    // 쿼리 스트링에서 page 값이 바뀔 때 currentPage 업데이트
     setCurrentPage(parseInt(pageParam));
-  }, [pageParam]);
+    setSelectedCourse(courseParam);
+    setSelectedYear(yearParam);
+  }, [pageParam, courseParam, yearParam]);
 
   return (
     <div className="min-h-screen p-8 flex">
@@ -111,9 +144,9 @@ export default function StudentList() {
               className="w-44"
               allowClear
             >
-              {course.map((c) => (
-                <Option key={c} value={c}>
-                  {c}
+              {courses.map((course) => (
+                <Option key={course} value={course}>
+                  {course}
                 </Option>
               ))}
             </Select>
@@ -148,9 +181,7 @@ export default function StudentList() {
                 {item.studentNumber}
               </span>
               <span className="w-[15%] text-xs sm:text-sm">{item.name}</span>
-              <span className="w-[20%] text-xs sm:text-sm">
-                {item.department}
-              </span>
+              <span className="w-[20%] text-xs sm:text-sm">{item.major}</span>
               <span className="w-[20%] text-xs sm:text-sm">{item.course}</span>
               <span className="w-[10%] text-xs sm:text-sm">
                 <FiTrash2 className="text-lg lg:text-xl" />

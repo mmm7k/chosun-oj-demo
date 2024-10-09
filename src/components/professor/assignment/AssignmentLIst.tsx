@@ -16,18 +16,38 @@ export default function AssignmentList() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
 
-  // 쿼리 파라미터에서 page 값 읽기 (기본값은 1)
+  // 쿼리 파라미터에서 page, year, course 값 읽기 (기본값은 1)
   const pageParam = searchParams.get('page') || '1';
+  const yearParam = searchParams.get('year') || null;
+  const courseParam = searchParams.get('course') || null;
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string | null>(yearParam);
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(
+    courseParam,
+  );
 
-  const handleYearChange = (value: string) => {
+  const handleYearChange = (value: string | null) => {
     setSelectedYear(value);
+    setCurrentPage(1);
+    updateQueryParams(1, value, selectedCourse);
   };
 
-  const handleCourseChange = (value: string) => {
+  const handleCourseChange = (value: string | null) => {
     setSelectedCourse(value);
+    setCurrentPage(1);
+    updateQueryParams(1, selectedYear, value);
+  };
+
+  const updateQueryParams = (
+    page: number,
+    year: string | null,
+    course: string | null,
+  ) => {
+    const query = new URLSearchParams();
+    if (year) query.set('year', year);
+    if (course) query.set('course', course);
+    query.set('page', page.toString());
+    router.push(`/professor/assignment/list?${query.toString()}`);
   };
 
   // 문제 리스트에 연도와 과목을 랜덤하게 배치
@@ -73,16 +93,17 @@ export default function AssignmentList() {
     (_, i) => startPage + i,
   );
 
-  // 페이지 변경 시 쿼리 스트링으로 업데이트
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/professor/assignment/list?page=${page}`);
+    updateQueryParams(page, selectedYear, selectedCourse);
   };
 
   useEffect(() => {
-    // 쿼리 스트링에서 page 값이 바뀔 때 currentPage 업데이트
+    // 쿼리 스트링에서 page, year, course 값이 바뀔 때 상태 업데이트
     setCurrentPage(parseInt(pageParam));
-  }, [pageParam]);
+    setSelectedYear(yearParam);
+    setSelectedCourse(courseParam);
+  }, [pageParam, yearParam, courseParam]);
 
   // 삭제 모달 열기
   const showDeleteModal = (id: number) => {

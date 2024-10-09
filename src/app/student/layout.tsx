@@ -7,7 +7,7 @@ export default function StudentLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className=" flex flex-col min-w-screen min-h-[100dvh]">
+    <div className="flex flex-col min-w-screen overflow-hidden  min-h-[100dvh] ">
       <HeaderNav />
       {children}
       <Footer />

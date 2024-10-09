@@ -16,13 +16,25 @@ export default function AnnouncementList() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
 
-  // 쿼리 파라미터에서 page 값 읽기 (기본값은 1)
+  // 쿼리 파라미터에서 page, course 값 읽기 (기본값은 1)
   const pageParam = searchParams.get('page') || '1';
+  const courseParam = searchParams.get('course') || null;
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(
+    courseParam,
+  );
 
-  const handleCourseChange = (value: string) => {
+  const handleCourseChange = (value: string | null) => {
     setSelectedCourse(value);
+    setCurrentPage(1);
+    updateQueryParams(1, value);
+  };
+
+  const updateQueryParams = (page: number, course: string | null) => {
+    const query = new URLSearchParams();
+    if (course) query.set('course', course);
+    query.set('page', page.toString());
+    router.push(`/professor/announcement/list?${query.toString()}`);
   };
 
   // 문제 리스트에 과목을 랜덤하게 배치
@@ -68,13 +80,14 @@ export default function AnnouncementList() {
   // 페이지 변경 시 쿼리 스트링으로 업데이트
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/professor/assignment/list?page=${page}`);
+    updateQueryParams(page, selectedCourse);
   };
 
   useEffect(() => {
-    // 쿼리 스트링에서 page 값이 바뀔 때 currentPage 업데이트
+    // 쿼리 스트링에서 page 및 course 값이 바뀔 때 상태 업데이트
     setCurrentPage(parseInt(pageParam));
-  }, [pageParam]);
+    setSelectedCourse(courseParam);
+  }, [pageParam, courseParam]);
 
   // 삭제 모달 열기
   const showDeleteModal = (id: number) => {

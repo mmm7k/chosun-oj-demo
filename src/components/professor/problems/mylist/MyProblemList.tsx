@@ -16,13 +16,23 @@ export default function MyProblemList() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
 
-  // 쿼리 파라미터에서 page 값 읽기 (기본값은 1)
+  // 쿼리 파라미터에서 page, year 값 읽기 (기본값은 1)
   const pageParam = searchParams.get('page') || '1';
+  const yearParam = searchParams.get('year') || null;
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
-  const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string | null>(yearParam);
 
   const handleYearChange = (value: string | null) => {
     setSelectedYear(value);
+    setCurrentPage(1);
+    updateQueryParams(1, value);
+  };
+
+  const updateQueryParams = (page: number, year: string | null) => {
+    const query = new URLSearchParams();
+    if (year) query.set('year', year);
+    query.set('page', page.toString());
+    router.push(`/professor/problems/mylist?${query.toString()}`);
   };
 
   // 문제 리스트에 연도 추가, 랜덤 배치
@@ -60,12 +70,13 @@ export default function MyProblemList() {
 
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/professor/problems/mylist?page=${page}`);
+    updateQueryParams(page, selectedYear);
   };
 
   useEffect(() => {
     setCurrentPage(parseInt(pageParam));
-  }, [pageParam]);
+    setSelectedYear(yearParam);
+  }, [pageParam, yearParam]);
 
   // 삭제 모달 열기
   const showDeleteModal = (id: number) => {
@@ -87,7 +98,6 @@ export default function MyProblemList() {
     setIsModalVisible(false);
     setDeleteItemId(null);
   };
-
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
