@@ -37,7 +37,7 @@ export default function SideNav() {
       <div className="flex 2xl:flex-col items-center justify-between 2xl:justify-normal w-[100%] px-[5%] 2xl:px-0 2xl:min-h-screen relative">
         {/* 로고 이미지 */}
         <div className="min-w-9 2xl:min-w-16 min-h-9 2xl:min-h-16 relative 2xl:mt-11">
-          <Link href="/professor/dashboard">
+          <Link href="/professor/dashboard" onClick={closeAllDropdowns}>
             <Image
               src="/commons/symbol.png"
               alt="logo"
