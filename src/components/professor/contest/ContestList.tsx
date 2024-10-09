@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 const { Option } = Select;
 
-export default function AnnouncementList() {
+export default function ContestList() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,14 +26,14 @@ export default function AnnouncementList() {
   };
 
   // 문제 리스트에 과목을 랜덤하게 배치
-  const courses = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
+  const courses = ['기초프로그래밍', '심화프로그래밍', '알고리즘', '기타'];
 
   const list = Array.from({ length: 60 }, (_, i) => {
     const randomCourseIndex = Math.floor(Math.random() * courses.length);
 
     return {
       id: i + 1,
-      name: `공지 사항${i + 1}`,
+      name: `${courses[randomCourseIndex]} 대회 ${i + 1}`,
       registrationTime: `2024-9-2 16:19:${i + 1}`,
       course: courses[randomCourseIndex],
     };
@@ -72,7 +72,6 @@ export default function AnnouncementList() {
   };
 
   useEffect(() => {
-    // 쿼리 스트링에서 page 값이 바뀔 때 currentPage 업데이트
     setCurrentPage(parseInt(pageParam));
   }, [pageParam]);
 
@@ -101,11 +100,11 @@ export default function AnnouncementList() {
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">공지 목록</h1>
+          <h1 className="text-lg mb-3 md:mb-0">대회 목록</h1>
           <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
             <Select
               id="course-select"
-              placeholder="과목 및 대회를 선택하세요."
+              placeholder="과목을 선택하세요."
               value={selectedCourse}
               onChange={handleCourseChange}
               className="w-56"
@@ -123,7 +122,7 @@ export default function AnnouncementList() {
               <input
                 className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
                 type="text"
-                placeholder="공지를 검색해보세요"
+                placeholder="대회를 검색해보세요"
               />
             </div>
           </div>
@@ -134,9 +133,9 @@ export default function AnnouncementList() {
         <section className="flex flex-col px-3 sm:px-16">
           <div className="flex justify-between items-center py-6 border-b-2">
             <span className="w-[10%]">ID</span>
-            <span className="w-[60%]">공지 이름</span>
-            <span className="w-[20%]">공지 등록 시간</span>
-            <span className="w-[20%]">공지 관리</span>
+            <span className="w-[60%]">대회 이름</span>
+            <span className="w-[20%]">대회 등록 시간</span>
+            <span className="w-[20%]">대회 관리</span>
           </div>
           {currentItems.map((item) => (
             <div
@@ -149,7 +148,7 @@ export default function AnnouncementList() {
                 {item.registrationTime}
               </span>
               <span className="w-[20%] text-xs sm:text-base flex items-center">
-                <Link href={`/professor/announcement/list/${item.id}`}>
+                <Link href={`/professor/contest/list/${item.id}`}>
                   <TbEdit className="text-lg lg:text-xl mr-2" />
                 </Link>
                 <FiTrash2
@@ -201,16 +200,17 @@ export default function AnnouncementList() {
             </button>
           </div>
         </section>
+
         {/* 삭제 확인 모달 */}
         <Modal
-          title="공제 삭제 확인"
+          title="대회 삭제 확인"
           visible={isModalVisible}
           onOk={handleDelete}
           onCancel={handleCancel}
           okText="삭제"
           cancelText="취소"
         >
-          <p>정말로 이 공지를 삭제하시겠습니까?</p>
+          <p>정말로 이 대회를 삭제하시겠습니까?</p>
         </Modal>
       </div>
     </div>

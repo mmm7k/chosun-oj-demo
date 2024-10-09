@@ -4,13 +4,13 @@ import { Select, Modal } from 'antd';
 import { useState, useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { TbEdit } from 'react-icons/tb';
 import { FiTrash2 } from 'react-icons/fi';
-import Link from 'next/link';
 
 const { Option } = Select;
 
-export default function AnnouncementList() {
+export default function AssignmentList() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -19,22 +19,30 @@ export default function AnnouncementList() {
   // 쿼리 파라미터에서 page 값 읽기 (기본값은 1)
   const pageParam = searchParams.get('page') || '1';
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+
+  const handleYearChange = (value: string) => {
+    setSelectedYear(value);
+  };
 
   const handleCourseChange = (value: string) => {
     setSelectedCourse(value);
   };
 
-  // 문제 리스트에 과목을 랜덤하게 배치
+  // 문제 리스트에 연도와 과목을 랜덤하게 배치
+  const years = ['2020', '2021', '2022'];
   const courses = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
 
   const list = Array.from({ length: 60 }, (_, i) => {
+    const randomYearIndex = Math.floor(Math.random() * years.length);
     const randomCourseIndex = Math.floor(Math.random() * courses.length);
 
     return {
       id: i + 1,
-      name: `공지 사항${i + 1}`,
+      name: `피라미드 별찍기${i + 1}`,
       registrationTime: `2024-9-2 16:19:${i + 1}`,
+      year: years[randomYearIndex],
       course: courses[randomCourseIndex],
     };
   });
@@ -43,9 +51,9 @@ export default function AnnouncementList() {
   const pagesPerBlock = 5;
 
   // 필터링된 리스트
-  const filteredList = list.filter((item) =>
-    selectedCourse ? item.course === selectedCourse : true,
-  );
+  const filteredList = list
+    .filter((item) => (selectedYear ? item.year === selectedYear : true))
+    .filter((item) => (selectedCourse ? item.course === selectedCourse : true));
 
   // 현재 페이지에 해당하는 항목들 가져오기
   const currentItems = filteredList.slice(
@@ -101,14 +109,29 @@ export default function AnnouncementList() {
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">공지 목록</h1>
+          <h1 className="text-lg mb-3 md:mb-0">과제 목록</h1>
           <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
             <Select
+              id="year-select"
+              placeholder="연도를 선택하세요."
+              value={selectedYear}
+              onChange={handleYearChange}
+              className="w-44"
+              allowClear
+            >
+              {years.map((year) => (
+                <Option key={year} value={year}>
+                  {year}
+                </Option>
+              ))}
+            </Select>
+
+            <Select
               id="course-select"
-              placeholder="과목 및 대회를 선택하세요."
+              placeholder="과목을 선택하세요."
               value={selectedCourse}
               onChange={handleCourseChange}
-              className="w-56"
+              className="w-44"
               allowClear
             >
               {courses.map((course) => (
@@ -123,7 +146,7 @@ export default function AnnouncementList() {
               <input
                 className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
                 type="text"
-                placeholder="공지를 검색해보세요"
+                placeholder="문제를 검색해보세요"
               />
             </div>
           </div>
@@ -134,9 +157,10 @@ export default function AnnouncementList() {
         <section className="flex flex-col px-3 sm:px-16">
           <div className="flex justify-between items-center py-6 border-b-2">
             <span className="w-[10%]">ID</span>
-            <span className="w-[60%]">공지 이름</span>
-            <span className="w-[20%]">공지 등록 시간</span>
-            <span className="w-[20%]">공지 관리</span>
+            <span className="w-[40%]">문제 이름</span>
+            <span className="w-[20%]">과목</span>
+            <span className="w-[20%]">과제 등록 시간</span>
+            <span className="w-[10%]">과제 관리</span>
           </div>
           {currentItems.map((item) => (
             <div
@@ -144,16 +168,18 @@ export default function AnnouncementList() {
               className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
             >
               <span className="w-[10%] text-xs sm:text-sm">{item.id}</span>
-              <span className="w-[60%] text-xs sm:text-sm">{item.name}</span>
+              <span className="w-[40%] text-xs sm:text-sm">{item.name}</span>
+              <span className="w-[20%] text-xs sm:text-sm">{item.course}</span>
               <span className="w-[20%] text-xs sm:text-sm">
                 {item.registrationTime}
               </span>
-              <span className="w-[20%] text-xs sm:text-base flex items-center">
-                <Link href={`/professor/announcement/list/${item.id}`}>
+              <span className="w-[10%] text-xs sm:text-base flex items-center">
+                <Link href={`/professor/assignment/list/${item.id}`}>
                   <TbEdit className="text-lg lg:text-xl mr-2" />
                 </Link>
+
                 <FiTrash2
-                  className="text-lg lg:text-xl"
+                  className="text-lg lg:text-xl cursor-pointer"
                   onClick={() => showDeleteModal(item.id)}
                 />
               </span>
@@ -203,14 +229,14 @@ export default function AnnouncementList() {
         </section>
         {/* 삭제 확인 모달 */}
         <Modal
-          title="공제 삭제 확인"
+          title="과제 삭제 확인"
           visible={isModalVisible}
           onOk={handleDelete}
           onCancel={handleCancel}
           okText="삭제"
           cancelText="취소"
         >
-          <p>정말로 이 공지를 삭제하시겠습니까?</p>
+          <p>정말로 이 과제를 삭제하시겠습니까?</p>
         </Modal>
       </div>
     </div>

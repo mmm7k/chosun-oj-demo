@@ -1,41 +1,47 @@
 'use client';
 
-import { Select, Modal } from 'antd';
+import { Select } from 'antd';
 import { useState, useEffect } from 'react';
+import { FiTrash2 } from 'react-icons/fi';
 import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { TbEdit } from 'react-icons/tb';
-import { FiTrash2 } from 'react-icons/fi';
-import Link from 'next/link';
 
 const { Option } = Select;
 
-export default function AnnouncementList() {
+export default function StudentList() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
 
   // 쿼리 파라미터에서 page 값 읽기 (기본값은 1)
   const pageParam = searchParams.get('page') || '1';
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const [selectedYear, setSelectedYear] = useState<string | null>(null);
 
   const handleCourseChange = (value: string) => {
     setSelectedCourse(value);
   };
 
-  // 문제 리스트에 과목을 랜덤하게 배치
-  const courses = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
+  const handleYearChange = (value: string) => {
+    setSelectedYear(value);
+  };
+
+  // 임의의 학생 리스트 데이터에 과목과 연도를 랜덤하게 배치
+  const course = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
+  const years = ['2020', '2021', '2022'];
 
   const list = Array.from({ length: 60 }, (_, i) => {
-    const randomCourseIndex = Math.floor(Math.random() * courses.length);
+    const randomCourseIndex = Math.floor(Math.random() * course.length);
+    const randomYearIndex = Math.floor(Math.random() * years.length);
 
     return {
       id: i + 1,
-      name: `공지 사항${i + 1}`,
-      registrationTime: `2024-9-2 16:19:${i + 1}`,
-      course: courses[randomCourseIndex],
+      studentNumber: `2020111${i + 1}`,
+      name: ['박준걸', '전성환', '김재호', '안재빈', '김민수'][i % 5],
+      email: `example@chosun.ac.kr${i + 1}`,
+      department: '컴퓨터공학과',
+      course: course[randomCourseIndex],
+      year: years[randomYearIndex],
     };
   });
 
@@ -43,9 +49,9 @@ export default function AnnouncementList() {
   const pagesPerBlock = 5;
 
   // 필터링된 리스트
-  const filteredList = list.filter((item) =>
-    selectedCourse ? item.course === selectedCourse : true,
-  );
+  const filteredList = list
+    .filter((item) => (selectedCourse ? item.course === selectedCourse : true))
+    .filter((item) => (selectedYear ? item.year === selectedYear : true));
 
   // 현재 페이지에 해당하는 항목들 가져오기
   const currentItems = filteredList.slice(
@@ -68,7 +74,7 @@ export default function AnnouncementList() {
   // 페이지 변경 시 쿼리 스트링으로 업데이트
   const changePage = (page: number) => {
     setCurrentPage(page);
-    router.push(`/professor/assignment/list?page=${page}`);
+    router.push(`/professor/student/list?page=${page}`);
   };
 
   useEffect(() => {
@@ -76,44 +82,38 @@ export default function AnnouncementList() {
     setCurrentPage(parseInt(pageParam));
   }, [pageParam]);
 
-  // 삭제 모달 열기
-  const showDeleteModal = (id: number) => {
-    setDeleteItemId(id);
-    setIsModalVisible(true);
-  };
-
-  // 삭제 모달에서 확인 버튼 클릭 시
-  const handleDelete = () => {
-    if (deleteItemId !== null) {
-      console.log(`Delete item with ID: ${deleteItemId}`);
-    }
-    setIsModalVisible(false);
-    setDeleteItemId(null);
-  };
-
-  // 삭제 모달에서 취소 버튼 클릭 시
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setDeleteItemId(null);
-  };
-
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">공지 목록</h1>
+          <h1 className="text-lg mb-3 md:mb-0">학생 목록</h1>
           <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
             <Select
-              id="course-select"
-              placeholder="과목 및 대회를 선택하세요."
-              value={selectedCourse}
-              onChange={handleCourseChange}
-              className="w-56"
+              id="year-select"
+              placeholder="연도를 선택하세요."
+              value={selectedYear}
+              onChange={handleYearChange}
+              className="w-44"
               allowClear
             >
-              {courses.map((course) => (
-                <Option key={course} value={course}>
-                  {course}
+              {years.map((year) => (
+                <Option key={year} value={year}>
+                  {year}
+                </Option>
+              ))}
+            </Select>
+
+            <Select
+              id="course-select"
+              placeholder="과목을 선택하세요."
+              value={selectedCourse}
+              onChange={handleCourseChange}
+              className="w-44"
+              allowClear
+            >
+              {course.map((c) => (
+                <Option key={c} value={c}>
+                  {c}
                 </Option>
               ))}
             </Select>
@@ -123,7 +123,7 @@ export default function AnnouncementList() {
               <input
                 className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
                 type="text"
-                placeholder="공지를 검색해보세요"
+                placeholder="학번, 이름으로 검색해보세요"
               />
             </div>
           </div>
@@ -133,29 +133,27 @@ export default function AnnouncementList() {
 
         <section className="flex flex-col px-3 sm:px-16">
           <div className="flex justify-between items-center py-6 border-b-2">
-            <span className="w-[10%]">ID</span>
-            <span className="w-[60%]">공지 이름</span>
-            <span className="w-[20%]">공지 등록 시간</span>
-            <span className="w-[20%]">공지 관리</span>
+            <span className="w-[15%]">학번</span>
+            <span className="w-[15%]">이름</span>
+            <span className="w-[20%]">학과</span>
+            <span className="w-[20%]">수강 과목</span>
+            <span className="w-[10%]">학생 관리</span>
           </div>
           {currentItems.map((item) => (
             <div
               key={item.id}
-              className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
+              className="flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
             >
-              <span className="w-[10%] text-xs sm:text-sm">{item.id}</span>
-              <span className="w-[60%] text-xs sm:text-sm">{item.name}</span>
-              <span className="w-[20%] text-xs sm:text-sm">
-                {item.registrationTime}
+              <span className="w-[15%] text-xs sm:text-sm">
+                {item.studentNumber}
               </span>
-              <span className="w-[20%] text-xs sm:text-base flex items-center">
-                <Link href={`/professor/announcement/list/${item.id}`}>
-                  <TbEdit className="text-lg lg:text-xl mr-2" />
-                </Link>
-                <FiTrash2
-                  className="text-lg lg:text-xl"
-                  onClick={() => showDeleteModal(item.id)}
-                />
+              <span className="w-[15%] text-xs sm:text-sm">{item.name}</span>
+              <span className="w-[20%] text-xs sm:text-sm">
+                {item.department}
+              </span>
+              <span className="w-[20%] text-xs sm:text-sm">{item.course}</span>
+              <span className="w-[10%] text-xs sm:text-sm">
+                <FiTrash2 className="text-lg lg:text-xl" />
               </span>
             </div>
           ))}
@@ -201,17 +199,6 @@ export default function AnnouncementList() {
             </button>
           </div>
         </section>
-        {/* 삭제 확인 모달 */}
-        <Modal
-          title="공제 삭제 확인"
-          visible={isModalVisible}
-          onOk={handleDelete}
-          onCancel={handleCancel}
-          okText="삭제"
-          cancelText="취소"
-        >
-          <p>정말로 이 공지를 삭제하시겠습니까?</p>
-        </Modal>
       </div>
     </div>
   );
