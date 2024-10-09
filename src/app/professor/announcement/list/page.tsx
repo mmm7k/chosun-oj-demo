@@ -220,12 +220,13 @@
 'use client';
 
 import { Select, Modal } from 'antd';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 import { TbEdit } from 'react-icons/tb';
 import { FiTrash2 } from 'react-icons/fi';
 import Link from 'next/link';
 import PageParams from '@/components/professor/announcement/AnnouncementList';
+import { useRouter } from 'next/navigation';
 
 const { Option } = Select;
 
@@ -234,7 +235,7 @@ export default function AnnouncementList() {
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
-
+  const router = useRouter();
   const handleCourseChange = (value: string) => {
     setSelectedCourse(value);
   };
