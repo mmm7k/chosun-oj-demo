@@ -1,7 +1,7 @@
 'use client';
 
 import { Select } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -83,123 +83,133 @@ export default function StudentList() {
   }, [pageParam]);
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">학생 목록</h1>
-          <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
-            <Select
-              id="year-select"
-              placeholder="연도를 선택하세요."
-              value={selectedYear}
-              onChange={handleYearChange}
-              className="w-44"
-              allowClear
-            >
-              {years.map((year) => (
-                <Option key={year} value={year}>
-                  {year}
-                </Option>
-              ))}
-            </Select>
-
-            <Select
-              id="course-select"
-              placeholder="과목을 선택하세요."
-              value={selectedCourse}
-              onChange={handleCourseChange}
-              className="w-44"
-              allowClear
-            >
-              {course.map((c) => (
-                <Option key={c} value={c}>
-                  {c}
-                </Option>
-              ))}
-            </Select>
-
-            <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-              <IoSearchSharp className="text-gray-500 text-lg mr-2" />
-              <input
-                className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
-                type="text"
-                placeholder="학번, 이름으로 검색해보세요"
-              />
-            </div>
-          </div>
-        </section>
-
-        <hr className="border-t-2 mt-5 border-gray-200" />
-
-        <section className="flex flex-col px-3 sm:px-16">
-          <div className="flex justify-between items-center py-6 border-b-2">
-            <span className="w-[15%]">학번</span>
-            <span className="w-[15%]">이름</span>
-            <span className="w-[20%]">학과</span>
-            <span className="w-[20%]">수강 과목</span>
-            <span className="w-[10%]">학생 관리</span>
-          </div>
-          {currentItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
-            >
-              <span className="w-[15%] text-xs sm:text-sm">
-                {item.studentNumber}
-              </span>
-              <span className="w-[15%] text-xs sm:text-sm">{item.name}</span>
-              <span className="w-[20%] text-xs sm:text-sm">
-                {item.department}
-              </span>
-              <span className="w-[20%] text-xs sm:text-sm">{item.course}</span>
-              <span className="w-[10%] text-xs sm:text-sm">
-                <FiTrash2 className="text-lg lg:text-xl" />
-              </span>
-            </div>
-          ))}
-        </section>
-
-        {/* 페이지네이션 및 버튼 */}
-        <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
-          <div className="flex items-center space-x-1">
-            {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
-            <button
-              onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
-              disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
-            >
-              &lt;
-            </button>
-
-            <div className="flex space-x-1 font-normal">
-              {pages.map((page) => (
-                <button
-                  key={page}
-                  onClick={() => changePage(page)}
-                  className={`px-3 py-1 rounded-xl ${
-                    page === currentPage
-                      ? 'bg-primary text-white hover:bg-primaryButtonHover'
-                      : 'bg-gray-200 hover:bg-gray-300'
-                  }`}
+    <>
+      <Suspense>
+        <div className="min-h-screen p-8 flex">
+          <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
+            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
+              <h1 className="text-lg mb-3 md:mb-0">학생 목록</h1>
+              <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
+                <Select
+                  id="year-select"
+                  placeholder="연도를 선택하세요."
+                  value={selectedYear}
+                  onChange={handleYearChange}
+                  className="w-44"
+                  allowClear
                 >
-                  {page}
-                </button>
-              ))}
-            </div>
+                  {years.map((year) => (
+                    <Option key={year} value={year}>
+                      {year}
+                    </Option>
+                  ))}
+                </Select>
 
-            {/* > 버튼 - 다음 블록의 첫 페이지로 이동 */}
-            <button
-              onClick={() =>
-                changePage(Math.min(startPage + pagesPerBlock, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
-            >
-              &gt;
-            </button>
+                <Select
+                  id="course-select"
+                  placeholder="과목을 선택하세요."
+                  value={selectedCourse}
+                  onChange={handleCourseChange}
+                  className="w-44"
+                  allowClear
+                >
+                  {course.map((c) => (
+                    <Option key={c} value={c}>
+                      {c}
+                    </Option>
+                  ))}
+                </Select>
+
+                <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
+                  <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+                  <input
+                    className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                    type="text"
+                    placeholder="학번, 이름으로 검색해보세요"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <hr className="border-t-2 mt-5 border-gray-200" />
+
+            <section className="flex flex-col px-3 sm:px-16">
+              <div className="flex justify-between items-center py-6 border-b-2">
+                <span className="w-[15%]">학번</span>
+                <span className="w-[15%]">이름</span>
+                <span className="w-[20%]">학과</span>
+                <span className="w-[20%]">수강 과목</span>
+                <span className="w-[10%]">학생 관리</span>
+              </div>
+              {currentItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  <span className="w-[15%] text-xs sm:text-sm">
+                    {item.studentNumber}
+                  </span>
+                  <span className="w-[15%] text-xs sm:text-sm">
+                    {item.name}
+                  </span>
+                  <span className="w-[20%] text-xs sm:text-sm">
+                    {item.department}
+                  </span>
+                  <span className="w-[20%] text-xs sm:text-sm">
+                    {item.course}
+                  </span>
+                  <span className="w-[10%] text-xs sm:text-sm">
+                    <FiTrash2 className="text-lg lg:text-xl" />
+                  </span>
+                </div>
+              ))}
+            </section>
+
+            {/* 페이지네이션 및 버튼 */}
+            <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
+              <div className="flex items-center space-x-1">
+                {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
+                <button
+                  onClick={() =>
+                    changePage(Math.max(startPage - pagesPerBlock, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+                >
+                  &lt;
+                </button>
+
+                <div className="flex space-x-1 font-normal">
+                  {pages.map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => changePage(page)}
+                      className={`px-3 py-1 rounded-xl ${
+                        page === currentPage
+                          ? 'bg-primary text-white hover:bg-primaryButtonHover'
+                          : 'bg-gray-200 hover:bg-gray-300'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                {/* > 버튼 - 다음 블록의 첫 페이지로 이동 */}
+                <button
+                  onClick={() =>
+                    changePage(Math.min(startPage + pagesPerBlock, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+                >
+                  &gt;
+                </button>
+              </div>
+            </section>
           </div>
-        </section>
-      </div>
-    </div>
+        </div>
+      </Suspense>
+    </>
   );
 }

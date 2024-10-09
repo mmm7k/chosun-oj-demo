@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
-import { TbEdit } from 'react-icons/tb';
-import { FiTrash2 } from 'react-icons/fi';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function ProblemsList() {

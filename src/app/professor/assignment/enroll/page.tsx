@@ -1,25 +1,14 @@
 'use client';
 
 import { Checkbox, Select } from 'antd';
-import { SetStateAction, useState } from 'react';
-import DatePicker from 'react-datepicker';
+import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import MdEditor from 'react-markdown-editor-lite';
-import MarkdownIt from 'markdown-it';
 import 'react-markdown-editor-lite/lib/index.css';
 import { IoSearchSharp } from 'react-icons/io5';
 
 const { Option } = Select;
-const mdParser = new MarkdownIt();
 
 export default function Post() {
-  const [isDisclose, setIsDisclose] = useState(false);
-  const [isManage, setIsManage] = useState(false);
-  const [isMarkdownAccess, setIsMarkdownAccess] = useState(false);
-  const [postDate, setPostDate] = useState(new Date());
-  const [selectedOrganizations, setSelectedOrganizations] = useState([]);
-  const [selectedVisibility, setSelectedVisibility] = useState('');
-  const [markdownText, setMarkdownText] = useState('');
   const [selectedProblems, setSelectedProblems] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCourse, setSelectedCourse] = useState<string | undefined>(

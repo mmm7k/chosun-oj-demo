@@ -1,7 +1,7 @@
 'use client';
 
 import { Select, Modal } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { TbEdit } from 'react-icons/tb';
@@ -97,122 +97,130 @@ export default function ContestList() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">대회 목록</h1>
-          <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
-            <Select
-              id="course-select"
-              placeholder="과목을 선택하세요."
-              value={selectedCourse}
-              onChange={handleCourseChange}
-              className="w-56"
-              allowClear
-            >
-              {courses.map((course) => (
-                <Option key={course} value={course}>
-                  {course}
-                </Option>
-              ))}
-            </Select>
-
-            <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-              <IoSearchSharp className="text-gray-500 text-lg mr-2" />
-              <input
-                className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
-                type="text"
-                placeholder="대회를 검색해보세요"
-              />
-            </div>
-          </div>
-        </section>
-
-        <hr className="border-t-2 mt-5 border-gray-200" />
-
-        <section className="flex flex-col px-3 sm:px-16">
-          <div className="flex justify-between items-center py-6 border-b-2">
-            <span className="w-[10%]">ID</span>
-            <span className="w-[60%]">대회 이름</span>
-            <span className="w-[20%]">대회 등록 시간</span>
-            <span className="w-[20%]">대회 관리</span>
-          </div>
-          {currentItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
-            >
-              <span className="w-[10%] text-xs sm:text-sm">{item.id}</span>
-              <span className="w-[60%] text-xs sm:text-sm">{item.name}</span>
-              <span className="w-[20%] text-xs sm:text-sm">
-                {item.registrationTime}
-              </span>
-              <span className="w-[20%] text-xs sm:text-base flex items-center">
-                <Link href={`/professor/contest/list/${item.id}`}>
-                  <TbEdit className="text-lg lg:text-xl mr-2" />
-                </Link>
-                <FiTrash2
-                  className="text-lg lg:text-xl"
-                  onClick={() => showDeleteModal(item.id)}
-                />
-              </span>
-            </div>
-          ))}
-        </section>
-
-        {/* 페이지네이션 및 버튼 */}
-        <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
-          <div className="flex items-center space-x-1">
-            {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
-            <button
-              onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
-              disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
-            >
-              &lt;
-            </button>
-
-            <div className="flex space-x-1 font-normal">
-              {pages.map((page) => (
-                <button
-                  key={page}
-                  onClick={() => changePage(page)}
-                  className={`px-3 py-1 rounded-xl ${
-                    page === currentPage
-                      ? 'bg-primary text-white hover:bg-primaryButtonHover'
-                      : 'bg-gray-200 hover:bg-gray-300'
-                  }`}
+    <>
+      <Suspense>
+        <div className="min-h-screen p-8 flex">
+          <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
+            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
+              <h1 className="text-lg mb-3 md:mb-0">대회 목록</h1>
+              <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
+                <Select
+                  id="course-select"
+                  placeholder="과목을 선택하세요."
+                  value={selectedCourse}
+                  onChange={handleCourseChange}
+                  className="w-56"
+                  allowClear
                 >
-                  {page}
-                </button>
+                  {courses.map((course) => (
+                    <Option key={course} value={course}>
+                      {course}
+                    </Option>
+                  ))}
+                </Select>
+
+                <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
+                  <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+                  <input
+                    className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                    type="text"
+                    placeholder="대회를 검색해보세요"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <hr className="border-t-2 mt-5 border-gray-200" />
+
+            <section className="flex flex-col px-3 sm:px-16">
+              <div className="flex justify-between items-center py-6 border-b-2">
+                <span className="w-[10%]">ID</span>
+                <span className="w-[60%]">대회 이름</span>
+                <span className="w-[20%]">대회 등록 시간</span>
+                <span className="w-[20%]">대회 관리</span>
+              </div>
+              {currentItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  <span className="w-[10%] text-xs sm:text-sm">{item.id}</span>
+                  <span className="w-[60%] text-xs sm:text-sm">
+                    {item.name}
+                  </span>
+                  <span className="w-[20%] text-xs sm:text-sm">
+                    {item.registrationTime}
+                  </span>
+                  <span className="w-[20%] text-xs sm:text-base flex items-center">
+                    <Link href={`/professor/contest/list/${item.id}`}>
+                      <TbEdit className="text-lg lg:text-xl mr-2" />
+                    </Link>
+                    <FiTrash2
+                      className="text-lg lg:text-xl"
+                      onClick={() => showDeleteModal(item.id)}
+                    />
+                  </span>
+                </div>
               ))}
-            </div>
+            </section>
 
-            {/* > 버튼 - 다음 블록의 첫 페이지로 이동 */}
-            <button
-              onClick={() =>
-                changePage(Math.min(startPage + pagesPerBlock, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+            {/* 페이지네이션 및 버튼 */}
+            <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
+              <div className="flex items-center space-x-1">
+                {/* < 버튼 - 이전 블록의 첫 페이지로 이동 */}
+                <button
+                  onClick={() =>
+                    changePage(Math.max(startPage - pagesPerBlock, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+                >
+                  &lt;
+                </button>
+
+                <div className="flex space-x-1 font-normal">
+                  {pages.map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => changePage(page)}
+                      className={`px-3 py-1 rounded-xl ${
+                        page === currentPage
+                          ? 'bg-primary text-white hover:bg-primaryButtonHover'
+                          : 'bg-gray-200 hover:bg-gray-300'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                {/* > 버튼 - 다음 블록의 첫 페이지로 이동 */}
+                <button
+                  onClick={() =>
+                    changePage(Math.min(startPage + pagesPerBlock, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+                >
+                  &gt;
+                </button>
+              </div>
+            </section>
+
+            {/* 삭제 확인 모달 */}
+            <Modal
+              title="대회 삭제 확인"
+              visible={isModalVisible}
+              onOk={handleDelete}
+              onCancel={handleCancel}
+              okText="삭제"
+              cancelText="취소"
             >
-              &gt;
-            </button>
+              <p>정말로 이 대회를 삭제하시겠습니까?</p>
+            </Modal>
           </div>
-        </section>
-
-        {/* 삭제 확인 모달 */}
-        <Modal
-          title="대회 삭제 확인"
-          visible={isModalVisible}
-          onOk={handleDelete}
-          onCancel={handleCancel}
-          okText="삭제"
-          cancelText="취소"
-        >
-          <p>정말로 이 대회를 삭제하시겠습니까?</p>
-        </Modal>
-      </div>
-    </div>
+        </div>
+      </Suspense>
+    </>
   );
 }
