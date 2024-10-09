@@ -5,7 +5,6 @@ import { SetStateAction, useState } from 'react';
 import { PiExclamationMarkFill } from 'react-icons/pi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import PrimaryButton from '@/components/PrimaryButton';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
 import 'react-markdown-editor-lite/lib/index.css';
@@ -40,7 +39,7 @@ export default function Post() {
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex justify-between items-center px-16 relative ">
-          <h1 className="text-xl">문제 등록</h1>
+          <h1 className="text-lg">문제 등록</h1>
         </section>
         <hr className="border-t-2 mt-5 border-gray-200" />
         <section className="flex flex-col text-sm ">
@@ -329,7 +328,9 @@ export default function Post() {
           </div>
           {/* 등록 버튼 */}
           <div className="w-full flex justify-end px-10 mt-8">
-            <PrimaryButton text="문제 등록" />
+            <button className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover">
+              문제 등록
+            </button>
           </div>
         </section>
       </div>

@@ -1,6 +1,6 @@
-import SideNav from '@/components/layout/admin/SideNav';
+import SideNav from '@/components/layout/professor/SideNav';
 
-export default function AdminLayout({
+export default function ProfessorLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

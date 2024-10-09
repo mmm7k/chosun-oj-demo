@@ -49,7 +49,7 @@ export default function Home() {
     const { username, password } = data;
     if (username === 'root' && password === 'root') {
       if (isStaff) {
-        router.push('/admin');
+        router.push('/professor/dashboard');
       } else {
         router.push('/student');
       }
