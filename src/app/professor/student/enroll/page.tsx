@@ -75,69 +75,19 @@ export default function Enroll() {
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">학생 등록</h1>
-          <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
-            <Button
-              type="primary"
-              style={
-                selectedStudents.length > 0
-                  ? { backgroundColor: '#0032A0', borderColor: '#0032A0' }
-                  : {}
-              }
-              disabled={selectedStudents.length === 0}
-              onClick={() => setIsModalVisible(true)}
-            >
-              학생 등록
-            </Button>
-            <Select
-              placeholder="학년을 선택하세요."
-              value={selectedGrade}
-              onChange={handleGradeChange}
-              className="w-44"
-              allowClear
-            >
-              {gradeOptions.map((grade) => (
-                <Option key={grade} value={grade}>
-                  {grade}
-                </Option>
-              ))}
-            </Select>
-
-            <Select
-              placeholder="전공을 선택하세요."
-              value={selectedMajor}
-              onChange={handleMajorChange}
-              className="w-44"
-              allowClear
-            >
-              {majorOptions.map((major) => (
-                <Option key={major} value={major}>
-                  {major}
-                </Option>
-              ))}
-            </Select>
-
-            <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-              <IoSearchSharp className="text-gray-500 text-lg mr-2" />
-              <input
-                className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="학번, 이름, 전공으로 검색해보세요"
-              />
-            </div>
-          </div>
-
-          {/* sm 이하일 때 필터, 검색 */}
-          <div className="w-full sm:hidden flex flex-col items-center space-y-3">
-            <div className="flex space-x-[2%] justify-center w-full">
+        <section className="flex justify-between items-center px-16 relative">
+          <h1 className="text-lg">학생 등록</h1>
+        </section>
+        <hr className="border-t-2 mt-5 border-gray-200" />
+        <section className="flex flex-col text-sm">
+          {/* 학년 및 전공 선택 */}
+          <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
+            <div className="flex flex-col  sm:flex-row items-center space-y-3 sm:space-y-0  space-x-0 sm:space-x-4">
               <Select
                 placeholder="학년을 선택하세요."
                 value={selectedGrade}
                 onChange={handleGradeChange}
-                className="w-[43%]"
+                className="w-[60%] sm:w-[15%]"
                 allowClear
               >
                 {gradeOptions.map((grade) => (
@@ -146,12 +96,11 @@ export default function Enroll() {
                   </Option>
                 ))}
               </Select>
-
               <Select
                 placeholder="전공을 선택하세요."
                 value={selectedMajor}
                 onChange={handleMajorChange}
-                className="w-[43%]"
+                className="w-[60%] sm:w-[20%]"
                 allowClear
               >
                 {majorOptions.map((major) => (
@@ -161,73 +110,95 @@ export default function Enroll() {
                 ))}
               </Select>
             </div>
-
-            <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[88%] bg-white shadow-sm">
-              <IoSearchSharp className="text-gray-500 text-lg mr-2" />
-              <input
-                className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="학번, 이름, 전공으로 검색해보세요"
-              />
+          </div>
+          {/* 학생 검색 및 선택 */}
+          <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
+            <h2 className="mb-4">학생 선택</h2>
+            <div className="flex items-center mb-4">
+              <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
+                <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+                <input
+                  className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="학번, 이름, 전공으로 검색해보세요"
+                />
+              </div>
             </div>
-
-            <div className="flex justify-center w-full">
-              <Button
-                type="primary"
-                style={
-                  selectedStudents.length > 0
-                    ? { backgroundColor: '#0032A0', borderColor: '#0032A0' }
-                    : {}
-                }
-                disabled={selectedStudents.length === 0}
-                onClick={() => setIsModalVisible(true)}
-              >
-                학생 등록
-              </Button>
+            <div className="h-[45dvh] overflow-y-auto border-t-[1.5px] border-gray-200">
+              {filteredStudents.map((student) => (
+                <div
+                  key={student.id}
+                  className={`flex justify-between items-center py-2 border-b-[1px] border-gray-100 hover:bg-gray-50 cursor-pointer ${
+                    selectedStudents.includes(student.studentNumber)
+                      ? 'bg-gray-100'
+                      : ''
+                  }`}
+                  onClick={() => handleStudentSelection(student.studentNumber)}
+                >
+                  <Checkbox
+                    checked={selectedStudents.includes(student.studentNumber)}
+                    onChange={() =>
+                      handleStudentSelection(student.studentNumber)
+                    }
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                  <span className="w-[15%] ml-2 text-xs sm:text-sm">
+                    {student.studentNumber}
+                  </span>
+                  <span className="w-[25%] text-xs sm:text-sm">
+                    {student.name}
+                  </span>
+                  <span className="w-[20%] text-xs sm:text-sm">
+                    {student.grade}
+                  </span>
+                  <span className="w-[30%] text-xs sm:text-sm">
+                    {student.major}
+                  </span>
+                </div>
+              ))}
             </div>
+            {/* 선택된 학생 목록 */}
+            {selectedStudents.length > 0 && (
+              <div className="mt-4">
+                <h3 className="mb-2 text-sm">선택된 학생:</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedStudents.map((studentNumber) => {
+                    const student = students.find(
+                      (s) => s.studentNumber === studentNumber,
+                    );
+                    return (
+                      <div
+                        key={studentNumber}
+                        className="flex items-center bg-gray-200 text-sm rounded-full px-3 py-1"
+                      >
+                        <span className="mr-2">
+                          {student?.studentNumber} - {student?.name}
+                        </span>
+                        <button
+                          className="text-red-500"
+                          onClick={() => handleStudentSelection(studentNumber)}
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </section>
-
-        <hr className="border-t-2 mt-5 border-gray-200" />
-
-        <section className="px-3 sm:px-16">
-          <div className="flex justify-between items-center py-6 border-b-2">
-            <span className="w-[5%]">선택</span>
-            <span className="w-[20%]">학번</span>
-            <span className="w-[20%]">이름</span>
-            <span className="w-[20%]">전공</span>
-            <span className="w-[20%]">학년</span>
-          </div>
-          {filteredStudents.map((student) => (
-            <div
-              key={student.id}
-              className={`flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer ${
-                selectedStudents.includes(student.studentNumber)
-                  ? 'bg-gray-100'
-                  : ''
-              }`}
-              onClick={() => handleStudentSelection(student.studentNumber)}
-            >
-              <Checkbox
-                className="w-[5%]"
-                checked={selectedStudents.includes(student.studentNumber)}
-                onChange={() => handleStudentSelection(student.studentNumber)}
-              />
-              <span className="w-[20%] text-xs sm:text-sm">
-                {student.studentNumber}
-              </span>
-              <span className="w-[20%] text-xs sm:text-sm">{student.name}</span>
-              <span className="w-[20%] text-xs sm:text-sm">
-                {student.major}
-              </span>
-              <span className="w-[20%] text-xs sm:text-sm">
-                {student.grade}
-              </span>
-            </div>
-          ))}
-        </section>
+        {/* 등록 버튼 */}
+        <div className="w-full flex justify-end px-10 mt-8">
+          <button
+            className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
+            onClick={() => setIsModalVisible(true)}
+          >
+            문제 등록
+          </button>
+        </div>
 
         <Modal
           title="과목 선택"
