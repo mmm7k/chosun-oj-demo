@@ -12,7 +12,7 @@ export default function ProblemList() {
   const pageParam = searchParams.get('page') || '1';
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
 
-  const itemsPerPage = 9; // 한 페이지당 항목 수
+  const itemsPerPage = 15; // 한 페이지당 항목 수
   const pagesPerBlock = 5; // 한 페이지 블록당 페이지 수
 
   // 문제 리스트

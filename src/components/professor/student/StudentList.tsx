@@ -27,7 +27,7 @@ export default function StudentList() {
   const [courses, setCourses] = useState<string[]>([]);
   const [years, setYears] = useState<string[]>([]);
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 15;
   const pagesPerBlock = 5;
 
   // Axios로 JSON 데이터를 불러오는 부분

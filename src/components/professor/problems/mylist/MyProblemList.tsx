@@ -47,7 +47,7 @@ export default function MyProblemList() {
     };
   });
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 15;
   const pagesPerBlock = 5;
 
   const filteredList = list.filter((item) =>

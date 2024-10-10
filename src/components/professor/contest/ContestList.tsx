@@ -49,7 +49,7 @@ export default function ContestList() {
     };
   });
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 15;
   const pagesPerBlock = 5;
 
   // 필터링된 리스트

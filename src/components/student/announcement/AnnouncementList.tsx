@@ -14,7 +14,7 @@ export default function AnnouncementList({ course }: { course: string }) {
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
   const [expandedItems, setExpandedItems] = useState<number[]>([]);
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 15;
   const pagesPerBlock = 5;
 
   const problemList = Array.from({ length: 60 }, (_, i) => ({
