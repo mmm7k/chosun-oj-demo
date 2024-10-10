@@ -135,7 +135,7 @@ export default function Post() {
         {/* 등록 버튼 */}
         <div className="w-full flex justify-end px-10 mt-8">
           <button className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover">
-            문제 등록
+            과제 등록
           </button>
         </div>
       </div>

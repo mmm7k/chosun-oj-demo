@@ -209,13 +209,12 @@ export default function Enroll() {
         </section>
         {/* 등록 버튼 */}
         <div className="w-full flex justify-end px-10 mt-8">
-          <Button
-            type="primary"
-            className="px-4 py-2 text-base rounded-xl font-normal"
+          <button
+            className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
             onClick={() => setIsModalVisible(true)}
           >
-            문제 등록
-          </Button>
+            학생 등록
+          </button>
         </div>
 
         <Modal
