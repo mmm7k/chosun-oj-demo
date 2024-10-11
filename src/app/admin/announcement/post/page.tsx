@@ -49,7 +49,11 @@ export default function AnnouncementPost() {
         <hr className="border-t-2 mt-5 border-gray-200" />
 
         <section className="px-3 sm:px-16 mt-5 space-y-4">
+          <label htmlFor="organization-select" className="mr-3">
+            과목:
+          </label>
           <Select
+            id="course-select"
             placeholder="공지를 등록 할 과목을 선택하세요."
             mode="multiple"
             value={selectedCourse}

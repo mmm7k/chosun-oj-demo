@@ -5,18 +5,12 @@ import { useState } from 'react';
 
 const { Option } = Select;
 
-export default function AnnouncementPost() {
+export default function AnnouncementEdit() {
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
   const [announcementTitle, setAnnouncementTitle] = useState<string>('');
   const [announcementContent, setAnnouncementContent] = useState<string>('');
 
-  const courseOptions = [
-    '기초프로그래밍',
-    '심화프로그래밍',
-    '알고리즘',
-    '대회1',
-    '대회2',
-  ];
+  const courseOptions = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
 
   const handleCourseChange = (value: string) => setSelectedCourse(value);
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -24,7 +18,7 @@ export default function AnnouncementPost() {
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setAnnouncementContent(e.target.value);
 
-  const handlePost = () => {
+  const handleEdit = () => {
     if (!selectedCourse || !announcementTitle || !announcementContent) {
       alert('모든 항목을 입력해주세요.');
       return;
@@ -43,15 +37,14 @@ export default function AnnouncementPost() {
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">공지 등록</h1>
+          <h1 className="text-lg mb-3 md:mb-0">공지 수정</h1>
         </section>
 
         <hr className="border-t-2 mt-5 border-gray-200" />
 
         <section className="px-3 sm:px-16 mt-5 space-y-4">
           <Select
-            placeholder="공지를 등록 할 과목을 선택하세요."
-            mode="multiple"
+            placeholder="과목을 선택하세요."
             value={selectedCourse}
             onChange={handleCourseChange}
             className="w-full sm:w-1/2"
@@ -83,7 +76,7 @@ export default function AnnouncementPost() {
           <div className="flex justify-end">
             <button
               className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
-              onClick={handlePost}
+              onClick={handleEdit}
             >
               공지 등록
             </button>
