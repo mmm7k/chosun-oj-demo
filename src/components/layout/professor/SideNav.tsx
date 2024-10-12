@@ -274,6 +274,21 @@ export default function SideNav() {
                     과제 등록
                   </Link>
                 </li>
+
+                <li
+                  className={`transition ${
+                    pathname === '/professor/assignment/submission'
+                      ? 'text-primary hover:text-primaryHover'
+                      : 'text-secondary hover:text-secondaryHover'
+                  }`}
+                >
+                  <Link
+                    href="/professor/assignment/submission"
+                    onClick={closeAllDropdowns}
+                  >
+                    제출 확인
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -328,6 +343,21 @@ export default function SideNav() {
                     onClick={closeAllDropdowns}
                   >
                     대회 등록
+                  </Link>
+                </li>
+
+                <li
+                  className={`transition ${
+                    pathname === '/professor/contest/submission'
+                      ? 'text-primary hover:text-primaryHover'
+                      : 'text-secondary hover:text-secondaryHover'
+                  }`}
+                >
+                  <Link
+                    href="/professor/contest/submission"
+                    onClick={closeAllDropdowns}
+                  >
+                    제출 확인
                   </Link>
                 </li>
               </ul>
@@ -610,6 +640,23 @@ export default function SideNav() {
                     과제 등록
                   </li>
                 </Link>
+
+                <Link
+                  href="/professor/assignment/submission"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/professor/assignment/submission' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    제출 확인
+                  </li>
+                </Link>
               </ul>
             )}
           </div>
@@ -665,6 +712,23 @@ export default function SideNav() {
                     }`}
                   >
                     대회 등록
+                  </li>
+                </Link>
+
+                <Link
+                  href="/professor/contest/submission"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/professor/contest/submission' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    제출 확인
                   </li>
                 </Link>
               </ul>
