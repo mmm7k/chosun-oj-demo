@@ -167,7 +167,7 @@ export default function SubmissionList() {
               {openSubmissionId === item.id && (
                 <div className="p-4 rounded-b-lg">
                   <p className="text-sm font-semibold mb-2">제출 코드:</p>
-                  <pre className="bg-gray-900 text-white p-4 rounded-md overflow-auto">
+                  <pre className="whitespace-pre-wrap break-words bg-gray-900 text-white p-4 rounded-md overflow-auto">
                     {item.code}
                   </pre>
                 </div>
