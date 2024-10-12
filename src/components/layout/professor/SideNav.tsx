@@ -454,6 +454,24 @@ export default function SideNav() {
             </span>
           </Link>
 
+          <Link
+            href="/professor/questions"
+            className="w-full flex justify-center items-center py-4 hover:bg-gray-100"
+            onClick={() => {
+              setMenuOpen(!menuOpen);
+              closeAllDropdowns();
+            }}
+          >
+            <span
+              className={`${
+                pathname === '/professor/questions' &&
+                'text-primary font-semibold'
+              }`}
+            >
+              Q & A
+            </span>
+          </Link>
+
           {/* 학생 드롭다운 */}
           <div className="w-full">
             <div
