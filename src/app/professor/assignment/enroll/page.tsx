@@ -36,28 +36,36 @@ export default function Post() {
       : true,
   );
 
-  const courses = ['기초 프로그래밍', '심화 프로그래밍', '알고리즘'];
+  const courses = [
+    '기초프로그래밍 01분반',
+    '심화프로그래밍 01분반',
+    '알고리즘 01분반',
+    '대회1',
+    '대회2',
+  ];
 
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex justify-between items-center px-16 relative">
+        <section className="flex justify-between items-center px-16 ">
           <h1 className="text-lg">과제 등록</h1>
         </section>
         <hr className="border-t-2 mt-5 border-gray-200" />
         <section className="flex flex-col text-sm">
           {/* 과목 선택 */}
           <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
-            <div className="flex items-center">
-              <label htmlFor="course-select" className="mr-3">
+            <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
+              <label htmlFor="course-select" className="mr-1">
                 과목 선택:
               </label>
               <Select
                 id="course-select"
+                mode="multiple"
                 placeholder="과목을 선택하세요"
                 value={selectedCourse}
                 onChange={(value) => setSelectedCourse(value)}
                 className="w-[60%] sm:w-[40%]"
+                allowClear
               >
                 {courses.map((course) => (
                   <Option key={course} value={course}>

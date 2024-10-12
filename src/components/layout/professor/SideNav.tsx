@@ -10,7 +10,10 @@ import { LuLayoutDashboard } from 'react-icons/lu';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { MdLogout, MdOutlineTask } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { IoMegaphoneOutline } from 'react-icons/io5';
+import {
+  IoChatbubbleEllipsesOutline,
+  IoMegaphoneOutline,
+} from 'react-icons/io5';
 import { GoTrophy } from 'react-icons/go';
 export default function SideNav() {
   const pathname = usePathname();
@@ -72,6 +75,24 @@ export default function SideNav() {
                 </div>
               </div>
             </Link>
+
+            {/* Q&A */}
+            <div>
+              <Link href="/professor/questions" onClick={closeAllDropdowns}>
+                <div
+                  className={`flex justify-between items-center ${
+                    pathname === '/professor/questions'
+                      ? 'text-primary hover:text-primaryHover'
+                      : 'text-secondary hover:text-secondaryHover'
+                  }`}
+                >
+                  <div className="flex items-center transition">
+                    <IoChatbubbleEllipsesOutline className="text-xl mr-2" />
+                    <span>Q & A</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
             {/* 학생 드롭다운 */}
             <div>
               <div
@@ -154,7 +175,7 @@ export default function SideNav() {
                   isProblemsDropdownOpen ? 'max-h-40' : 'max-h-0'
                 }`}
               >
-                <Link
+                {/* <Link
                   href="/professor/problems/list"
                   onClick={closeAllDropdowns}
                 >
@@ -167,7 +188,7 @@ export default function SideNav() {
                   >
                     전체 문제 목록
                   </li>
-                </Link>
+                </Link> */}
                 <Link
                   href="/professor/problems/mylist"
                   onClick={closeAllDropdowns}
@@ -481,7 +502,7 @@ export default function SideNav() {
             </div>
             {isProblemsDropdownOpen && (
               <ul className="py-2 space-y-2 bg-white w-full">
-                <Link
+                {/* <Link
                   href="/professor/problems/list"
                   onClick={() => {
                     setMenuOpen(!menuOpen);
@@ -496,23 +517,24 @@ export default function SideNav() {
                   >
                     전체 문제 목록
                   </li>
-                  <Link
-                    href="/professor/problems/mylist"
-                    onClick={() => {
-                      setMenuOpen(!menuOpen);
-                      closeAllDropdowns();
-                    }}
+                </Link> */}
+                <Link
+                  href="/professor/problems/mylist"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/professor/problems/mylist' &&
+                      'text-primary font-semibold'
+                    }`}
                   >
-                    <li
-                      className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
-                        pathname === '/professor/problems/mylist' &&
-                        'text-primary font-semibold'
-                      }`}
-                    >
-                      나의 문제 목록
-                    </li>
-                  </Link>
+                    나의 문제 목록
+                  </li>
                 </Link>
+
                 <Link
                   href="/professor/problems/post"
                   onClick={() => {

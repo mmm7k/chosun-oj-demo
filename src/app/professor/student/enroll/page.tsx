@@ -1,24 +1,54 @@
 'use client';
 
 import axios from 'axios';
-import { Select, Checkbox, Button, Modal } from 'antd';
+import { Select, Checkbox, Button, Modal, Upload, message } from 'antd';
 import { useState, useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
+import * as XLSX from 'xlsx';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
 export default function Enroll() {
-  const [selectedGrade, setSelectedGrade] = useState<string | null>(null);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
-  const [selectedStudents, setSelectedStudents] = useState<number[]>([]);
+  const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [courseToEnroll, setCourseToEnroll] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [students, setStudents] = useState<any[]>([]);
-  const [grades, setGrades] = useState<string[]>([]);
   const [majors, setMajors] = useState<string[]>([]);
 
   const courseOptions = ['기초프로그래밍', '심화프로그래밍', '알고리즘'];
+
+  const handleExcelUpload = async (file: File) => {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      try {
+        const binaryStr = event.target?.result;
+        const workbook = XLSX.read(binaryStr, { type: 'binary' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+        const studentData = data.slice(1).map((row: any) => ({
+          studentNumber: row[0],
+          name: row[1],
+        }));
+        setSelectedStudents((prev) => [...prev, ...studentData]);
+        message.success('엑셀 파일이 성공적으로 업로드되었습니다.');
+      } catch (error) {
+        message.error('엑셀 파일 처리 중 오류가 발생했습니다.');
+      }
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  const handleCustomRequest = (options: any) => {
+    const { file, onSuccess } = options;
+    handleExcelUpload(file);
+    onSuccess('ok');
+  };
 
   // Axios로 JSON 데이터를 불러오는 부분
   useEffect(() => {
@@ -28,18 +58,10 @@ export default function Enroll() {
           '/mock/professor/student/studentlist.json',
         );
         const studentData = response.data;
-
         setStudents(studentData);
-
-        // 중복 없이 학년과 전공 목록을 추출하여 셀렉트 박스에 사용
-        const uniqueGrades = Array.from(
-          new Set(studentData.map((student: any) => student.grade)),
-        ) as string[];
         const uniqueMajors = Array.from(
-          new Set(studentData.map((student: any) => student.major)),
+          new Set(studentData.map((s: any) => s.major)),
         ) as string[];
-
-        setGrades(uniqueGrades);
         setMajors(uniqueMajors);
       } catch (error) {
         console.error('Error fetching student list:', error);
@@ -49,17 +71,20 @@ export default function Enroll() {
     fetchStudentList();
   }, []);
 
-  const handleGradeChange = (value: string) => setSelectedGrade(value);
   const handleMajorChange = (value: string) => setSelectedMajor(value);
 
-  const handleStudentSelection = (studentNumber: number) => {
+  const handleStudentSelection = (student: {
+    studentNumber: number;
+    name: string;
+  }) => {
+    console.log(student);
     setSelectedStudents((prev) =>
-      prev.includes(studentNumber)
-        ? prev.filter((num) => num !== studentNumber)
-        : [...prev, studentNumber],
+      prev.some((s) => s.studentNumber === student.studentNumber)
+        ? prev.filter((s) => s.studentNumber !== student.studentNumber)
+        : [...prev, student],
     );
   };
-
+  console.log(selectedStudents);
   const handleRegister = () => {
     if (!courseToEnroll) {
       Modal.error({
@@ -76,9 +101,6 @@ export default function Enroll() {
 
   const filteredStudents = students
     .filter((student) =>
-      selectedGrade ? student.grade === selectedGrade : true,
-    )
-    .filter((student) =>
       selectedMajor ? student.major === selectedMajor : true,
     )
     .filter((student) =>
@@ -92,28 +114,27 @@ export default function Enroll() {
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex justify-between items-center px-16 relative">
+        <section className="flex flex-col sm:flex-row justify-between items-center px-16 ">
           <h1 className="text-lg">학생 등록</h1>
+          <Upload
+            accept=".xlsx, .xls"
+            showUploadList={false}
+            customRequest={handleCustomRequest}
+          >
+            <Button icon={<UploadOutlined />}>엑셀 파일 업로드</Button>
+          </Upload>
         </section>
         <hr className="border-t-2 mt-5 border-gray-200" />
+
         <section className="flex flex-col text-sm">
           {/* 학년 및 전공 선택 */}
           <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
             <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
+              <label htmlFor="major-select" className="mr-1">
+                전공 선택:
+              </label>
               <Select
-                placeholder="학년을 선택하세요."
-                value={selectedGrade}
-                onChange={handleGradeChange}
-                className="w-[60%] sm:w-[15%]"
-                allowClear
-              >
-                {grades.map((grade) => (
-                  <Option key={grade} value={grade}>
-                    {grade}
-                  </Option>
-                ))}
-              </Select>
-              <Select
+                id="major-select"
                 placeholder="전공을 선택하세요."
                 value={selectedMajor}
                 onChange={handleMajorChange}
@@ -148,29 +169,22 @@ export default function Enroll() {
                 <div
                   key={student.id}
                   className={`flex justify-between items-center py-2 border-b-[1px] border-gray-100 hover:bg-gray-50 cursor-pointer ${
-                    selectedStudents.includes(student.studentNumber)
-                      ? 'bg-gray-100'
-                      : ''
+                    selectedStudents.includes(student) ? 'bg-gray-100' : ''
                   }`}
-                  onClick={() => handleStudentSelection(student.studentNumber)}
+                  onClick={() => handleStudentSelection(student)}
                 >
                   <Checkbox
-                    checked={selectedStudents.includes(student.studentNumber)}
-                    onChange={() =>
-                      handleStudentSelection(student.studentNumber)
-                    }
+                    checked={selectedStudents.includes(student)}
+                    onChange={() => handleStudentSelection(student)}
                     onClick={(e) => e.stopPropagation()}
                   />
-                  <span className="w-[15%] ml-2 text-xs sm:text-sm">
-                    {student.studentNumber}
-                  </span>
-                  <span className="w-[25%] text-xs sm:text-sm">
+                  <div className="w-[40%] sm:w-[15%] ml-2 text-xs sm:text-sm">
+                    <span>{student.studentNumber}</span>
+                  </div>
+                  <span className="w-[40%] sm:w-[55%] text-xs sm:text-sm">
                     {student.name}
                   </span>
-                  <span className="w-[20%] text-xs sm:text-sm">
-                    {student.grade}학년
-                  </span>
-                  <span className="w-[30%] text-xs sm:text-sm">
+                  <span className="w-[40%] sm:w-[30%] text-xs sm:text-sm">
                     {student.major}
                   </span>
                 </div>
@@ -180,28 +194,23 @@ export default function Enroll() {
             {selectedStudents.length > 0 && (
               <div className="mt-4">
                 <h3 className="mb-2 text-sm">선택된 학생:</h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedStudents.map((studentNumber) => {
-                    const student = students.find(
-                      (s) => s.studentNumber === studentNumber,
-                    );
-                    return (
-                      <div
-                        key={studentNumber}
-                        className="flex items-center bg-gray-200 text-sm rounded-full px-3 py-1"
+                <div className="flex flex-wrap gap-2 max-h-16 overflow-y-auto">
+                  {selectedStudents.map((student) => (
+                    <div
+                      key={student.studentNumber}
+                      className="flex items-center bg-gray-200 text-sm rounded-full px-3 py-1"
+                    >
+                      <span className="mr-2">
+                        {student.studentNumber} - {student.name}
+                      </span>
+                      <button
+                        className="text-red-500"
+                        onClick={() => handleStudentSelection(student)}
                       >
-                        <span className="mr-2">
-                          {student?.studentNumber} - {student?.name}
-                        </span>
-                        <button
-                          className="text-red-500"
-                          onClick={() => handleStudentSelection(studentNumber)}
-                        >
-                          &times;
-                        </button>
-                      </div>
-                    );
-                  })}
+                        &times;
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -219,7 +228,7 @@ export default function Enroll() {
 
         <Modal
           title="과목 선택"
-          visible={isModalVisible}
+          open={isModalVisible}
           onCancel={() => setIsModalVisible(false)}
           onOk={handleRegister}
           okText="등록"

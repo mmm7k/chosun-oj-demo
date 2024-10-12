@@ -24,6 +24,7 @@ export default function Post() {
   const [isCppChecked, setIsCppChecked] = useState(false);
   const [isCChecked, setIsCChecked] = useState(false);
   const [isPythonChecked, setIsPythonChecked] = useState(false);
+  const [isContestCkecked, setIsContestChecked] = useState(false);
 
   const handleOrganizationChange = (value: SetStateAction<never[]>) => {
     setSelectedOrganizations(value);
@@ -84,10 +85,30 @@ export default function Post() {
               <Checkbox
                 id="disclose-checkbox"
                 checked={isDisclose}
-                onChange={(e) => setIsDisclose(e.target.checked)}
+                onChange={(e) => setIsContestChecked(e.target.checked)}
               />
             </div>
           </div>
+          {/* 대회,과제 용 여부 */}
+          <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
+            <div>
+              <label htmlFor="manage-checkbox" className="mr-2">
+                대회, 과제 출제:
+              </label>
+              <Checkbox
+                id="contest-checkbox"
+                checked={isManage}
+                onChange={(e) => setIsManage(e.target.checked)}
+              />
+            </div>
+            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+              <PiExclamationMarkFill className="text-lg" />
+              <span>
+                &nbsp; 체크 시 대회 또는 과제 문제로 등록할 수 있습니다.
+              </span>
+            </span>
+          </div>
+
           {/* 수동 관리 여부 */}
           <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
             <div>
