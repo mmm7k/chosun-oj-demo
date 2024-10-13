@@ -9,6 +9,7 @@
     "year": "2020",
     "grade": "1"
   },
+
   {
     "id": 2,
     "studentNumber": "20201112",
@@ -292,6 +293,36 @@
   },
   {
     "id": 30,
+    "studentNumber": "20201140",
+    "name": "박현아",
+    "email": "example30@chosun.ac.kr",
+    "major": "컴퓨터공학과",
+    "course": "심화프로그래밍",
+    "year": "2022",
+    "grade": "4"
+  },
+  {
+    "id": 31,
+    "studentNumber": "20201140",
+    "name": "박현아",
+    "email": "example30@chosun.ac.kr",
+    "major": "컴퓨터공학과",
+    "contest": "대회 1",
+    "year": "2022",
+    "grade": "4"
+  },
+  {
+    "id": 32,
+    "studentNumber": "20201140",
+    "name": "박현아",
+    "email": "example30@chosun.ac.kr",
+    "major": "컴퓨터공학과",
+    "course": "심화프로그래밍",
+    "year": "2022",
+    "grade": "4"
+  },
+  {
+    "id": 33,
     "studentNumber": "20201140",
     "name": "박현아",
     "email": "example30@chosun.ac.kr",

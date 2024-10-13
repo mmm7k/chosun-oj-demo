@@ -1,10 +1,13 @@
 'use client';
 
-import { Checkbox } from 'antd';
+import { Checkbox, Button, Upload, message } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import * as XLSX from 'xlsx';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { IoSearchSharp } from 'react-icons/io5';
+import { PiExclamationMarkFill } from 'react-icons/pi';
 
 export default function ContestRegister() {
   const [title, setTitle] = useState('');
@@ -16,6 +19,8 @@ export default function ContestRegister() {
   const [allowedIpRanges, setAllowedIpRanges] = useState('');
   const [selectedProblems, setSelectedProblems] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
+  const [isContestRegistered, setIsContestRegistered] = useState(false);
 
   // 임의의 문제 리스트
   const problems = Array.from({ length: 60 }, (_, i) => ({
@@ -40,11 +45,47 @@ export default function ContestRegister() {
       : true,
   );
 
+  const handleExcelUpload = async (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const binaryStr = event.target?.result;
+        const workbook = XLSX.read(binaryStr, { type: 'binary' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+        const studentData = data.slice(1).map((row: any) => ({
+          studentNumber: row[0],
+          name: row[1],
+        }));
+
+        setSelectedStudents((prev) => [...prev, ...studentData]);
+        message.success('엑셀 파일이 성공적으로 업로드되었습니다.');
+      } catch (error) {
+        message.error('엑셀 파일 처리 중 오류가 발생했습니다.');
+      }
+    };
+    reader.readAsBinaryString(file);
+  };
+
+  const handleCustomRequest = (options: any) => {
+    const { file, onSuccess } = options;
+    handleExcelUpload(file);
+    onSuccess('ok');
+  };
+
+  //대회 등록 전에는 문제, 학생 등록 불가능
+  const handleContestRegistration = () => {
+    // 대회 등록 시 상태를 true로 변경
+    setIsContestRegistered(true);
+    message.success('대회가 성공적으로 등록되었습니다.');
+  };
+
   return (
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex justify-between items-center px-16 relative">
-          <h1 className="text-lg">대회 수정</h1>
+          <h1 className="text-lg">대회 등록</h1>
         </section>
         <hr className="border-t-2 mt-5 border-gray-200" />
         <section className="flex flex-col text-sm">
@@ -148,6 +189,15 @@ export default function ContestRegister() {
               />
             </div>
           </div>
+          {/* 대회 등록 버튼 */}
+          <div className="w-full flex justify-end space-x-4  items-center px-10 py-4 border-b-[1.5px] border-gray-200">
+            <button
+              className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
+              onClick={handleContestRegistration}
+            >
+              대회 수정
+            </button>
+          </div>
           {/* 문제 선택 */}
           <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
             <h2 className="mb-4">문제 선택</h2>
@@ -213,13 +263,76 @@ export default function ContestRegister() {
               </div>
             )}
           </div>
+
+          {/* 문제 등록 버튼 */}
+          <div className="w-full flex justify-end  px-10 py-4 border-b-[1.5px] border-gray-200">
+            <button
+              className={`px-4 py-2 text-white text-base rounded-xl font-normal ${
+                isContestRegistered
+                  ? 'bg-primary hover:bg-primaryButtonHover'
+                  : 'bg-gray-300 cursor-not-allowed'
+              }`}
+            >
+              문제 수정
+            </button>
+          </div>
+
+          {/* 학생 엑셀 업로드 버튼 */}
+          <div className="w-full flex  px-10 py-4 border-b-[1.5px] border-gray-200">
+            <Upload
+              accept=".xlsx, .xls"
+              showUploadList={false}
+              customRequest={handleCustomRequest}
+            >
+              <Button icon={<UploadOutlined />}>학생 엑셀 파일 업로드</Button>
+            </Upload>
+          </div>
+
+          {/* 선택된 학생 목록 */}
+          {selectedStudents.length > 0 && (
+            <div className="px-10 py-4 border-b-[1.5px] border-gray-200">
+              <h3 className="text-sm">선택된 학생:</h3>
+              <div className="flex flex-wrap gap-2 mt-2  max-h-16 overflow-y-auto">
+                {selectedStudents.map((student) => (
+                  <div
+                    key={student.studentNumber}
+                    className="flex items-center bg-gray-200 rounded-full px-3 py-1"
+                  >
+                    <span className="mr-2">
+                      {student.studentNumber} - {student.name}
+                    </span>
+
+                    <button
+                      className="text-red-500"
+                      onClick={() =>
+                        setSelectedStudents((prev) =>
+                          prev.filter(
+                            (s) => s.studentNumber !== student.studentNumber,
+                          ),
+                        )
+                      }
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 학생 등록 버튼 */}
+          <div className="w-full flex justify-end px-10 py-4 border-b-[1.5px] border-gray-200">
+            <button
+              className={`px-4 py-2 text-white text-base rounded-xl font-normal ${
+                isContestRegistered
+                  ? 'bg-primary hover:bg-primaryButtonHover'
+                  : 'bg-gray-300 cursor-not-allowed'
+              }`}
+            >
+              학생 수정
+            </button>
+          </div>
         </section>
-        {/* 등록 버튼 */}
-        <div className="w-full flex justify-end px-10 mt-8">
-          <button className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover">
-            대회 등록
-          </button>
-        </div>
       </div>
     </div>
   );
