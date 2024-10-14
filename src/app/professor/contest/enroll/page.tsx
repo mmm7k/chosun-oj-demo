@@ -21,6 +21,8 @@ export default function ContestRegister() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
   const [isContestRegistered, setIsContestRegistered] = useState(false);
+  const [searched, setSearched] = useState(false);
+  const [filteredProblems, setFilteredProblems] = useState<any[]>([]);
 
   // 임의의 문제 리스트
   const problems = Array.from({ length: 60 }, (_, i) => ({
@@ -29,6 +31,18 @@ export default function ContestRegister() {
     registrationTime: `2024-9-2 16:19:${i + 1}`,
   }));
 
+  const handleSearch = () => {
+    const results = problems.filter((problem) =>
+      problem.name.includes(searchTerm),
+    );
+    setFilteredProblems(results);
+    setSearched(true);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleSearch();
+  };
+
   const handleProblemSelection = (problemId: number) => {
     setSelectedProblems((prev) =>
       prev.includes(problemId)
@@ -36,14 +50,6 @@ export default function ContestRegister() {
         : [...prev, problemId],
     );
   };
-
-  // 문제 검색 필터
-  const filteredProblems = problems.filter((problem) =>
-    searchTerm
-      ? problem.name.includes(searchTerm) ||
-        problem.registrationTime.includes(searchTerm)
-      : true,
-  );
 
   const handleExcelUpload = async (file: File) => {
     const reader = new FileReader();
@@ -203,42 +209,51 @@ export default function ContestRegister() {
             </button>
           </div>
           {/* 문제 선택 */}
-          <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
+          <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200 text-sm">
             <h2 className="mb-4">문제 선택</h2>
             <div className="flex items-center mb-4">
               <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
-                <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+                <IoSearchSharp
+                  className="text-gray-500 text-lg mr-2 cursor-pointer"
+                  onClick={handleSearch}
+                />
                 <input
                   className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   placeholder="문제를 검색해보세요"
                 />
               </div>
             </div>
-            <div className="h-64 overflow-y-auto border-t-[1.5px] border-gray-200">
-              {filteredProblems.map((problem) => (
-                <div
-                  key={problem.id}
-                  className={`flex justify-between items-center p-2 border-b-[1px] border-gray-100 hover:bg-gray-50 cursor-pointer ${
-                    selectedProblems.includes(problem.id) ? 'bg-gray-100' : ''
-                  }`}
-                  onClick={() => handleProblemSelection(problem.id)}
-                >
-                  <Checkbox
-                    checked={selectedProblems.includes(problem.id)}
-                    onChange={() => handleProblemSelection(problem.id)}
-                    onClick={(e) => e.stopPropagation()} // Prevent div click when clicking checkbox
-                  />
-                  <span className="ml-2 text-xs sm:text-sm">
-                    {problem.name}
-                  </span>
-                  <span className="ml-auto mr-3 text-xs sm:text-sm">
-                    {problem.registrationTime}
-                  </span>
-                </div>
-              ))}
+
+            <div className="max-h-[45dvh] overflow-y-auto border-t-[1.5px] border-gray-200">
+              {searched && filteredProblems.length === 0 ? (
+                <p className="text-center mt-4">검색 결과가 없습니다.</p>
+              ) : (
+                filteredProblems.map((problem) => (
+                  <div
+                    key={problem.id}
+                    className={`flex justify-between items-center p-2 border-b-[1px] border-gray-100 hover:bg-gray-50 cursor-pointer ${
+                      selectedProblems.includes(problem.id) ? 'bg-gray-100' : ''
+                    }`}
+                    onClick={() => handleProblemSelection(problem.id)}
+                  >
+                    <Checkbox
+                      checked={selectedProblems.includes(problem.id)}
+                      onChange={() => handleProblemSelection(problem.id)}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <span className="ml-2 text-xs sm:text-sm">
+                      {problem.name}
+                    </span>
+                    <span className="ml-auto mr-3 text-xs sm:text-sm">
+                      {problem.registrationTime}
+                    </span>
+                  </div>
+                ))
+              )}
             </div>
 
             {/* 선택된 문제 목록 */}

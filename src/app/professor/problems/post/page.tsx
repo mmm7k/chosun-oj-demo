@@ -18,6 +18,7 @@ export default function Post() {
   const [isMarkdownAccess, setIsMarkdownAccess] = useState(false);
   const [postDate, setPostDate] = useState(new Date());
   const [selectedOrganizations, setSelectedOrganizations] = useState([]);
+  const [selectedTag, setSelectedTag] = useState([]);
   const [selectedVisibility, setSelectedVisibility] = useState('');
   const [markdownText, setMarkdownText] = useState('');
   const [isJavaChecked, setIsJavaChecked] = useState(false);
@@ -29,12 +30,40 @@ export default function Post() {
   const handleOrganizationChange = (value: SetStateAction<never[]>) => {
     setSelectedOrganizations(value);
   };
+
+  const handleTagChange = (value: SetStateAction<never[]>) => {
+    setSelectedTag(value);
+  };
+
   const handleVisibilityChange = (value: string) => {
     setSelectedVisibility(value);
   };
   const handleEditorChange = ({ text }: { text: string }) => {
     setMarkdownText(text);
   };
+
+  const problemTags = [
+    '데이터 타입',
+    '연산자',
+    '조건문',
+    '반복문',
+    '배열',
+    '함수',
+    '포인터',
+    '문자열',
+    '구조체',
+    '버퍼',
+    '파일',
+    '클래스',
+    '정렬',
+    '탐색',
+    '동적',
+    '그래프',
+    '탐욕',
+    '순회',
+    '분할 정복',
+    '백트래킹',
+  ];
 
   return (
     <div className="min-h-screen p-8 flex">
@@ -155,6 +184,7 @@ export default function Post() {
                 value={selectedOrganizations}
                 onChange={handleOrganizationChange}
                 className="w-[60%] sm:w-[20%] h-8"
+                allowClear
               >
                 <Option value="java">Java</Option>
                 <Option value="c++">C++</Option>
@@ -174,6 +204,7 @@ export default function Post() {
                 value={selectedVisibility}
                 onChange={handleVisibilityChange}
                 className="w-[60%] sm:w-[20%] h-8"
+                allowClear
               >
                 <Option value="전역 설정 따르기">전역 설정 따르기</Option>
                 <Option value="항상 보이기">항상 보이기</Option>
@@ -233,25 +264,26 @@ export default function Post() {
               </Select>
             </div>
           </div>
-          {/* 문제 그룹 */}
+          {/* 문제 태그 */}
           <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
             <div className="flex items-center">
-              <label htmlFor="problem-group-select" className="mr-3">
-                문제 그룹:
+              <label htmlFor="problem-tag-select" className="mr-3">
+                문제 태그:
               </label>
               <Select
-                id="problem-group-select"
-                placeholder="문제 그룹을 선택하세요."
-                value={selectedVisibility}
-                onChange={handleVisibilityChange}
-                className="w-[60%] sm:w-[20%] h-8"
+                id="problem-tag-select"
+                mode="multiple"
+                placeholder="문제 태그를 선택하세요."
+                value={selectedTag}
+                onChange={handleTagChange}
+                className="w-[60%] overflow-hidden sm:min-w-[20%] sm:w-auto h-8"
+                allowClear
               >
-                <Option value="전역 설정 따르기">전역 설정 따르기</Option>
-                <Option value="항상 보이기">항상 보이기</Option>
-                <Option value="문제가 해결됐을 경우 보이기">
-                  문제가 해결됐을 경우 보이기
-                </Option>
-                <Option value="자신의 제출물만">자신의 제출물만</Option>
+                {problemTags.map((tag) => (
+                  <Option key={tag} value={tag}>
+                    {tag}
+                  </Option>
+                ))}
               </Select>
             </div>
           </div>

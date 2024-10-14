@@ -5,37 +5,31 @@ import { useState } from 'react';
 
 const { Option } = Select;
 
-export default function AnnouncementPost() {
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+export default function ContestPost() {
+  const [selectedContest, setSelectedContest] = useState<string | null>(null);
   const [announcementTitle, setAnnouncementTitle] = useState<string>('');
   const [announcementContent, setAnnouncementContent] = useState<string>('');
 
-  const courseOptions = [
-    '기초프로그래밍 01분반',
-    '심화프로그래밍 01분반',
-    '알고리즘 01분반',
-    '대회1',
-    '대회2',
-  ];
+  const contestOptions = ['대회1', '대회2'];
 
-  console.log(selectedCourse);
-  const handleCourseChange = (value: string) => setSelectedCourse(value);
+  console.log(selectedContest);
+  const handleContestChange = (value: string) => setSelectedContest(value);
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAnnouncementTitle(e.target.value);
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setAnnouncementContent(e.target.value);
 
   const handlePost = () => {
-    if (!selectedCourse || !announcementTitle || !announcementContent) {
+    if (!selectedContest || !announcementTitle || !announcementContent) {
       alert('모든 항목을 입력해주세요.');
       return;
     }
 
-    console.log('Selected course:', selectedCourse);
+    console.log('Selected Contest:', selectedContest);
     console.log('Announcement title:', announcementTitle);
     console.log('Announcement content:', announcementContent);
 
-    setSelectedCourse(null);
+    setSelectedContest(null);
     setAnnouncementTitle('');
     setAnnouncementContent('');
   };
@@ -44,28 +38,28 @@ export default function AnnouncementPost() {
     <div className="min-h-screen p-8 flex">
       <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
         <section className="flex items-center justify-between px-16">
-          <h1 className="text-lg mb-3 md:mb-0">공지 등록</h1>
+          <h1 className="text-lg mb-3 md:mb-0">대회 공지 등록</h1>
         </section>
         <hr className="border-t-2 mt-5 border-gray-200" />
         <section className="flex flex-col text-sm">
           <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
             <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
-              <label htmlFor="course-select" className="mr-3">
-                과목 선택:
+              <label htmlFor="contest-select" className="mr-3">
+                대회 선택:
               </label>
 
               <Select
-                id="course-select"
-                placeholder="공지를 등록 할 과목을 선택하세요."
+                id="contest-select"
+                placeholder="공지를 등록 할 대회를 선택하세요."
                 mode="multiple"
-                value={selectedCourse}
-                onChange={handleCourseChange}
+                value={selectedContest}
+                onChange={handleContestChange}
                 className="w-full sm:w-1/2"
                 allowClear
               >
-                {courseOptions.map((course) => (
-                  <Option key={course} value={course}>
-                    {course}
+                {contestOptions.map((contest) => (
+                  <Option key={contest} value={contest}>
+                    {contest}
                   </Option>
                 ))}
               </Select>

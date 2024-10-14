@@ -77,7 +77,7 @@ export default function SideNav() {
             </Link>
 
             {/* Q&A */}
-            <div>
+            {/* <div>
               <Link href="/professor/questions" onClick={closeAllDropdowns}>
                 <div
                   className={`flex justify-between items-center ${
@@ -92,7 +92,7 @@ export default function SideNav() {
                   </div>
                 </div>
               </Link>
-            </div>
+            </div> */}
             {/* 학생 드롭다운 */}
             <div>
               <div
@@ -190,17 +190,17 @@ export default function SideNav() {
                   </li>
                 </Link> */}
                 <Link
-                  href="/professor/problems/mylist"
+                  href="/professor/problems/list"
                   onClick={closeAllDropdowns}
                 >
                   <li
                     className={`transition mt-5 ${
-                      pathname === '/professor/problems/mylist'
+                      pathname === '/professor/problems/list'
                         ? 'text-primary hover:text-primaryHover'
                         : 'text-secondary hover:text-secondaryHover'
                     }`}
                   >
-                    나의 문제 목록
+                    등록한 문제 목록
                   </li>
                 </Link>
                 <li
@@ -405,16 +405,31 @@ export default function SideNav() {
                 </li>
                 <li
                   className={`transition ${
-                    pathname === '/professor/announcement/post'
+                    pathname === '/professor/announcement/post/course'
                       ? 'text-primary hover:text-primaryHover'
                       : 'text-secondary hover:text-secondaryHover'
                   }`}
                 >
                   <Link
-                    href="/professor/announcement/post"
+                    href="/professor/announcement/post/course"
                     onClick={closeAllDropdowns}
                   >
-                    공지 등록
+                    과목 공지 등록
+                  </Link>
+                </li>
+
+                <li
+                  className={`transition ${
+                    pathname === '/professor/announcement/post/contest'
+                      ? 'text-primary hover:text-primaryHover'
+                      : 'text-secondary hover:text-secondaryHover'
+                  }`}
+                >
+                  <Link
+                    href="/professor/announcement/post/contest"
+                    onClick={closeAllDropdowns}
+                  >
+                    대회 공지 등록
                   </Link>
                 </li>
               </ul>
@@ -454,7 +469,7 @@ export default function SideNav() {
             </span>
           </Link>
 
-          <Link
+          {/* <Link
             href="/professor/questions"
             className="w-full flex justify-center items-center py-4 hover:bg-gray-100"
             onClick={() => {
@@ -470,7 +485,7 @@ export default function SideNav() {
             >
               Q & A
             </span>
-          </Link>
+          </Link> */}
 
           {/* 학생 드롭다운 */}
           <div className="w-full">
@@ -567,7 +582,7 @@ export default function SideNav() {
                   </li>
                 </Link> */}
                 <Link
-                  href="/professor/problems/mylist"
+                  href="/professor/problems/list"
                   onClick={() => {
                     setMenuOpen(!menuOpen);
                     closeAllDropdowns();
@@ -575,11 +590,11 @@ export default function SideNav() {
                 >
                   <li
                     className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
-                      pathname === '/professor/problems/mylist' &&
+                      pathname === '/professor/problems/list' &&
                       'text-primary font-semibold'
                     }`}
                   >
-                    나의 문제 목록
+                    등록한 문제 목록
                   </li>
                 </Link>
 
@@ -793,7 +808,7 @@ export default function SideNav() {
                   </li>
                 </Link>
                 <Link
-                  href="/professor/assignment/enroll"
+                  href="/professor/announcement/post/course"
                   onClick={() => {
                     setMenuOpen(!menuOpen);
                     closeAllDropdowns();
@@ -801,11 +816,28 @@ export default function SideNav() {
                 >
                   <li
                     className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
-                      pathname === '/professor/announcement/post' &&
+                      pathname === '/professor/announcement/post/course' &&
                       'text-primary font-semibold'
                     }`}
                   >
-                    공지 등록
+                    과목 공지 등록
+                  </li>
+                </Link>
+
+                <Link
+                  href="/professor/announcement/post/contest"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/professor/announcement/post/contest' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    대회 공지 등록
                   </li>
                 </Link>
               </ul>
