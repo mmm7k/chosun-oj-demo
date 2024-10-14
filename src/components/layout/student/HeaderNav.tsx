@@ -39,7 +39,6 @@ export default function HeaderNav() {
           <span className="text-primary">&nbsp;Chosun&nbsp;</span>
           <span>Online Judge</span>
         </Link>
-        {/* </section> */}
 
         {/* 햄버거 메뉴 */}
         <div className="sm:hidden ml-auto">
@@ -50,7 +49,7 @@ export default function HeaderNav() {
         </div>
 
         {/* 메뉴 (sm 이상에서만 표시) */}
-        <section className="hidden sm:flex ml-[7%] space-x-16">
+        <section className="hidden sm:flex ml-[3%] space-x-9">
           <Link href={'/student/problems?category=all'}>
             <span
               className={`cursor-pointer transition ${
@@ -63,10 +62,21 @@ export default function HeaderNav() {
             </span>
           </Link>
 
+          <Link href={'/student/ranking'}>
+            <span
+              className={`cursor-pointer transition ${
+                pathname.startsWith('/student/ranking')
+                  ? 'text-primary border-b-4 border-primary pb-[1.5rem] lg:pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
+                  : 'hover:text-secondaryHover'
+              }`}
+            >
+              랭킹
+            </span>
+          </Link>
+
           <Link href={'/student/questions/common'}>
             <span
               className={`cursor-pointer transition ${
-                // pathname === `${classPath}/questions`
                 pathname.startsWith('/student/questions')
                   ? 'text-primary border-b-4 border-primary  pb-[1.5rem] lg:pb-[1rem] hover:text-primaryHover hover:border-primaryHover'
                   : 'hover:text-secondaryHover'
@@ -111,7 +121,7 @@ export default function HeaderNav() {
         </section>
         {/* )} */}
 
-        {/* 분반 및 로그아웃 (sm 이상에서만 표시) */}
+        {/* 로그아웃 (sm 이상에서만 표시) */}
 
         <section className="hidden sm:flex items-center ml-auto">
           <Link href="/">
@@ -139,6 +149,18 @@ export default function HeaderNav() {
         >
           <span className="cursor-pointer transition  font-semibold ">
             문제
+          </span>
+        </Link>
+
+        <Link
+          href={'/student/ranking'}
+          className={`w-full flex justify-center items-center py-3 hover:bg-gray-100  ${
+            pathname.startsWith('/student/ranking') && 'text-primary'
+          }`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span className="cursor-pointer transition  font-semibold ">
+            랭킹
           </span>
         </Link>
 

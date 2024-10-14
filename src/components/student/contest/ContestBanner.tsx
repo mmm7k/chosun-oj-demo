@@ -5,8 +5,6 @@ import Image from 'next/image';
 export default function ContestBanner({ course }: { course: string }) {
   const decodedCourse = decodeURIComponent(course);
 
-  // 배너 캐러셀 세팅
-
   return (
     <section className="w-screen h-44 bg-gradient-to-r from-[#9face6] to-[#74ebd5]  ">
       <div className="w-screen px-[10%] lg:px-[20%] h-44">

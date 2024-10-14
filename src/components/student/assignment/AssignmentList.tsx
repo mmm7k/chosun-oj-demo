@@ -72,7 +72,7 @@ export default function AssignmentList({ course }: { course: string }) {
     <>
       <main className="w-full lg:w-[75%]">
         {/* 문제 목록 */}
-        <div className="rounded-2xl border bg-white shadow-md text-sm text-gray-500">
+        <div className="rounded-2xl  bg-white shadow-md text-sm text-gray-500">
           <div className="flex justify-between items-center rounded-t-2xl py-2 px-5 border-b bg-[#eeeff3] text-gray-800">
             <span className="w-[10%]">상태</span>
             <span className="w-[50%]">문제 이름</span>

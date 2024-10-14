@@ -113,9 +113,9 @@ export default function SubmissionList() {
           </div>
         ) : (
           <>
-            <section className="flex justify-between items-center px-0 md:px-16 mb-6">
-              <h1 className="text-lg">대회 제출 목록</h1>
-              <div className="flex items-center space-x-4">
+            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
+              <h1 className="text-lg mb-3 md:mb-0">대회 제출 목록</h1>
+              <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 space-x-4">
                 <Select
                   value={selectedCourse}
                   onChange={handleCourseChange}
@@ -140,45 +140,63 @@ export default function SubmissionList() {
 
             <hr className="border-t-2 mt-5 border-gray-200" />
 
-            <section className="flex flex-col px-3 sm:px-16">
-              {currentItems.map((item) => (
-                <div key={item.id} className="border-b">
-                  <div
-                    className="flex justify-between items-center py-4 text-sm hover:bg-gray-100 cursor-pointer"
-                    onClick={() => toggleSubmission(item.id)}
-                  >
-                    <span className="w-[10%]">{item.studentId}</span>
-                    <span className="w-[15%]">{item.studentName}</span>
-                    <span className="w-[25%]">{item.problemName}</span>
-                    <span className="w-[10%]">{item.course}</span>
-                    <span className="w-[10%]">{item.ip}</span>
-                    <span className="w-[10%] flex justify-center">
-                      {item.isSuccess ? (
-                        <FiCheckCircle className="text-green-500 text-lg" />
-                      ) : (
-                        <FiXCircle className="text-red-500 text-lg" />
-                      )}
-                    </span>
-                    <span className="w-[20%]">{item.submissionTime}</span>
-                    <span className="ml-2">
-                      {openSubmissionId === item.id ? (
-                        <RiArrowDropUpLine className="text-2xl" />
-                      ) : (
-                        <RiArrowDropDownLine className="text-2xl" />
-                      )}
-                    </span>
-                  </div>
+            <section className="px-3 sm:px-16 overflow-x-auto">
+              <table className="table-auto w-full text-sm text-left border-b-2">
+                <thead>
+                  <tr className="border-b-2">
+                    <th className="p-4">학번</th>
+                    <th className="p-4">이름</th>
+                    <th className="p-4">문제</th>
+                    <th className="p-4">과목</th>
+                    <th className="p-4">IP</th>
+                    <th className="p-4">결과</th>
+                    <th className="p-4">제출 시간</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((item) => (
+                    <>
+                      <tr
+                        key={item.id}
+                        className="hover:bg-gray-50 cursor-pointer border-b relative"
+                        onClick={() => toggleSubmission(item.id)}
+                      >
+                        <td className="p-4">{item.studentId}</td>
+                        <td className="p-4">{item.studentName}</td>
+                        <td className="p-4">{item.problemName}</td>
+                        <td className="p-4">{item.course}</td>
+                        <td className="p-4">{item.ip}</td>
+                        <td className="p-4">
+                          {item.isSuccess ? (
+                            <FiCheckCircle className="text-green-500" />
+                          ) : (
+                            <FiXCircle className="text-red-500" />
+                          )}
+                        </td>
+                        <td className="p-4">{item.submissionTime}</td>
 
-                  {openSubmissionId === item.id && (
-                    <div className="p-4 rounded-b-lg">
-                      <p className="text-sm font-semibold mb-2">제출 코드:</p>
-                      <pre className="whitespace-pre-wrap break-words bg-gray-900 text-white p-4 rounded-md overflow-auto">
-                        {item.code}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              ))}
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                          {openSubmissionId === item.id ? (
+                            <RiArrowDropUpLine className="text-2xl" />
+                          ) : (
+                            <RiArrowDropDownLine className="text-2xl" />
+                          )}
+                        </div>
+                      </tr>
+
+                      {openSubmissionId === item.id && (
+                        <tr>
+                          <td colSpan={7} className="p-4 bg-gray-100">
+                            <pre className="whitespace-pre-wrap bg-gray-900 text-white p-4 rounded-md overflow-auto">
+                              {item.code}
+                            </pre>
+                          </td>
+                        </tr>
+                      )}
+                    </>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
@@ -192,23 +210,19 @@ export default function SubmissionList() {
                 >
                   &lt;
                 </button>
-
-                <div className="flex space-x-1 font-normal">
-                  {pages.map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => changePage(page)}
-                      className={`px-3 py-1 rounded-xl ${
-                        page === currentPage
-                          ? 'bg-primary text-white hover:bg-primaryButtonHover'
-                          : 'bg-gray-200 hover:bg-gray-300'
-                      }`}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </div>
-
+                {pages.map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => changePage(page)}
+                    className={`px-3 py-1 rounded-xl ${
+                      page === currentPage
+                        ? 'bg-primary text-white'
+                        : 'bg-gray-200'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
                 <button
                   onClick={() =>
                     changePage(Math.min(startPage + pagesPerBlock, totalPages))

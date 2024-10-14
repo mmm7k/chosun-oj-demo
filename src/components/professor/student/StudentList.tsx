@@ -97,9 +97,9 @@ export default function StudentList() {
         ) : (
           <>
             {/* Header */}
-            <section className="flex justify-between items-center px-0 md:px-16">
-              <h1 className="text-lg">학생 목록</h1>
-              <div className="flex items-center space-x-4">
+            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
+              <h1 className="text-lg mb-3 md:mb-0">학생 목록</h1>
+              <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 space-x-4">
                 <Select
                   placeholder="과목또는 대회를 선택하세요."
                   value={selectedCourse}
@@ -126,36 +126,36 @@ export default function StudentList() {
             <hr className="border-t-2 mt-5 border-gray-200" />
 
             {/* Student List */}
-            <section className="flex flex-col px-3 sm:px-16">
-              <div className="flex justify-between items-center py-6 border-b-2">
-                <span className="w-[15%]">학번</span>
-                <span className="w-[15%]">이름</span>
-                <span className="w-[20%]">학과</span>
-                <span className="w-[20%]">수강 과목</span>
-                <span className="w-[10%]">학생 관리</span>
-              </div>
-              {currentItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  <span className="w-[15%] text-xs sm:text-sm">
-                    {item.studentNumber}
-                  </span>
-                  <span className="w-[15%] text-xs sm:text-sm">
-                    {item.name}
-                  </span>
-                  <span className="w-[20%] text-xs sm:text-sm">
-                    {item.major}
-                  </span>
-                  <span className="w-[20%] text-xs sm:text-sm">
-                    {item.course}
-                  </span>
-                  <span className="w-[10%] text-xs sm:text-sm">
-                    <FiTrash2 className="text-lg lg:text-xl" />
-                  </span>
-                </div>
-              ))}
+            <section className="px-3 sm:px-16 overflow-x-auto">
+              <table className="table-auto w-full text-sm text-left border-b-2">
+                <thead>
+                  <tr className="border-b-2">
+                    <th className="p-4">학번</th>
+                    <th className="p-4">이름</th>
+                    <th className="p-4">학과</th>
+                    <th className="p-4">수강 과목</th>
+                    <th className="p-4">학생 관리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="hover:bg-gray-50 cursor-pointer border-b"
+                    >
+                      <td className="p-4 text-xs sm:text-sm">
+                        {item.studentNumber}
+                      </td>
+                      <td className="p-4 text-xs sm:text-sm">{item.name}</td>
+                      <td className="p-4 text-xs sm:text-sm">{item.major}</td>
+                      <td className="p-4 text-xs sm:text-sm">{item.course}</td>
+                      <td className="p-4 text-lg sm:text-xl">
+                        <FiTrash2 className="text-lg lg:text-xl" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             {/* Pagination */}

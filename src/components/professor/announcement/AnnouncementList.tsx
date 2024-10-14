@@ -119,9 +119,9 @@ export default function AnnouncementList() {
           </div>
         ) : (
           <>
-            <section className="flex justify-between items-center px-0 md:px-16">
-              <h1 className="text-lg">공지 목록</h1>
-              <div className="flex items-center space-x-4">
+            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
+              <h1 className="text-lg mb-3 md:mb-0">공지 목록</h1>
+              <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 space-x-4">
                 <Select
                   value={selectedCourse}
                   onChange={handleCourseChange}
@@ -146,26 +146,40 @@ export default function AnnouncementList() {
 
             <hr className="border-t-2 mt-5 border-gray-200" />
 
-            <section className="flex flex-col px-3 sm:px-16">
-              {currentItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between items-center text-sm py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  <span className="w-[10%]">{item.id}</span>
-                  <span className="w-[60%]">{item.name}</span>
-                  <span className="w-[20%]">{item.registrationTime}</span>
-                  <span className="w-[10%] flex items-center">
-                    <Link href={`/professor/announcement/list/${item.id}`}>
-                      <TbEdit className="text-lg lg:text-xl mr-2" />
-                    </Link>
-                    <FiTrash2
-                      className="text-lg lg:text-xl"
-                      onClick={() => showDeleteModal(item.id)}
-                    />
-                  </span>
-                </div>
-              ))}
+            <section className="px-3 sm:px-16 overflow-x-auto">
+              <table className="table-auto w-full text-sm text-left  border-b-2">
+                <thead className="">
+                  <tr className="border-b-2">
+                    <th className="p-4">ID</th>
+                    <th className="p-4">공지 제목</th>
+                    <th className="p-4">등록 시간</th>
+                    <th className="p-4">공지 관리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="hover:bg-gray-100 cursor-pointer border-b"
+                    >
+                      <td className="p-4 text-xs sm:text-sm">{item.id}</td>
+                      <td className="p-4 text-xs sm:text-sm">{item.name}</td>
+                      <td className="p-4 text-xs sm:text-sm">
+                        {item.registrationTime}
+                      </td>
+                      <td className="p-4 text-xs sm:text-base flex items-center space-x-2">
+                        <Link href={`/professor/announcement/list/${item.id}`}>
+                          <TbEdit className="text-lg lg:text-xl cursor-pointer" />
+                        </Link>
+                        <FiTrash2
+                          className="text-lg lg:text-xl cursor-pointer"
+                          onClick={() => showDeleteModal(item.id)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">

@@ -106,9 +106,9 @@ export default function AssignmentList() {
           </div>
         ) : (
           <>
-            <section className="flex justify-between items-center px-0 md:px-16">
-              <h1 className="text-lg">과제 목록</h1>
-              <div className="flex items-center space-x-4">
+            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
+              <h1 className="text-lg mb-3 md:mb-0">과제 목록</h1>
+              <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 space-x-4">
                 <Select
                   value={selectedCourse}
                   onChange={handleCourseSelection}
@@ -133,36 +133,40 @@ export default function AssignmentList() {
 
             <hr className="border-t-2 mt-5 border-gray-200" />
 
-            <section className="flex flex-col px-3 sm:px-16">
-              <div className="flex justify-between items-center py-6 border-b-2">
-                <span className="w-[10%]">ID</span>
-                <span className="w-[50%]">과제 이름</span>
-                <span className="w-[30%]">등록 시간</span>
-                <span className="w-[10%]">관리</span>
-              </div>
-              {currentItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between items-center py-5 border-b-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  <span className="w-[10%] text-xs sm:text-sm">{item.id}</span>
-                  <span className="w-[50%] text-xs sm:text-sm">
-                    {item.name}
-                  </span>
-                  <span className="w-[30%] text-xs sm:text-sm">
-                    {item.registrationTime}
-                  </span>
-                  <span className="w-[10%] text-xs sm:text-base flex items-center">
-                    <Link href={`/professor/assignment/list/${item.id}`}>
-                      <TbEdit className="text-lg lg:text-xl mr-2" />
-                    </Link>
-                    <FiTrash2
-                      className="text-lg lg:text-xl cursor-pointer"
-                      onClick={() => showDeleteModal(item.id)}
-                    />
-                  </span>
-                </div>
-              ))}
+            <section className="px-3 sm:px-16 overflow-x-auto">
+              <table className="table-auto w-full text-sm text-left  border-b-2">
+                <thead>
+                  <tr className="border-b-2">
+                    <th className="p-4">ID</th>
+                    <th className="p-4">과제 이름</th>
+                    <th className="p-4">등록 시간</th>
+                    <th className="p-4">과제 관리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="hover:bg-gray-100 cursor-pointer border-b"
+                    >
+                      <td className="p-4 text-xs sm:text-sm">{item.id}</td>
+                      <td className="p-4 text-xs sm:text-sm">{item.name}</td>
+                      <td className="p-4 text-xs sm:text-sm">
+                        {item.registrationTime}
+                      </td>
+                      <td className="p-4 text-xs sm:text-base flex items-center space-x-2">
+                        <Link href={`/professor/assignment/list/${item.id}`}>
+                          <TbEdit className="text-lg lg:text-xl cursor-pointer" />
+                        </Link>
+                        <FiTrash2
+                          className="text-lg lg:text-xl cursor-pointer"
+                          onClick={() => showDeleteModal(item.id)}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
