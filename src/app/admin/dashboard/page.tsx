@@ -26,10 +26,10 @@ ChartJS.register(
 // 좌측 도넛 차트 데이터
 const donutData = {
   labels: [
-    '알고리즘 01 분반',
-    '알고리즘 02 분반',
-    '네트워크 보안 01 분반',
-    '네트워크 보안 02 분반',
+    // '알고리즘 01 분반',
+    // '알고리즘 02 분반',
+    // '네트워크 보안 01 분반',
+    // '네트워크 보안 02 분반',
   ],
   datasets: [
     {
@@ -77,22 +77,22 @@ const barData = {
   ],
   datasets: [
     {
-      label: '알고리즘 01 분반',
+      // label: '알고리즘 01 분반',
       data: [5, 10, 15, 20, 15, 10, 10, 10, 3, 2], // 각 구간에 학생 수 분포
       backgroundColor: '#FF6384', // 도넛 차트와 동일한 색상
     },
     {
-      label: '알고리즘 02 분반',
+      // label: '알고리즘 02 분반',
       data: [8, 12, 15, 17, 14, 10, 10, 8, 4, 2],
       backgroundColor: '#36A2EB', // 도넛 차트와 동일한 색상
     },
     {
-      label: '네트워크 보안 01 분반',
+      // label: '네트워크 보안 01 분반',
       data: [7, 13, 17, 15, 13, 12, 10, 8, 3, 2],
       backgroundColor: '#FFCE56', // 도넛 차트와 동일한 색상
     },
     {
-      label: '네트워크 보안 02 분반',
+      // label: '네트워크 보안 02 분반',
       data: [6, 14, 16, 18, 12, 10, 12, 6, 4, 2],
       backgroundColor: '#4BC0C0', // 도넛 차트와 동일한 색상
     },
@@ -141,15 +141,15 @@ export default function Dashboard() {
               <div className="w-24 h-24 mb-4 bg-gray-200 rounded-full"></div>
               <div className="flex items-center text-xl font-bold text-primary">
                 <LiaChalkboardTeacherSolid className="mr-2 text-3xl" />
-                <span>강문수</span>
+                <span>Admin</span>
               </div>
             </section>
             <hr className="w-full my-4 " />
             <ul className="mt-2 space-y-3">
-              <li>• 알고리즘 - 01 분반</li>
+              {/* <li>• 알고리즘 - 01 분반</li>
               <li>• 알고리즘 - 02 분반</li>
               <li>• 네트워크 보안 - 01 분반</li>
-              <li>• 네트워크 보안 - 02 분반</li>
+              <li>• 네트워크 보안 - 02 분반</li> */}
             </ul>
           </div>
 

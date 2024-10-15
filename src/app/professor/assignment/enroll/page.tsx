@@ -7,7 +7,7 @@ import { IoSearchSharp } from 'react-icons/io5';
 
 const { Option } = Select;
 
-export default function Post() {
+export default function AssignmentEnroll() {
   const [selectedProblems, setSelectedProblems] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searched, setSearched] = useState(false);

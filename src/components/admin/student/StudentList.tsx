@@ -1,37 +1,42 @@
 'use client';
 
-import { Modal } from 'antd';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { FiTrash2 } from 'react-icons/fi';
 import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { TbEdit } from 'react-icons/tb';
-import { FiTrash2 } from 'react-icons/fi';
-import Link from 'next/link';
 
-export default function ContestList() {
+export default function StudentList() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
 
-  const pageParam = searchParams.get('page') || '1';
-  const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
-
-  const list = Array.from({ length: 8 }, (_, i) => ({
-    id: i + 1,
-    name: `대회 ${i + 1}`,
-    registrationTime: `2024-9-2 16:19:${i + 1}`,
-  }));
-
+  const [studentList, setStudentList] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 15;
   const pagesPerBlock = 5;
 
-  const currentItems = list.slice(
+  useEffect(() => {
+    const fetchStudentList = async () => {
+      try {
+        const response = await axios.get(
+          '/mock/professor/student/studentlist.json',
+        );
+        setStudentList(response.data);
+        console.log('Student List:', response.data);
+      } catch (error) {
+        console.error('Error fetching student list:', error);
+      }
+    };
+
+    fetchStudentList();
+  }, []);
+
+  const currentItems = studentList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
 
-  const totalPages = Math.ceil(list.length / itemsPerPage);
+  const totalPages = Math.ceil(studentList.length / itemsPerPage);
   const currentBlock = Math.ceil(currentPage / pagesPerBlock);
   const startPage = (currentBlock - 1) * pagesPerBlock + 1;
   const endPage = Math.min(startPage + pagesPerBlock - 1, totalPages);
@@ -42,74 +47,53 @@ export default function ContestList() {
 
   const changePage = (page: number) => {
     setCurrentPage(page);
-    const query = new URLSearchParams({ page: page.toString() });
-    router.push(`/professor/contest/list?${query.toString()}`);
-  };
-
-  const showDeleteModal = (id: number) => {
-    setDeleteItemId(id);
-    setIsModalVisible(true);
-  };
-
-  const handleDelete = () => {
-    if (deleteItemId !== null) {
-      console.log(`Delete item with ID: ${deleteItemId}`);
-    }
-    setIsModalVisible(false);
-    setDeleteItemId(null);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    setDeleteItemId(null);
+    router.push(`/admin/student/list?page=${page}`);
   };
 
   return (
     <div className="flex min-h-screen p-8">
       <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
-        <section className="flex items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg">대회 목록</h1>
+        {/* Header */}
+        <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
+          <h1 className="mb-3 text-lg md:mb-0">학생 전체 목록</h1>
           <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
             <IoSearchSharp className="mr-2 text-lg text-gray-500" />
             <input
               className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
               type="text"
-              placeholder="대회를 검색해보세요"
+              placeholder="학번, 이름으로 검색해보세요"
             />
           </div>
         </section>
 
         <hr className="mt-5 border-t-2 border-gray-200" />
 
+        {/* Student List */}
         <section className="px-3 overflow-x-auto sm:px-16">
           <table className="w-full text-sm text-left border-b-2 table-auto">
             <thead>
               <tr className="border-b-2">
-                <th className="p-4">ID</th>
-                <th className="p-4">대회 이름</th>
-                <th className="p-4">등록 시간</th>
-                <th className="p-4">대회 관리</th>
+                <th className="p-4">학번</th>
+                <th className="p-4">이름</th>
+                <th className="p-4">아이디</th>
+                <th className="p-4">이메일</th>
+                <th className="p-4">학생 관리</th>
               </tr>
             </thead>
             <tbody>
               {currentItems.map((item) => (
                 <tr
                   key={item.id}
-                  className="border-b cursor-pointer hover:bg-gray-100"
+                  className="border-b cursor-pointer hover:bg-gray-50"
                 >
-                  <td className="p-4 text-xs sm:text-sm">{item.id}</td>
-                  <td className="p-4 text-xs sm:text-sm">{item.name}</td>
                   <td className="p-4 text-xs sm:text-sm">
-                    {item.registrationTime}
+                    {item.studentNumber}
                   </td>
-                  <td className="flex items-center p-4 space-x-2 text-xs sm:text-base">
-                    <Link href={`/professor/contest/list/${item.id}`}>
-                      <TbEdit className="text-lg cursor-pointer lg:text-xl" />
-                    </Link>
-                    <FiTrash2
-                      className="text-lg cursor-pointer lg:text-xl"
-                      onClick={() => showDeleteModal(item.id)}
-                    />
+                  <td className="p-4 text-xs sm:text-sm">{item.name}</td>
+                  <td className="p-4 text-xs sm:text-sm">{item.student_id}</td>
+                  <td className="p-4 text-xs sm:text-sm">{item.email}</td>
+                  <td className="p-4 text-lg sm:text-xl">
+                    <FiTrash2 className="text-lg lg:text-xl" />
                   </td>
                 </tr>
               ))}
@@ -117,6 +101,7 @@ export default function ContestList() {
           </table>
         </section>
 
+        {/* Pagination */}
         <section className="flex items-center justify-center w-full px-16 mt-4 sm:justify-end">
           <div className="flex items-center space-x-1">
             <button
@@ -126,7 +111,7 @@ export default function ContestList() {
             >
               &lt;
             </button>
-            <div className="flex space-x-1">
+            <div className="flex space-x-1 font-normal">
               {pages.map((page) => (
                 <button
                   key={page}
@@ -152,17 +137,6 @@ export default function ContestList() {
             </button>
           </div>
         </section>
-
-        <Modal
-          title="대회 삭제 확인"
-          visible={isModalVisible}
-          onOk={handleDelete}
-          onCancel={handleCancel}
-          okText="삭제"
-          cancelText="취소"
-        >
-          <p>정말로 이 대회를 삭제하시겠습니까?</p>
-        </Modal>
       </div>
     </div>
   );

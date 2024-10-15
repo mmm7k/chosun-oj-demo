@@ -103,9 +103,8 @@ export default function ContestList() {
                     {item.registrationTime}
                   </td>
                   <td className="flex items-center p-4 space-x-2 text-xs sm:text-base">
-                    <Link href={`/professor/contest/list/${item.id}`}>
-                      <TbEdit className="text-lg cursor-pointer lg:text-xl" />
-                    </Link>
+                    <TbEdit className="text-lg cursor-pointer lg:text-xl" />
+
                     <FiTrash2
                       className="text-lg cursor-pointer lg:text-xl"
                       onClick={() => showDeleteModal(item.id)}

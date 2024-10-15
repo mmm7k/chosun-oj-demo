@@ -8,7 +8,7 @@ import { TbEdit } from 'react-icons/tb';
 import { FiTrash2 } from 'react-icons/fi';
 import Link from 'next/link';
 
-export default function ContestList() {
+export default function ClassList() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -17,9 +17,9 @@ export default function ContestList() {
   const pageParam = searchParams.get('page') || '1';
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
 
-  const list = Array.from({ length: 8 }, (_, i) => ({
+  const list = Array.from({ length: 3 }, (_, i) => ({
     id: i + 1,
-    name: `대회 ${i + 1}`,
+    name: `기초프로그래밍 0${i + 1}분반`,
     registrationTime: `2024-9-2 16:19:${i + 1}`,
   }));
 
@@ -43,7 +43,7 @@ export default function ContestList() {
   const changePage = (page: number) => {
     setCurrentPage(page);
     const query = new URLSearchParams({ page: page.toString() });
-    router.push(`/professor/contest/list?${query.toString()}`);
+    router.push(`/professor/class/list?${query.toString()}`);
   };
 
   const showDeleteModal = (id: number) => {
@@ -68,13 +68,13 @@ export default function ContestList() {
     <div className="flex min-h-screen p-8">
       <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         <section className="flex items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg">대회 목록</h1>
+          <h1 className="text-lg">분반 목록</h1>
           <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
             <IoSearchSharp className="mr-2 text-lg text-gray-500" />
             <input
               className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
               type="text"
-              placeholder="대회를 검색해보세요"
+              placeholder="분반을 검색해보세요"
             />
           </div>
         </section>
@@ -86,9 +86,9 @@ export default function ContestList() {
             <thead>
               <tr className="border-b-2">
                 <th className="p-4">ID</th>
-                <th className="p-4">대회 이름</th>
+                <th className="p-4">분반 이름</th>
                 <th className="p-4">등록 시간</th>
-                <th className="p-4">대회 관리</th>
+                <th className="p-4">분반 관리</th>
               </tr>
             </thead>
             <tbody>
@@ -103,9 +103,8 @@ export default function ContestList() {
                     {item.registrationTime}
                   </td>
                   <td className="flex items-center p-4 space-x-2 text-xs sm:text-base">
-                    <Link href={`/professor/contest/list/${item.id}`}>
-                      <TbEdit className="text-lg cursor-pointer lg:text-xl" />
-                    </Link>
+                    <TbEdit className="text-lg cursor-pointer lg:text-xl" />
+
                     <FiTrash2
                       className="text-lg cursor-pointer lg:text-xl"
                       onClick={() => showDeleteModal(item.id)}
@@ -154,14 +153,14 @@ export default function ContestList() {
         </section>
 
         <Modal
-          title="대회 삭제 확인"
+          title="분반 삭제 확인"
           visible={isModalVisible}
           onOk={handleDelete}
           onCancel={handleCancel}
           okText="삭제"
           cancelText="취소"
         >
-          <p>정말로 이 대회를 삭제하시겠습니까?</p>
+          <p>정말로 이 분반을 삭제하시겠습니까?</p>
         </Modal>
       </div>
     </div>

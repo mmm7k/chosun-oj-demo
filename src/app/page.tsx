@@ -19,7 +19,8 @@ const notoSansKr = Noto_Sans_KR({
 
 export default function Home() {
   const router = useRouter();
-  const [isStaff, setIsStaff] = useState(false);
+  const [isProfessor, setIsProfessor] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const validationSchema = Yup.object().shape({
     username: Yup.string().required('학번을 입력해주세요'),
@@ -48,8 +49,10 @@ export default function Home() {
   const onSubmit = (data: { username: string; password: string }) => {
     const { username, password } = data;
     if (username === 'root' && password === 'root') {
-      if (isStaff) {
+      if (isProfessor) {
         router.push('/professor/dashboard');
+      } else if (isAdmin) {
+        router.push('/admin/dashboard');
       } else {
         router.push('/student');
       }
@@ -112,18 +115,29 @@ export default function Home() {
                   {errors.password.message}
                 </p>
               )}
+              <div className="flex items-center  w-3/4 space-x-2">
+                {/* 교수 로그인 체크박스 */}
+                <div className=" flex  text-[#5a5a5a] items-center">
+                  <Checkbox
+                    checked={isProfessor}
+                    onChange={(e) => setIsProfessor(e.target.checked)}
+                  />
+                  <span className="ml-2  md:text-lg lg:text-sm">
+                    교수 로그인
+                  </span>
+                </div>
 
-              {/* 교직원 로그인 체크박스 */}
-              <div className=" w-3/4 flex  text-[#5a5a5a] items-center">
-                <Checkbox
-                  checked={isStaff}
-                  onChange={(e) => setIsStaff(e.target.checked)}
-                />
-                <span className="ml-2  md:text-lg lg:text-sm">
-                  교직원 로그인
-                </span>
+                {/* 관리자 로그인 체크박스 */}
+                <div className="  flex  text-[#5a5a5a] items-center">
+                  <Checkbox
+                    checked={isAdmin}
+                    onChange={(e) => setIsAdmin(e.target.checked)}
+                  />
+                  <span className="ml-2  md:text-lg lg:text-sm">
+                    관리자 로그인
+                  </span>
+                </div>
               </div>
-
               <button
                 type="submit"
                 className="flex items-center justify-center w-3/4 py-2 text-white transition rounded-md cursor-pointer md:py-5 lg:py-2 bg-primary hover:bg-primaryButtonHover"

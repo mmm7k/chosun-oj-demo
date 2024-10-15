@@ -1,10 +1,10 @@
-import AssignmentList from '@/components/professor/assignment/AssignmentLIst';
+import CourseList from '@/components/admin/course/CourseList';
 import { Suspense } from 'react';
 
 export default function List() {
   return (
     <Suspense>
-      <AssignmentList />
+      <CourseList />
     </Suspense>
   );
 }

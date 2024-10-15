@@ -1,14 +1,14 @@
 'use client';
 
 import { Modal } from 'antd';
-import { useState } from 'react';
-import { IoSearchSharp } from 'react-icons/io5';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { TbEdit } from 'react-icons/tb';
+import { useState, useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
+import { IoSearchSharp } from 'react-icons/io5';
+import { TbEdit } from 'react-icons/tb';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function ContestList() {
+export default function ProblemList() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -17,9 +17,15 @@ export default function ContestList() {
   const pageParam = searchParams.get('page') || '1';
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
 
-  const list = Array.from({ length: 8 }, (_, i) => ({
+  const updateQueryParams = (page: number) => {
+    const query = new URLSearchParams();
+    query.set('page', page.toString());
+    router.push(`/professor/problems/list?${query.toString()}`);
+  };
+
+  const list = Array.from({ length: 60 }, (_, i) => ({
     id: i + 1,
-    name: `대회 ${i + 1}`,
+    name: `피라미드 별찍기${i + 1}`,
     registrationTime: `2024-9-2 16:19:${i + 1}`,
   }));
 
@@ -42,9 +48,12 @@ export default function ContestList() {
 
   const changePage = (page: number) => {
     setCurrentPage(page);
-    const query = new URLSearchParams({ page: page.toString() });
-    router.push(`/professor/contest/list?${query.toString()}`);
+    updateQueryParams(page);
   };
+
+  useEffect(() => {
+    setCurrentPage(parseInt(pageParam));
+  }, [pageParam]);
 
   const showDeleteModal = (id: number) => {
     setDeleteItemId(id);
@@ -67,28 +76,29 @@ export default function ContestList() {
   return (
     <div className="flex min-h-screen p-8">
       <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
-        <section className="flex items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg">대회 목록</h1>
-          <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-            <IoSearchSharp className="mr-2 text-lg text-gray-500" />
-            <input
-              className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
-              type="text"
-              placeholder="대회를 검색해보세요"
-            />
+        <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
+          <h1 className="mb-3 text-lg md:mb-0">전체 문제 목록</h1>
+          <div className="flex items-center">
+            <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
+              <IoSearchSharp className="mr-2 text-lg text-gray-500" />
+              <input
+                className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
+                type="text"
+                placeholder="문제를 검색해보세요"
+              />
+            </div>
           </div>
         </section>
-
         <hr className="mt-5 border-t-2 border-gray-200" />
 
         <section className="px-3 overflow-x-auto sm:px-16">
           <table className="w-full text-sm text-left border-b-2 table-auto">
             <thead>
               <tr className="border-b-2">
-                <th className="p-4">ID</th>
-                <th className="p-4">대회 이름</th>
-                <th className="p-4">등록 시간</th>
-                <th className="p-4">대회 관리</th>
+                <th className="p-4 ">ID</th>
+                <th className="p-4 ">문제 이름</th>
+                <th className="p-4 ">문제 등록 시간</th>
+                <th className="p-4 ">문제 관리</th>
               </tr>
             </thead>
             <tbody>
@@ -103,9 +113,8 @@ export default function ContestList() {
                     {item.registrationTime}
                   </td>
                   <td className="flex items-center p-4 space-x-2 text-xs sm:text-base">
-                    <Link href={`/professor/contest/list/${item.id}`}>
-                      <TbEdit className="text-lg cursor-pointer lg:text-xl" />
-                    </Link>
+                    <TbEdit className="text-lg cursor-pointer lg:text-xl" />
+
                     <FiTrash2
                       className="text-lg cursor-pointer lg:text-xl"
                       onClick={() => showDeleteModal(item.id)}
@@ -122,11 +131,12 @@ export default function ContestList() {
             <button
               onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300"
             >
               &lt;
             </button>
-            <div className="flex space-x-1">
+
+            <div className="flex space-x-1 font-normal">
               {pages.map((page) => (
                 <button
                   key={page}
@@ -141,12 +151,13 @@ export default function ContestList() {
                 </button>
               ))}
             </div>
+
             <button
               onClick={() =>
                 changePage(Math.min(startPage + pagesPerBlock, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+              className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300"
             >
               &gt;
             </button>
@@ -154,14 +165,14 @@ export default function ContestList() {
         </section>
 
         <Modal
-          title="대회 삭제 확인"
+          title="문제 삭제 확인"
           visible={isModalVisible}
           onOk={handleDelete}
           onCancel={handleCancel}
           okText="삭제"
           cancelText="취소"
         >
-          <p>정말로 이 대회를 삭제하시겠습니까?</p>
+          <p>정말로 이 문제를 삭제하시겠습니까?</p>
         </Modal>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
-export default function Enroll() {
+export default function StudentEnroll() {
   const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [students, setStudents] = useState<any[]>([]);

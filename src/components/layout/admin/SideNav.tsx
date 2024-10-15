@@ -8,19 +8,15 @@ import { useState } from 'react';
 import { PiStudent } from 'react-icons/pi';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
-import { MdLogout, MdOutlineTask } from 'react-icons/md';
+import { MdLogout } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import {
-  IoChatbubbleEllipsesOutline,
-  IoMegaphoneOutline,
-} from 'react-icons/io5';
+import { IoMegaphoneOutline } from 'react-icons/io5';
 import { GoTrophy } from 'react-icons/go';
 export default function SideNav() {
   const pathname = usePathname();
   const [isStudentDropdownOpen, setIsStudentDropdownOpen] = useState(false);
   const [isProblemsDropdownOpen, setIsProblemsDropdownOpen] = useState(false);
-  const [isAssignmentDropdownOpen, setIsAssignmentDropdownOpen] =
-    useState(false);
+  const [isCourseDropdownOpen, setIsCourseDropdownOpen] = useState(false);
   const [isAnnouncementDropdownOpen, setIsAnnouncementDropdownOpen] =
     useState(false);
   const [isContestDropdownOpen, setIsContestDropdownOpen] = useState(false);
@@ -29,7 +25,7 @@ export default function SideNav() {
   const closeAllDropdowns = () => {
     setIsStudentDropdownOpen(false);
     setIsProblemsDropdownOpen(false);
-    setIsAssignmentDropdownOpen(false);
+    setIsCourseDropdownOpen(false);
     setIsAnnouncementDropdownOpen(false);
     setIsContestDropdownOpen(false);
     setMenuOpen(false);
@@ -69,12 +65,62 @@ export default function SideNav() {
                     : 'text-white'
                 }`}
               >
-                <div className="flex items-center transition ">
+                <div className="flex  items-center transition ">
                   <LuLayoutDashboard className="mr-2 text-lg" />
                   <span> 대시보드</span>
                 </div>
               </div>
             </Link>
+
+            {/* 강의 드롭다운 */}
+            <div>
+              <div
+                className={`flex justify-between cursor-pointer items-center ${
+                  pathname.startsWith('/admin/course')
+                    ? 'text-white underline decoration-dotted'
+                    : 'text-white'
+                }`}
+                onClick={() => setIsCourseDropdownOpen(!isCourseDropdownOpen)}
+              >
+                <div className="flex items-center transition">
+                  <PiStudent className="mr-2 text-xl" />
+                  <span>강의</span>
+                </div>
+                {isCourseDropdownOpen ? (
+                  <RiArrowDropUpLine className="text-3xl" />
+                ) : (
+                  <RiArrowDropDownLine className="text-3xl" />
+                )}
+              </div>
+              <ul
+                className={`list-disc overflow-hidden transition-all duration-500 ease-in-out pl-8 space-y-4 ${
+                  isCourseDropdownOpen ? 'max-h-40' : 'max-h-0'
+                }`}
+              >
+                <li
+                  className={`transition mt-5 ${
+                    pathname === '/admin/course/list'
+                      ? 'text-white underline decoration-dotted'
+                      : 'text-white'
+                  }`}
+                >
+                  <Link href="/admin/course/list" onClick={closeAllDropdowns}>
+                    강의 목록
+                  </Link>
+                </li>
+                <li
+                  className={`transition mt-5 ${
+                    pathname === '/admin/course/enroll'
+                      ? 'text-white underline decoration-dotted'
+                      : 'text-white'
+                  }`}
+                >
+                  <Link href="/admin/course/enroll" onClick={closeAllDropdowns}>
+                    강의 개설
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             {/* 학생 드롭다운 */}
             <div>
@@ -163,7 +209,7 @@ export default function SideNav() {
                         : 'text-white'
                     }`}
                   >
-                    등록한 문제 목록
+                    전체 문제 목록
                   </li>
                 </Link>
                 <li
@@ -290,31 +336,16 @@ export default function SideNav() {
                 </li>
                 <li
                   className={`transition ${
-                    pathname === '/admin/announcement/post/course'
+                    pathname === '/admin/announcement/post'
                       ? 'text-white underline decoration-dotted'
                       : 'text-white'
                   }`}
                 >
                   <Link
-                    href="/admin/announcement/post/course"
+                    href="/admin/announcement/post"
                     onClick={closeAllDropdowns}
                   >
-                    과목 공지 등록
-                  </Link>
-                </li>
-
-                <li
-                  className={`transition ${
-                    pathname === '/admin/announcement/post/contest'
-                      ? 'text-white underline decoration-dotted'
-                      : 'text-white'
-                  }`}
-                >
-                  <Link
-                    href="/admin/announcement/post/contest"
-                    onClick={closeAllDropdowns}
-                  >
-                    대회 공지 등록
+                    공지 등록
                   </Link>
                 </li>
               </ul>
@@ -352,6 +383,63 @@ export default function SideNav() {
               대시보드
             </span>
           </Link>
+
+          {/* 강의 드롭다운 */}
+          <div className="w-full">
+            <div
+              className={`flex justify-center cursor-pointer items-center px-5 py-3 hover:bg-gray-100 ${
+                pathname.startsWith('/admin/course') &&
+                'text-primary font-semibold'
+              }`}
+              onClick={() => setIsCourseDropdownOpen(!isCourseDropdownOpen)}
+            >
+              <span className="flex items-center">
+                <PiStudent className="mr-2 text-xl" />
+                강의
+              </span>
+              {isCourseDropdownOpen ? (
+                <RiArrowDropUpLine className="text-3xl" />
+              ) : (
+                <RiArrowDropDownLine className="text-3xl" />
+              )}
+            </div>
+            {isCourseDropdownOpen && (
+              <ul className="w-full space-y-2 bg-white">
+                <Link
+                  href="/admin/course/list"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/admin/course/list' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    강의 목록
+                  </li>
+                </Link>
+                <Link
+                  href="/admin/course/enroll"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/admin/course/enroll' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    강의 개설
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
 
           {/* 학생 드롭다운 */}
           <div className="w-full">
@@ -444,7 +532,7 @@ export default function SideNav() {
                       'text-primary font-semibold'
                     }`}
                   >
-                    등록한 문제 목록
+                    전체 문제 목록
                   </li>
                 </Link>
 
@@ -582,7 +670,7 @@ export default function SideNav() {
                   </li>
                 </Link>
                 <Link
-                  href="/admin/announcement/post/course"
+                  href="/admin/announcement/post"
                   onClick={() => {
                     setMenuOpen(!menuOpen);
                     closeAllDropdowns();
@@ -590,28 +678,11 @@ export default function SideNav() {
                 >
                   <li
                     className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
-                      pathname === '/admin/announcement/post/course' &&
+                      pathname === '/admin/announcement/post' &&
                       'text-primary font-semibold'
                     }`}
                   >
-                    과목 공지 등록
-                  </li>
-                </Link>
-
-                <Link
-                  href="/admin/announcement/post/contest"
-                  onClick={() => {
-                    setMenuOpen(!menuOpen);
-                    closeAllDropdowns();
-                  }}
-                >
-                  <li
-                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
-                      pathname === '/admin/announcement/post/contest' &&
-                      'text-primary font-semibold'
-                    }`}
-                  >
-                    대회 공지 등록
+                    공지 등록
                   </li>
                 </Link>
               </ul>

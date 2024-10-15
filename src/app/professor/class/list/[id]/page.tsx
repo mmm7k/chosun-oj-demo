@@ -9,7 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { IoSearchSharp } from 'react-icons/io5';
 import { PiExclamationMarkFill } from 'react-icons/pi';
 
-export default function ContestEnroll() {
+export default function ContestEdit() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [password, setPassword] = useState('');
@@ -80,18 +80,18 @@ export default function ContestEnroll() {
     onSuccess('ok');
   };
 
-  //대회 등록 전에는 문제, 학생 등록 불가능
+  //대회 수정 전에는 문제, 학생 수정 불가능
   const handleContestRegistration = () => {
-    // 대회 등록 시 상태를 true로 변경
+    // 대회 수정 시 상태를 true로 변경
     setIsContestRegistered(true);
-    message.success('대회가 성공적으로 등록되었습니다.');
+    message.success('대회가 성공적으로 수정되었습니다.');
   };
 
   return (
     <div className="flex min-h-screen p-8">
       <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         <section className="relative flex items-center justify-between px-16">
-          <h1 className="text-lg">대회 등록</h1>
+          <h1 className="text-lg">대회 수정</h1>
         </section>
         <hr className="mt-5 border-t-2 border-gray-200" />
         <section className="flex flex-col text-sm">
@@ -195,17 +195,17 @@ export default function ContestEnroll() {
               />
             </div>
           </div>
-          {/* 대회 등록 버튼 */}
+          {/* 대회 수정 버튼 */}
           <div className="w-full flex justify-end space-x-4  items-center px-10 py-4 border-b-[1.5px] border-gray-200">
             <div className="flex items-center text-gray-500">
               <PiExclamationMarkFill className="mr-2 text-lg" />
-              <span>대회 등록 후 문제 및 학생 등록이 가능합니다.</span>
+              <span>대회 수정 후 문제 및 학생 수정이 가능합니다.</span>
             </div>
             <button
               className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover"
               onClick={handleContestRegistration}
             >
-              대회 등록
+              대회 수정
             </button>
           </div>
           {/* 문제 선택 */}
@@ -283,7 +283,7 @@ export default function ContestEnroll() {
             )}
           </div>
 
-          {/* 문제 등록 버튼 */}
+          {/* 문제 수정 버튼 */}
           <div className="w-full flex justify-end  px-10 py-4 border-b-[1.5px] border-gray-200">
             <button
               className={`px-4 py-2 text-white text-base rounded-xl font-normal ${
@@ -291,9 +291,8 @@ export default function ContestEnroll() {
                   ? 'bg-primary hover:bg-primaryButtonHover'
                   : 'bg-gray-300 cursor-not-allowed'
               }`}
-              disabled={!isContestRegistered} // 대회 등록 전까지 비활성화
             >
-              문제 등록
+              문제 수정
             </button>
           </div>
 
@@ -340,7 +339,7 @@ export default function ContestEnroll() {
             </div>
           )}
 
-          {/* 학생 등록 버튼 */}
+          {/* 학생 수정 버튼 */}
           <div className="w-full flex justify-end px-10 py-4 border-b-[1.5px] border-gray-200">
             <button
               className={`px-4 py-2 text-white text-base rounded-xl font-normal ${
@@ -348,9 +347,8 @@ export default function ContestEnroll() {
                   ? 'bg-primary hover:bg-primaryButtonHover'
                   : 'bg-gray-300 cursor-not-allowed'
               }`}
-              disabled={!isContestRegistered} // 대회 등록 전까지 비활성화
             >
-              학생 등록
+              학생 수정
             </button>
           </div>
         </section>

@@ -6,7 +6,7 @@ import { IoSearchSharp } from 'react-icons/io5';
 
 const { Option } = Select;
 
-export default function Edit() {
+export default function AssignmentEdit() {
   const [selectedProblems, setSelectedProblems] = useState<number[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [courseToEnroll, setCourseToEnroll] = useState<string | null>(null);

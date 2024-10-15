@@ -5,18 +5,16 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { useState } from 'react';
-import { PiStudent } from 'react-icons/pi';
+import { PiBookOpenTextLight, PiStudent } from 'react-icons/pi';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { MdLogout, MdOutlineTask } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import {
-  IoChatbubbleEllipsesOutline,
-  IoMegaphoneOutline,
-} from 'react-icons/io5';
+import { IoMegaphoneOutline } from 'react-icons/io5';
 import { GoTrophy } from 'react-icons/go';
 export default function SideNav() {
   const pathname = usePathname();
+  const [isClassDropdownOpen, setIsClassDropdownOpen] = useState(false);
   const [isStudentDropdownOpen, setIsStudentDropdownOpen] = useState(false);
   const [isProblemsDropdownOpen, setIsProblemsDropdownOpen] = useState(false);
   const [isAssignmentDropdownOpen, setIsAssignmentDropdownOpen] =
@@ -27,6 +25,7 @@ export default function SideNav() {
   const [menuOpen, setMenuOpen] = useState(false); // 햄버거 메뉴 상태
 
   const closeAllDropdowns = () => {
+    setIsClassDropdownOpen(false);
     setIsStudentDropdownOpen(false);
     setIsProblemsDropdownOpen(false);
     setIsAssignmentDropdownOpen(false);
@@ -76,23 +75,62 @@ export default function SideNav() {
               </div>
             </Link>
 
-            {/* Q&A */}
-            {/* <div>
-              <Link href="/professor/questions" onClick={closeAllDropdowns}>
-                <div
-                  className={`flex justify-between items-center ${
-                    pathname === '/professor/questions'
+            {/* 분반 드롭다운 */}
+            <div>
+              <div
+                className={`flex justify-between cursor-pointer items-center ${
+                  pathname.startsWith('/professor/class')
+                    ? 'text-primary hover:text-primaryHover'
+                    : 'text-secondary hover:text-secondaryHover'
+                }`}
+                onClick={() => setIsClassDropdownOpen(!isClassDropdownOpen)}
+              >
+                <div className="flex items-center transition">
+                  <PiBookOpenTextLight className="mr-2 text-xl" />
+                  <span>분반</span>
+                </div>
+                {isClassDropdownOpen ? (
+                  <RiArrowDropUpLine className="text-3xl" />
+                ) : (
+                  <RiArrowDropDownLine className="text-3xl" />
+                )}
+              </div>
+              <ul
+                className={`list-disc overflow-hidden transition-all duration-500 ease-in-out pl-8 space-y-4 ${
+                  isClassDropdownOpen ? 'max-h-40' : 'max-h-0'
+                }`}
+              >
+                <li
+                  className={`transition mt-5 ${
+                    pathname === '/professor/class/list'
                       ? 'text-primary hover:text-primaryHover'
                       : 'text-secondary hover:text-secondaryHover'
                   }`}
                 >
-                  <div className="flex items-center transition">
-                    <IoChatbubbleEllipsesOutline className="mr-2 text-xl" />
-                    <span>Q & A</span>
-                  </div>
-                </div>
-              </Link>
-            </div> */}
+                  <Link
+                    href="/professor/class/list"
+                    onClick={closeAllDropdowns}
+                  >
+                    분반 목록
+                  </Link>
+                </li>
+                <li
+                  className={`transition mt-5 ${
+                    pathname === '/professor/class/enroll'
+                      ? 'text-primary hover:text-primaryHover'
+                      : 'text-secondary hover:text-secondaryHover'
+                  }`}
+                >
+                  <Link
+                    href="/professor/class/enroll"
+                    onClick={closeAllDropdowns}
+                  >
+                    분반 개설
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
             {/* 학생 드롭다운 */}
             <div>
               <div
@@ -175,20 +213,6 @@ export default function SideNav() {
                   isProblemsDropdownOpen ? 'max-h-40' : 'max-h-0'
                 }`}
               >
-                {/* <Link
-                  href="/professor/problems/list"
-                  onClick={closeAllDropdowns}
-                >
-                  <li
-                    className={`transition mt-5 ${
-                      pathname === '/professor/problems/list'
-                        ? 'text-primary hover:text-primaryHover'
-                        : 'text-secondary hover:text-secondaryHover'
-                    }`}
-                  >
-                    전체 문제 목록
-                  </li>
-                </Link> */}
                 <Link
                   href="/professor/problems/list"
                   onClick={closeAllDropdowns}
@@ -468,6 +492,63 @@ export default function SideNav() {
               대시보드
             </span>
           </Link>
+
+          {/* 분반 드롭다운 */}
+          <div className="w-full">
+            <div
+              className={`flex justify-center cursor-pointer items-center px-5 py-3 hover:bg-gray-100 ${
+                pathname.startsWith('/professor/class') &&
+                'text-primary font-semibold'
+              }`}
+              onClick={() => setIsClassDropdownOpen(!isClassDropdownOpen)}
+            >
+              <span className="flex items-center">
+                <PiBookOpenTextLight className="mr-2 text-xl" />
+                분반
+              </span>
+              {isClassDropdownOpen ? (
+                <RiArrowDropUpLine className="text-3xl" />
+              ) : (
+                <RiArrowDropDownLine className="text-3xl" />
+              )}
+            </div>
+            {isClassDropdownOpen && (
+              <ul className="w-full space-y-2 bg-white">
+                <Link
+                  href="/professor/class/list"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/professor/class/list' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    분반 목록
+                  </li>
+                </Link>
+                <Link
+                  href="/professor/class/enroll"
+                  onClick={() => {
+                    setMenuOpen(!menuOpen);
+                    closeAllDropdowns();
+                  }}
+                >
+                  <li
+                    className={`w-full flex justify-center items-center py-2 hover:bg-gray-100 ${
+                      pathname === '/professor/class/enroll' &&
+                      'text-primary font-semibold'
+                    }`}
+                  >
+                    분반 개설
+                  </li>
+                </Link>
+              </ul>
+            )}
+          </div>
 
           {/* 학생 드롭다운 */}
           <div className="w-full">

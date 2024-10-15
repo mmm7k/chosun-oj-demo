@@ -12,7 +12,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 const { Option } = Select;
 const mdParser = new MarkdownIt();
 
-export default function Post() {
+export default function ProblemPost() {
   const [isDisclose, setIsDisclose] = useState(false);
   const [isManage, setIsManage] = useState(false);
   const [isMarkdownAccess, setIsMarkdownAccess] = useState(false);

@@ -7,7 +7,8 @@
     "major": "인공지능공학과",
     "course": "기초프로그래밍",
     "year": "2020",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
 
   {
@@ -18,7 +19,8 @@
     "major": "정보통신공학과",
     "course": "알고리즘",
     "year": "2021",
-    "grade": "2"
+    "grade": "2",
+    "student_id": "cus12121"
   },
   {
     "id": 3,
@@ -28,7 +30,8 @@
     "major": "컴퓨터공학과",
     "course": "심화프로그래밍",
     "year": "2022",
-    "grade": "3"
+    "grade": "3",
+    "student_id": "cus12121"
   },
   {
     "id": 4,
@@ -38,7 +41,8 @@
     "major": "정보통신공학과",
     "course": "기초프로그래밍",
     "year": "2021",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
   {
     "id": 5,
@@ -48,7 +52,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2020",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 6,
@@ -58,7 +63,8 @@
     "major": "컴퓨터공학과",
     "course": "기초프로그래밍",
     "year": "2022",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
   {
     "id": 7,
@@ -68,7 +74,8 @@
     "major": "인공지능공학과",
     "course": "심화프로그래밍",
     "year": "2020",
-    "grade": "2"
+    "grade": "2",
+    "student_id": "cus12121"
   },
   {
     "id": 8,
@@ -78,7 +85,8 @@
     "major": "정보통신공학과",
     "course": "알고리즘",
     "year": "2021",
-    "grade": "3"
+    "grade": "3",
+    "student_id": "cus12121"
   },
   {
     "id": 9,
@@ -88,7 +96,8 @@
     "major": "컴퓨터공학과",
     "course": "심화프로그래밍",
     "year": "2022",
-    "grade": "2"
+    "grade": "2",
+    "student_id": "cus12121"
   },
   {
     "id": 10,
@@ -98,7 +107,8 @@
     "major": "컴퓨터공학과",
     "course": "기초프로그래밍",
     "year": "2020",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
 
   {
@@ -109,7 +119,8 @@
     "major": "정보통신공학과",
     "course": "기초프로그래밍",
     "year": "2021",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
   {
     "id": 12,
@@ -119,7 +130,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2022",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 13,
@@ -129,7 +141,8 @@
     "major": "컴퓨터공학과",
     "course": "심화프로그래밍",
     "year": "2020",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 14,
@@ -139,7 +152,8 @@
     "major": "인공지능공학과",
     "course": "기초프로그래밍",
     "year": "2022",
-    "grade": "3"
+    "grade": "3",
+    "student_id": "cus12121"
   },
   {
     "id": 15,
@@ -149,7 +163,8 @@
     "major": "정보통신공학과",
     "course": "알고리즘",
     "year": "2021",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 16,
@@ -159,7 +174,8 @@
     "major": "컴퓨터공학과",
     "course": "기초프로그래밍",
     "year": "2020",
-    "grade": "2"
+    "grade": "2",
+    "student_id": "cus12121"
   },
   {
     "id": 17,
@@ -169,7 +185,8 @@
     "major": "컴퓨터공학과",
     "course": "심화프로그래밍",
     "year": "2021",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
   {
     "id": 18,
@@ -179,7 +196,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2022",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 19,
@@ -189,7 +207,8 @@
     "major": "컴퓨터공학과",
     "course": "기초프로그래밍",
     "year": "2020",
-    "grade": "3"
+    "grade": "3",
+    "student_id": "cus12121"
   },
   {
     "id": 20,
@@ -199,7 +218,8 @@
     "major": "인공지능공학과",
     "course": "심화프로그래밍",
     "year": "2021",
-    "grade": "3"
+    "grade": "3",
+    "student_id": "cus12121"
   },
   {
     "id": 21,
@@ -209,7 +229,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2021",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
   {
     "id": 22,
@@ -219,7 +240,8 @@
     "major": "정보통신공학과",
     "course": "기초프로그래밍",
     "year": "2022",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 23,
@@ -229,7 +251,8 @@
     "major": "인공지능공학과",
     "course": "심화프로그래밍",
     "year": "2020",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 24,
@@ -239,7 +262,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2021",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 25,
@@ -249,7 +273,8 @@
     "major": "정보통신공학과",
     "course": "기초프로그래밍",
     "year": "2022",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 26,
@@ -259,7 +284,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2020",
-    "grade": "1"
+    "grade": "1",
+    "student_id": "cus12121"
   },
   {
     "id": 27,
@@ -269,7 +295,8 @@
     "major": "정보통신공학과",
     "course": "심화프로그래밍",
     "year": "2021",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 28,
@@ -279,7 +306,8 @@
     "major": "컴퓨터공학과",
     "course": "기초프로그래밍",
     "year": "2021",
-    "grade": "3"
+    "grade": "3",
+    "student_id": "cus12121"
   },
   {
     "id": 29,
@@ -289,7 +317,8 @@
     "major": "컴퓨터공학과",
     "course": "알고리즘",
     "year": "2020",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   },
   {
     "id": 30,
@@ -299,6 +328,7 @@
     "major": "컴퓨터공학과",
     "course": "심화프로그래밍",
     "year": "2022",
-    "grade": "4"
+    "grade": "4",
+    "student_id": "cus12121"
   }
 ]
