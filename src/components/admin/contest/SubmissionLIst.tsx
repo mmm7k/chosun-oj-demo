@@ -75,7 +75,7 @@ export default function SubmissionList() {
     const query = new URLSearchParams();
     if (course) query.set('course', course);
     query.set('page', page.toString());
-    router.push(`/professor/contest/submission?${query.toString()}`);
+    router.push(`/admin/contest/submission?${query.toString()}`);
   };
 
   const toggleSubmission = (id: number) => {
