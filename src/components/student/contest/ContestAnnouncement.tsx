@@ -27,7 +27,7 @@ export default function ContestAnnouncement() {
   };
 
   return (
-    <section className="w-full  border flex flex-col bg-white border-gray-300 rounded-2xl mb-10">
+    <section className="flex flex-col w-full mb-10 bg-white border border-gray-300 rounded-2xl">
       {/* 공지사항 아코디언 */}
       {announcements.map((announcement) => (
         <div
@@ -48,7 +48,7 @@ export default function ContestAnnouncement() {
             </span>
           </div>
           {expandedItems.includes(announcement.id) && (
-            <div className="py-4 px-10 border-t border-gray-300 text-sm">
+            <div className="px-10 py-4 text-sm border-t border-gray-300">
               <p>문제 제출 시 접속 ip도 함께 제출됩니다.</p>
               <p>대회 도중 ip가 변경되지 않도록 주의하세요.</p>
             </div>

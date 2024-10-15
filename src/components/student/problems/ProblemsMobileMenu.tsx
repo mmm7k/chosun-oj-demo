@@ -12,12 +12,12 @@ export default function ProblemsMobileMenu() {
 
   return (
     <>
-      <div className="block lg:hidden bg-white w-full">
+      <div className="block w-full bg-white lg:hidden">
         <div
           className="flex justify-center items-center cursor-pointer py-4 border-[1.5px] border-gray-200"
           onClick={() => setIsMenuOpen(!isMenuOpen)} // 클릭 시 메뉴 열기/닫기 토글
         >
-          <span className="font-semibold text-secondary mr-2">카테고리</span>
+          <span className="mr-2 font-semibold text-secondary">카테고리</span>
           {isMenuOpen ? (
             <IoChevronUp className="text-xl text-gray-500 transition-transform duration-300" />
           ) : (

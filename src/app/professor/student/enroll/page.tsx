@@ -94,9 +94,9 @@ export default function Enroll() {
   ];
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex flex-col sm:flex-row justify-between items-center px-16">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
+        <section className="flex flex-col items-center justify-between px-16 sm:flex-row">
           <h1 className="text-lg">학생 등록</h1>
           <Upload
             accept=".xlsx, .xls"
@@ -106,11 +106,11 @@ export default function Enroll() {
             <Button icon={<UploadOutlined />}>엑셀 파일 업로드</Button>
           </Upload>
         </section>
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
 
         {/* 과목 선택 */}
         <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200 text-sm">
-          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
+          <div className="flex flex-col items-center space-x-0 space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
             <label htmlFor="course-select" className="mr-1">
               등록 할 과목 선택:
             </label>
@@ -137,11 +137,11 @@ export default function Enroll() {
             <div className="flex items-center mb-4">
               <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
                 <IoSearchSharp
-                  className="text-gray-500 text-lg mr-2 cursor-pointer"
+                  className="mr-2 text-lg text-gray-500 cursor-pointer"
                   onClick={handleSearch}
                 />
                 <input
-                  className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                  className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -153,7 +153,7 @@ export default function Enroll() {
 
             <div className="max-h-[45dvh] overflow-y-auto border-t-[1.5px] border-gray-200">
               {searched && filteredStudents.length === 0 ? (
-                <p className="text-center mt-4">검색 결과가 없습니다.</p>
+                <p className="mt-4 text-center">검색 결과가 없습니다.</p>
               ) : (
                 filteredStudents.map((student) => (
                   <div
@@ -184,13 +184,13 @@ export default function Enroll() {
           </div>
 
           {selectedStudents.length > 0 && (
-            <div className="mt-4 px-10">
+            <div className="px-10 mt-4">
               <h3 className="mb-2 text-sm">선택된 학생:</h3>
-              <div className="flex flex-wrap gap-2 max-h-16 overflow-y-auto">
+              <div className="flex flex-wrap gap-2 overflow-y-auto max-h-16">
                 {selectedStudents.map((student) => (
                   <div
                     key={student.studentNumber}
-                    className="flex items-center bg-gray-200 text-sm rounded-full px-3 py-1"
+                    className="flex items-center px-3 py-1 text-sm bg-gray-200 rounded-full"
                   >
                     <span className="mr-2">
                       {student.studentNumber} - {student.name}
@@ -208,8 +208,8 @@ export default function Enroll() {
           )}
         </section>
 
-        <div className="w-full flex justify-end px-10 mt-8">
-          <button className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover">
+        <div className="flex justify-end w-full px-10 mt-8">
+          <button className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover">
             학생 등록
           </button>
         </div>

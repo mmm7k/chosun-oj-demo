@@ -34,15 +34,15 @@ export default function AnnouncementEdit() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">공지 수정</h1>
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
+        <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
+          <h1 className="mb-3 text-lg md:mb-0">공지 수정</h1>
         </section>
 
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
 
-        <section className="px-3 sm:px-16 mt-5 space-y-4">
+        <section className="px-3 mt-5 space-y-4 sm:px-16">
           <Select
             placeholder="과목을 선택하세요."
             value={selectedCourse}
@@ -75,7 +75,7 @@ export default function AnnouncementEdit() {
 
           <div className="flex justify-end">
             <button
-              className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
+              className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover"
               onClick={handleEdit}
             >
               공지 등록

@@ -66,12 +66,12 @@ export default function Post() {
   ];
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex justify-between items-center px-16 relative ">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
+        <section className="relative flex items-center justify-between px-16 ">
           <h1 className="text-lg">문제 등록</h1>
         </section>
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
         <section className="flex flex-col text-sm ">
           {/* 문제 코드 */}
           <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200 ">
@@ -84,7 +84,7 @@ export default function Post() {
                 placeholder="문제코드를 입력해주세요"
               />
             </div>
-            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+            <span className="flex items-center mt-3 text-xs font-normal text-gray-400">
               <PiExclamationMarkFill className="text-lg" />
               <span>&nbsp; URL에서 사용되는 문제에 대한 고유한 코드.</span>
             </span>
@@ -100,7 +100,7 @@ export default function Post() {
                 placeholder="문제이름을 입력해주세요"
               />
             </div>
-            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+            <span className="flex items-center mt-3 text-xs font-normal text-gray-400">
               <PiExclamationMarkFill className="text-lg" />
               <span>&nbsp; 문제 목록에 표시된 문제의 전체 이름입니다.</span>
             </span>
@@ -130,7 +130,7 @@ export default function Post() {
                 onChange={(e) => setIsManage(e.target.checked)}
               />
             </div>
-            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+            <span className="flex items-center mt-3 text-xs font-normal text-gray-400">
               <PiExclamationMarkFill className="text-lg" />
               <span>
                 &nbsp; 체크 시 대회 또는 과제 문제로 등록할 수 있습니다.
@@ -150,7 +150,7 @@ export default function Post() {
                 onChange={(e) => setIsManage(e.target.checked)}
               />
             </div>
-            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+            <span className="flex items-center mt-3 text-xs font-normal text-gray-400">
               <PiExclamationMarkFill className="text-lg" />
               <span>&nbsp; 심사위원의 데이터 관리 허용 여부.</span>
             </span>
@@ -312,7 +312,7 @@ export default function Post() {
                 max={1}
               />
             </div>
-            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+            <span className="flex items-center mt-3 text-xs font-normal text-gray-400">
               <PiExclamationMarkFill className="text-lg" />
               <span>
                 &nbsp; 이 문제의 시간 제한(초)입니다. 소수 자릿수 초(예: 1.5)가
@@ -332,7 +332,7 @@ export default function Post() {
                 max={262144}
               />
             </div>
-            <span className="text-xs font-normal text-gray-400  mt-3 flex items-center">
+            <span className="flex items-center mt-3 text-xs font-normal text-gray-400">
               <PiExclamationMarkFill className="text-lg" />
               <span>
                 &nbsp; 이 문제에 대한 메모리 제한(KB)입니다(예: 256mb =
@@ -380,8 +380,8 @@ export default function Post() {
             />
           </div>
           {/* 등록 버튼 */}
-          <div className="w-full flex justify-end px-10 mt-8">
-            <button className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover">
+          <div className="flex justify-end w-full px-10 mt-8">
+            <button className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover">
               문제 등록
             </button>
           </div>

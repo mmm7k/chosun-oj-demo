@@ -232,12 +232,12 @@ export default function StudentMain() {
   }, [radarData]);
 
   return (
-    <div className=" w-full flex flex-col items-center mb-36  gap-12 justify-center">
+    <div className="flex flex-col items-center justify-center w-full gap-12 mb-36">
       {/* 배너 캐러셀 */}
-      <section className="w-screen h-96 bg-black">
+      <section className="w-screen bg-black h-96">
         <Slider {...bannerSettings} className="w-full h-full text-white">
           <div className="bg-black  w-screen px-[10%] lg:px-[20%] h-96 ">
-            <div className="h-96 flex justify-between items-center">
+            <div className="flex items-center justify-between h-96">
               <div className="flex flex-col gap-3">
                 <span className="">예시 타이틀1</span>
                 <span className="text-3xl">
@@ -262,7 +262,7 @@ export default function StudentMain() {
             </div>
           </div>
           <div className="bg-black  w-screen  px-[10%] lg:px-[20%] h-96 ">
-            <div className="h-96 flex justify-between items-center">
+            <div className="flex items-center justify-between h-96">
               <div className="flex flex-col gap-3">
                 <span className="">예시 타이틀2</span>
                 <span className="text-3xl">
@@ -287,7 +287,7 @@ export default function StudentMain() {
             </div>
           </div>
           <div className="bg-black  w-screen  px-[10%] lg:px-[20%] h-96 ">
-            <div className="h-96 flex justify-between items-center">
+            <div className="flex items-center justify-between h-96">
               <div className="flex flex-col gap-3">
                 <span className="">예시 타이틀3</span>
                 <span className="text-3xl">
@@ -327,8 +327,8 @@ export default function StudentMain() {
         {/* 왼쪽 섹션 유저 프로필 */}
         <div className="w-[100%] sm:w-[25%] flex flex-col justify-center items-center py-10 px-10 border border-gray-300 rounded-xl space-y-1  text-gray-700">
           <FaUserGraduate className="text-primary text-[4rem] mb-2" />
-          <span className="font-semibold text-xl">김민수</span>
-          <span className=" text-lg">Developer</span>
+          <span className="text-xl font-semibold">김민수</span>
+          <span className="text-lg ">Developer</span>
           <div>
             <span className="font-semibold">Major : </span> 컴퓨터 공학과
           </div>
@@ -337,15 +337,15 @@ export default function StudentMain() {
           </div>
         </div>
         {/* 오른쪽 섹션 랭크,잔디 */}
-        <div className="flex-1 flex flex-col sm:flex-row items-center justify-between  py-10 px-10 sm:px-1 md:px-10 lg:px-1 2xl:px-10 border border-gray-300 rounded-xl">
+        <div className="flex flex-col items-center justify-between flex-1 px-10 py-10 border border-gray-300 sm:flex-row sm:px-1 md:px-10 lg:px-1 2xl:px-10 rounded-xl">
           {/* 랭크와 스텟 */}
-          <div className="flex-1 flex flex-col items-center sm:flex-row  ">
+          <div className="flex flex-col items-center flex-1 sm:flex-row ">
             <BiSolidAward
               className={`text-[11rem] sm:text-[8rem]  lg:text-[9rem] xl:text-[10rem] 2xl:text-[11rem] animate-pulse mb-5 sm:mb-0`}
               style={{ color: rankColor }}
             />
-            <div className="ml-0 sm:ml-0 lg:ml-3 flex flex-col justify-center items-start text-gray-600 space-y-3 mb-5 sm:mb-0">
-              <span className=" lg:text-lg  2xl:text-xl font-semibold">
+            <div className="flex flex-col items-start justify-center mb-5 ml-0 space-y-3 text-gray-600 sm:ml-0 lg:ml-3 sm:mb-0">
+              <span className="font-semibold lg:text-lg 2xl:text-xl">
                 <span>Rank : </span>
                 <span className="text-gray-900 ">{rank}</span>
               </span>
@@ -391,7 +391,7 @@ export default function StudentMain() {
               showWeekdayLabels
               gutterSize={1.5}
             />
-            <div className="absolute space-x-2 font-light text-gray-500  bottom-0 right-0 flex items-center ">
+            <div className="absolute bottom-0 right-0 flex items-center space-x-2 font-light text-gray-500 ">
               <span className="text-xs 2xl:text-sm">Less</span>
               <div className="rounded-[0.27rem] bg-[#ebedf0] w-[0.9rem] h-[0.9rem]" />
               <div className="rounded-[0.27rem] bg-[#9be9a8] w-[0.9rem] h-[0.9rem]" />
@@ -404,7 +404,7 @@ export default function StudentMain() {
         </div>
       </section>
       <section className="border border-gray-300 rounded-xl w-[90%] lg:w-[62%] py-10 flex-col">
-        <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
+        <p className="flex items-center text-lg font-semibold text-secondary pl-9 mb-7">
           <PiRanking className="text-2xl mr-1 mt-[0.18rem] " />
 
           <span>난이도 분포</span>
@@ -421,7 +421,7 @@ export default function StudentMain() {
               <span>레벨</span>
               <span>문제</span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
 
             {/* Lv.1 */}
             <div className="flex justify-between pl-[5%] pr-[25%] relative">
@@ -431,7 +431,7 @@ export default function StudentMain() {
                 {calculatePercentage(donutData.datasets[0].data[0])}%
               </span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
 
             {/* Lv.2 */}
             <div className="flex justify-between pl-[5%] pr-[25%] relative">
@@ -441,7 +441,7 @@ export default function StudentMain() {
                 {calculatePercentage(donutData.datasets[0].data[1])}%
               </span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
 
             {/* Lv.3 */}
             <div className="flex justify-between pl-[5%] pr-[25%] relative">
@@ -451,12 +451,12 @@ export default function StudentMain() {
                 {calculatePercentage(donutData.datasets[0].data[2])}%
               </span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
           </div>
         </div>
       </section>
       <section className="border border-gray-300 rounded-xl w-[90%] lg:w-[62%] py-10 flex-col">
-        <p className="text-lg font-semibold text-secondary pl-9 mb-7 flex items-center">
+        <p className="flex items-center text-lg font-semibold text-secondary pl-9 mb-7">
           <FaCodeBranch className="text-xl mr-1 mt-[0.18rem]" />
           <span>알고리즘 분포</span>
         </p>
@@ -472,7 +472,7 @@ export default function StudentMain() {
               <span>태그</span>
               <span>문제</span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
 
             {/* 가장 많이 푼 #1 태그 */}
             <div className="flex justify-between pl-[5%] pr-[25%] relative">
@@ -482,7 +482,7 @@ export default function StudentMain() {
                 {calculateTagPercentage(topTags[0].count)}%
               </span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
 
             {/* 가장 많이 푼 #2 태그 */}
             <div className="flex justify-between pl-[5%] pr-[25%] relative">
@@ -492,7 +492,7 @@ export default function StudentMain() {
                 {calculateTagPercentage(topTags[1].count)}%
               </span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
             {/* 가장 많이 푼 #3 태그 */}
             <div className="flex justify-between pl-[5%] pr-[25%] relative">
               <span className="text-secondary">#{topTags[2].label}</span>
@@ -501,7 +501,7 @@ export default function StudentMain() {
                 {calculateTagPercentage(topTags[2].count)}%
               </span>
             </div>
-            <hr className="w-full border-b-1 border-gray-300 my-2" />
+            <hr className="w-full my-2 border-gray-300 border-b-1" />
           </div>
         </div>
       </section>

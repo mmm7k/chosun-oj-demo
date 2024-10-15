@@ -10,9 +10,9 @@ export default function QuestionsMenu({ course }: { course: string }) {
   const [isAlgorithmDropdownOpen, setIsAlgorithmDropdownOpen] = useState(false);
   const decodedCourse = decodeURIComponent(course);
   return (
-    <aside className="hidden lg:block flex-1 p-8 text-sm bg-white shadow-md rounded-2xl">
-      <div className="w-full h-full flex flex-col space-y-7">
-        <h1 className="font-semibold text-secondary mb-2">카테고리</h1>
+    <aside className="flex-1 hidden p-8 text-sm bg-white shadow-md lg:block rounded-2xl">
+      <div className="flex flex-col w-full h-full space-y-7">
+        <h1 className="mb-2 font-semibold text-secondary">카테고리</h1>
 
         {/* 공통 Q&A */}
         <Link href="/student/questions/common">

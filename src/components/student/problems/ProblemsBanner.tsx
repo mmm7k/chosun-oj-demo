@@ -20,10 +20,10 @@ export default function ProblemsBanner() {
     waitForAnimate: false,
   };
   return (
-    <section className="w-screen h-44 bg-black">
+    <section className="w-screen bg-black h-44">
       <Slider {...bannerSettings} className="w-full h-full text-white">
         <div className="bg-black  w-screen px-[10%] lg:px-[20%] h-44 ">
-          <div className="h-44 flex justify-between items-center">
+          <div className="flex items-center justify-between h-44">
             <div className="flex flex-col gap-3">
               <span className="text-xl">
                 조선대학교는 학생들의
@@ -47,7 +47,7 @@ export default function ProblemsBanner() {
           </div>
         </div>
         <div className="bg-black  w-screen  px-[10%] lg:px-[20%] h-44 ">
-          <div className="h-44 flex justify-between items-center">
+          <div className="flex items-center justify-between h-44">
             <div className="flex flex-col gap-3">
               <span className="text-xl">
                 조선대학교는 학생들의
@@ -71,7 +71,7 @@ export default function ProblemsBanner() {
           </div>
         </div>
         <div className="bg-black  w-screen  px-[10%] lg:px-[20%] h-44 ">
-          <div className="h-44 flex justify-between items-center">
+          <div className="flex items-center justify-between h-44">
             <div className="flex flex-col gap-3">
               <span className="text-xl">
                 조선대학교는 학생들의

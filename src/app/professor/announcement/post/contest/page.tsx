@@ -35,15 +35,15 @@ export default function ContestPost() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         <section className="flex items-center justify-between px-16">
-          <h1 className="text-lg mb-3 md:mb-0">대회 공지 등록</h1>
+          <h1 className="mb-3 text-lg md:mb-0">대회 공지 등록</h1>
         </section>
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
         <section className="flex flex-col text-sm">
           <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200">
-            <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
+            <div className="flex flex-col items-center space-x-0 space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
               <label htmlFor="contest-select" className="mr-3">
                 대회 선택:
               </label>
@@ -86,7 +86,7 @@ export default function ContestPost() {
         </section>
         <div className="flex justify-end px-10 mt-8">
           <button
-            className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
+            className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover"
             onClick={handlePost}
           >
             공지 등록

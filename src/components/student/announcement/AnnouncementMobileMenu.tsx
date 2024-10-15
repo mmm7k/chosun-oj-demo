@@ -8,12 +8,12 @@ export default function AnnouncementMobileMenu({ course }: { course: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const decodedCourse = decodeURIComponent(course);
   return (
-    <div className="block lg:hidden bg-white w-full ">
+    <div className="block w-full bg-white lg:hidden ">
       <div
-        className="flex justify-center items-center cursor-pointer py-4 border-b border-gray-200 "
+        className="flex items-center justify-center py-4 border-b border-gray-200 cursor-pointer "
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <span className="font-semibold text-secondary mr-2">카테고리</span>
+        <span className="mr-2 font-semibold text-secondary">카테고리</span>
         {isMenuOpen ? (
           <IoChevronUp className="text-xl text-gray-500 " />
         ) : (
@@ -24,7 +24,7 @@ export default function AnnouncementMobileMenu({ course }: { course: string }) {
       <div
         className={` overflow-hidden ${isMenuOpen ? ' h-auto py-3' : 'max-h-0'}`}
       >
-        <ul className="space-y-4  text-gray-500">
+        <ul className="space-y-4 text-gray-500">
           {/* 공통 공지 */}
           <Link href="/student/announcement/common">
             <li

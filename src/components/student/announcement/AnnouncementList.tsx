@@ -60,17 +60,17 @@ export default function AnnouncementList({ course }: { course: string }) {
   return (
     <main className="w-full lg:w-[75%]">
       {/* 공지 검색 */}
-      <div className="flex items-center bg-white shadow-md rounded-2xl px-4">
-        <IoSearchSharp className="text-gray-400 text-lg" />
+      <div className="flex items-center px-4 bg-white shadow-md rounded-2xl">
+        <IoSearchSharp className="text-lg text-gray-400" />
         <input
           type="text"
-          className="w-full py-3 pl-3 focus:outline-none placeholder:text-sm text-sm"
+          className="w-full py-3 pl-3 text-sm focus:outline-none placeholder:text-sm"
           placeholder="공지 제목을 입력하세요."
         />
       </div>
       {/* 공지 목록 */}
-      <div className="mt-5 rounded-2xl border bg-white shadow-md text-sm text-gray-500">
-        <div className="flex items-center rounded-t-2xl py-2 px-5 border-b bg-white text-gray-800">
+      <div className="mt-5 text-sm text-gray-500 bg-white border shadow-md rounded-2xl">
+        <div className="flex items-center px-5 py-2 text-gray-800 bg-white border-b rounded-t-2xl">
           <span className="ml-[30%]">공지 제목</span>
           <span className="ml-auto mr-[25%]">시간</span>
         </div>
@@ -106,7 +106,7 @@ export default function AnnouncementList({ course }: { course: string }) {
       </div>
 
       {/* 페이지네이션 */}
-      <div className="flex justify-center items-center mt-4 space-x-1">
+      <div className="flex items-center justify-center mt-4 space-x-1">
         <button
           onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
           disabled={currentPage === 1}

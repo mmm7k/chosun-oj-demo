@@ -88,12 +88,12 @@ export default function ContestRegister() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex justify-between items-center px-16 relative">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
+        <section className="relative flex items-center justify-between px-16">
           <h1 className="text-lg">대회 등록</h1>
         </section>
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
         <section className="flex flex-col text-sm">
           {/* 대회 이름 */}
           <div className="flex flex-col justify-center px-10 py-4 border-b-[1.5px] border-gray-200">
@@ -198,11 +198,11 @@ export default function ContestRegister() {
           {/* 대회 등록 버튼 */}
           <div className="w-full flex justify-end space-x-4  items-center px-10 py-4 border-b-[1.5px] border-gray-200">
             <div className="flex items-center text-gray-500">
-              <PiExclamationMarkFill className="text-lg mr-2" />
+              <PiExclamationMarkFill className="mr-2 text-lg" />
               <span>대회 등록 후 문제 및 학생 등록이 가능합니다.</span>
             </div>
             <button
-              className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover"
+              className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover"
               onClick={handleContestRegistration}
             >
               대회 등록
@@ -214,11 +214,11 @@ export default function ContestRegister() {
             <div className="flex items-center mb-4">
               <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
                 <IoSearchSharp
-                  className="text-gray-500 text-lg mr-2 cursor-pointer"
+                  className="mr-2 text-lg text-gray-500 cursor-pointer"
                   onClick={handleSearch}
                 />
                 <input
-                  className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                  className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -230,7 +230,7 @@ export default function ContestRegister() {
 
             <div className="max-h-[45dvh] overflow-y-auto border-t-[1.5px] border-gray-200">
               {searched && filteredProblems.length === 0 ? (
-                <p className="text-center mt-4">검색 결과가 없습니다.</p>
+                <p className="mt-4 text-center">검색 결과가 없습니다.</p>
               ) : (
                 filteredProblems.map((problem) => (
                   <div
@@ -266,7 +266,7 @@ export default function ContestRegister() {
                     return (
                       <div
                         key={id}
-                        className="flex items-center bg-gray-200 text-sm rounded-full px-3 py-1"
+                        className="flex items-center px-3 py-1 text-sm bg-gray-200 rounded-full"
                       >
                         <span className="mr-2">{problem?.name}</span>
                         <button
@@ -312,11 +312,11 @@ export default function ContestRegister() {
           {selectedStudents.length > 0 && (
             <div className="px-10 py-4 border-b-[1.5px] border-gray-200">
               <h3 className="text-sm">선택된 학생:</h3>
-              <div className="flex flex-wrap gap-2 mt-2  max-h-16 overflow-y-auto">
+              <div className="flex flex-wrap gap-2 mt-2 overflow-y-auto max-h-16">
                 {selectedStudents.map((student) => (
                   <div
                     key={student.studentNumber}
-                    className="flex items-center bg-gray-200 rounded-full px-3 py-1"
+                    className="flex items-center px-3 py-1 bg-gray-200 rounded-full"
                   >
                     <span className="mr-2">
                       {student.studentNumber} - {student.name}

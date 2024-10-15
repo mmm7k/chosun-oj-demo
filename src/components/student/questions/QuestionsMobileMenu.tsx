@@ -13,12 +13,12 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
   const decodedCourse = decodeURIComponent(course);
 
   return (
-    <div className="block lg:hidden bg-white w-full ">
+    <div className="block w-full bg-white lg:hidden ">
       <div
-        className="flex justify-center items-center cursor-pointer py-4 border-b border-gray-200 "
+        className="flex items-center justify-center py-4 border-b border-gray-200 cursor-pointer "
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <span className="font-semibold text-secondary mr-2">카테고리</span>
+        <span className="mr-2 font-semibold text-secondary">카테고리</span>
         {isMenuOpen ? (
           <IoChevronUp className="text-xl text-gray-500 " />
         ) : (
@@ -83,7 +83,7 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
               {[...Array(15)].map((_, idx) => (
                 <li
                   key={idx}
-                  className="hover:text-gray-900 transition cursor-pointer"
+                  className="transition cursor-pointer hover:text-gray-900"
                 >
                   <Link
                     href={`/student/questions/기초 프로그래밍?chapter=${idx + 1}`}
@@ -140,7 +140,7 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
               {[...Array(15)].map((_, idx) => (
                 <li
                   key={idx}
-                  className="hover:text-gray-900 transition cursor-pointer"
+                  className="transition cursor-pointer hover:text-gray-900"
                 >
                   <Link
                     href={`/student/questions/자바 프로그래밍?chapter=${idx + 1}`}
@@ -200,7 +200,7 @@ export default function QuestionsMobileMenu({ course }: { course: string }) {
               {[...Array(15)].map((_, idx) => (
                 <li
                   key={idx}
-                  className="hover:text-gray-900 transition cursor-pointer"
+                  className="transition cursor-pointer hover:text-gray-900"
                 >
                   <Link href={`/student/questions/알고리즘?chapter=${idx + 1}`}>
                     Chapter {idx + 1}

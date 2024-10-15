@@ -36,10 +36,10 @@ export default function SideNav() {
   };
 
   return (
-    <nav className="w-screen 2xl:w-52 h-20 2xl:min-h-screen bg-white flex justify-center 2xl:fixed 2xl:left-0 2xl:top-0 text-secondary text-sm font-semibold shadow-xl">
+    <nav className="flex justify-center w-screen h-20 text-sm font-semibold bg-white shadow-xl 2xl:w-52 2xl:min-h-screen 2xl:fixed 2xl:left-0 2xl:top-0 text-secondary">
       <div className="flex 2xl:flex-col items-center justify-between 2xl:justify-normal w-[100%] px-[5%] 2xl:px-0 2xl:min-h-screen relative">
         {/* 로고 이미지 */}
-        <div className="min-w-9 2xl:min-w-16 min-h-9 2xl:min-h-16 relative 2xl:mt-11">
+        <div className="relative min-w-9 2xl:min-w-16 min-h-9 2xl:min-h-16 2xl:mt-11">
           <Link href="/professor/dashboard" onClick={closeAllDropdowns}>
             <Image
               src="/commons/symbol.png"
@@ -70,7 +70,7 @@ export default function SideNav() {
                 }`}
               >
                 <div className="flex items-center transition">
-                  <LuLayoutDashboard className="text-lg mr-2" />
+                  <LuLayoutDashboard className="mr-2 text-lg" />
                   <span> 대시보드</span>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export default function SideNav() {
                   }`}
                 >
                   <div className="flex items-center transition">
-                    <IoChatbubbleEllipsesOutline className="text-xl mr-2" />
+                    <IoChatbubbleEllipsesOutline className="mr-2 text-xl" />
                     <span>Q & A</span>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ export default function SideNav() {
                 onClick={() => setIsStudentDropdownOpen(!isStudentDropdownOpen)}
               >
                 <div className="flex items-center transition">
-                  <PiStudent className="text-xl mr-2" />
+                  <PiStudent className="mr-2 text-xl" />
                   <span>학생</span>
                 </div>
                 {isStudentDropdownOpen ? (
@@ -161,7 +161,7 @@ export default function SideNav() {
                 }
               >
                 <div className="flex items-center transition">
-                  <HiOutlinePencilSquare className="text-xl mr-2" />
+                  <HiOutlinePencilSquare className="mr-2 text-xl" />
                   <span>문제</span>
                 </div>
                 {isProblemsDropdownOpen ? (
@@ -232,7 +232,7 @@ export default function SideNav() {
                 }
               >
                 <div className="flex items-center transition">
-                  <MdOutlineTask className="text-xl mr-2" />
+                  <MdOutlineTask className="mr-2 text-xl" />
                   <span>과제</span>
                 </div>
                 {isAssignmentDropdownOpen ? (
@@ -303,7 +303,7 @@ export default function SideNav() {
                 onClick={() => setIsContestDropdownOpen(!isContestDropdownOpen)}
               >
                 <div className="flex items-center transition">
-                  <GoTrophy className="text-xl mr-2" />
+                  <GoTrophy className="mr-2 text-xl" />
                   <span>대회</span>
                 </div>
                 {isContestDropdownOpen ? (
@@ -375,7 +375,7 @@ export default function SideNav() {
                 }
               >
                 <div className="flex items-center transition">
-                  <IoMegaphoneOutline className="text-xl mr-2" />
+                  <IoMegaphoneOutline className="mr-2 text-xl" />
                   <span>공지</span>
                 </div>
                 {isAnnouncementDropdownOpen ? (
@@ -437,8 +437,8 @@ export default function SideNav() {
           </div>
           {/* 로그아웃 */}
           <Link href="/" className="mt-5">
-            <div className="cursor-pointer flex items-center transition hover:text-secondaryHover">
-              <MdLogout className="text-xl mr-2" />
+            <div className="flex items-center transition cursor-pointer hover:text-secondaryHover">
+              <MdLogout className="mr-2 text-xl" />
               <span>로그아웃</span>
             </div>
           </Link>
@@ -453,7 +453,7 @@ export default function SideNav() {
         >
           <Link
             href="/professor/dashboard"
-            className="w-full flex justify-center items-center py-4 hover:bg-gray-100"
+            className="flex items-center justify-center w-full py-4 hover:bg-gray-100"
             onClick={() => {
               setMenuOpen(!menuOpen);
               closeAllDropdowns();
@@ -471,7 +471,7 @@ export default function SideNav() {
 
           {/* <Link
             href="/professor/questions"
-            className="w-full flex justify-center items-center py-4 hover:bg-gray-100"
+            className="flex items-center justify-center w-full py-4 hover:bg-gray-100"
             onClick={() => {
               setMenuOpen(!menuOpen);
               closeAllDropdowns();
@@ -497,7 +497,7 @@ export default function SideNav() {
               onClick={() => setIsStudentDropdownOpen(!isStudentDropdownOpen)}
             >
               <span className="flex items-center">
-                <PiStudent className="text-xl mr-2" />
+                <PiStudent className="mr-2 text-xl" />
                 학생
               </span>
               {isStudentDropdownOpen ? (
@@ -507,7 +507,7 @@ export default function SideNav() {
               )}
             </div>
             {isStudentDropdownOpen && (
-              <ul className="space-y-2 bg-white w-full">
+              <ul className="w-full space-y-2 bg-white">
                 <Link
                   href="/professor/student/list"
                   onClick={() => {
@@ -554,7 +554,7 @@ export default function SideNav() {
               onClick={() => setIsProblemsDropdownOpen(!isProblemsDropdownOpen)}
             >
               <span className="flex items-center">
-                <HiOutlinePencilSquare className="text-xl mr-2" />
+                <HiOutlinePencilSquare className="mr-2 text-xl" />
                 문제
               </span>
               {isProblemsDropdownOpen ? (
@@ -564,7 +564,7 @@ export default function SideNav() {
               )}
             </div>
             {isProblemsDropdownOpen && (
-              <ul className="py-2 space-y-2 bg-white w-full">
+              <ul className="w-full py-2 space-y-2 bg-white">
                 {/* <Link
                   href="/professor/problems/list"
                   onClick={() => {
@@ -630,7 +630,7 @@ export default function SideNav() {
               }
             >
               <span className="flex items-center">
-                <MdOutlineTask className="text-xl mr-2" />
+                <MdOutlineTask className="mr-2 text-xl" />
                 과제
               </span>
               {isAssignmentDropdownOpen ? (
@@ -640,7 +640,7 @@ export default function SideNav() {
               )}
             </div>
             {isAssignmentDropdownOpen && (
-              <ul className="py-2 space-y-2 bg-white w-full">
+              <ul className="w-full py-2 space-y-2 bg-white">
                 <Link
                   href="/professor/assignment/list"
                   onClick={() => {
@@ -704,7 +704,7 @@ export default function SideNav() {
               onClick={() => setIsContestDropdownOpen(!isContestDropdownOpen)}
             >
               <span className="flex items-center">
-                <GoTrophy className="text-xl mr-2" />
+                <GoTrophy className="mr-2 text-xl" />
                 대회
               </span>
               {isContestDropdownOpen ? (
@@ -714,7 +714,7 @@ export default function SideNav() {
               )}
             </div>
             {isContestDropdownOpen && (
-              <ul className="py-2 space-y-2 bg-white w-full">
+              <ul className="w-full py-2 space-y-2 bg-white">
                 <Link
                   href="/professor/contest/list"
                   onClick={() => {
@@ -780,7 +780,7 @@ export default function SideNav() {
               }
             >
               <span className="flex items-center">
-                <IoMegaphoneOutline className="text-xl mr-2" />
+                <IoMegaphoneOutline className="mr-2 text-xl" />
                 공지
               </span>
               {isAnnouncementDropdownOpen ? (
@@ -790,7 +790,7 @@ export default function SideNav() {
               )}
             </div>
             {isAnnouncementDropdownOpen && (
-              <ul className="py-2 space-y-2 bg-white w-full">
+              <ul className="w-full py-2 space-y-2 bg-white">
                 <Link
                   href="/professor/announcement/list"
                   onClick={() => {
@@ -846,10 +846,10 @@ export default function SideNav() {
           {/* 로그아웃 */}
           <Link
             href="/"
-            className="w-full flex justify-center items-center py-4 hover:bg-gray-100"
+            className="flex items-center justify-center w-full py-4 hover:bg-gray-100"
           >
-            <span className="cursor-pointer flex items-center">
-              로그아웃 <MdLogout className="text-lg ml-2" />
+            <span className="flex items-center cursor-pointer">
+              로그아웃 <MdLogout className="ml-2 text-lg" />
             </span>
           </Link>
         </div>

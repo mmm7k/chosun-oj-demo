@@ -55,16 +55,16 @@ export default function Post() {
   };
 
   return (
-    <div className="min-h-screen p-8 flex text-sm">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex justify-between items-center px-16 ">
+    <div className="flex min-h-screen p-8 text-sm">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
+        <section className="flex items-center justify-between px-16 ">
           <h1 className="text-lg">과제 등록</h1>
         </section>
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
 
         {/* 과목 선택 */}
         <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200 text-sm">
-          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
+          <div className="flex flex-col items-center space-x-0 space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
             <label htmlFor="course-select" className="mr-1">
               등록 할 과목 선택:
             </label>
@@ -87,7 +87,7 @@ export default function Post() {
 
         {/* 등록 할 주차 선택 선택 */}
         <div className="flex flex-col px-10 py-4 border-b-[1.5px] border-gray-200 text-sm">
-          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 space-x-0 sm:space-x-4">
+          <div className="flex flex-col items-center space-x-0 space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
             <label htmlFor="chapter-select" className="mr-1">
               등록 할 주차 선택:
             </label>
@@ -161,11 +161,11 @@ export default function Post() {
           <div className="flex items-center mb-4">
             <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
               <IoSearchSharp
-                className="text-gray-500 text-lg mr-2 cursor-pointer"
+                className="mr-2 text-lg text-gray-500 cursor-pointer"
                 onClick={handleSearch}
               />
               <input
-                className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -177,7 +177,7 @@ export default function Post() {
 
           <div className="max-h-[45dvh] overflow-y-auto border-t-[1.5px] border-gray-200">
             {searched && filteredProblems.length === 0 ? (
-              <p className="text-center mt-4">검색 결과가 없습니다.</p>
+              <p className="mt-4 text-center">검색 결과가 없습니다.</p>
             ) : (
               filteredProblems.map((problem) => (
                 <div
@@ -213,7 +213,7 @@ export default function Post() {
                   return (
                     <div
                       key={id}
-                      className="flex items-center bg-gray-200 text-sm rounded-full px-3 py-1"
+                      className="flex items-center px-3 py-1 text-sm bg-gray-200 rounded-full"
                     >
                       <span className="mr-2">{problem?.name}</span>
                       <button
@@ -231,8 +231,8 @@ export default function Post() {
         </div>
 
         {/* 등록 버튼 */}
-        <div className="w-full flex justify-end px-10 mt-8">
-          <button className="px-4 py-2 bg-primary text-white text-base rounded-xl font-normal hover:bg-primaryButtonHover">
+        <div className="flex justify-end w-full px-10 mt-8">
+          <button className="px-4 py-2 text-base font-normal text-white bg-primary rounded-xl hover:bg-primaryButtonHover">
             과제 등록
           </button>
         </div>

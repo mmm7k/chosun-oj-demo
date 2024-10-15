@@ -131,16 +131,16 @@ const barOptions = {
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen p-8 flex flex-col 2xl:flex-row">
-      <div className="flex flex-1 gap-4 flex-col 2xl:flex-row">
+    <div className="flex flex-col min-h-screen p-8 2xl:flex-row">
+      <div className="flex flex-col flex-1 gap-4 2xl:flex-row">
         {/* 좌측 영역 */}
-        <div className="flex flex-col gap-4 w-full 2xl:w-1/3">
+        <div className="flex flex-col w-full gap-4 2xl:w-1/3">
           {/* 좌측 프로필 영역 */}
-          <div className="bg-white rounded-3xl shadow-lg p-6 h-auto 2xl:h-1/2 flex flex-col">
+          <div className="flex flex-col h-auto p-6 bg-white shadow-lg rounded-3xl 2xl:h-1/2">
             <section className="flex flex-col items-center">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mb-4"></div>
-              <div className="text-primary text-xl font-bold flex items-center">
-                <LiaChalkboardTeacherSolid className="text-3xl mr-2" />
+              <div className="w-24 h-24 mb-4 bg-gray-200 rounded-full"></div>
+              <div className="flex items-center text-xl font-bold text-primary">
+                <LiaChalkboardTeacherSolid className="mr-2 text-3xl" />
                 <span>강문수</span>
               </div>
             </section>
@@ -154,20 +154,20 @@ export default function Dashboard() {
           </div>
 
           {/* 좌측 하단 도넛 그래프 영역 */}
-          <div className="bg-white rounded-3xl shadow-lg p-6 flex-grow">
+          <div className="flex-grow p-6 bg-white shadow-lg rounded-3xl">
             <span className="font-bold">💡 학생 분포도</span>
             <hr className="w-full my-4 " />
-            <div className="h-72 flex items-center justify-center">
+            <div className="flex items-center justify-center h-72">
               <Doughnut data={donutData} options={donutOptions} />
             </div>
           </div>
         </div>
 
         {/* 우측 영역 */}
-        <div className="flex flex-col w-full 2xl:w-2/3 gap-4">
+        <div className="flex flex-col w-full gap-4 2xl:w-2/3">
           {/* 상단 3개의 작은 카드 영역 */}
-          <div className="flex flex-col 2xl:flex-row gap-4 text-sm">
-            <div className="bg-white rounded-3xl shadow-lg p-6 h-32 flex-grow">
+          <div className="flex flex-col gap-4 text-sm 2xl:flex-row">
+            <div className="flex-grow h-32 p-6 bg-white shadow-lg rounded-3xl">
               <span className="font-bold">📝 할 일 목록</span>
               <hr className="w-full my-2 " />
               <ul className="mt-2 space-y-1 ">
@@ -175,7 +175,7 @@ export default function Dashboard() {
                 <li>• 강의 준비</li>
               </ul>
             </div>
-            <div className="bg-white rounded-3xl shadow-lg p-6 h-32 flex-grow">
+            <div className="flex-grow h-32 p-6 bg-white shadow-lg rounded-3xl">
               <span className="font-bold">📢 공지사항</span>
               <hr className="w-full my-2 " />
               <ul className="mt-2 space-y-1">
@@ -183,7 +183,7 @@ export default function Dashboard() {
                 <li>• 새 과제 업데이트</li>
               </ul>
             </div>
-            <div className="bg-white rounded-3xl shadow-lg p-6 h-32 flex-grow">
+            <div className="flex-grow h-32 p-6 bg-white shadow-lg rounded-3xl">
               <span className="font-bold">🗒 메모</span>
               <hr className="w-full my-2 " />
               <p className="mt-2">오늘 할 일 완료</p>
@@ -191,8 +191,8 @@ export default function Dashboard() {
           </div>
 
           {/* 우측 메인 그래프 영역 */}
-          <div className="bg-white rounded-3xl shadow-lg p-6 flex-grow">
-            <h2 className="font-bold text-lg">📊 분반별 성적 비교</h2>
+          <div className="flex-grow p-6 bg-white shadow-lg rounded-3xl">
+            <h2 className="text-lg font-bold">📊 분반별 성적 비교</h2>
             <hr className="w-full my-6 " />
             <div className="h-[35rem]">
               <Bar data={barData} options={barOptions} />

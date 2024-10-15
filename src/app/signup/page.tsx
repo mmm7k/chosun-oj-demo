@@ -6,8 +6,8 @@ export default function Home() {
     <>
       <div className="w-screen h-[100dvh] flex ">
         {/* left */}
-        <section className="hidden flex-1 lg:flex items-center justify-center bg-primary">
-          <div className="w-1/3 h-2/5 relative">
+        <section className="items-center justify-center flex-1 hidden lg:flex bg-primary">
+          <div className="relative w-1/3 h-2/5">
             <Image
               src="/commons/logo.png"
               alt="Chosun Online Judge"
@@ -17,9 +17,9 @@ export default function Home() {
           </div>
         </section>
         {/* right */}
-        <section className="flex-1 flex items-center justify-center ">
+        <section className="flex items-center justify-center flex-1 ">
           <div className="w-[70%] h-[70%] lg:w-1/2 lg:h-1/2  space-y-4 rounded-sm border-solid border-[1px] border-slate-200 shadow-xl flex flex-col justify-center items-center">
-            <span className="text-secondary text-2xl sm:text-3xl md:text-4xl lg:text-2xl">
+            <span className="text-2xl text-secondary sm:text-3xl md:text-4xl lg:text-2xl">
               회원가입
             </span>
             <input
@@ -38,7 +38,7 @@ export default function Home() {
               placeholder="다시 한번 비밀번호를 입력해주세요"
             />
 
-            <div className="w-3/4 py-2 md:py-5 lg:py-2 rounded-md bg-primary text-white flex items-center justify-center  cursor-pointer hover:bg-primaryButtonHover transition">
+            <div className="flex items-center justify-center w-3/4 py-2 text-white transition rounded-md cursor-pointer md:py-5 lg:py-2 bg-primary hover:bg-primaryButtonHover">
               회원가입
             </div>
             <Link

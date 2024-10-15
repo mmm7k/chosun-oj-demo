@@ -41,9 +41,9 @@ export default function Ranking() {
     <>
       <section className="w-screen h-44 bg-gradient-to-r from-[#9face6] to-[#74ebd5]">
         <div className="w-screen px-[10%] lg:px-[20%] h-44">
-          <div className="h-44 flex justify-between items-center">
+          <div className="flex items-center justify-between h-44">
             <div
-              className="flex flex-col gap-1 text-white text-2xl"
+              className="flex flex-col gap-1 text-2xl text-white"
               style={{ textShadow: '1px 2px 3px rgba(0, 0, 0, 0.5)' }}
             >
               <span>🎉 빛나는 노력의 과정을 확인하세요</span>
@@ -60,7 +60,7 @@ export default function Ranking() {
       </section>
       <div className="bg-[#f0f4fc] w-full flex items-center justify-center">
         <div className="w-[90%] lg:w-[62%] pt-12 mb-44">
-          <div className="w-full flex space-x-5 text-sm mb-3 text-gray-500 overflow-x-auto overflow-y-hidden">
+          <div className="flex w-full mb-3 space-x-5 overflow-x-auto overflow-y-hidden text-sm text-gray-500">
             <div className="flex items-center">
               <BiSolidAward className="text-[1.5rem] text-[#ff0000]" />
               <span>Challenger 5000+</span>
@@ -91,7 +91,7 @@ export default function Ranking() {
             </div>
           </div>
           <table
-            className="table-auto w-full bg-white text-center shadow-md text-sm border-separate"
+            className="w-full text-sm text-center bg-white border-separate shadow-md table-auto"
             style={{ borderSpacing: '0 1px' }}
           >
             <thead className="font-semibold text-gray-700">
@@ -112,7 +112,7 @@ export default function Ranking() {
             </thead>
             <tbody className="text-sm text-gray-500">
               {users.map((user, index) => (
-                <tr key={user.username} className="hover:bg-gray-50  shadow-sm">
+                <tr key={user.username} className="shadow-sm hover:bg-gray-50">
                   <td
                     className="p-4 border-l-[5px] "
                     style={{ borderColor: rankColor(user.tier) }}

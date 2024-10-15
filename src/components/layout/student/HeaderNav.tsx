@@ -20,7 +20,7 @@ export default function HeaderNav() {
   }
 
   return (
-    <nav className="min-w-screen h-20 lg:h-16 text-secondary border-b border-gray-200 flex justify-center">
+    <nav className="flex justify-center h-20 border-b border-gray-200 min-w-screen lg:h-16 text-secondary">
       <div className="w-[90%] md:[80%] lg:w-[62%] h-full flex  items-center">
         {/* 로고 */}
 
@@ -28,7 +28,7 @@ export default function HeaderNav() {
           href="/student"
           className="flex items-center text-lg font-semibold"
         >
-          <div className="w-9 h-9 relative">
+          <div className="relative w-9 h-9">
             <Image
               src={'/commons/symbol.png'}
               alt="Logo"
@@ -41,7 +41,7 @@ export default function HeaderNav() {
         </Link>
 
         {/* 햄버거 메뉴 */}
-        <div className="sm:hidden ml-auto">
+        <div className="ml-auto sm:hidden">
           <GiHamburgerMenu
             className="text-3xl cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -123,11 +123,11 @@ export default function HeaderNav() {
 
         {/* 로그아웃 (sm 이상에서만 표시) */}
 
-        <section className="hidden sm:flex items-center ml-auto">
+        <section className="items-center hidden ml-auto sm:flex">
           <Link href="/">
-            <div className="flex items-center transition hover:text-secondaryHover cursor-pointer">
+            <div className="flex items-center transition cursor-pointer hover:text-secondaryHover">
               <span> 로그아웃</span>
-              <MdLogout className="text-xl ml-2" />
+              <MdLogout className="ml-2 text-xl" />
             </div>
           </Link>
         </section>
@@ -147,9 +147,7 @@ export default function HeaderNav() {
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition  font-semibold ">
-            문제
-          </span>
+          <span className="font-semibold transition cursor-pointer ">문제</span>
         </Link>
 
         <Link
@@ -159,9 +157,7 @@ export default function HeaderNav() {
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition  font-semibold ">
-            랭킹
-          </span>
+          <span className="font-semibold transition cursor-pointer ">랭킹</span>
         </Link>
 
         <Link
@@ -171,7 +167,7 @@ export default function HeaderNav() {
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition font-semibold ">Q&A</span>
+          <span className="font-semibold transition cursor-pointer ">Q&A</span>
         </Link>
 
         <Link
@@ -181,7 +177,7 @@ export default function HeaderNav() {
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition font-semibold ">공지</span>
+          <span className="font-semibold transition cursor-pointer ">공지</span>
         </Link>
         <Link
           href={'/student/assignment'}
@@ -190,7 +186,7 @@ export default function HeaderNav() {
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition font-semibold ">과제</span>
+          <span className="font-semibold transition cursor-pointer ">과제</span>
         </Link>
         <Link
           href={'/student/contest'}
@@ -199,15 +195,15 @@ export default function HeaderNav() {
           }`}
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="cursor-pointer transition font-semibold ">대회</span>
+          <span className="font-semibold transition cursor-pointer ">대회</span>
         </Link>
 
         <Link
           href="/"
-          className="w-full flex justify-center items-center py-3 hover:bg-gray-100 "
+          className="flex items-center justify-center w-full py-3 hover:bg-gray-100 "
         >
-          <span className="cursor-pointer transition flex items-center font-semibold">
-            로그아웃 <MdLogout className="text-lg ml-2" />
+          <span className="flex items-center font-semibold transition cursor-pointer">
+            로그아웃 <MdLogout className="ml-2 text-lg" />
           </span>
         </Link>
       </section>

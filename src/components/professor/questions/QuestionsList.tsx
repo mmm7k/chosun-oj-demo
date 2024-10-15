@@ -93,11 +93,11 @@ export default function QuestionsList() {
   }, [pageParam, searchParams]);
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
-        <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-          <h1 className="text-lg mb-3 md:mb-0">질문 목록</h1>
-          <div className="hidden sm:flex items-center space-x-2 md:space-x-4">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
+        <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
+          <h1 className="mb-3 text-lg md:mb-0">질문 목록</h1>
+          <div className="items-center hidden space-x-2 sm:flex md:space-x-4">
             <Select
               id="course-select"
               placeholder="과목을 선택하세요."
@@ -114,9 +114,9 @@ export default function QuestionsList() {
             </Select>
 
             <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-              <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+              <IoSearchSharp className="mr-2 text-lg text-gray-500" />
               <input
-                className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                 type="text"
                 placeholder="질문를 검색해보세요"
               />
@@ -124,10 +124,10 @@ export default function QuestionsList() {
           </div>
         </section>
 
-        <hr className="border-t-2 mt-5 border-gray-200" />
+        <hr className="mt-5 border-t-2 border-gray-200" />
 
         <section className="flex flex-col px-3 sm:px-16">
-          <div className="flex justify-between items-center py-6 border-b-2">
+          <div className="flex items-center justify-between py-6 border-b-2">
             <span className="w-[10%]">학번</span>
             <span className="w-[20%]">이름</span>
             <span className="w-[30%]">질문 제목</span>
@@ -138,7 +138,7 @@ export default function QuestionsList() {
           {currentItems.map((item) => (
             <div key={item.id} className="border-b">
               <div
-                className="flex justify-between items-center py-4 text-sm hover:bg-gray-100 cursor-pointer"
+                className="flex items-center justify-between py-4 text-sm cursor-pointer hover:bg-gray-100"
                 onClick={() => toggleQuestion(item.id)}
               >
                 <span className="w-[10%]">{item.studentNumber}</span>
@@ -156,9 +156,9 @@ export default function QuestionsList() {
 
               {openQuestionId === item.id && (
                 <div className="p-4 rounded-b-lg">
-                  <p className="text-sm font-semibold mb-2">{item.detail}</p>
+                  <p className="mb-2 text-sm font-semibold">{item.detail}</p>
                   <textarea
-                    className="w-full h-24 mt-2 p-2 rounded-md border text-sm placeholder:font-normal placeholder:text-sm focus:outline-none resize-none"
+                    className="w-full h-24 p-2 mt-2 text-sm border rounded-md resize-none placeholder:font-normal placeholder:text-sm focus:outline-none"
                     value={answers[item.id] || ''}
                     onChange={(e) =>
                       handleAnswerChange(item.id, e.target.value)
@@ -167,7 +167,7 @@ export default function QuestionsList() {
                   />
                   <div className="flex justify-end mt-4">
                     <button
-                      className="px-3 py-2 bg-primary text-white rounded-md hover:bg-primaryButtonHover font-normal"
+                      className="px-3 py-2 font-normal text-white rounded-md bg-primary hover:bg-primaryButtonHover"
                       onClick={() => submitAnswer(item.id)}
                     >
                       답변 등록
@@ -179,7 +179,7 @@ export default function QuestionsList() {
           ))}
         </section>
 
-        <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
+        <section className="flex items-center justify-center w-full px-16 mt-4 sm:justify-end">
           <div className="flex items-center space-x-1">
             <button
               onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}

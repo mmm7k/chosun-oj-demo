@@ -147,17 +147,17 @@ export default function ProblemList() {
     <>
       <main className="w-full lg:w-[75%]">
         {/* 문제 검색 */}
-        <div className="flex items-center bg-white shadow-md rounded-2xl px-4">
-          <IoSearchSharp className="text-gray-400 text-lg" />
+        <div className="flex items-center px-4 bg-white shadow-md rounded-2xl">
+          <IoSearchSharp className="text-lg text-gray-400" />
           <input
             type="text"
-            className="w-full py-3 pl-3 focus:outline-none placeholder:text-sm text-sm"
+            className="w-full py-3 pl-3 text-sm focus:outline-none placeholder:text-sm"
             placeholder="문제 제목을 입력하세요."
           />
         </div>
         {/* 문제 필터 */}
-        <section className="flex gap-4 mt-3 overflow-auto no-scrollbar overflow-y-hidden">
-          <div className="h-9 w-full">
+        <section className="flex gap-4 mt-3 overflow-auto overflow-y-hidden no-scrollbar">
+          <div className="w-full h-9">
             <Select
               id="solved-select"
               placeholder="상태를 선택하세요."
@@ -170,7 +170,7 @@ export default function ProblemList() {
               <Option value="solved">푼 문제</Option>
             </Select>
           </div>
-          <div className="h-9 w-full">
+          <div className="w-full h-9">
             <Select
               id="level-select"
               placeholder="난이도를 선택하세요."
@@ -184,7 +184,7 @@ export default function ProblemList() {
               <Option value="3">Lv.3</Option>
             </Select>
           </div>
-          <div className="h-9 w-full">
+          <div className="w-full h-9">
             <Select
               id="submission-select"
               placeholder="제출 인원"
@@ -197,7 +197,7 @@ export default function ProblemList() {
               <Option value="descending">제출 인원 내림차순</Option>
             </Select>
           </div>
-          <div className="h-9 w-full">
+          <div className="w-full h-9">
             <Select
               id="accuracy-select"
               placeholder="정답률"
@@ -212,7 +212,7 @@ export default function ProblemList() {
           </div>
         </section>
         {/* 문제 목록 */}
-        <div className="mt-5 rounded-2xl border bg-white shadow-md text-sm text-gray-500">
+        <div className="mt-5 text-sm text-gray-500 bg-white border shadow-md rounded-2xl">
           <div className="flex justify-between items-center rounded-t-2xl py-2 px-5 border-b bg-[#eeeff3] text-gray-800">
             <span className="w-[10%]">상태</span>
             <span className="w-[50%]">문제 이름</span>
@@ -245,7 +245,7 @@ export default function ProblemList() {
           ))}
         </div>
         {/* 페이지네이션 */}
-        <div className="flex justify-center items-center mt-16 space-x-1">
+        <div className="flex items-center justify-center mt-16 space-x-1">
           <button
             onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
             disabled={currentPage === 1}

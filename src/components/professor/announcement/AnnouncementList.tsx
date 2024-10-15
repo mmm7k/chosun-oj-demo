@@ -100,8 +100,8 @@ export default function AnnouncementList() {
   }, [pageParam, courseParam]);
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         {!selectedCourse ? (
           <div className="flex flex-col items-center justify-center h-full space-y-6">
             <h1 className="text-xl">💡 과목 또는 대회를 선택하세요</h1>
@@ -119,9 +119,9 @@ export default function AnnouncementList() {
           </div>
         ) : (
           <>
-            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-              <h1 className="text-lg mb-3 md:mb-0">공지 목록</h1>
-              <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 space-x-4">
+            <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
+              <h1 className="mb-3 text-lg md:mb-0">공지 목록</h1>
+              <div className="flex flex-col items-center space-x-4 space-y-3 md:flex-row md:space-y-0">
                 <Select
                   value={selectedCourse}
                   onChange={handleCourseChange}
@@ -134,9 +134,9 @@ export default function AnnouncementList() {
                   ))}
                 </Select>
                 <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-                  <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+                  <IoSearchSharp className="mr-2 text-lg text-gray-500" />
                   <input
-                    className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                    className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                     type="text"
                     placeholder="공지를 검색해보세요"
                   />
@@ -144,10 +144,10 @@ export default function AnnouncementList() {
               </div>
             </section>
 
-            <hr className="border-t-2 mt-5 border-gray-200" />
+            <hr className="mt-5 border-t-2 border-gray-200" />
 
-            <section className="px-3 sm:px-16 overflow-x-auto">
-              <table className="table-auto w-full text-sm text-left  border-b-2">
+            <section className="px-3 overflow-x-auto sm:px-16">
+              <table className="w-full text-sm text-left border-b-2 table-auto">
                 <thead className="">
                   <tr className="border-b-2">
                     <th className="p-4">ID</th>
@@ -160,19 +160,19 @@ export default function AnnouncementList() {
                   {currentItems.map((item) => (
                     <tr
                       key={item.id}
-                      className="hover:bg-gray-100 cursor-pointer border-b"
+                      className="border-b cursor-pointer hover:bg-gray-100"
                     >
                       <td className="p-4 text-xs sm:text-sm">{item.id}</td>
                       <td className="p-4 text-xs sm:text-sm">{item.name}</td>
                       <td className="p-4 text-xs sm:text-sm">
                         {item.registrationTime}
                       </td>
-                      <td className="p-4 text-xs sm:text-base flex items-center space-x-2">
+                      <td className="flex items-center p-4 space-x-2 text-xs sm:text-base">
                         <Link href={`/professor/announcement/list/${item.id}`}>
-                          <TbEdit className="text-lg lg:text-xl cursor-pointer" />
+                          <TbEdit className="text-lg cursor-pointer lg:text-xl" />
                         </Link>
                         <FiTrash2
-                          className="text-lg lg:text-xl cursor-pointer"
+                          className="text-lg cursor-pointer lg:text-xl"
                           onClick={() => showDeleteModal(item.id)}
                         />
                       </td>
@@ -182,7 +182,7 @@ export default function AnnouncementList() {
               </table>
             </section>
 
-            <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
+            <section className="flex items-center justify-center w-full px-16 mt-4 sm:justify-end">
               <div className="flex items-center space-x-1">
                 <button
                   onClick={() =>

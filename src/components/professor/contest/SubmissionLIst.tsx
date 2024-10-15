@@ -94,8 +94,8 @@ export default function SubmissionList() {
   }, [pageParam, courseParam]);
 
   return (
-    <div className="min-h-screen p-8 flex">
-      <div className="w-full h-full bg-white shadow-lg py-8 rounded-3xl text-secondary font-semibold">
+    <div className="flex min-h-screen p-8">
+      <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         {!selectedCourse ? (
           <div className="flex flex-col items-center justify-center h-full space-y-6">
             <h1 className="text-xl">💡 대회를 선택하세요</h1>
@@ -113,9 +113,9 @@ export default function SubmissionList() {
           </div>
         ) : (
           <>
-            <section className="flex flex-col md:flex-row items-center justify-between px-0 md:px-16">
-              <h1 className="text-lg mb-3 md:mb-0">대회 제출 목록</h1>
-              <div className="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 space-x-4">
+            <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
+              <h1 className="mb-3 text-lg md:mb-0">대회 제출 목록</h1>
+              <div className="flex flex-col items-center space-x-4 space-y-3 md:flex-row md:space-y-0">
                 <Select
                   value={selectedCourse}
                   onChange={handleCourseChange}
@@ -128,9 +128,9 @@ export default function SubmissionList() {
                   ))}
                 </Select>
                 <div className="flex items-center border-[1px] border-gray-300 rounded-lg px-3 py-2 w-[16rem] bg-white shadow-sm">
-                  <IoSearchSharp className="text-gray-500 text-lg mr-2" />
+                  <IoSearchSharp className="mr-2 text-lg text-gray-500" />
                   <input
-                    className="w-full text-secondary text-sm placeholder:text-sm placeholder:font-normal focus:outline-none"
+                    className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                     type="text"
                     placeholder="문제를 검색해보세요"
                   />
@@ -138,10 +138,10 @@ export default function SubmissionList() {
               </div>
             </section>
 
-            <hr className="border-t-2 mt-5 border-gray-200" />
+            <hr className="mt-5 border-t-2 border-gray-200" />
 
-            <section className="px-3 sm:px-16 overflow-x-auto">
-              <table className="table-auto w-full text-sm text-left border-b-2">
+            <section className="px-3 overflow-x-auto sm:px-16">
+              <table className="w-full text-sm text-left border-b-2 table-auto">
                 <thead>
                   <tr className="border-b-2">
                     <th className="p-4">학번</th>
@@ -158,7 +158,7 @@ export default function SubmissionList() {
                     <>
                       <tr
                         key={item.id}
-                        className="hover:bg-gray-50 cursor-pointer border-b relative"
+                        className="relative border-b cursor-pointer hover:bg-gray-50"
                         onClick={() => toggleSubmission(item.id)}
                       >
                         <td className="p-4">{item.studentId}</td>
@@ -175,7 +175,7 @@ export default function SubmissionList() {
                         </td>
                         <td className="p-4">{item.submissionTime}</td>
 
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                        <div className="absolute -translate-y-1/2 right-4 top-1/2">
                           {openSubmissionId === item.id ? (
                             <RiArrowDropUpLine className="text-2xl" />
                           ) : (
@@ -187,7 +187,7 @@ export default function SubmissionList() {
                       {openSubmissionId === item.id && (
                         <tr>
                           <td colSpan={7} className="p-4 bg-gray-100">
-                            <pre className="whitespace-pre-wrap bg-gray-900 text-white p-4 rounded-md overflow-auto">
+                            <pre className="p-4 overflow-auto text-white whitespace-pre-wrap bg-gray-900 rounded-md">
                               {item.code}
                             </pre>
                           </td>
@@ -199,7 +199,7 @@ export default function SubmissionList() {
               </table>
             </section>
 
-            <section className="flex justify-center sm:justify-end w-full px-16 items-center mt-4">
+            <section className="flex items-center justify-center w-full px-16 mt-4 sm:justify-end">
               <div className="flex items-center space-x-1">
                 <button
                   onClick={() =>

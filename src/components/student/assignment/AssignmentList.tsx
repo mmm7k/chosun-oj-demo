@@ -72,7 +72,7 @@ export default function AssignmentList({ course }: { course: string }) {
     <>
       <main className="w-full lg:w-[75%]">
         {/* 문제 목록 */}
-        <div className="rounded-2xl  bg-white shadow-md text-sm text-gray-500">
+        <div className="text-sm text-gray-500 bg-white shadow-md rounded-2xl">
           <div className="flex justify-between items-center rounded-t-2xl py-2 px-5 border-b bg-[#eeeff3] text-gray-800">
             <span className="w-[10%]">상태</span>
             <span className="w-[50%]">문제 이름</span>
@@ -109,7 +109,7 @@ export default function AssignmentList({ course }: { course: string }) {
           ))}
         </div>
         {/* 페이지네이션 */}
-        <div className="flex justify-center items-center mt-16 space-x-1">
+        <div className="flex items-center justify-center mt-16 space-x-1">
           <button
             onClick={() => changePage(Math.max(startPage - pagesPerBlock, 1))}
             disabled={currentPage === 1}
