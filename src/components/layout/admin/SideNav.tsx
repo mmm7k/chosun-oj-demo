@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { useState } from 'react';
-import { PiStudent } from 'react-icons/pi';
+import { PiBookOpenTextLight, PiStudent } from 'react-icons/pi';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { MdLogout } from 'react-icons/md';
@@ -83,7 +83,7 @@ export default function SideNav() {
                 onClick={() => setIsCourseDropdownOpen(!isCourseDropdownOpen)}
               >
                 <div className="flex items-center transition">
-                  <PiStudent className="mr-2 text-xl" />
+                  <PiBookOpenTextLight className="mr-2 text-xl" />
                   <span>강의</span>
                 </div>
                 {isCourseDropdownOpen ? (
@@ -394,7 +394,7 @@ export default function SideNav() {
               onClick={() => setIsCourseDropdownOpen(!isCourseDropdownOpen)}
             >
               <span className="flex items-center">
-                <PiStudent className="mr-2 text-xl" />
+                <PiBookOpenTextLight className="mr-2 text-xl" />
                 강의
               </span>
               {isCourseDropdownOpen ? (
