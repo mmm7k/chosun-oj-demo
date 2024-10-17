@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from 'react';
 import MonacoEditor from '@monaco-editor/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Split from 'react-split';
 import Switch from '@mui/material/Switch';
 import io, { Socket } from 'socket.io-client';
@@ -14,7 +13,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useRouter } from 'next/navigation';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css'; // 원하는 테마 사용
+import 'highlight.js/styles/github.css';
 
 export default function Problem() {
   const [code, setCode] = useState(`#include <string>

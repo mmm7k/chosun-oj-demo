@@ -6,6 +6,8 @@ import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 
 const { Option } = Select;
 
@@ -42,8 +44,15 @@ export default function SubmissionList() {
     isSuccess: Math.random() > 0.5,
     course: courses[Math.floor(Math.random() * courses.length)],
     ip: generateRandomIP(),
-    code: `console.log('Hello, World ${i + 1}!');`,
+    code: `function solution(s) {
+let t = s.split(" ");
+return Math.min(...t) + " " + Math.max(...t);
+}`,
   }));
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [openSubmissionId]);
 
   const itemsPerPage = 15;
   const pagesPerBlock = 5;
@@ -186,9 +195,9 @@ export default function SubmissionList() {
 
                       {openSubmissionId === item.id && (
                         <tr>
-                          <td colSpan={7} className="p-4 bg-gray-100">
-                            <pre className="p-4 overflow-auto text-white whitespace-pre-wrap bg-gray-900 rounded-md">
-                              {item.code}
+                          <td colSpan={7} className="px-4 py-2 text-left">
+                            <pre>
+                              <code>{item.code}</code>
                             </pre>
                           </td>
                         </tr>
