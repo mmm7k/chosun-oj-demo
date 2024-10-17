@@ -148,7 +148,7 @@ export default function AnnouncementList() {
 
             <section className="px-3 overflow-x-auto sm:px-16">
               <table className="w-full text-sm text-left border-b-2 table-auto">
-                <thead className="">
+                <thead>
                   <tr className="border-b-2">
                     <th className="p-4">ID</th>
                     <th className="p-4">공지 제목</th>

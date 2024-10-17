@@ -13,6 +13,8 @@ import 'xterm/css/xterm.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useRouter } from 'next/navigation';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css'; // 원하는 테마 사용
 
 export default function Problem() {
   const [code, setCode] = useState(`#include <string>
@@ -34,6 +36,22 @@ string solution(string s) {
   const [isLeftVisible, setIsLeftVisible] = useState(true);
   const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSubmitVisible, setIsSubmitVisible] = useState(false);
+  // 제출내역
+  const [isCodeVisible, setIsCodeVisible] = useState(false);
+  const [isCodeVisible2, setIsCodeVisible2] = useState(false);
+  const codeString = `function solution(s) {
+let t = s.split(" ");
+return Math.min(...t) + " " + Math.max(...t);
+}`;
+
+  // 코드 블록을 보여줄 때 하이라이트 적용
+  useEffect(() => {
+    if (isCodeVisible || isCodeVisible2) {
+      hljs.highlightAll();
+    }
+  }, [isCodeVisible, isCodeVisible2]);
+
   // 모달 열기/닫기 함수
   const toggleModal = () => {
     setIsModalVisible((prev) => !prev);
@@ -151,9 +169,21 @@ string solution(string s) {
 
       {/* 문제 이름 */}
       <div className="w-full h-14 border-b-[1.5px] bg-white border-gray-300 px-4 sm:px-12 flex justify-between items-center">
-        <span className="mt-4 text-primary font-semibold border-b-[3px] pb-3 border-primary">
-          피라미드 문제
-        </span>
+        <div className="space-x-2 sm:space-x-4">
+          <button
+            className={`mt-4  pb-3 ${!isSubmitVisible ? 'text-primary border-primary border-b-[3px] font-semibold ' : 'text-gray-400 border-gray-400'}`}
+            onClick={() => setIsSubmitVisible(!isSubmitVisible)}
+          >
+            피라미드 문제
+          </button>
+
+          <button
+            className={`mt-4  pb-3 ${isSubmitVisible ? 'text-primary border-primary border-b-[3px] font-semibold ' : 'text-gray-400 border-gray-400'}`}
+            onClick={() => setIsSubmitVisible(!isSubmitVisible)}
+          >
+            제출 내역
+          </button>
+        </div>
         <div className="flex items-center">
           <div className="sm:hidden">
             {/* sm 이하에서만 보이는 토글 버튼 그룹 */}
@@ -190,62 +220,113 @@ string solution(string s) {
         <div className="hidden w-full sm:flex">
           <Split className="flex flex-1" sizes={[50, 50]} minSize={200}>
             {/* 왼쪽 섹션 */}
-            <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
-              <h1 className="font-semibold">문제 설명</h1>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-              <hr className="border-[1px] border-gray-200" />
-              <h1 className="font-semibold">제한 사항</h1>
-              <p className="text-sm">
-                * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
-                <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
-                정수입니다.
-              </p>
-              <hr className="border-[1px] border-gray-200" />
-              <h1 className="font-semibold">입출력 예</h1>
-              <div className="text-sm">
-                <table className="w-[30%] text-center border-collapse">
-                  <thead>
+            {!isSubmitVisible ? (
+              <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
+                <h1 className="font-semibold">문제 설명</h1>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+                <hr className="border-[1px] border-gray-200" />
+                <h1 className="font-semibold">제한 사항</h1>
+                <p className="text-sm">
+                  * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
+                  <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000
+                  이하인 정수입니다.
+                </p>
+                <hr className="border-[1px] border-gray-200" />
+                <h1 className="font-semibold">입출력 예</h1>
+                <div className="text-sm">
+                  <table className="w-[30%] text-center border-collapse">
+                    <thead>
+                      <tr>
+                        <th className="border border-gray-300">num1</th>
+                        <th className="border border-gray-300">num2</th>
+                        <th className="border border-gray-300">return</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300">3</td>
+                        <td className="border border-gray-300">3</td>
+                        <td className="border border-gray-300">1</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300">3</td>
+                        <td className="border border-gray-300">4</td>
+                        <td className="border border-gray-300">-1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <hr className="border-[1px] border-gray-200" />
+                <h1 className="font-semibold">입출력 예 설명</h1>
+                <h2 className="font-semibold">입출력 예 #1</h2>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+                <h2 className="font-semibold">입출력 예 #2</h2>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+                <h2 className="font-semibold">입출력 예 #3</h2>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+              </div>
+            ) : (
+              <div className="w-full h-full p-3">
+                <table className="w-full table-auto text-center border-t">
+                  <thead className="border-b-2 text-gray-500 text-xs ">
                     <tr>
-                      <th className="border border-gray-300">num1</th>
-                      <th className="border border-gray-300">num2</th>
-                      <th className="border border-gray-300">return</th>
+                      <th className="py-1 font-normal">제출 일시</th>
+                      <th className="py-1 font-normal">언어</th>
+                      <th className="py-1 font-normal">채점 내역</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-300">3</td>
-                      <td className="border border-gray-300">3</td>
-                      <td className="border border-gray-300">1</td>
+                  <tbody className="w-full text-gray-600 text-xs">
+                    <tr
+                      className="hover:bg-gray-50 border-b cursor-pointer"
+                      onClick={() => setIsCodeVisible(!isCodeVisible)}
+                    >
+                      <td className="py-3 font-normal">2022-06-22</td>
+                      <td className="py-3 font-normal">Javascript</td>
+                      <td className="py-3 font-normal text-green-500">정답</td>
                     </tr>
-                    <tr>
-                      <td className="border border-gray-300">3</td>
-                      <td className="border border-gray-300">4</td>
-                      <td className="border border-gray-300">-1</td>
+                    {isCodeVisible && (
+                      <tr>
+                        <td colSpan={3} className="px-4 py-2 text-left">
+                          <pre>
+                            <code>{codeString}</code>
+                          </pre>
+                        </td>
+                      </tr>
+                    )}
+                    <tr
+                      className="hover:bg-gray-50 border-b cursor-pointer"
+                      onClick={() => setIsCodeVisible2(!isCodeVisible2)}
+                    >
+                      <td className="py-3 font-normal">2022-06-22</td>
+                      <td className="py-3 font-normal">Javascript</td>
+                      <td className="py-3 font-normal text-red-500">오답</td>
                     </tr>
+                    {isCodeVisible2 && (
+                      <tr>
+                        <td colSpan={3} className="px-4 py-2 text-left">
+                          <pre>
+                            <code>{codeString}</code>
+                          </pre>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
-              <hr className="border-[1px] border-gray-200" />
-              <h1 className="font-semibold">입출력 예 설명</h1>
-              <h2 className="font-semibold">입출력 예 #1</h2>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-              <h2 className="font-semibold">입출력 예 #2</h2>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-              <h2 className="font-semibold">입출력 예 #3</h2>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-            </div>
+            )}
+
             {/* 오른쪽 섹션 */}
             <Split direction="vertical" sizes={[50, 50]} minSize={100}>
               {isTerminalMode ? (
@@ -283,62 +364,112 @@ string solution(string s) {
         {/* sm 이하에서는 좌/우 토글된 화면 */}
         <div className="flex w-screen h-full sm:hidden">
           {isLeftVisible ? (
-            <div className="w-full px-4 py-5 space-y-5 overflow-auto sm:px-12 ">
-              <h1 className="font-semibold">문제 설명</h1>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-              <hr className="border-[1px] border-gray-200" />
-              <h1 className="font-semibold">제한 사항</h1>
-              <p className="text-sm">
-                * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
-                <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000 이하인
-                정수입니다.
-              </p>
-              <hr className="border-[1px] border-gray-200" />
-              <h1 className="font-semibold">입출력 예</h1>
-              <div className="text-sm">
-                <table className="w-[30%] text-center border-collapse">
-                  <thead>
+            !isSubmitVisible ? (
+              <div className="w-full px-4 py-5 space-y-5 overflow-auto sm:px-12 ">
+                <h1 className="font-semibold">문제 설명</h1>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+                <hr className="border-[1px] border-gray-200" />
+                <h1 className="font-semibold">제한 사항</h1>
+                <p className="text-sm">
+                  * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
+                  <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000
+                  이하인 정수입니다.
+                </p>
+                <hr className="border-[1px] border-gray-200" />
+                <h1 className="font-semibold">입출력 예</h1>
+                <div className="text-sm">
+                  <table className="w-[30%] text-center border-collapse">
+                    <thead>
+                      <tr>
+                        <th className="border border-gray-300">num1</th>
+                        <th className="border border-gray-300">num2</th>
+                        <th className="border border-gray-300">return</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300">3</td>
+                        <td className="border border-gray-300">3</td>
+                        <td className="border border-gray-300">1</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300">3</td>
+                        <td className="border border-gray-300">4</td>
+                        <td className="border border-gray-300">-1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <hr className="border-[1px] border-gray-200" />
+                <h1 className="font-semibold">입출력 예 설명</h1>
+                <h2 className="font-semibold">입출력 예 #1</h2>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+                <h2 className="font-semibold">입출력 예 #2</h2>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+                <h2 className="font-semibold">입출력 예 #3</h2>
+                <p className="text-sm">
+                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
+                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
+                </p>
+              </div>
+            ) : (
+              <div className="w-full h-full p-3">
+                <table className="w-full table-auto text-center border-t">
+                  <thead className="border-b-2 text-gray-500 text-xs ">
                     <tr>
-                      <th className="border border-gray-300">num1</th>
-                      <th className="border border-gray-300">num2</th>
-                      <th className="border border-gray-300">return</th>
+                      <th className="py-1 font-normal">제출 일시</th>
+                      <th className="py-1 font-normal">언어</th>
+                      <th className="py-1 font-normal">채점 내역</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-300">3</td>
-                      <td className="border border-gray-300">3</td>
-                      <td className="border border-gray-300">1</td>
+                  <tbody className="w-full text-gray-600 text-xs">
+                    <tr
+                      className="hover:bg-gray-50 border-b cursor-pointer"
+                      onClick={() => setIsCodeVisible(!isCodeVisible)}
+                    >
+                      <td className="py-3 font-normal">2022-06-22</td>
+                      <td className="py-3 font-normal">Javascript</td>
+                      <td className="py-3 font-normal text-green-500">정답</td>
                     </tr>
-                    <tr>
-                      <td className="border border-gray-300">3</td>
-                      <td className="border border-gray-300">4</td>
-                      <td className="border border-gray-300">-1</td>
+                    {isCodeVisible && (
+                      <tr>
+                        <td colSpan={3} className="px-4 py-2 text-left">
+                          <pre>
+                            <code>{codeString}</code>
+                          </pre>
+                        </td>
+                      </tr>
+                    )}
+                    <tr
+                      className="hover:bg-gray-50 border-b cursor-pointer"
+                      onClick={() => setIsCodeVisible2(!isCodeVisible2)}
+                    >
+                      <td className="py-3 font-normal">2022-06-22</td>
+                      <td className="py-3 font-normal">Javascript</td>
+                      <td className="py-3 font-normal text-red-500">오답</td>
                     </tr>
+                    {isCodeVisible2 && (
+                      <tr>
+                        <td colSpan={3} className="px-4 py-2 text-left">
+                          <pre>
+                            <code>{codeString}</code>
+                          </pre>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
-              <hr className="border-[1px] border-gray-200" />
-              <h1 className="font-semibold">입출력 예 설명</h1>
-              <h2 className="font-semibold">입출력 예 #1</h2>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-              <h2 className="font-semibold">입출력 예 #2</h2>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-              <h2 className="font-semibold">입출력 예 #3</h2>
-              <p className="text-sm">
-                정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-              </p>
-            </div>
+            )
           ) : (
             <Split
               direction="vertical"
