@@ -28,6 +28,7 @@ const nextConfig = {
 
     return config;
   },
+  transpilePackages: ['highlight.js'],
 };
 
 export default nextConfig;
