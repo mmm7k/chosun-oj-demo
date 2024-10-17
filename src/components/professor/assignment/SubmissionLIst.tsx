@@ -84,7 +84,7 @@ return Math.min(...t) + " " + Math.max(...t);
     const query = new URLSearchParams();
     if (course) query.set('course', course);
     query.set('page', page.toString());
-    router.push(`/professor/contest/submission?${query.toString()}`);
+    router.push(`/professor/assignment/submission?${query.toString()}`);
   };
 
   const toggleSubmission = (id: number) => {
@@ -107,9 +107,9 @@ return Math.min(...t) + " " + Math.max(...t);
       <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         {!selectedCourse ? (
           <div className="flex flex-col items-center justify-center h-full space-y-6">
-            <h1 className="text-xl">💡 대회를 선택하세요</h1>
+            <h1 className="text-xl">💡 과목을 선택하세요</h1>
             <Select
-              placeholder="대회를 선택하세요."
+              placeholder="과목을 선택하세요."
               className="w-64"
               onChange={handleCourseChange}
             >
@@ -123,7 +123,7 @@ return Math.min(...t) + " " + Math.max(...t);
         ) : (
           <>
             <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
-              <h1 className="mb-3 text-lg md:mb-0">대회 제출 목록</h1>
+              <h1 className="mb-3 text-lg md:mb-0">과제 제출 목록</h1>
               <div className="flex flex-col items-center space-x-4 space-y-3 md:flex-row md:space-y-0">
                 <Select
                   value={selectedCourse}
