@@ -6,6 +6,8 @@ import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 
 const { Option } = Select;
 
@@ -23,9 +25,9 @@ export default function SubmissionList() {
   );
 
   const courses = [
-    '기초프로그래밍 01분반',
-    '심화프로그래밍 02분반',
-    '알고리즘 01분반',
+    '기초프로그래밍 중간고사',
+    '심화프로그래밍 중간고사',
+    '알고리즘 대회',
   ];
 
   const generateRandomIP = () =>
@@ -42,14 +44,21 @@ export default function SubmissionList() {
     isSuccess: Math.random() > 0.5,
     course: courses[Math.floor(Math.random() * courses.length)],
     ip: generateRandomIP(),
-    code: `console.log('Hello, World ${i + 1}!'); `,
+    code: `function solution(s) {
+let t = s.split(" ");
+return Math.min(...t) + " " + Math.max(...t);
+}`,
   }));
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [openSubmissionId]);
 
   const itemsPerPage = 15;
   const pagesPerBlock = 5;
 
-  const filteredList = submissions.filter((item) =>
-    selectedCourse ? item.course === selectedCourse : false,
+  const filteredList = submissions.filter(
+    (item) => selectedCourse && item.course === selectedCourse,
   );
 
   const currentItems = filteredList.slice(
@@ -75,7 +84,7 @@ export default function SubmissionList() {
     const query = new URLSearchParams();
     if (course) query.set('course', course);
     query.set('page', page.toString());
-    router.push(`/professor/assignment/submission?${query.toString()}`);
+    router.push(`/professor/contest/submission?${query.toString()}`);
   };
 
   const toggleSubmission = (id: number) => {
@@ -98,9 +107,9 @@ export default function SubmissionList() {
       <div className="w-full h-full py-8 font-semibold bg-white shadow-lg rounded-3xl text-secondary">
         {!selectedCourse ? (
           <div className="flex flex-col items-center justify-center h-full space-y-6">
-            <h1 className="text-xl">💡 과목을 선택하세요</h1>
+            <h1 className="text-xl">💡 대회를 선택하세요</h1>
             <Select
-              placeholder="과목을 선택하세요."
+              placeholder="대회를 선택하세요."
               className="w-64"
               onChange={handleCourseChange}
             >
@@ -114,7 +123,7 @@ export default function SubmissionList() {
         ) : (
           <>
             <section className="flex flex-col items-center justify-between px-0 md:flex-row md:px-16">
-              <h1 className="mb-3 text-lg md:mb-0">과제 제출 목록</h1>
+              <h1 className="mb-3 text-lg md:mb-0">대회 제출 목록</h1>
               <div className="flex flex-col items-center space-x-4 space-y-3 md:flex-row md:space-y-0">
                 <Select
                   value={selectedCourse}
@@ -186,9 +195,9 @@ export default function SubmissionList() {
 
                       {openSubmissionId === item.id && (
                         <tr>
-                          <td colSpan={7} className="p-4 bg-gray-100">
-                            <pre className="p-4 overflow-auto text-white whitespace-pre-wrap bg-gray-900 rounded-md">
-                              {item.code}
+                          <td colSpan={7} className="px-4 py-2 text-left">
+                            <pre>
+                              <code>{item.code}</code>
                             </pre>
                           </td>
                         </tr>
