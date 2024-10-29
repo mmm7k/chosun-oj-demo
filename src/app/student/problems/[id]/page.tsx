@@ -14,6 +14,16 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useRouter } from 'next/navigation';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
+import { Select } from 'antd';
+import axios from 'axios';
+
+const { Option } = Select;
+
+const JDoodleConfig = {
+  clientId: process.env.NEXT_PUBLIC_JDOODLE_ID,
+  clientSecret: process.env.NEXT_PUBLIC_JDOODLE_SECRET,
+  url: 'https://api.jdoodle.com/v1/execute',
+};
 
 export default function Problem() {
   const [code, setCode] = useState(`#include <string>
@@ -43,6 +53,38 @@ string solution(string s) {
 let t = s.split(" ");
 return Math.min(...t) + " " + Math.max(...t);
 }`;
+
+  const codeTemplate = {
+    c: `#include <stdio.h>\n\nint main() {\n    // Your code here\n    return 0;\n}`,
+    cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}`,
+    python: `def solution():\n    # Your code here\n    pass`,
+    javascript: `function solution() {\n    // Your code here\n}`,
+  };
+
+  const runcode = async (language: string, versionIndex: string) => {
+    const requestBody = {
+      clientId: JDoodleConfig.clientId,
+      clientSecret: JDoodleConfig.clientSecret,
+      script: "print('Hello, World!')",
+      language, // 사용 언어, 예: "python3"
+      versionIndex, // 버전, 예: "3" (버전 목록은 JDoodle 문서 참조)
+    };
+
+    try {
+      const response = await axios.post(JDoodleConfig.url, requestBody);
+      console.log('Execution Output:', response.data.output);
+      return response.data.output;
+    } catch (error) {
+      console.error('Execution failed:', error);
+      return 'Error executing code.';
+    }
+  };
+
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>('C');
+
+  const languageOptions = ['C', 'C++', 'Java', 'Python', 'Javascript'];
+
+  const handleLanguageChange = (value: string) => setSelectedLanguage(value);
 
   // 코드 블록을 보여줄 때 하이라이트 적용
   useEffect(() => {
@@ -205,6 +247,19 @@ return Math.min(...t) + " " + Math.max(...t);
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
+          <Select
+            id="language-select"
+            placeholder="언어 선택"
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+            className="w-28"
+          >
+            {languageOptions.map((language) => (
+              <Option key={language} value={language}>
+                {language}
+              </Option>
+            ))}
+          </Select>
           <Switch
             checked={isTerminalMode}
             onChange={() => setIsTerminalMode((prev) => !prev)}
@@ -486,8 +541,8 @@ return Math.min(...t) + " " + Math.max(...t);
               ) : (
                 <div className="h-full overflow-auto ">
                   <MonacoEditor
-                    language="cpp"
-                    theme="vs-light"
+                    // language="cpp"
+                    // theme="vs-light"
                     value={code}
                     onChange={(newCode) => setCode(newCode || '')}
                     options={{
@@ -521,7 +576,10 @@ return Math.min(...t) + " " + Math.max(...t);
           <button className="px-4 py-2 text-gray-800 transition bg-gray-200 rounded-md hover:bg-gray-300">
             초기화
           </button>
-          <button className="px-4 py-2 text-gray-800 transition bg-gray-200 rounded-md hover:bg-gray-300">
+          <button
+            className="px-4 py-2 text-gray-800 transition bg-gray-200 rounded-md hover:bg-gray-300"
+            onClick={() => runcode('Python3', '3.11.5')}
+          >
             코드 실행
           </button>
           <button

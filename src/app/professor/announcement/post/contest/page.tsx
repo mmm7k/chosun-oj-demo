@@ -12,7 +12,6 @@ export default function ContestPost() {
 
   const contestOptions = ['대회1', '대회2'];
 
-  console.log(selectedContest);
   const handleContestChange = (value: string) => setSelectedContest(value);
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setAnnouncementTitle(e.target.value);
@@ -24,10 +23,6 @@ export default function ContestPost() {
       alert('모든 항목을 입력해주세요.');
       return;
     }
-
-    console.log('Selected Contest:', selectedContest);
-    console.log('Announcement title:', announcementTitle);
-    console.log('Announcement content:', announcementContent);
 
     setSelectedContest(null);
     setAnnouncementTitle('');

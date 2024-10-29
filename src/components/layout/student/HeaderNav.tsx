@@ -136,7 +136,7 @@ export default function HeaderNav() {
       <section
         className={`absolute top-20 left-0 w-full bg-white shadow-md flex flex-col items-center space-y-4 sm:hidden z-50 overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen
-            ? 'max-h-80 opacity-100 visible'
+            ? 'max-h-120 opacity-100 visible'
             : 'max-h-0 opacity-0 invisible'
         }`}
       >
