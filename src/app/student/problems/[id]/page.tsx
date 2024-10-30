@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import MonacoEditor from '@monaco-editor/react';
 import Image from 'next/image';
 import Split from 'react-split';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import Switch from '@mui/material/Switch';
 import io, { Socket } from 'socket.io-client';
 import { Terminal } from 'xterm';
@@ -19,23 +21,24 @@ import axios from 'axios';
 
 const { Option } = Select;
 
-const JDoodleConfig = {
-  clientId: process.env.NEXT_PUBLIC_JDOODLE_ID,
-  clientSecret: process.env.NEXT_PUBLIC_JDOODLE_SECRET,
-  url: 'https://api.jdoodle.com/v1/execute',
+const codeTemplate = {
+  c: `#include <stdio.h>\n\nint main() {\n    // Your code here\n    return 0;\n}`,
+  cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}`,
+  python: `def solution():\n    # Your code here\n    pass`,
+  java: `public class Solution {\n    public static void main(String[] args) {\n        // Your code here\n    }\n}`,
+};
+
+const languageMap = {
+  C: 'c',
+  'C++': 'cpp',
+  Python: 'python',
+  Java: 'java',
 };
 
 export default function Problem() {
-  const [code, setCode] = useState(`#include <string>
-#include <vector>
-
-using namespace std;
-
-string solution(string s) {
-    string answer = "";
-    return answer;
-}
-`);
+  const [code, setCode] = useState(codeTemplate.c);
+  const [output, setOutput] = useState('실행 결과가 표시됩니다.');
+  const [isLoading, setIsLoading] = useState(false);
   const [isTerminalMode, setIsTerminalMode] = useState(false); // 터미널 모드 플래그
   const [socket, setSocket] = useState<Socket | null>(null); // Socket.IO 연결 상태 관리
   const [isConnected, setIsConnected] = useState(false); // 연결 상태 플래그
@@ -49,42 +52,73 @@ string solution(string s) {
   // 제출내역
   const [isCodeVisible, setIsCodeVisible] = useState(false);
   const [isCodeVisible2, setIsCodeVisible2] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>('C');
+  const languageOptions = ['C', 'C++', 'Java', 'Python'];
+
   const codeString = `function solution(s) {
 let t = s.split(" ");
 return Math.min(...t) + " " + Math.max(...t);
 }`;
 
-  const codeTemplate = {
-    c: `#include <stdio.h>\n\nint main() {\n    // Your code here\n    return 0;\n}`,
-    cpp: `#include <iostream>\nusing namespace std;\n\nint main() {\n    // Your code here\n    return 0;\n}`,
-    python: `def solution():\n    # Your code here\n    pass`,
-    javascript: `function solution() {\n    // Your code here\n}`,
-  };
-
-  const runcode = async (language: string, versionIndex: string) => {
-    const requestBody = {
-      clientId: JDoodleConfig.clientId,
-      clientSecret: JDoodleConfig.clientSecret,
-      script: "print('Hello, World!')",
-      language, // 사용 언어, 예: "python3"
-      versionIndex, // 버전, 예: "3" (버전 목록은 JDoodle 문서 참조)
-    };
-
+  const runcode = async () => {
+    setIsLoading(true);
     try {
-      const response = await axios.post(JDoodleConfig.url, requestBody);
+      const response = await axios.post('/api/jdoodle', {
+        script: code,
+        language: selectedLanguage,
+      });
+
       console.log('Execution Output:', response.data.output);
+      setOutput(response.data.output);
       return response.data.output;
     } catch (error) {
       console.error('Execution failed:', error);
+      setOutput('Error executing code.');
       return 'Error executing code.';
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const [selectedLanguage, setSelectedLanguage] = useState<string | null>('C');
+  const handleLanguageChange = (value: string) => {
+    setSelectedLanguage(value);
+    switch (value) {
+      case 'C':
+        setCode(codeTemplate.c);
+        break;
+      case 'C++':
+        setCode(codeTemplate.cpp);
+        break;
+      case 'Python':
+        setCode(codeTemplate.python);
+        break;
+      case 'Java':
+        setCode(codeTemplate.java);
+        break;
+      default:
+        setCode('');
+    }
+  };
 
-  const languageOptions = ['C', 'C++', 'Java', 'Python', 'Javascript'];
-
-  const handleLanguageChange = (value: string) => setSelectedLanguage(value);
+  // 초기화 버튼 클릭 핸들러 함수
+  const handleResetCode = () => {
+    switch (selectedLanguage) {
+      case 'C':
+        setCode(codeTemplate.c);
+        break;
+      case 'C++':
+        setCode(codeTemplate.cpp);
+        break;
+      case 'Python':
+        setCode(codeTemplate.python);
+        break;
+      case 'Java':
+        setCode(codeTemplate.java);
+        break;
+      default:
+        setCode('');
+    }
+  };
 
   // 코드 블록을 보여줄 때 하이라이트 적용
   useEffect(() => {
@@ -252,7 +286,7 @@ return Math.min(...t) + " " + Math.max(...t);
             placeholder="언어 선택"
             value={selectedLanguage}
             onChange={handleLanguageChange}
-            className="w-28"
+            className="w-24"
           >
             {languageOptions.map((language) => (
               <Option key={language} value={language}>
@@ -260,11 +294,11 @@ return Math.min(...t) + " " + Math.max(...t);
               </Option>
             ))}
           </Select>
-          <Switch
+          {/* <Switch
             checked={isTerminalMode}
             onChange={() => setIsTerminalMode((prev) => !prev)}
           />
-          <span className="mr-2 text-sm text-gray-700">터미널</span>
+          <span className="mr-2 text-sm text-gray-700">터미널</span> */}
         </div>
       </div>
 
@@ -393,8 +427,9 @@ return Math.min(...t) + " " + Math.max(...t);
               ) : (
                 <div className="h-full overflow-auto ">
                   <MonacoEditor
-                    language="cpp"
-                    theme="vs-light"
+                    //@ts-ignore
+                    language={languageMap[selectedLanguage]}
+                    theme="vs-dark"
                     value={code}
                     onChange={(newCode) => setCode(newCode || '')}
                     options={{
@@ -405,11 +440,19 @@ return Math.min(...t) + " " + Math.max(...t);
                   />
                 </div>
               )}
-              <div className="overflow-auto bg-gray-100">
-                <h1 className="px-5 py-3 font-semibold border-b border-gray-300">
+              <div className="overflow-auto  bg-[#1E1E1E] text-[#D4D4D4]">
+                <h1 className="px-5 py-3 font-medium border-b border-[#D4D4D4]">
                   실행 결과
                 </h1>
-                <p className="px-5 py-3 text-sm">실행 결과가 표시됩니다.</p>
+                <div className="px-5 py-3 text-sm">
+                  {isLoading ? (
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                  ) : (
+                    <pre>
+                      <code>{output}</code>
+                    </pre>
+                  )}
+                </div>
               </div>
             </Split>
           </Split>
@@ -541,8 +584,9 @@ return Math.min(...t) + " " + Math.max(...t);
               ) : (
                 <div className="h-full overflow-auto ">
                   <MonacoEditor
-                    // language="cpp"
-                    // theme="vs-light"
+                    //@ts-ignore
+                    language={languageMap[selectedLanguage]}
+                    theme="vs-dark"
                     value={code}
                     onChange={(newCode) => setCode(newCode || '')}
                     options={{
@@ -553,11 +597,19 @@ return Math.min(...t) + " " + Math.max(...t);
                   />
                 </div>
               )}
-              <div className="overflow-auto bg-gray-100">
-                <h1 className="px-5 py-3 font-semibold border-b border-gray-300">
+              <div className="overflow-auto  bg-[#1E1E1E] text-[#D4D4D4]">
+                <h1 className="px-5 py-3 font-medium border-b border-[#D4D4D4]">
                   실행 결과
                 </h1>
-                <p className="px-5 py-3 text-sm">실행 결과가 표시됩니다.</p>
+                <div className="px-5 py-3 text-sm">
+                  {isLoading ? (
+                    <Spin indicator={<LoadingOutlined spin />} size="large" />
+                  ) : (
+                    <pre>
+                      <code>{output}</code>
+                    </pre>
+                  )}
+                </div>
               </div>
             </Split>
           )}
@@ -573,12 +625,15 @@ return Math.min(...t) + " " + Math.max(...t);
           이전으로
         </button>
         <div className="flex space-x-4">
-          <button className="px-4 py-2 text-gray-800 transition bg-gray-200 rounded-md hover:bg-gray-300">
+          <button
+            className="px-4 py-2 text-gray-800 transition bg-gray-200 rounded-md hover:bg-gray-300"
+            onClick={handleResetCode}
+          >
             초기화
           </button>
           <button
             className="px-4 py-2 text-gray-800 transition bg-gray-200 rounded-md hover:bg-gray-300"
-            onClick={() => runcode('Python3', '3.11.5')}
+            onClick={runcode}
           >
             코드 실행
           </button>
