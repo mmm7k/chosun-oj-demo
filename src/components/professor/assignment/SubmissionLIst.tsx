@@ -6,7 +6,6 @@ import { IoSearchSharp } from 'react-icons/io5';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
-import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 
 const { Option } = Select;
@@ -49,10 +48,6 @@ let t = s.split(" ");
 return Math.min(...t) + " " + Math.max(...t);
 }`,
   }));
-
-  useEffect(() => {
-    hljs.highlightAll();
-  }, [openSubmissionId]);
 
   const itemsPerPage = 15;
   const pagesPerBlock = 5;
@@ -196,7 +191,7 @@ return Math.min(...t) + " " + Math.max(...t);
                       {openSubmissionId === item.id && (
                         <tr>
                           <td colSpan={7} className="px-4 py-2 text-left">
-                            <pre>
+                            <pre className="bg-[#1E1E1E] text-[#D4D4D4] p-2">
                               <code>{item.code}</code>
                             </pre>
                           </td>

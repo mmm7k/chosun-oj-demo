@@ -10,7 +10,7 @@ export default function StudentLayout({
   return (
     <div className="flex flex-col min-w-screen overflow-hidden min-h-[100dvh]">
       <HeaderNav />
-      {children}
+      <main className="flex-1">{children}</main>
       <Footer />
       <ScrollToTopButton />
     </div>

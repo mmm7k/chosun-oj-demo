@@ -14,7 +14,6 @@ import 'xterm/css/xterm.css';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useRouter } from 'next/navigation';
-import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import { Select } from 'antd';
 import axios from 'axios';
@@ -119,13 +118,6 @@ return Math.min(...t) + " " + Math.max(...t);
         setCode('');
     }
   };
-
-  // 코드 블록을 보여줄 때 하이라이트 적용
-  useEffect(() => {
-    if (isCodeVisible || isCodeVisible2) {
-      hljs.highlightAll();
-    }
-  }, [isCodeVisible, isCodeVisible2]);
 
   // 모달 열기/닫기 함수
   const toggleModal = () => {
@@ -387,7 +379,7 @@ return Math.min(...t) + " " + Math.max(...t);
                     {isCodeVisible && (
                       <tr>
                         <td colSpan={3} className="px-4 py-2 text-left">
-                          <pre>
+                          <pre className="bg-[#1E1E1E] text-[#D4D4D4] p-2">
                             <code>{codeString}</code>
                           </pre>
                         </td>
@@ -404,7 +396,7 @@ return Math.min(...t) + " " + Math.max(...t);
                     {isCodeVisible2 && (
                       <tr>
                         <td colSpan={3} className="px-4 py-2 text-left">
-                          <pre>
+                          <pre className="bg-[#1E1E1E] text-[#D4D4D4] p-2">
                             <code>{codeString}</code>
                           </pre>
                         </td>
@@ -540,7 +532,7 @@ return Math.min(...t) + " " + Math.max(...t);
                     {isCodeVisible && (
                       <tr>
                         <td colSpan={3} className="px-4 py-2 text-left">
-                          <pre>
+                          <pre className="bg-[#1E1E1E] text-[#D4D4D4] p-2 ">
                             <code>{codeString}</code>
                           </pre>
                         </td>
@@ -557,7 +549,7 @@ return Math.min(...t) + " " + Math.max(...t);
                     {isCodeVisible2 && (
                       <tr>
                         <td colSpan={3} className="px-4 py-2 text-left">
-                          <pre>
+                          <pre className="bg-[#1E1E1E] text-[#D4D4D4] p-2">
                             <code>{codeString}</code>
                           </pre>
                         </td>

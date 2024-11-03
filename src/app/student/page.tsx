@@ -21,6 +21,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 import { FaUserGraduate } from 'react-icons/fa6';
+import { RiEdit2Line } from 'react-icons/ri';
+import Link from 'next/link';
 
 ChartJS.register(
   ArcElement,
@@ -325,7 +327,10 @@ export default function StudentMain() {
       </section>
       <section className="w-[90%] lg:w-[62%] flex flex-col sm:flex-row space-x-0 sm:space-x-12 space-y-12 sm:space-y-0">
         {/* 왼쪽 섹션 유저 프로필 */}
-        <div className="w-[100%] sm:w-[25%] flex flex-col justify-center items-center py-10 px-10 border border-gray-300 rounded-xl space-y-1  text-gray-700">
+        <div className="w-[100%] sm:w-[25%] flex flex-col justify-center items-center py-10 px-10 border border-gray-300 rounded-xl space-y-1  text-gray-700 relative">
+          <Link href="/student/editaccount">
+            <RiEdit2Line className="absolute right-4 top-4 text-2xl cursor-pointer" />
+          </Link>
           <FaUserGraduate className="text-primary text-[4rem] mb-2" />
           <span className="text-xl font-semibold">김민수</span>
           <span className="text-lg ">Developer</span>
