@@ -43,6 +43,7 @@ export default function SubmissionList() {
     submissionTime: `2024-9-2 16:19:${i + 1}`,
     isSuccess: Math.random() > 0.5,
     course: courses[Math.floor(Math.random() * courses.length)],
+    language: 'C',
     ip: generateRandomIP(),
     code: `function solution(s) {
 let t = s.split(" ");
@@ -152,7 +153,7 @@ return Math.min(...t) + " " + Math.max(...t);
                     <th className="p-4">학번</th>
                     <th className="p-4">이름</th>
                     <th className="p-4">문제</th>
-                    <th className="p-4">과목</th>
+                    <th className="p-4">언어</th>
                     <th className="p-4">IP</th>
                     <th className="p-4">결과</th>
                     <th className="p-4">제출 시간</th>
@@ -169,7 +170,7 @@ return Math.min(...t) + " " + Math.max(...t);
                         <td className="p-4">{item.studentId}</td>
                         <td className="p-4">{item.studentName}</td>
                         <td className="p-4">{item.problemName}</td>
-                        <td className="p-4">{item.course}</td>
+                        <td className="p-4">{item.language}</td>
                         <td className="p-4">{item.ip}</td>
                         <td className="p-4">
                           {item.isSuccess ? (
