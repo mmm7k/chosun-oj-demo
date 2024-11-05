@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import 'highlight.js/styles/github.css';
 import { Select } from 'antd';
 import axios from 'axios';
+import { Buffer } from 'buffer';
 
 const { Option } = Select;
 
@@ -61,15 +62,55 @@ return Math.min(...t) + " " + Math.max(...t);
 
   const runcode = async () => {
     setIsLoading(true);
-    try {
-      const response = await axios.post('/api/jdoodle', {
-        script: code,
-        language: selectedLanguage,
-      });
 
-      console.log('Execution Output:', response.data.output);
-      setOutput(response.data.output);
-      return response.data.output;
+    let language = '';
+    switch (selectedLanguage) {
+      case 'C':
+        language = '49';
+        break;
+      case 'C++':
+        language = '54';
+        break;
+      case 'Python':
+        language = '71';
+        break;
+      case 'Java':
+        language = '62';
+        break;
+      default:
+        language = '';
+    }
+    try {
+      // const response = await axios.post('/api/jdoodle', {
+      const encodedSourceCode = Buffer.from(code, 'utf-8').toString('base64');
+      // const encodedStdin = Buffer.from('', 'utf-8').toString('base64');
+      const response = await axios.post(
+        'http://chosuncnl.shop:2358/submissions?base64_encoded=true&wait=true',
+        {
+          // script: code,
+          source_code: encodedSourceCode,
+          // language: selectedLanguage,
+          language_id: language,
+          stdin: '',
+          compiler_options: '',
+          command_line_arguments: '',
+          redirect_stderr_to_stdout: true,
+        },
+      );
+      const token = response.data.token;
+
+      // 두 번째 GET 요청으로 실행 결과 받기
+      const response2 = await axios.get(
+        `http://chosuncnl.shop:2358/submissions/${token}?base64_encoded=true`,
+      );
+      const result = response2.data;
+      const output = response2.data.stdout
+        ? Buffer.from(result.stdout, 'base64').toString('utf-8')
+        : 'No output available.';
+
+      // 출력 결과 설정
+      setOutput(output);
+      return output;
     } catch (error) {
       console.error('Execution failed:', error);
       setOutput('Error executing code.');
@@ -78,7 +119,6 @@ return Math.min(...t) + " " + Math.max(...t);
       setIsLoading(false);
     }
   };
-
   const handleLanguageChange = (value: string) => {
     setSelectedLanguage(value);
     switch (value) {

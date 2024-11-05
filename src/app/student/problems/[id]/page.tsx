@@ -83,7 +83,7 @@ return Math.min(...t) + " " + Math.max(...t);
     try {
       // const response = await axios.post('/api/jdoodle', {
       const encodedSourceCode = Buffer.from(code, 'utf-8').toString('base64');
-      const encodedStdin = Buffer.from('', 'utf-8').toString('base64');
+      // const encodedStdin = Buffer.from('', 'utf-8').toString('base64');
       const response = await axios.post(
         'http://chosuncnl.shop:2358/submissions?base64_encoded=true&wait=true',
         {
@@ -91,7 +91,7 @@ return Math.min(...t) + " " + Math.max(...t);
           source_code: encodedSourceCode,
           // language: selectedLanguage,
           language_id: language,
-          stdin: encodedStdin,
+          stdin: '',
           compiler_options: '',
           command_line_arguments: '',
           redirect_stderr_to_stdout: true,
