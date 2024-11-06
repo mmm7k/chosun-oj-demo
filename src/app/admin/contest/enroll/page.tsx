@@ -18,61 +18,124 @@ export default function ContestRegister() {
   const [isVisible, setIsVisible] = useState(false);
   const [allowedIpRanges, setAllowedIpRanges] = useState('');
   const [selectedProblems, setSelectedProblems] = useState<number[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedStudents, setSelectedStudents] = useState<any[]>([]);
+  const [problemSearchTerm, setProblemSearchTerm] = useState('');
+  const [studentSearchTerm, setStudentSearchTerm] = useState('');
   const [isContestRegistered, setIsContestRegistered] = useState(false);
-  const [searched, setSearched] = useState(false);
+  const [problemSearched, setProblemSearched] = useState(false);
+  const [studentSearched, setStudentSearched] = useState(false);
   const [filteredProblems, setFilteredProblems] = useState<any[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredStudents, setFilteredStudents] = useState<any[]>([]);
+  const [isProblemModalOpen, setIsProblemModalOpen] = useState(false);
+  const [isStudentModalOpen, setIsStudentModalOpen] = useState(false);
 
-  const itemsPerPage = 15; // 한 페이지에 보여줄 문제 수
-  const pagesPerBlock = 5; // 페이지 블록당 페이지 수
+  const [problemCurrentPage, setProblemCurrentPage] = useState(1);
+  const [studentCurrentPage, setStudentCurrentPage] = useState(1);
+
+  const itemsPerPage = 15;
+  const pagesPerBlock = 5;
 
   // 임의의 문제 리스트
-  const problems = Array.from({ length: 150 }, (_, i) => ({
+  const problems = Array.from({ length: 155 }, (_, i) => ({
     id: i + 1,
     name: `문제 ${i + 1}`,
     registrationTime: `2024-9-2 16:19:${i + 1}`,
   }));
 
-  // 모달 열기 및 닫기
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  // 임의의 학생 리스트
+  const students = Array.from({ length: 100 }, (_, i) => ({
+    id: i + 1,
+    studentNumber: `202147${i + 1}`,
+    name: `학생${i + 1}`,
+    registrationTime: `2024-9-2 16:19:${i + 1}`,
+  }));
 
   // 페이지네이션
-  const filteredList = searched ? filteredProblems : problems;
-  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
-  const currentBlock = Math.ceil(currentPage / pagesPerBlock);
-  const startPage = (currentBlock - 1) * pagesPerBlock + 1;
-  const endPage = Math.min(startPage + pagesPerBlock - 1, totalPages);
-  const pages = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, i) => startPage + i,
+  const filteredProblemList = problemSearched ? filteredProblems : problems;
+  const filteredStudentList = studentSearched ? filteredStudents : students;
+  const problemTotalPages = Math.ceil(
+    filteredProblemList.length / itemsPerPage,
+  );
+  const studnetTotalPages = Math.ceil(
+    filteredStudentList.length / itemsPerPage,
   );
 
-  const paginatedProblems = filteredList.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
+  const problemStartPage = Math.max(
+    (Math.ceil(problemCurrentPage / pagesPerBlock) - 1) * pagesPerBlock + 1,
+    1,
   );
-  const handleSearch = () => {
+  const studentStartPage = Math.max(
+    (Math.ceil(studentCurrentPage / pagesPerBlock) - 1) * pagesPerBlock + 1,
+    1,
+  );
+  const problemEndPage = Math.min(
+    problemStartPage + pagesPerBlock - 1,
+    problemTotalPages,
+  );
+  const studentEndPage = Math.min(
+    studentStartPage + pagesPerBlock - 1,
+    studnetTotalPages,
+  );
+
+  const problemPages = Array.from(
+    { length: problemEndPage - problemStartPage + 1 },
+    (_, i) => problemStartPage + i,
+  );
+  const studentPages = Array.from(
+    { length: studentEndPage - studentStartPage + 1 },
+    (_, i) => studentStartPage + i,
+  );
+
+  const paginatedProblems = filteredProblemList.slice(
+    (problemCurrentPage - 1) * itemsPerPage,
+    problemCurrentPage * itemsPerPage,
+  );
+  const paginatedStudents = filteredStudentList.slice(
+    (studentCurrentPage - 1) * itemsPerPage,
+    studentCurrentPage * itemsPerPage,
+  );
+
+  const handleProblemSearch = () => {
     const results = problems.filter((problem) =>
-      problem.name.includes(searchTerm),
+      problem.name.includes(problemSearchTerm),
     );
     setFilteredProblems(results);
-    setSearched(true);
+    setProblemSearched(true);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') handleSearch();
+  const handleStudentSearch = () => {
+    const results = students.filter((student) =>
+      student.studentNumber.includes(studentSearchTerm),
+    );
+    setFilteredStudents(results);
+    setStudentSearched(true);
   };
-
   const handleProblemSelection = (problemId: number) => {
     setSelectedProblems((prev) =>
       prev.includes(problemId)
         ? prev.filter((id) => id !== problemId)
         : [...prev, problemId],
     );
+  };
+
+  const handleStudentSelection = (id: number) => {
+    const student = students.find((s) => s.id === id);
+
+    if (!student) return; // 학생이 존재하지 않으면 함수 종료
+
+    setSelectedStudents((prev) =>
+      prev.some((s) => s.id === id)
+        ? prev.filter((s) => s.id !== id)
+        : [...prev, student],
+    );
+  };
+
+  const handleProblemKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleProblemSearch();
+  };
+
+  const handleStudentKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleStudentSearch();
   };
 
   const handleExcelUpload = async (file: File) => {
@@ -119,30 +182,42 @@ export default function ContestRegister() {
         </section>
         <hr className="mt-5 border-t-2 border-gray-200" />
 
-        {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg w-[80%] sm:w-[50%] h-[90vh] p-8 overflow-hidden flex flex-col">
+        {/* 문제 검색 모달 */}
+        {isProblemModalOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+            onClick={() => setIsProblemModalOpen(false)}
+          >
+            <div
+              className="bg-white rounded-lg w-[80%] sm:w-[50%] h-[90vh] p-8 overflow-hidden flex flex-col relative"
+              onClick={(e) => e.stopPropagation()}
+            >
               <h2 className="text-lg mb-4">문제 검색 및 선택</h2>
-
+              <button
+                className="absolute right-10 top-7 text-xl text-gray-700"
+                onClick={() => setIsProblemModalOpen(false)}
+              >
+                x
+              </button>
               {/* 검색 인풋창 */}
               <div className="flex items-center mb-4 border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
                 <IoSearchSharp
                   className="mr-2 text-lg text-gray-500 cursor-pointer"
-                  onClick={handleSearch}
+                  onClick={handleProblemSearch}
                 />
                 <input
                   className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
                   type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  value={problemSearchTerm}
+                  onChange={(e) => setProblemSearchTerm(e.target.value)}
+                  onKeyPress={handleProblemKeyPress}
                   placeholder="문제를 검색해보세요"
                 />
               </div>
 
               {/* 문제 리스트 */}
               <div className="flex-1 overflow-y-auto border-t mt-2">
-                {searched && paginatedProblems.length === 0 ? (
+                {problemSearched && paginatedProblems.length === 0 ? (
                   <p className="text-center mt-4">검색 결과가 없습니다.</p>
                 ) : (
                   paginatedProblems.map((problem) => (
@@ -169,20 +244,22 @@ export default function ContestRegister() {
               <div className="flex justify-center items-center mt-4 space-x-2">
                 <button
                   onClick={() =>
-                    setCurrentPage(Math.max(startPage - pagesPerBlock, 1))
+                    setProblemCurrentPage(
+                      Math.max(problemStartPage - pagesPerBlock, 1),
+                    )
                   }
-                  disabled={currentPage === 1}
+                  disabled={problemCurrentPage === 1}
                   className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
                 >
                   &lt;
                 </button>
                 <div className="flex space-x-1 font-normal">
-                  {pages.map((page) => (
+                  {problemPages.map((page) => (
                     <button
                       key={page}
-                      onClick={() => setCurrentPage(page)}
+                      onClick={() => setProblemCurrentPage(page)}
                       className={`px-3 py-1 rounded-xl ${
-                        page === currentPage
+                        page === problemCurrentPage
                           ? 'bg-primary text-white hover:bg-primaryButtonHover'
                           : 'bg-gray-200 hover:bg-gray-300'
                       }`}
@@ -193,20 +270,124 @@ export default function ContestRegister() {
                 </div>
                 <button
                   onClick={() =>
-                    setCurrentPage(
-                      Math.min(startPage + pagesPerBlock, totalPages),
+                    setProblemCurrentPage(
+                      Math.min(
+                        problemStartPage + pagesPerBlock,
+                        problemTotalPages,
+                      ),
                     )
                   }
-                  disabled={currentPage === totalPages}
+                  disabled={problemCurrentPage === problemTotalPages}
                   className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
                 >
                   &gt;
                 </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 학생 검색 모달 */}
+        {isStudentModalOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+            onClick={() => setIsStudentModalOpen(false)}
+          >
+            <div
+              className="bg-white rounded-lg w-[80%] sm:w-[50%] h-[90vh] p-8 overflow-hidden flex flex-col relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-lg mb-4">학생 검색 및 선택</h2>
+              <button
+                className="absolute right-10 top-7 text-xl text-gray-700"
+                onClick={() => setIsStudentModalOpen(false)}
+              >
+                x
+              </button>
+              {/* 검색 인풋창 */}
+              <div className="flex items-center mb-4 border-[1px] border-gray-300 rounded-lg px-3 py-2 w-full bg-white shadow-sm">
+                <IoSearchSharp
+                  className="mr-2 text-lg text-gray-500 cursor-pointer"
+                  onClick={handleStudentSearch}
+                />
+                <input
+                  className="w-full text-sm text-secondary placeholder:text-sm placeholder:font-normal focus:outline-none"
+                  type="text"
+                  value={studentSearchTerm}
+                  onChange={(e) => setStudentSearchTerm(e.target.value)}
+                  onKeyPress={handleStudentKeyPress}
+                  placeholder="학번으로 검색해보세요"
+                />
+              </div>
+
+              {/* 학생 리스트 */}
+              <div className="flex-1 overflow-y-auto border-t mt-2">
+                {problemSearched && paginatedStudents.length === 0 ? (
+                  <p className="text-center mt-4">검색 결과가 없습니다.</p>
+                ) : (
+                  paginatedStudents.map((student) => (
+                    <div
+                      key={student.id}
+                      className="flex items-center justify-between p-2 border-b cursor-pointer hover:bg-gray-50"
+                      onClick={() => handleStudentSelection(student.id)}
+                    >
+                      <span className="text-sm">{student.name}</span>
+                      <span className="text-xs text-gray-500">
+                        {student.studentNumber}
+                      </span>
+                      <Checkbox
+                        checked={selectedStudents.some(
+                          (s) => s.id === student.id,
+                        )}
+                        onChange={() => handleStudentSelection(student.id)}
+                        onClick={(e) => e.stopPropagation()}
+                      />
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* 페이지네이션 */}
+              <div className="flex justify-center items-center mt-4 space-x-2">
                 <button
-                  onClick={closeModal}
-                  className="ml-4 px-4 py-2 text-white bg-blue-500 rounded-lg"
+                  onClick={() =>
+                    setStudentCurrentPage(
+                      Math.max(studentStartPage - pagesPerBlock, 1),
+                    )
+                  }
+                  disabled={studentCurrentPage === 1}
+                  className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
                 >
-                  선택 완료
+                  &lt;
+                </button>
+                <div className="flex space-x-1 font-normal">
+                  {studentPages.map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setStudentCurrentPage(page)}
+                      className={`px-3 py-1 rounded-xl ${
+                        page === studentCurrentPage
+                          ? 'bg-primary text-white hover:bg-primaryButtonHover'
+                          : 'bg-gray-200 hover:bg-gray-300'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() =>
+                    setStudentCurrentPage(
+                      Math.min(
+                        studentStartPage + pagesPerBlock,
+                        studnetTotalPages,
+                      ),
+                    )
+                  }
+                  disabled={studentCurrentPage === studnetTotalPages}
+                  className="px-3 py-1 bg-gray-200 rounded-xl hover:bg-gray-300 disabled:opacity-50"
+                >
+                  &gt;
                 </button>
               </div>
             </div>
@@ -375,10 +556,10 @@ export default function ContestRegister() {
               )}
             </div> */}
             <button
-              onClick={openModal}
+              onClick={() => setIsProblemModalOpen(true)}
               className="py-2 w-36 text-sm font-normal text-white bg-blue-600 hover:bg-blue-700  rounded-xl transition-all "
             >
-              문제 목록 및 검색
+              문제 검색 및 선택
             </button>
             {/* 선택된 문제 목록 */}
             {selectedProblems.length > 0 && (
@@ -422,7 +603,13 @@ export default function ContestRegister() {
           </div>
 
           {/* 학생 엑셀 업로드 버튼 */}
-          <div className="w-full flex  px-10 py-4 border-b-[1.5px] border-gray-200">
+          <div className="w-full flex space-x-2 items-center px-10 py-4 border-b-[1.5px] border-gray-200">
+            <button
+              onClick={() => setIsStudentModalOpen(true)}
+              className="py-2 w-36 text-sm font-normal text-white bg-blue-600 hover:bg-blue-700  rounded-xl transition-all "
+            >
+              학생 검색 및 선택
+            </button>
             <Upload
               accept=".xlsx, .xls"
               showUploadList={false}
