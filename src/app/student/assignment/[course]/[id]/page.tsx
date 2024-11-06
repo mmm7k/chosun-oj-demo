@@ -81,15 +81,11 @@ return Math.min(...t) + " " + Math.max(...t);
         language = '';
     }
     try {
-      // const response = await axios.post('/api/jdoodle', {
       const encodedSourceCode = Buffer.from(code, 'utf-8').toString('base64');
-      // const encodedStdin = Buffer.from('', 'utf-8').toString('base64');
       const response = await axios.post(
         'http://chosuncnl.shop:2358/submissions?base64_encoded=true&wait=true',
         {
-          // script: code,
           source_code: encodedSourceCode,
-          // language: selectedLanguage,
           language_id: language,
           stdin: '',
           compiler_options: '',
@@ -104,9 +100,16 @@ return Math.min(...t) + " " + Math.max(...t);
         `http://chosuncnl.shop:2358/submissions/${token}?base64_encoded=true`,
       );
       const result = response2.data;
-      const output = response2.data.stdout
-        ? Buffer.from(result.stdout, 'base64').toString('utf-8')
-        : 'No output available.';
+
+      // stdout과 compile_output 체크
+      let output;
+      if (result.stdout) {
+        output = Buffer.from(result.stdout, 'base64').toString('utf-8');
+      } else if (result.compile_output) {
+        output = Buffer.from(result.compile_output, 'base64').toString('utf-8');
+      } else {
+        output = 'No output available.';
+      }
 
       // 출력 결과 설정
       setOutput(output);
@@ -119,6 +122,7 @@ return Math.min(...t) + " " + Math.max(...t);
       setIsLoading(false);
     }
   };
+
   const handleLanguageChange = (value: string) => {
     setSelectedLanguage(value);
     switch (value) {
