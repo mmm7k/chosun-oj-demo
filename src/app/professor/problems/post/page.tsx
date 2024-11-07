@@ -8,8 +8,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
 import 'react-markdown-editor-lite/lib/index.css';
-import { Editor } from '@toast-ui/react-editor';
+// import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/toastui-editor.css';
+import dynamic from 'next/dynamic';
+const Editor = dynamic(
+  () => import('@toast-ui/react-editor').then((mod) => mod.Editor),
+  {
+    ssr: false,
+  },
+);
 
 const { Option } = Select;
 const mdParser = new MarkdownIt();
@@ -29,7 +36,7 @@ export default function ProblemPost() {
   const [isPythonChecked, setIsPythonChecked] = useState(false);
   const [isContestCkecked, setIsContestChecked] = useState(false);
 
-  console.log(markdownText);
+  const editorRef = useRef<typeof Editor | null>(null);
   const handleOrganizationChange = (value: SetStateAction<never[]>) => {
     setSelectedOrganizations(value);
   };
@@ -42,12 +49,11 @@ export default function ProblemPost() {
     setSelectedVisibility(value);
   };
   const handleEditorChange = () => {
-    //@ts-ignore
-    const markdown = editorRef.current.getInstance().getMarkdown();
-    setMarkdownText(markdown);
+    if (editorRef.current) {
+      const markdown = (editorRef.current as any).getInstance().getMarkdown();
+      setMarkdownText(markdown);
+    }
   };
-
-  const editorRef = useRef(null);
 
   const problemTags = [
     '데이터 타입',
