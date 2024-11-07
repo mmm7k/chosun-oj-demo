@@ -248,16 +248,18 @@ export default function ProblemPost() {
                   renderHTML={(text) => mdParser.render(text)}
                   onChange={handleEditorChange}
                 /> */}
-                <Editor
-                  ref={editorRef}
-                  initialValue=" "
-                  previewStyle="vertical"
-                  height="25rem"
-                  initialEditType="markdown"
-                  useCommandShortcut={false}
-                  hideModeSwitch={true}
-                  onChange={handleEditorChange}
-                />
+                {typeof window !== 'undefined' && (
+                  <Editor
+                    ref={editorRef}
+                    initialValue=" "
+                    previewStyle="vertical"
+                    height="25rem"
+                    initialEditType="markdown"
+                    useCommandShortcut={false}
+                    hideModeSwitch={true}
+                    onChange={handleEditorChange}
+                  />
+                )}
               </div>
             </div>
           </div>
