@@ -1,18 +1,20 @@
 'use client';
 
 import { Checkbox, Select } from 'antd';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useRef, useState } from 'react';
 import { PiExclamationMarkFill } from 'react-icons/pi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
 import 'react-markdown-editor-lite/lib/index.css';
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/toastui-editor.css';
 
 const { Option } = Select;
 const mdParser = new MarkdownIt();
 
-export default function Post() {
+export default function ProblemPost() {
   const [isDisclose, setIsDisclose] = useState(false);
   const [isManage, setIsManage] = useState(false);
   const [isMarkdownAccess, setIsMarkdownAccess] = useState(false);
@@ -27,6 +29,7 @@ export default function Post() {
   const [isPythonChecked, setIsPythonChecked] = useState(false);
   const [isContestCkecked, setIsContestChecked] = useState(false);
 
+  console.log(markdownText);
   const handleOrganizationChange = (value: SetStateAction<never[]>) => {
     setSelectedOrganizations(value);
   };
@@ -38,9 +41,13 @@ export default function Post() {
   const handleVisibilityChange = (value: string) => {
     setSelectedVisibility(value);
   };
-  const handleEditorChange = ({ text }: { text: string }) => {
-    setMarkdownText(text);
+  const handleEditorChange = () => {
+    //@ts-ignore
+    const markdown = editorRef.current.getInstance().getMarkdown();
+    setMarkdownText(markdown);
   };
+
+  const editorRef = useRef(null);
 
   const problemTags = [
     '데이터 타입',
@@ -234,11 +241,21 @@ export default function Post() {
               <label htmlFor="markdown-editor">문제 본문: </label>
 
               <div className="mt-6">
-                <MdEditor
+                {/* <MdEditor
                   id="markdown-editor"
                   value={markdownText}
                   style={{ height: '25rem' }}
                   renderHTML={(text) => mdParser.render(text)}
+                  onChange={handleEditorChange}
+                /> */}
+                <Editor
+                  ref={editorRef}
+                  initialValue=" "
+                  previewStyle="vertical"
+                  height="25rem"
+                  initialEditType="markdown"
+                  useCommandShortcut={false}
+                  hideModeSwitch={true}
                   onChange={handleEditorChange}
                 />
               </div>
