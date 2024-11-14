@@ -54,8 +54,8 @@ export default function Problem() {
   const [isCodeVisible2, setIsCodeVisible2] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>('C');
   const languageOptions = ['C', 'C++', 'Java', 'Python'];
-
-  const codeString = `function solution(s) {
+  const codeString = `//샘플 제출 내역입니다.
+  function solution(s) {
 let t = s.split(" ");
 return Math.min(...t) + " " + Math.max(...t);
 }`;
@@ -163,11 +163,6 @@ return Math.min(...t) + " " + Math.max(...t);
     }
   };
 
-  // 모달 열기/닫기 함수
-  const toggleModal = () => {
-    setIsModalVisible((prev) => !prev);
-  };
-
   // 뒤로 가기
   const handleBack = () => {
     router.back();
@@ -263,6 +258,22 @@ return Math.min(...t) + " " + Math.max(...t);
     }
   };
 
+  const [modalMessage, setModalMessage] = useState('');
+
+  const runcodeAndCheckAnswer = async () => {
+    const result = await runcode();
+    if (result.trim() === 'Hello world') {
+      setModalMessage('정답입니다!');
+    } else {
+      setModalMessage('오답입니다.');
+    }
+    toggleModal();
+  };
+
+  const toggleModal = () => {
+    setIsModalVisible((prev) => !prev);
+  };
+
   return (
     <div className="h-[100dvh] flex flex-col text-gray-800 ">
       {/* 헤더 */}
@@ -347,59 +358,23 @@ return Math.min(...t) + " " + Math.max(...t);
             {!isSubmitVisible ? (
               <div className="px-12 py-5 space-y-5 overflow-auto w-[50%]">
                 <h1 className="font-semibold">문제 설명</h1>
-                <p className="text-sm">
-                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-                </p>
+                <p className="text-sm">Hello world를 출력해주세요</p>
                 <hr className="border-[1px] border-gray-200" />
                 <h1 className="font-semibold">제한 사항</h1>
                 <p className="text-sm">
-                  * num1, num2는 -10,000,000 이상, 10,000,000 이하인 정수입니다.
-                  <br /> <br /> * num1, num2는 -10,000,000 이상, 10,000,000
-                  이하인 정수입니다.
+                  사용가능 언어는 C, C++, Java, Python 입니다.
                 </p>
                 <hr className="border-[1px] border-gray-200" />
                 <h1 className="font-semibold">입출력 예</h1>
                 <div className="text-sm">
-                  <table className="w-[30%] text-center border-collapse">
-                    <thead>
-                      <tr>
-                        <th className="border border-gray-300">num1</th>
-                        <th className="border border-gray-300">num2</th>
-                        <th className="border border-gray-300">return</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-300">3</td>
-                        <td className="border border-gray-300">3</td>
-                        <td className="border border-gray-300">1</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300">3</td>
-                        <td className="border border-gray-300">4</td>
-                        <td className="border border-gray-300">-1</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <p>Hello world</p>
                 </div>
                 <hr className="border-[1px] border-gray-200" />
                 <h1 className="font-semibold">입출력 예 설명</h1>
                 <h2 className="font-semibold">입출력 예 #1</h2>
-                <p className="text-sm">
-                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-                </p>
-                <h2 className="font-semibold">입출력 예 #2</h2>
-                <p className="text-sm">
-                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-                </p>
-                <h2 className="font-semibold">입출력 예 #3</h2>
-                <p className="text-sm">
-                  정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1
-                  다르면 -1을 return 하도록 solution 함수를 완성해주세요.
-                </p>
+                <pre className="bg-gray-200 rounded-sm p-3">
+                  <code className="text-sm">Hello world</code>
+                </pre>
               </div>
             ) : (
               <div className="w-full h-full p-3">
@@ -675,7 +650,7 @@ return Math.min(...t) + " " + Math.max(...t);
           </button>
           <button
             className="bg-[#002a87] text-white px-4 py-2 rounded-md hover:bg-[#00226e] transition"
-            onClick={toggleModal}
+            onClick={runcodeAndCheckAnswer}
           >
             제출 후 채점하기
           </button>
@@ -690,19 +665,19 @@ return Math.min(...t) + " " + Math.max(...t);
           <div className="fixed inset-0 bg-black opacity-70"></div>
           {/* 모달 */}
           <div className="bg-white p-8 rounded-md shadow-lg z-50 w-[24rem] mx-auto">
-            <h1 className="mb-8 text-xl font-semibold ">정답입니다!</h1>
+            <h1 className="mb-8 text-xl font-semibold ">{modalMessage}</h1>
             <div className="flex justify-end gap-4">
-              <button
+              {/* <button
                 className="px-4 py-2 mt-4 text-white transition bg-gray-300 rounded-md hover:bg-gray-400"
                 onClick={toggleModal} // 모달 닫기
               >
                 닫기
-              </button>
+              </button> */}
               <button
                 className="px-4 py-2 mt-4 text-white transition bg-blue-500 rounded-md hover:bg-blue-600"
-                onClick={handleBack} // 뒤로가기
+                onClick={toggleModal} // 모달 닫기
               >
-                문제 목록으로 돌아가기
+                닫기
               </button>
             </div>
           </div>
