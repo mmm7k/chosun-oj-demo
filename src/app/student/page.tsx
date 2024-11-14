@@ -83,8 +83,6 @@ export default function StudentMain() {
 
     if (totalGrass >= 150) {
       return 'Challenger';
-    } else if (totalGrass >= 125) {
-      return 'Grandmaster';
     } else if (totalGrass >= 100) {
       const level = Math.ceil((125 - totalGrass) / 5);
       return `Diamond ${level}`;
@@ -104,14 +102,12 @@ export default function StudentMain() {
   }, [heatmapData]);
 
   const rankColor = useMemo(() => {
-    if (rank.startsWith('Challenger')) {
-      return '#ff0000'; // 빨간색
-    } else if (rank.startsWith('Grandmaster')) {
-      return '#ff4500'; // 주황색
+    if (rank.startsWith('Ruby')) {
+      return '#FF1D74'; // 빨간색
     } else if (rank.startsWith('Diamond')) {
-      return '#00ffff'; // 청록색
+      return '#21BEFC'; // 청록색
     } else if (rank.startsWith('Platinum')) {
-      return '#00d9ff'; // 플래티넘 은색
+      return '#36E3AA'; // 플래티넘 은색
     } else if (rank.startsWith('Gold')) {
       return '#FFD700'; // 황금색
     } else if (rank.startsWith('Silver')) {

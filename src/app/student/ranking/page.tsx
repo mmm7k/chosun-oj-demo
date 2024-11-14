@@ -5,13 +5,13 @@ import { BiSolidAward } from 'react-icons/bi';
 export default function Ranking() {
   // 포인트에 따른 티어 결정 함수
   const getTier = (points: number) => {
-    if (points >= 5000) return 'Challenger';
-    if (points >= 4000) return 'Grandmaster';
-    if (points >= 3000) return `Diamond ${Math.ceil((4000 - points) / 500)}`;
-    if (points >= 2000) return `Platinum ${Math.ceil((3000 - points) / 500)}`;
-    if (points >= 1500) return 'Gold';
-    if (points >= 1000) return 'Silver';
-    return 'Bronze';
+    if (points >= 5000) return `Ruby ${Math.ceil((6000 - points) / 500)}`;
+    if (points >= 4000) return `Diamond ${Math.ceil((5000 - points) / 500)}`;
+    if (points >= 3000) return `Platinum ${Math.ceil((4000 - points) / 500)}`;
+    if (points >= 2000) return `Gold ${Math.ceil((3000 - points) / 500)}`;
+    if (points >= 1500) return `Silver ${Math.ceil((2000 - points) / 500)}`;
+    if (points >= 1000) return `Bronze ${Math.ceil((1000 - points) / 500)}`;
+    return 'Unrated';
   };
 
   // 50명의 사용자 생성 및 누적 포인트 순으로 정렬
@@ -28,10 +28,9 @@ export default function Ranking() {
 
   // 티어 색상 결정 함수
   const rankColor = (tier: string) => {
-    if (tier.startsWith('Challenger')) return '#ff0000'; // 빨간색
-    if (tier.startsWith('Grandmaster')) return '#ff4500'; // 주황색
-    if (tier.startsWith('Diamond')) return '#00ffff'; // 청록색
-    if (tier.startsWith('Platinum')) return '#00d9ff'; // 플래티넘 은색
+    if (tier.startsWith('Ruby')) return '#FF1D74'; // 빨간색
+    if (tier.startsWith('Diamond')) return '#21BEFC'; // 청록색
+    if (tier.startsWith('Platinum')) return '#36E3AA'; // 플래티넘 은색
     if (tier.startsWith('Gold')) return '#FFD700'; // 황금색
     if (tier.startsWith('Silver')) return '#C0C0C0'; // 은색
     return '#cd7f32'; // 청동색
@@ -62,19 +61,16 @@ export default function Ranking() {
         <div className="w-[90%] lg:w-[62%] pt-12 mb-44">
           <div className="flex w-full mb-3 space-x-5 overflow-x-auto overflow-y-hidden text-sm text-gray-500">
             <div className="flex items-center">
-              <BiSolidAward className="text-[1.5rem] text-[#ff0000]" />
-              <span>Challenger 5000+</span>
+              <BiSolidAward className="text-[1.5rem] text-[#FF1D74]" />
+              <span>Ruby 5000+</span>
             </div>
+
             <div className="flex items-center">
-              <BiSolidAward className="text-[1.5rem] text-[#ff4500]" />
-              <span>Grandmaster 4000+</span>
-            </div>
-            <div className="flex items-center">
-              <BiSolidAward className="text-[1.5rem] text-[#00ffff]" />
+              <BiSolidAward className="text-[1.5rem] text-[#21BEFC]" />
               <span>Diamond 3000+</span>
             </div>
             <div className="flex items-center">
-              <BiSolidAward className="text-[1.5rem] text-[#00d9ff]" />
+              <BiSolidAward className="text-[1.5rem] text-[#36E3AA]" />
               <span>Platinum 2000+</span>
             </div>
             <div className="flex items-center">
