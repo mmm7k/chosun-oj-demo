@@ -67,15 +67,15 @@ export default function Ranking() {
 
             <div className="flex items-center">
               <BiSolidAward className="text-[1.5rem] text-[#21BEFC]" />
-              <span>Diamond 3000+</span>
+              <span>Diamond 4000+</span>
             </div>
             <div className="flex items-center">
               <BiSolidAward className="text-[1.5rem] text-[#36E3AA]" />
-              <span>Platinum 2000+</span>
+              <span>Platinum 3000+</span>
             </div>
             <div className="flex items-center">
               <BiSolidAward className="text-[1.5rem] text-[#FFD700]" />
-              <span>Gold 1500+</span>
+              <span>Gold 2000+</span>
             </div>
             <div className="flex items-center">
               <BiSolidAward className="text-[1.5rem] text-[#C0C0C0]" />
