@@ -42,7 +42,7 @@ export default function ProblemList() {
 
         return {
           id: i + 1,
-          name: `피라미드 별찍기${i + 1}`,
+          name: `Hello world 출력${i + 1}`,
           level: `Lv.${randomLevel}`,
           solved: randomSolved,
           submissionCount: randomSubmission,
